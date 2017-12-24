@@ -1,10 +1,14 @@
 {
   "name": "live-forum-server",
-  "description": "",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "src",
   "keywords": [
-    "feathers"
+    "feathers",
+    "express",
+    "node",
+    "knex",
+    "sql",
+    "socket"
   ],
   "author": {
     "name": "Bibek Subedi",
