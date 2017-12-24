@@ -1,4 +1,4 @@
-## Available Scripts
+## Live-Forum-Client
 
 In the project directory, you can run:
 
