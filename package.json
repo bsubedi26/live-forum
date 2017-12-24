@@ -1,0 +1,45 @@
+{
+  "name": "live-forum",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@feathersjs/client": "^3.1.1",
+    "animate-css-styled-components": "^0.0.20",
+    "bootstrap": "^4.0.0-beta.2",
+    "feathers-redux": "^2.0.0",
+    "formik": "^0.10.5",
+    "gh-pages": "^1.1.0",
+    "history": "^4.7.2",
+    "hover.css": "^2.2.1",
+    "npm-run-all": "^4.1.2",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-persist": "^5.4.0",
+    "redux-promise-middleware": "^4.4.2",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
+    "socket.io-client": "^2.0.4",
+    "styled-components": "^2.2.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "start:all": "npm-run-all -p watch-css start-js",
+    "build:all": "npm-run-all build-css build-js",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.2"
+  }
+}
