@@ -70,7 +70,7 @@ class NavbarCmp extends React.Component {
 
     return (
       <nav className="navbar navbar-expand-md navbar-light">
-        <a onClick={this.goRoute.bind(this, '/home')} className="navbar-brand pointer">ReForum</a>
+        <a onClick={this.goRoute.bind(this, '/home')} className="navbar-brand pointer">LiveForum</a>
         {/* HAMBURGER MENU TOGGLER FOR MOBILE */}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />

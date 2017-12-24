@@ -2,7 +2,7 @@ import React from 'react'
 import { Home, Login, Signup, Settings, ForumPage, ForumDetailById, ForumCreatePage, NotFoundPage } from 'containers'
 
 import { Header } from 'components'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import PrivateRoute from './private'
 
@@ -32,6 +32,7 @@ function Routes() {
             <Route exact path='/signup' component={Signup} />
 
             <PrivateRoute path='/settings' component={Settings} />
+            <Redirect exact from='/' to='/home'/>
             <Route component={NotFoundPage} />
           </Switch>
         </ConnectedRouter>
