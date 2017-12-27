@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
 import { FadeIn } from 'animate-css-styled-components'
 import { connect } from 'react-redux'
 import { actions as AuthActions } from 'reducers/auth'

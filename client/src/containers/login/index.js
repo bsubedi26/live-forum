@@ -12,7 +12,7 @@ class Login extends React.Component {
   }
 
   handleSubmit = (formValues) => {
-    const { dispatch, history } = this.props
+    const { dispatch } = this.props
     const credentials = { ...formValues, strategy: 'local' }
     // const credentials = { ...formValues, strategy: 'facebook' }
     

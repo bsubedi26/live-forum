@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Title, LineText } from '../common'
 import { services } from 'util/feathers'
@@ -105,7 +104,7 @@ class ForumDetailById extends React.Component {
 
 const findById = (data, props) => {
   const { id } = props.match.params
-  return data.find(item => item.id === parseInt(id))
+  return data.find(item => item.id === parseInt(id, 10))
 }
 
 const mapState = (state, props) => ({

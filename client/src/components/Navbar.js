@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { actions as AuthActions } from 'reducers/auth'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -34,7 +34,7 @@ class NavbarCmp extends React.Component {
   
   handleLogout = async (e) => {
     e.preventDefault()
-    const { dispatch, history } = this.props
+    const { dispatch } = this.props
     await dispatch(AuthActions.logout())
     dispatch(push('/home'))
   }

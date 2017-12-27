@@ -4,16 +4,17 @@ import auth from '@feathersjs/client/dist/authentication.min';
 // import io from 'socket.io-client';
 import fRest from '@feathersjs/client/dist/rest';
 import reduxifyAllServices from './reduxServices';
+import axios from 'axios';
 
-// const HOST = process.env.NODE_ENV === 'production' ? '//feathers-example.herokuapp.com' : 'http://localhost:3030'
-const HOST = 'http://localhost:3030'
+// const HOST = process.env.NODE_ENV === 'production' ? '//feathers-example.herokuapp.com' : 'http://localhost:3030';
+const HOST = 'http://localhost:3030';
 
 // const socket = io(HOST);
 const rest = fRest(HOST);
 
 const app = feathers()
   // .configure(fSocketio(socket))
-  .configure(rest.fetch(window.fetch.bind(window)))
+  .configure(rest.axios(axios))
   .configure(auth({
     storage: window.localStorage
   }));

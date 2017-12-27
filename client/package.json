@@ -5,6 +5,7 @@
   "dependencies": {
     "@feathersjs/client": "^3.1.1",
     "animate-css-styled-components": "^0.0.20",
+    "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta.2",
     "feathers-redux": "^2.0.0",
     "formik": "^0.10.5",

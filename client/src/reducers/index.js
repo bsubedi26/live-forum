@@ -4,7 +4,6 @@ import { persistCombineReducers } from 'redux-persist'
 import { routerReducer as router } from 'react-router-redux'
 
 import auth from './auth'
-import app from './app'
 import { services } from 'util/feathers'
 
 const config = {
@@ -14,7 +13,6 @@ const config = {
 
 const rootReducer = persistCombineReducers(config, {
   auth,
-  app,
   router,
   
   user: services.user.reducer,
