@@ -8,6 +8,24 @@ A live forum application built with the following technologies:
 * [FeathersJS](https://feathersjs.com/)
 * [KnexJS](http://knexjs.org/)
 
+### Getting Started
+
+1. Client setup
+
+    ```
+    cd path/to/client/folder
+    npm install
+    npm start
+    ```
+
+2. Server setup
+
+    ```
+    cd path/to/server/folder
+    npm install
+    npm start
+    ```
+
 ### Application Features
 * Users can post a discussion
 * Users can reply their opinions regarding discussion
