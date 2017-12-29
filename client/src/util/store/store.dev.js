@@ -5,7 +5,7 @@ import rootReducer from 'reducers'
 import promiseMiddleware from 'redux-promise-middleware'
 import { persistStore } from 'redux-persist'
 
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createHashHistory'
 import { routerMiddleware } from 'react-router-redux'
 
 export const history = createHistory()
@@ -22,6 +22,13 @@ const enhancers = [
 ]
 
 export default function configureStore(initialState = {}) {
+
+  const { pathname, search, hash } = window.location
+  
+  // Fix for react-router-redux initial state, which is null on initial app load
+  initialState = {
+     router: { location: { pathname, search, hash } }
+  }
 
   const composeEnhancers = composeWithDevTools(
     {

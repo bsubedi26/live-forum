@@ -1,13 +1,12 @@
 import React from 'react'
-import { Home, Login, Signup, Settings, ForumPage, ForumDetailById, ForumCreatePage, NotFoundPage } from 'containers'
-
-import { Header } from 'components'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import styled from 'styled-components'
-import PrivateRoute from './private'
-
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
+import styled from 'styled-components'
+
+import { Home, Login, Signup, ForumPage, ForumDetailById, ForumCreatePage, NotFoundPage } from 'containers'
+import { Header } from 'components'
 import { history } from 'util/store'
+// import PrivateRoute from './private'
 
 const Container = styled.div`text-align: center;`
 
@@ -31,7 +30,6 @@ function Routes() {
             <Route exact path='/login' component={Login} />
             <Route exact path='/signup' component={Signup} />
 
-            <PrivateRoute path='/settings' component={Settings} />
             <Redirect exact from='/' to='/home'/>
             <Route component={NotFoundPage} />
           </Switch>

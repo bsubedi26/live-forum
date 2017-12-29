@@ -34,9 +34,34 @@ class ForumDetailById extends React.Component {
     dispatch(services.comment.create(payload))
   }
 
+  renderCommentForm() {
+    const { auth } = this.props
+
+    if (auth.id) {
+      return (
+        <div className="mt-3 card">
+          <form onSubmit={this.createComment} noValidate>
+            <textarea id="comment" onChange={this.handleOnChange} className="form-control" rows="2" placeholder="Comment..."></textarea>
+            <div className="card-footer text-muted">
+              <button className="btn btn-outline-info">Submit</button>
+            </div>
+          </form>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="p-3 text-danger">
+          <h5>You <em>must</em> be signed in before posting a comment.</h5>
+        </div>
+      )
+    }
+  }
+
 
   render() {
     const { post } = this.props
+    let postDate = new Date(post.updated_at).toDateString()
 
     return (
       <div className="mx-auto w-75 mt-4">
@@ -51,7 +76,7 @@ class ForumDetailById extends React.Component {
             </p>
             <LineText>ID: {post.creator_id} - <i className="fa fa-github m-1"></i> {post.creator_email}</LineText>
             <LineText>
-              <span className="mr-2">7 months ago</span>
+              <span className="mr-2">{postDate}</span>
               <span className="m-2">{post.favorites} favorites</span>
               <span className="m-2">{post.opinions} opinions</span>
           </LineText>
@@ -59,17 +84,8 @@ class ForumDetailById extends React.Component {
 
         </div>
 
-        <div className="mt-3 card">
+        { this.renderCommentForm() }
 
-          <form onSubmit={this.createComment} noValidate>
-            <textarea id="comment" onChange={this.handleOnChange} className="form-control" rows="2" placeholder="Comment..."></textarea>
-            <div className="card-footer text-muted">
-              <button className="btn btn-outline-info">Submit</button>
-            </div>
-          </form>
-          
-        </div>
-        
         <hr />
 
         {this.state.comments && this.state.comments.map((item, i) => {

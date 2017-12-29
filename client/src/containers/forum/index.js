@@ -12,7 +12,9 @@ class ForumPage extends React.Component {
   componentDidMount() {
     const { topic } = this.props.match.params
     this.dispatchFind(topic)
+    // this.props.dispatch(services.forum.remove(0))
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       const { topic } = nextProps.match.params
@@ -48,13 +50,15 @@ class ForumPage extends React.Component {
             <div className="list-group list-group-flush">
               {
                 this.state.posts.map(item => {
+                  let postDate = new Date(item.updated_at).toDateString()
+
                   return (
                     <div key={item.id} className="list-group-item">
                       <Link to={`/forum/${topic}/individual/${item.id}`}><Title className="text-left mb-3">{item.title}</Title></Link>
                       <LineText className="text-left">ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item.creator_email}</LineText>
                       <LineText className="text-left">
                         
-                        <span className="mr-2">7 months ago</span>
+                        <span className="mr-2">{postDate}</span>
                         <span className="m-2">{item.favorites} favorites</span>
                         <span className="m-2">{item.opinions} opinions</span>
                       </LineText>
