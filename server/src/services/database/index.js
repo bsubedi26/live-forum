@@ -9,7 +9,7 @@ module.exports = function (app) {
   app.configure(comment);
   app.configure(topic);
 
-  app.get('/works', async (req, res) => {
+  app.get('/test/knex/join', async (req, res) => {
     const knex = app.get('knexClient');
 
     const query = knex.select('*')
