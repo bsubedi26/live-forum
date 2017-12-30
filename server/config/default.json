@@ -58,41 +58,6 @@
       "usernameField": "email",
       "passwordField": "password"
     },
-    "google": {
-      "clientID": "your google client id",
-      "clientSecret": "your google client secret",
-      "successRedirect": "/",
-      "scope": [
-        "profile openid email"
-      ]
-    },
-    "facebook": {
-      "clientID": "your facebook client id",
-      "clientSecret": "your facebook client secret",
-      "successRedirect": "/",
-      "scope": [
-        "public_profile",
-        "email"
-      ],
-      "profileFields": [
-        "id",
-        "displayName",
-        "first_name",
-        "last_name",
-        "email",
-        "gender",
-        "profileUrl",
-        "birthday",
-        "picture",
-        "permissions"
-      ]
-    },
-    "github": {
-      "clientID": "bfa0c6c5da9631cd99b2",
-      "clientSecret": "8ebca61bbcf3af0bca8f1eb96d848f72d76ab180",
-      "successRedirect": "/",
-      "callbackURL": "http://localhost:3030/auth/github/callback"
-    },
     "cookie": {
       "enabled": true,
       "domain": "localhost",

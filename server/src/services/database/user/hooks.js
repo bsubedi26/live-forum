@@ -1,12 +1,6 @@
 // const { authenticate } = require('@feathersjs/authentication').hooks;
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
-// const verifyHooks = require('feathers-authentication-management').hooks;
-// const sendVerificationEmail = require('./hooks/sendVerificationEmail');
-
 const validateUniqueUser = require('./hooks/validateUniqueUser');
-
-// const { iffElse } = require('feathers-hooks-common');
-// iffElse(predicate, hookFuncsTrue, hookFuncsFalse)
 
 module.exports = {
   before: {
@@ -16,9 +10,7 @@ module.exports = {
     ],
     get: [],
     create: [
-      // oAuthCheck(),
       validateUniqueUser(),
-      // verifyHooks.addVerification(),
       hashPassword()
     ],
     update: [ 
@@ -40,11 +32,7 @@ module.exports = {
     
     ],
     get: [],
-    create: [
-      // sendVerificationEmail(),
-      // removes verification/reset fields other than .isVerified
-      // verifyHooks.removeVerification()
-    ],
+    create: [],
     update: [],
     patch: [],
     remove: []
