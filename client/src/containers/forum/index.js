@@ -12,7 +12,6 @@ class ForumPage extends React.Component {
   componentDidMount() {
     const { topic } = this.props.match.params
     this.dispatchFind(topic)
-    // this.props.dispatch(services.forum.remove(0))
   }
 
   componentWillReceiveProps(nextProps) {
