@@ -3,6 +3,7 @@ module.exports = function (app) {
   const table = 'comment';
 
   db.schema.hasTable(table).then(exists => {
+
     if (!exists) {
       db.schema.createTable(table, t => {
         t.increments('id').primary();

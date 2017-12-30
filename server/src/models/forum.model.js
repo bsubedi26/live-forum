@@ -1,3 +1,4 @@
+
 module.exports = function (app) {
   const db = app.get('knexClient');
   const table = 'forum';
@@ -9,15 +10,10 @@ module.exports = function (app) {
         t.increments('id').primary();
         t.string('title').notNullable();
         t.string('summary').notNullable();
-        t.integer('favorites').defaultTo(0);
         t.integer('opinions').defaultTo(0);
-
-
-        t.string('topic').notNullable();
 
         t.integer('topic_id').unsigned().references('id').inTable('topic');
         t.integer('creator_id').unsigned().references('id').inTable('user');
-        t.string('creator_email').references('email').inTable('user');
         t.timestamps(true, true);
 
       })
