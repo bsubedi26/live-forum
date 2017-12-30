@@ -22,12 +22,17 @@ module.exports = function () {
       console.error(chalk.red.bold(hook.error));
     }
 
-    logger.debug('hook.data', hook.data);
-    logger.debug('hook.params', hook.params);
+    // console.log(Object.keys(this))
+    // console.log(hook.app.request.url)
 
-    if (hook.result) {
-      logger.debug('hook.result', hook.result);
-    }
+
+
+    // logger.debug('hook.data', hook.data);
+    // logger.debug('hook.params', hook.params);
+
+    // if (hook.result) {
+    //   logger.debug('hook.result', hook.result);
+    // }
 
   };
 };

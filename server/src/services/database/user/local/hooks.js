@@ -1,26 +1,12 @@
 // const { authenticate } = require('@feathersjs/authentication').hooks;
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
-const verifyHooks = require('feathers-authentication-management').hooks;
+// const verifyHooks = require('feathers-authentication-management').hooks;
+// const sendVerificationEmail = require('./hooks/sendVerificationEmail');
 
 const validateUniqueUser = require('./hooks/validateUniqueUser');
-const sendVerificationEmail = require('./hooks/sendVerificationEmail');
 
 // const { iffElse } = require('feathers-hooks-common');
 // iffElse(predicate, hookFuncsTrue, hookFuncsFalse)
-
-const oAuthCheck = () => {
-  return async hook => {
-
-    const svc = hook.app.service('oauth');
-    const all = await svc.find();
-    console.log('ALL ', all);
-
-    const one = await svc.get(1);
-    console.log('onE! ', one);
-
-    return hook;
-  };
-};
 
 module.exports = {
   before: {

@@ -1,35 +1,21 @@
 module.exports = function (app) {
   const knex = app.get('knexClient');
   const table = 'user';
-  const schemaBuilder = require('knex/lib/schema/builder');
-  const tableBuilder = require('knex/lib/schema/tablebuilder');
+  
+  // const schemaBuilder = require('knex/lib/schema/builder');
+  // const tableBuilder = require('knex/lib/schema/tablebuilder');
 
-  schemaBuilder.prototype.addedThis = function () {
-    console.log('addedThis works');
-    return this;
-  };
+  // schemaBuilder.prototype.addedThis = function () {
+  //   console.log('addedThis works');
+  //   return this;
+  // };
 
-  tableBuilder.prototype.validateCol = function () {
-    return this;
-  };
+  // tableBuilder.prototype.validateCol = function () {
+  //   return this;
+  // };
 
   knex.schema.hasTable(table).then(exists => {
-    // if (exists) {
-    //   knex.schema.table(table, t => {
-
-    //     // t.dropColumn('password')
-    //     // t.renameColumn('resetToken', 'verifyShortToken')
-        
-    //     // t.string('googleId');
-    //     // t.string('facebookId');
-    //     // t.string('githubId');
-    //     // t.json('github')
-
-    //     // t.json('verifyChanges');
-    //   })
-    //   .then(console.log('done'));
-    // }
-
+    
     if (!exists) {
       knex.schema.createTable(table, t => {
         t.increments('id').primary();
@@ -37,12 +23,12 @@ module.exports = function (app) {
         t.string('password').notNullable();
         t.timestamps(true, true);
 
-        t.boolean('isVerified');
-        t.string('verifyToken');
-        t.string('verifyShortToken');
+        // t.boolean('isVerified');
+        // t.string('verifyToken');
+        // t.string('verifyShortToken');
 
-        t.json('verifyChanges');
-        t.string('verifyExpires');
+        // t.json('verifyChanges');
+        // t.string('verifyExpires');
 
         // t.string('githubId');
         // t.json('github');

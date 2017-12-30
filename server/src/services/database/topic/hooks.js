@@ -1,11 +1,9 @@
-'use strict';
+
 
 module.exports = {
   before: {
-    all: [
-    ],
-    find: [
-    ],
+    all: [],
+    find: [],
     get: [],
     create: [],
     update: [],
@@ -14,18 +12,7 @@ module.exports = {
   },
 
   after: {
-    all: [
-      // populate({
-      //   schema: {
-      //     include: [{
-      //       service: 'users',
-      //       nameAs: 'user',
-      //       parentField: 'userId',
-      //       childField: '_id'
-      //     }]
-      //   }
-      // })
-    ],
+    all: [],
     find: [],
     get: [],
     create: [],
