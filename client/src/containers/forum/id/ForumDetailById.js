@@ -12,12 +12,6 @@ class ForumDetailById extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props
     const { id } = this.props.match.params
-    
-    // dispatch(services.comment.find({ query: { forum_id: id } }))
-    // .then(({ value }) => {
-    //   this.setState({ comments: value.data })
-    // })
-    // .catch(err => console.log(err))
   }
 
   handleOnChange = (e) => {

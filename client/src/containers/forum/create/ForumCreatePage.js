@@ -66,15 +66,7 @@ class ForumCreatePage extends React.Component {
 }
 
 
-// const getTopicByName = (state, props) => {
-//   const { data } = state.topic.queryResult
-//   const { topic } = props.match.params
-
-//   return data.find(item => item.name === topic)
-// }
-
 const mapState = (state, props) => ({
-  // currentTopic: getTopicByName(state, props),
   auth: state.auth
   
 })

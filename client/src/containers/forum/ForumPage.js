@@ -79,14 +79,4 @@ class ForumPage extends React.Component {
   }
 }
 
-// const getTopicByName = (state, props) => {
-//   const { data } = state.topic.queryResult
-//   const { topic } = props.match.params
-//   console.log('topic ', topic)
-  
-//   const result = data.find(item => item.name === topic)
-//   console.log('result ', result)
-//   return result
-// }
-
 export default connect(null)(ForumPage)
