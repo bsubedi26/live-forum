@@ -6,11 +6,6 @@ import { push } from 'react-router-redux'
 
 class Home extends React.Component {
 
-  handleVerify = (e) => {
-    e.preventDefault();
-    this.props.dispatch(AuthActions.verifyJwtOAuth());
-  }
-
   goRoute(path) {
     this.props.dispatch(push(path))
   }
@@ -25,8 +20,7 @@ class Home extends React.Component {
             <hr className="my-4" />
             <p>The technologies used: ReactJS, ReduxJS, BootstrapCSS, NodeJS, FeathersJS, SQL, KnexJS, & SocketIO.</p>
             <p className="lead">
-              <button onClick={this.goRoute.bind(this, '/forum/react')} className="btn btn-outline-primary btn-lg pointer hvr-float-shadow hvr-bounce-to-right">Learn more</button>
-              <button onClick={this.handleVerify} className="btn btn-info btn-lg pointer hvr-float-shadow hvr-bounce-to-right mx-3">Verify</button>
+              <button onClick={this.goRoute.bind(this, '/forum/2')} className="btn btn-outline-primary btn-lg pointer hvr-float-shadow hvr-bounce-to-right">Learn more</button>
             </p>
           </div>
         </FadeIn>
