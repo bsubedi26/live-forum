@@ -10,23 +10,23 @@ class ForumPage extends React.Component {
     posts: []
   }
   componentDidMount() {
-    const { topic } = this.props.match.params
-    this.dispatchFind(topic)
+    const { topicId } = this.props.match.params
+    this.dispatchFind(topicId)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
-      const { topic } = nextProps.match.params
-      this.dispatchFind(topic)
+      const { topicId } = nextProps.match.params
+      this.dispatchFind(topicId)
     }
   }
 
-  dispatchFind(topic) {
+  dispatchFind(topicId) {
     const { dispatch } = this.props
 
-    dispatch(services.forum.find({ query: { topic } }))
+    dispatch(services.forum.find({ query: { topic_id: topicId } }))
     .then(({ action }) => {
-      // console.log('.then ', action)
+      // console.log('.then forum find ', action)
       this.setState({
         posts: action.payload.data
       })
@@ -35,7 +35,7 @@ class ForumPage extends React.Component {
   }
 
   render() {
-    const { topic } = this.props.match.params
+    const { topicId } = this.props.match.params
 
     return (
       <div className="row mx-auto w-75 mt-4">
@@ -53,13 +53,13 @@ class ForumPage extends React.Component {
 
                   return (
                     <div key={item.id} className="list-group-item">
-                      <Link to={`/forum/${topic}/individual/${item.id}`}><Title className="text-left mb-3">{item.title}</Title></Link>
-                      <LineText className="text-left">ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item.creator_email}</LineText>
+                      <Link to={`/forum/${topicId}/individual/${item.id}`}><Title className="text-left mb-3">{item.title}</Title></Link>
+                      <LineText className="text-left">ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item._user.data[0].email}</LineText>
                       <LineText className="text-left">
                         
                         <span className="mr-2">{postDate}</span>
-                        <span className="m-2">{item.favorites} favorites</span>
-                        <span className="m-2">{item.opinions} opinions</span>
+                        <span className="mr-2">-</span>
+                        <span className="mr-2">{item._comments.total} comments</span>
                       </LineText>
                     </div>
                   )    
@@ -78,5 +78,15 @@ class ForumPage extends React.Component {
     )
   }
 }
+
+// const getTopicByName = (state, props) => {
+//   const { data } = state.topic.queryResult
+//   const { topic } = props.match.params
+//   console.log('topic ', topic)
+  
+//   const result = data.find(item => item.name === topic)
+//   console.log('result ', result)
+//   return result
+// }
 
 export default connect(null)(ForumPage)

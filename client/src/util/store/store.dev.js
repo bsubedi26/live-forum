@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from 'reducers'
 import promiseMiddleware from 'redux-promise-middleware'
 import { persistStore } from 'redux-persist'
+import freeze from 'redux-freeze'
 
 import createHistory from 'history/createHashHistory'
 import { routerMiddleware } from 'react-router-redux'
@@ -14,7 +15,8 @@ const routeMiddleware = routerMiddleware(history)
 const middlewares = [
   ReduxThunk,
   promiseMiddleware(),
-  routeMiddleware
+  routeMiddleware,
+  freeze
 ]
 const enhancers = [
   applyMiddleware(...middlewares),

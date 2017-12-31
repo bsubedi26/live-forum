@@ -16,7 +16,6 @@ class Signup extends React.Component {
 
     return dispatch(AuthActions.signup(formValues))
     .then(res => {
-      console.log('SUCCESSFUL SIGNUP ', res)
       this.setState({ error: false, errorMessage: null })
       dispatch(push('/login'))
       return res

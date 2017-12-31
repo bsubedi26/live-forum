@@ -4,6 +4,7 @@ import { actions as AuthActions } from 'reducers/auth'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { push, getLocation } from 'react-router-redux'
+import { services } from 'util/feathers'
 
 const NavLink = styled.li`
   background-color: ${ prop =>  prop.activeTab ? 'beige' : '' };
@@ -14,13 +15,24 @@ class NavbarCmp extends React.Component {
   state = {
     isOpen: false,
     activeTab: this.props.location.pathname,
-    guestLinks: [
-      { name: 'Home', path: '/home' },
-      { name: 'React', path: '/forum/react' },
-      { name: 'Redux', path: '/forum/redux' },
-      { name: 'NodeJS', path: '/forum/nodejs' },
-    ],
+    guestLinks: []
+    // guestLinks: [
+    //   { name: 'Home', path: '/home' },
+    //   { name: 'React', path: '/forum/react' },
+    //   { name: 'Redux', path: '/forum/redux' },
+    //   { name: 'NodeJS', path: '/forum/nodejs' },
+    // ],
   };
+
+  componentWillMount() {
+    const { dispatch } = this.props
+    dispatch(services.topic.find())
+      .then(({ action }) => {
+        this.setState({ guestLinks: action.payload.data })
+      })
+      .catch(err => console.log(err))
+  }
+  
   
   goRoute(path) {
     this.props.dispatch(push(path))
@@ -53,7 +65,6 @@ class NavbarCmp extends React.Component {
       </ul>
     )
   }
-
   
   renderUnAuthenticated() {
     return (
@@ -81,7 +92,7 @@ class NavbarCmp extends React.Component {
             { this.state.guestLinks.map((link) => 
               (
                 <NavLink activeTab={routerLocation.pathname.includes(link.path)} onClick={this.goRoute.bind(this, link.path)} className="nav-item pointer mx-2" key={link.name}>
-                  <a className="nav-link">{link.name}</a>
+                  <a className="nav-link">{link.display}</a>
                 </NavLink>    
               )
             )}

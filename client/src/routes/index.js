@@ -23,9 +23,9 @@ function Routes() {
             <Route exact path='/signup' component={Signup} />
 
             {/* FORUM */}
-            <Route exact path='/forum/:topic' component={ForumPage} />
-            <Route exact path='/forum/:topic/individual/:id' component={ForumDetailById} />
-            <Route exact path='/forum/:topic/create' component={ForumCreatePage} />
+            <Route exact path='/forum/:topicId' component={ForumPage} />
+            <Route exact path='/forum/:topicId/individual/:id' component={ForumDetailById} />
+            <Route exact path='/forum/:topicId/create' component={ForumCreatePage} />
 
             {/* 404 & Redirects */}
             <Redirect exact from='/' to='/home'/>

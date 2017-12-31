@@ -18,6 +18,7 @@ const rootReducer = persistCombineReducers(config, {
   user: services.user.reducer,
   forum: services.forum.reducer,
   comment: services.comment.reducer,
+  topic: services.topic.reducer,
 })
 
 export default rootReducer

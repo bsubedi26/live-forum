@@ -16,11 +16,11 @@ class ForumCreatePage extends React.Component {
 
   handleCreateForum = (e) => {
     e.preventDefault()
-    const { dispatch, auth } = this.props
-    const { topic } = this.props.match.params
+    const { dispatch, auth, currentTopic } = this.props
+    const { topicId } = this.props.match.params
     const { title, summary } = this.state
-    const payload = { title, summary, topic, creator_email: auth.email, creator_id: auth.id }
-
+    // const payload = { title, summary, topic, creator_email: auth.email, creator_id: auth.id }
+    const payload = { title, summary, topic_id: topicId, creator_id: auth.id }
     
     dispatch(services.forum.create(payload))
     console.log('created!')
@@ -45,7 +45,6 @@ class ForumCreatePage extends React.Component {
     )
   }
   render() {
-    const { topic } = this.props.match.params
     const { auth } = this.props
 
     return (
@@ -53,7 +52,7 @@ class ForumCreatePage extends React.Component {
         <div className="card">
           <div className="card-header">
             
-            <h5>You are creating a new post on <em>{topic}</em> forum.</h5>
+            <h5>You are creating a new post.</h5>
           </div>
 
           <div>
@@ -66,7 +65,18 @@ class ForumCreatePage extends React.Component {
   }
 }
 
-const mapState = state => ({
+
+// const getTopicByName = (state, props) => {
+//   const { data } = state.topic.queryResult
+//   const { topic } = props.match.params
+
+//   return data.find(item => item.name === topic)
+// }
+
+const mapState = (state, props) => ({
+  // currentTopic: getTopicByName(state, props),
   auth: state.auth
+  
 })
+
 export default connect(mapState)(ForumCreatePage)

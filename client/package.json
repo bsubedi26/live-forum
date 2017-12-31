@@ -21,6 +21,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
+    "redux-freeze": "^0.1.5",
     "redux-persist": "^5.4.0",
     "redux-promise-middleware": "^4.4.2",
     "redux-thunk": "^2.2.0",

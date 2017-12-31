@@ -18,9 +18,8 @@ class Login extends React.Component {
     
     return dispatch(AuthActions.authenticate(credentials))
     .then(res => {
-      console.log('SUCCESSFUL LOGIN ', res)
       this.setState({ error: false, errorMessage: null })
-      dispatch(push('/forum/react'))
+      dispatch(push('/forum/2'))
     })
     .catch(err => {
       console.log(err)

@@ -10,7 +10,6 @@ const FormContainer = withFormik({
   validate: validate,
   // Submission handler
   handleSubmit: (values, { props, setSubmitting, setErrors /* setValues, setStatus, and other goodies */ }) => {
-    console.log('LOGIN!')
     setSubmitting(true);
     
     props.handleSubmit(values)

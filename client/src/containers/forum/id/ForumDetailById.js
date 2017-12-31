@@ -13,11 +13,11 @@ class ForumDetailById extends React.Component {
     const { dispatch } = this.props
     const { id } = this.props.match.params
     
-    dispatch(services.comment.find({ query: { forum_id: id } }))
-    .then(({ value }) => {
-      this.setState({ comments: value.data })
-    })
-    .catch(err => console.log(err))
+    // dispatch(services.comment.find({ query: { forum_id: id } }))
+    // .then(({ value }) => {
+    //   this.setState({ comments: value.data })
+    // })
+    // .catch(err => console.log(err))
   }
 
   handleOnChange = (e) => {
@@ -30,7 +30,7 @@ class ForumDetailById extends React.Component {
     e.preventDefault()
     const { dispatch, post, auth } = this.props
     const { comment } = this.state
-    const payload = { comment, forum_id: post.id, creator_id: auth.id, creator_email: auth.email }
+    const payload = { comment, forum_id: post.id, creator_id: auth.id }
 
     dispatch(services.comment.create(payload))
   }
@@ -62,6 +62,7 @@ class ForumDetailById extends React.Component {
 
   render() {
     const { post } = this.props
+
     let postDate = new Date(post.updated_at).toDateString()
 
     return (
@@ -75,11 +76,11 @@ class ForumDetailById extends React.Component {
             <p className="mt-2">
               {post.summary}
             </p>
-            <LineText>ID: {post.creator_id} - <i className="fa fa-github m-1"></i> {post.creator_email}</LineText>
+            <LineText>ID: {post.creator_id} - <i className="fa fa-github m-1"></i> {post._user.data[0].email}</LineText>
             <LineText>
               <span className="mr-2">{postDate}</span>
-              <span className="m-2">{post.favorites} favorites</span>
-              <span className="m-2">{post.opinions} opinions</span>
+              <span className="mr-2">-</span>
+              <span className="mr-2">{post._comments.total} comments</span>
           </LineText>
           </div>
 
@@ -89,20 +90,21 @@ class ForumDetailById extends React.Component {
 
         <hr />
 
-        {this.state.comments && this.state.comments.map((item, i) => {
+        {post._comments.data && post._comments.data.map((item, i) => {
+          let commentDate = new Date(item.updated_at).toDateString()
           return (
             <div key={i} className="card">
               <div className="card-header">
-                <Title>{item.creator_email}</Title>
+                <Title>{item._user.data[0].email}</Title>
               </div>
 
               <div className="text-center">
                 <p className="mt-2">
                   {item.comment}
                 </p>
-                <LineText>ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item.creator_email}</LineText>
+                <LineText>ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item._user.data[0].email}</LineText>
                 <LineText>
-                  <span className="mr-2">7 months ago</span>
+                  <span className="mr-2">{commentDate}</span>
                   {/* <span className="m-2">{item.favorites} favorites</span> */}
                   {/* <span className="m-2">{post.opinions} opinions</span> */}
               </LineText>
