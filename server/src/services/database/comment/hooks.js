@@ -1,14 +1,12 @@
 'use strict';
 const { fastJoin } = require('feathers-hooks-common');
 // const { authenticate } = require('feathers-authentication').hooks;
-// const { populate } = require('feathers-hooks-common');
-// const processMessage = require('../../hooks/process-message');
-
 
 const userCommentCreatorJoins = {
   joins: {
     _user: () => async (comment, hook) => {
-      let user = await hook.app.service('user').find({ query: { id: comment.creator_id } });
+      let query = { id: comment.creator_id, $select: ['id', 'email', 'created_at', 'updated_at'] };
+      let user = await hook.app.service('user').find({ query });
       comment._user = user;
     }
   }
@@ -29,18 +27,7 @@ module.exports = {
   },
 
   after: {
-    all: [
-      // populate({
-      //   schema: {
-      //     include: [{
-      //       service: 'users',
-      //       nameAs: 'user',
-      //       parentField: 'userId',
-      //       childField: '_id'
-      //     }]
-      //   }
-      // })
-    ],
+    all: [],
     find: [
       fastJoin(userCommentCreatorJoins)
     ],

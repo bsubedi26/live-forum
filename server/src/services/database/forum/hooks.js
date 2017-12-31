@@ -8,7 +8,8 @@ const commentJoins = {
       forum._comments = comments;
     },
     _user: () => async (forum, hook) => {
-      let user = await hook.app.service('user').find({ query: { id: forum.creator_id } });
+      let query = { id: forum.creator_id, $select: ['id', 'email', 'created_at', 'updated_at'] };
+      let user = await hook.app.service('user').find({ query });
       forum._user = user;
     }
   }
