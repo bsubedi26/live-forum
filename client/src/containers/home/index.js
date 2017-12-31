@@ -1,7 +1,6 @@
 import React from 'react'
 import { FadeIn } from 'animate-css-styled-components'
 import { connect } from 'react-redux'
-import { actions as AuthActions } from 'reducers/auth'
 import { push } from 'react-router-redux'
 
 class Home extends React.Component {

@@ -2,12 +2,13 @@ import React from 'react'
 import { Title, LineText } from '../common'
 
 const CommentList = props => {
-  const { createComment, handleOnChange, comments } = props
+  const { comments } = props
 
   return (
     <div>
       {comments.data.map((item, i) => {
         let commentDate = new Date(item.updated_at).toDateString()
+        
         return (
           <div key={i} className="card">
             <div className="card-header">
