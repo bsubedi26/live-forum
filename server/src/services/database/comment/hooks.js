@@ -1,25 +1,17 @@
 'use strict';
-
+const { fastJoin } = require('feathers-hooks-common');
 // const { authenticate } = require('feathers-authentication').hooks;
 // const { populate } = require('feathers-hooks-common');
 // const processMessage = require('../../hooks/process-message');
 
-const populateTopicIds = () => async hook => {
-  const forumService = hook.app.service('forum');
-  const topicService = hook.app.service('topic');
 
-  const forums = await forumService.find();
-  const topics = await topicService.find();
-
-  topics.data.forEach(topic => {
-    forums.data.forEach(forum => {
-      if (topic.name.toLowerCase() === forum.topic) {
-        forumService.patch(forum.id, { topic_id: topic.id });
-      }
-    });
-  });
-
-  return hook;
+const userCommentCreatorJoins = {
+  joins: {
+    _user: () => async (comment, hook) => {
+      let user = await hook.app.service('user').find({ query: { id: comment.creator_id } });
+      comment._user = user;
+    }
+  }
 };
 
 module.exports = {
@@ -28,7 +20,6 @@ module.exports = {
       // authenticate('jwt')
     ],
     find: [
-      // populateTopicIds()
     ],
     get: [],
     create: [],
@@ -50,7 +41,9 @@ module.exports = {
       //   }
       // })
     ],
-    find: [],
+    find: [
+      fastJoin(userCommentCreatorJoins)
+    ],
     get: [],
     create: [],
     update: [],

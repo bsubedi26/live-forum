@@ -3,13 +3,14 @@ const { fastJoin } = require('feathers-hooks-common');
 
 const commentJoins = {
   joins: {
-    comments: () => async (forum, hook) => {
-      forum.comments = await hook.app.service('comment').find({ query: { forum_id: forum.id } });
+    _comments: () => async (forum, hook) => {
+      let comments = await hook.app.service('comment').find({ query: { forum_id: forum.id } });
+      forum._comments = comments;
     },
-    creatingUser: () => async (forum, hook) => {
-      forum.creatingUser = await hook.app.service('user').find({ query: { id: forum.creator_id } });
+    _user: () => async (forum, hook) => {
+      let user = await hook.app.service('user').find({ query: { id: forum.creator_id } });
+      forum._user = user;
     }
-
   }
 };
 
@@ -28,17 +29,7 @@ module.exports = {
 
   after: {
     all: [
-      // fastJoin(commentJoins),
-      // populate({
-      //   schema: {
-      //     include: [{
-      //       service: 'comment',
-      //       nameAs: 'comments',
-      //       parentField: 'id',
-      //       childField: 'forum_id'
-      //     }]
-      //   }
-      // })
+      fastJoin(commentJoins)
     ],
     find: [],
     get: [],

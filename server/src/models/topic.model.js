@@ -6,7 +6,8 @@ module.exports = function (app) {
   knex.schema.hasTable(tableName).then(exists => {
     // if (exists) {
     //   knex.schema.table(tableName, table => {
-    //     table.index('idx_blah');
+    //     // table.index('idx_blah');
+    //     table.string('display');
     //   })
     //     .then(() => console.log(`INDEXED ${tableName} table`))
     //     .catch(e => console.error(`Error creating ${tableName} table`, e));
