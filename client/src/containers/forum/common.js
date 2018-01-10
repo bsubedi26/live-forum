@@ -23,11 +23,11 @@ export const ForumList = props => {
           return (
             <div key={item.id} className="list-group-item">
               <Link to={`/forum/${topicId}/individual/${item.id}`}><Title className="text-left mb-3">{item.title}</Title></Link>
-              <LineText className="text-left">ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item._user.data[0].email}</LineText>
+              <LineText className="text-left">ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item._creator.email}</LineText>
               <LineText className="text-left">
                 <span className="mr-2">{postDate}</span>
                 <span className="mr-2">-</span>
-                <span className="mr-2">{item._comments.total} comments</span>
+                <span className="mr-2">{item._comments.length} comments</span>
               </LineText>
             </div>
           )

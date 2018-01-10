@@ -46,7 +46,7 @@ class ForumPage extends React.Component {
               Discussions
             </div>
 
-            {/* <ForumList forums={this.state.forums} topicId={topicId} /> */}
+            <ForumList forums={this.state.forums} topicId={topicId} />
           </div>
         </div>
 

@@ -15,11 +15,11 @@ const SingleForum = props => {
         <p className="mt-2">
           {post.summary}
         </p>
-        <LineText>ID: {post.creator_id} - <i className="fa fa-github m-1"></i> {post._user.data[0].email}</LineText>
+        <LineText>ID: {post.creator_id} - <i className="fa fa-github m-1"></i> {post._creator.email}</LineText>
         <LineText>
           <span className="mr-2">{postDate}</span>
           <span className="mr-2">-</span>
-          <span className="mr-2">{post._comments.total} comments</span>
+          <span className="mr-2">{post._comments.length} comments</span>
         </LineText>
       </div>
 
