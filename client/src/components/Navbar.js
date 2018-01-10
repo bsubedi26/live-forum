@@ -4,7 +4,7 @@ import { actions as AuthActions } from 'reducers/auth'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { push, getLocation } from 'react-router-redux'
-import { services } from 'util/feathers'
+// import { services } from 'util/feathers'
 
 const NavLink = styled.li`
   background-color: ${ prop =>  prop.activeTab ? 'beige' : '' };
@@ -15,24 +15,23 @@ class NavbarCmp extends React.Component {
   state = {
     isOpen: false,
     activeTab: this.props.location.pathname,
-    guestLinks: []
-    // guestLinks: [
-    //   { name: 'Home', path: '/home' },
-    //   { name: 'React', path: '/forum/react' },
-    //   { name: 'Redux', path: '/forum/redux' },
-    //   { name: 'NodeJS', path: '/forum/nodejs' },
-    // ],
+    guestLinks: [
+      { id: 1, name: "home", path: "/home", display: "Home" },
+      { id: 2, name: "react", path: "/forum/2", display: "React" },
+      { id: 3, name: "redux", path: "/forum/3", display: "Redux" },
+      { id: 6, name: "nodejs", path: "/forum/6", display: "NodeJS" }
+    ]
   };
 
-  componentWillMount() {
-    const { dispatch } = this.props
-    dispatch(services.topic.find())
-      .then(({ action }) => {
-        this.setState({ guestLinks: action.payload.data })
-      })
-      .catch(err => console.log(err))
-  }
-  
+  // componentWillMount() {
+  //   const { dispatch } = this.props
+  //   dispatch(services.topic.find())
+  //     .then(({ action }) => {
+  //       console.log(action.payload.data);
+  //       this.setState({ guestLinks: action.payload.data })
+  //     })
+  //     .catch(err => console.log(err))
+  // }
   
   goRoute(path) {
     this.props.dispatch(push(path))

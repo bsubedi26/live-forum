@@ -26,6 +26,7 @@ class ForumPage extends React.Component {
 
     dispatch(services.forum.find({ query: { topic_id: topicId } }))
     .then(({ action }) => {
+      console.log(action.payload);
       this.setState({
         forums: action.payload.data
       })
@@ -45,7 +46,7 @@ class ForumPage extends React.Component {
               Discussions
             </div>
 
-            <ForumList forums={this.state.forums} topicId={topicId} />
+            {/* <ForumList forums={this.state.forums} topicId={topicId} /> */}
           </div>
         </div>
 

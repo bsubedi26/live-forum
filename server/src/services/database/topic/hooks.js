@@ -1,9 +1,8 @@
-
-
 module.exports = {
   before: {
     all: [],
-    find: [],
+    find: [
+    ],
     get: [],
     create: [],
     update: [],

@@ -29,7 +29,7 @@ module.exports = {
   after: {
     all: [],
     find: [
-      fastJoin(userCommentCreatorJoins)
+      // fastJoin(userCommentCreatorJoins)
     ],
     get: [],
     create: [],
