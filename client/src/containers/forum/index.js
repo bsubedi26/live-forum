@@ -1,41 +1,41 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { services } from 'util/feathers'
-import { ForumList } from './common'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { services } from 'util/feathers';
+import ForumList from './ForumList';
 
 
 class ForumPage extends React.Component {
   state = {
     forums: []
   }
+
   componentDidMount() {
-    const { topicId } = this.props.match.params
-    this.dispatchFind(topicId)
+    const { topicId } = this.props.match.params;
+    this.dispatchFind(topicId);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
-      const { topicId } = nextProps.match.params
-      this.dispatchFind(topicId)
+      const { topicId } = nextProps.match.params;
+      this.dispatchFind(topicId);
     }
   }
 
   dispatchFind(topicId) {
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
 
     dispatch(services.forum.find({ query: { topic_id: topicId } }))
     .then(({ action }) => {
-      console.log(action.payload);
       this.setState({
         forums: action.payload.data
       })
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
   }
 
   render() {
-    const { topicId } = this.props.match.params
+    const { topicId } = this.props.match.params;
 
     return (
       <div className="row mx-auto w-75 mt-4">
@@ -59,4 +59,4 @@ class ForumPage extends React.Component {
   }
 }
 
-export default connect(null)(ForumPage)
+export default connect(null)(ForumPage);

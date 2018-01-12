@@ -1,8 +1,8 @@
-import React from 'react'
-import { actions as AuthActions } from 'reducers/auth'
-import FormContainer from './form'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import React from 'react';
+import { actions as AuthActions } from 'reducers/auth';
+import FormContainer from './form';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { FadeIn } from 'animate-css-styled-components';
 
 class Signup extends React.Component {
@@ -12,18 +12,18 @@ class Signup extends React.Component {
   }
 
   handleSubmit = (formValues) => {
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
 
     return dispatch(AuthActions.signup(formValues))
     .then(res => {
-      this.setState({ error: false, errorMessage: null })
-      dispatch(push('/login'))
+      this.setState({ error: false, errorMessage: null });
+      dispatch(push('/login'));
       return res
     })
     .catch(err => {
-      console.log('.catch ', err)
-      this.setState({ error: true, errorMessage: err.message })
-      return Promise.reject(err)
+      // console.log('.catch ', err);
+      this.setState({ error: true, errorMessage: err.message });
+      return Promise.reject(err);
     })
     
   }
@@ -59,4 +59,4 @@ class Signup extends React.Component {
 }
 
 
-export default connect(null)(Signup)
+export default connect(null)(Signup);

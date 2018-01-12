@@ -24,5 +24,5 @@ const FormContainer = withFormik({
   },
 })
 
-export default FormContainer(FormFields)
+export default FormContainer(FormFields);
 

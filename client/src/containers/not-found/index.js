@@ -1,18 +1,18 @@
-import React from 'react'
-import { FadeIn } from 'animate-css-styled-components'
-import { connect } from 'react-redux'
-import { replace, goBack } from 'react-router-redux'
+import React from 'react';
+import { FadeIn } from 'animate-css-styled-components';
+import { connect } from 'react-redux';
+import { replace, goBack } from 'react-router-redux';
 
 class NotFound extends React.Component {
 
   route(path) {
-    const { dispatch } = this.props
-    dispatch(replace(path))
+    const { dispatch } = this.props;
+    dispatch(replace(path));
   }
 
   goBack() {
-    const { dispatch } = this.props
-    dispatch(goBack())
+    const { dispatch } = this.props;
+    dispatch(goBack());
   }
 
   render() {

@@ -27,9 +27,10 @@ module.exports = {
   },
 
   after: {
-    all: [],
-    find: [
+    all: [
       fastJoin(commentCreatorResolvers)
+    ],
+    find: [
     ],
     get: [],
     create: [],

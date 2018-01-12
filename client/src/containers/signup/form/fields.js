@@ -2,7 +2,7 @@ import React from 'react';
 
 // Our inner form component which receives our form's state and updater methods as props
 const FormFields = (props) => {
-    const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting } = props
+    const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting } = props;
 
     return (
         <form onSubmit={handleSubmit} noValidate>

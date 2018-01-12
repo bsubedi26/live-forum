@@ -1,10 +1,10 @@
-import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { actions as AuthActions } from 'reducers/auth'
-import { connect } from 'react-redux'
-import styled from 'styled-components'
-import { push, getLocation } from 'react-router-redux'
-// import { services } from 'util/feathers'
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { actions as AuthActions } from 'reducers/auth';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { push, getLocation } from 'react-router-redux';
+// import { services } from 'util/feathers';
 
 const NavLink = styled.li`
   background-color: ${ prop =>  prop.activeTab ? 'beige' : '' };
@@ -34,7 +34,7 @@ class NavbarCmp extends React.Component {
   // }
   
   goRoute(path) {
-    this.props.dispatch(push(path))
+    this.props.dispatch(push(path));
   }
 
   toggle = () => {
@@ -44,10 +44,10 @@ class NavbarCmp extends React.Component {
   }
   
   handleLogout = async (e) => {
-    e.preventDefault()
-    const { dispatch } = this.props
-    await dispatch(AuthActions.logout())
-    dispatch(push('/home'))
+    e.preventDefault();
+    const { dispatch } = this.props;
+    await dispatch(AuthActions.logout());
+    dispatch(push('/home'));
   }
   
   renderAuthenticated = () => {
@@ -76,7 +76,7 @@ class NavbarCmp extends React.Component {
 
 
   render() {
-    const { auth, routerLocation } = this.props
+    const { auth, routerLocation } = this.props;
 
     return (
       <nav className="navbar navbar-expand-md navbar-light">
@@ -112,4 +112,4 @@ const mapState = state => ({
   routerLocation: getLocation(state)
 })
 
-export default withRouter(connect(mapState)(NavbarCmp))
+export default withRouter(connect(mapState)(NavbarCmp));

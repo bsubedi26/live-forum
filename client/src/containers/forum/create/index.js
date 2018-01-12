@@ -1,7 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { services } from 'util/feathers'
-import CreateForm from './CreateForm'
+import React from 'react';
+import { connect } from 'react-redux';
+import { services } from 'util/feathers';
+import CreateForm from './CreateForm';
 
 class ForumCreatePage extends React.Component {
   state = {
@@ -9,20 +9,20 @@ class ForumCreatePage extends React.Component {
     summary: ''
   }
 
-  handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value })
+  handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value });
 
   handleCreateForum = (e) => {
-    e.preventDefault()
-    const { dispatch, auth } = this.props
-    const { topicId } = this.props.match.params
-    const { title, summary } = this.state
-    const payload = { title, summary, topic_id: topicId, creator_id: auth.id }
+    e.preventDefault();
+    const { dispatch, auth } = this.props;
+    const { topicId } = this.props.match.params;
+    const { title, summary } = this.state;
+    const payload = { title, summary, topic_id: topicId, creator_id: auth.id };
     
-    dispatch(services.forum.create(payload))
+    dispatch(services.forum.create(payload));
   }
 
   render() {
-    const { auth } = this.props
+    const { auth } = this.props;
 
     return (
       <div className="mx-auto w-75 mt-4">
@@ -52,4 +52,4 @@ const mapState = (state, props) => ({
   auth: state.auth
 })
 
-export default connect(mapState)(ForumCreatePage)
+export default connect(mapState)(ForumCreatePage);

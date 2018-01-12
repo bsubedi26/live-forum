@@ -1,7 +1,7 @@
-import initialState from './state'
-import feathers from 'util/feathers'
-const user = feathers.service('user')
-const oauth = feathers.service('oauth')
+import initialState from './state';
+import feathers from 'util/feathers';
+const user = feathers.service('user');
+const oauth = feathers.service('oauth');
 
 const types = {
   AUTHENTICATE: 'AUTH/AUTHENTICATE',
@@ -18,7 +18,7 @@ const types = {
 export const actions = {
   signup(payload) {
     return dispatch => {
-      return dispatch({ type: types.SIGNUP, payload: user.create(payload) })
+      return dispatch({ type: types.SIGNUP, payload: user.create(payload) });
     }        
   },
   authenticate(payload) {
@@ -27,52 +27,52 @@ export const actions = {
       return dispatch({ type: types.AUTHENTICATE, payload: feathers.authenticate(payload) })
       .then(response => {
         dispatch({ type: types.VERIFY_JWT, payload: feathers.passport.verifyJWT(response.value.accessToken)});
-        return Promise.resolve(response)      
+        return Promise.resolve(response);
       })
       .then(response => {
-        const { id } = getState().auth
-        dispatch({ type: types.USER_GET, payload: user.get(id) })
-        return Promise.resolve(response)      
+        const { id } = getState().auth;
+        dispatch({ type: types.USER_GET, payload: user.get(id) });
+        return Promise.resolve(response);   
       })
       .catch(error => {
-        return Promise.reject(error)
+        return Promise.reject(error);
       })
     }        
   },
   verifyJwtOAuth() {
-    const accessToken = window.localStorage.getItem('feathers-jwt')
+    const accessToken = window.localStorage.getItem('feathers-jwt');
 
     return dispatch => {
       // feathers.passport.getJWT().then()
       return dispatch({ type: types.VERIFY_JWT, payload: feathers.passport.verifyJWT(accessToken)})
       .then(response => {
-        const { userId } = response.value
-        dispatch({ type: types.OAUTH_GET, payload: oauth.get(userId) })
+        const { userId } = response.value;
+        dispatch({ type: types.OAUTH_GET, payload: oauth.get(userId) });
         // oauth.get(userId)
         // .then(res => console.log('OAUTH ', res))
         // .catch(res => console.log('OAUTH ERR ', res))
-        return Promise.resolve(response)      
+        return Promise.resolve(response);      
       })
       .catch(error => {
-        console.log('ERROR ', error)
-        return Promise.reject(error)
+        console.log('ERROR ', error);
+        return Promise.reject(error);
       })
     }
     
   },
   logout() {
     return dispatch => {
-      dispatch({ type: types.AUTH_RESET })
-      window.localStorage.removeItem('persist:primary')
+      dispatch({ type: types.AUTH_RESET });
+      window.localStorage.removeItem('persist:primary');
       // window.localStorage.clear()
-      return dispatch({ type: types.LOGOUT, payload: feathers.logout() })
+      return dispatch({ type: types.LOGOUT, payload: feathers.logout() });
     }
   }
 }
 
 
 export default function reducer (state = initialState, action) {
-  const { type, payload } = action
+  const { type, payload } = action;
 
   switch (type) {
     case `${types.AUTHENTICATE}_PENDING`: {
@@ -91,7 +91,7 @@ export default function reducer (state = initialState, action) {
     }
 
     case `${types.AUTHENTICATE}_FULFILLED`: {
-      const { accessToken } = payload
+      const { accessToken } = payload;
       return {
         ...state,
         isPending: false,
@@ -110,8 +110,8 @@ export default function reducer (state = initialState, action) {
     }
 
     case `${types.OAUTH_GET}_FULFILLED`: {
-      let { id, githubId, github } = payload
-      github = (typeof github === 'string') ? JSON.parse(github) : github
+      let { id, githubId, github } = payload;
+      github = (typeof github === 'string') ? JSON.parse(github) : github;
 
       return {
         ...state,

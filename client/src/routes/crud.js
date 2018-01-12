@@ -2,7 +2,7 @@ import React, { createElement } from 'react';
 import { Route, Switch } from 'react-router-dom';
 const CrudRoute = ({ resource, list, create, edit, show, remove }) => {
     // inject the resource prop
-    const ResourcePage = component => routeProps => createElement(component, { resource, ...routeProps })
+    const ResourcePage = component => routeProps => createElement(component, { resource, ...routeProps });
 
     return (
         <Switch>
@@ -35,4 +35,4 @@ const CrudRoute = ({ resource, list, create, edit, show, remove }) => {
     )
 }
 
-export default CrudRoute
+export default CrudRoute;

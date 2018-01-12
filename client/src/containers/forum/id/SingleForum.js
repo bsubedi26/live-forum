@@ -1,9 +1,9 @@
-import React from 'react'
-import { Title, LineText } from '../common'
+import React from 'react';
+import { Title, LineText } from '../common';
 
 const SingleForum = props => {
-  const { post } = props
-  const postDate = new Date(post.updated_at).toDateString()
+  const { post } = props;
+  const postDate = new Date(post.updated_at).toDateString();
 
   return (
     <div className="card">
@@ -15,7 +15,7 @@ const SingleForum = props => {
         <p className="mt-2">
           {post.summary}
         </p>
-        <LineText>ID: {post.creator_id} - <i className="fa fa-github m-1"></i> {post._creator.email}</LineText>
+        <LineText>ID: {post._creator.id} - <i className="fa fa-github m-1"></i> {post._creator.email}</LineText>
         <LineText>
           <span className="mr-2">{postDate}</span>
           <span className="mr-2">-</span>
@@ -27,4 +27,4 @@ const SingleForum = props => {
   )
 }
 
-export default SingleForum
+export default SingleForum;

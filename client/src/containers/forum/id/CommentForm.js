@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const CommentForm = props => {
-  const { createComment, handleOnChange } = props
+  const { createComment, handleOnChange } = props;
   return (
     <div className="mt-3 card">
       <form onSubmit={createComment} noValidate>
@@ -14,4 +14,4 @@ const CommentForm = props => {
   )
 }
 
-export default CommentForm
+export default CommentForm;

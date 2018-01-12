@@ -9,9 +9,9 @@ const resolvers = {
   },
 
   joins: {
-    _user: () => async (forum, hook) => {
+    _creator: () => async (forum, hook) => {
       let user = await hook._userLoader.load(forum.creator_id);
-      forum._user = user;
+      forum._creator = user;
     },
     _comments: () => async (forum, hook) => {
       let comments = await hook._commentsLoader.load(forum.id);

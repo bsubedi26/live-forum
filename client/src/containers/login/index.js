@@ -1,9 +1,9 @@
-import React from 'react'
-import FormContainer from './form'
-import { actions as AuthActions } from 'reducers/auth'
-import { connect } from 'react-redux'
-import { FadeIn } from 'animate-css-styled-components'
-import { push } from 'react-router-redux'
+import React from 'react';
+import FormContainer from './form';
+import { actions as AuthActions } from 'reducers/auth';
+import { connect } from 'react-redux';
+import { FadeIn } from 'animate-css-styled-components';
+import { push } from 'react-router-redux';
 
 class Login extends React.Component {
   state = {
@@ -12,19 +12,19 @@ class Login extends React.Component {
   }
 
   handleSubmit = (formValues) => {
-    const { dispatch } = this.props
-    const credentials = { ...formValues, strategy: 'local' }
-    // const credentials = { ...formValues, strategy: 'facebook' }
+    const { dispatch } = this.props;
+    const credentials = { ...formValues, strategy: 'local' };
+    // const credentials = { ...formValues, strategy: 'facebook' };
     
     return dispatch(AuthActions.authenticate(credentials))
     .then(res => {
-      this.setState({ error: false, errorMessage: null })
-      dispatch(push('/forum/2'))
+      this.setState({ error: false, errorMessage: null });
+      dispatch(push('/forum/2'));
     })
     .catch(err => {
-      console.log(err)
-      this.setState({ error: true, errorMessage: err.message })
-      return Promise.reject(err)
+      // console.log(err);
+      this.setState({ error: true, errorMessage: err.message });
+      return Promise.reject(err);
     })
     
   }
@@ -65,4 +65,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null)(Login)
+export default connect(null)(Login);

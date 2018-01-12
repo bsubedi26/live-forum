@@ -7,10 +7,10 @@ export default (values, props) => {
     }
 
     if (!values.password) {
-        errors.password = 'The password field is required.'
+        errors.password = 'The password field is required.';
     }
     else if (values.password.length > 15) {
-        errors.password = 'The password must be 15 characters or less.'
+        errors.password = 'The password must be 15 characters or less.';
     }
 
     return errors;

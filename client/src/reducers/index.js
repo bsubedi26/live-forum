@@ -1,10 +1,10 @@
-// import { combineReducers } from 'redux'
-import storage from 'redux-persist/lib/storage' // or whatever storage you are using
-import { persistCombineReducers } from 'redux-persist'
-import { routerReducer as router } from 'react-router-redux'
+// import { combineReducers } from 'redux';
+import storage from 'redux-persist/lib/storage';
+import { persistCombineReducers } from 'redux-persist';
+import { routerReducer as router } from 'react-router-redux';
 
-import auth from './auth'
-import { services } from 'util/feathers'
+import auth from './auth';
+import { services } from 'util/feathers';
 
 const config = {
   key: 'primary',
@@ -21,4 +21,4 @@ const rootReducer = persistCombineReducers(config, {
   topic: services.topic.reducer,
 })
 
-export default rootReducer
+export default rootReducer;

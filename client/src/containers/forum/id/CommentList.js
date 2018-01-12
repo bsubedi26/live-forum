@@ -1,25 +1,25 @@
-import React from 'react'
-import { Title, LineText } from '../common'
+import React from 'react';
+import { Title, LineText } from '../common';
 
 const CommentList = props => {
-  const { comments } = props
+  const { comments } = props;
 
   return (
     <div>
       {comments.map((item, i) => {
-        let commentDate = new Date(item.updated_at).toDateString()
+        let commentDate = new Date(item.updated_at).toDateString();
         
         return (
           <div key={i} className="card">
             <div className="card-header">
-              <Title>{item._creator}</Title>
+              <Title>{item._creator.email}</Title>
             </div>
 
             <div className="text-center">
               <p className="mt-2">
                 {item.comment}
               </p>
-              <LineText>ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item._creator}</LineText>
+              <LineText>ID: {item._creator.id} - <i className="fa fa-github m-1"></i> {item._creator.email}</LineText>
               <LineText>
                 <span className="mr-2">{commentDate}</span>
                 {/* <span className="m-2">{item.favorites} favorites</span> */}
@@ -34,4 +34,4 @@ const CommentList = props => {
   )
 }
 
-export default CommentList
+export default CommentList;

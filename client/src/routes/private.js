@@ -1,9 +1,9 @@
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = localStorage.getItem('feathers-jwt') ? true : false
-  console.log('isAuthenticated ', isAuthenticated)
+  const isAuthenticated = localStorage.getItem('feathers-jwt') ? true : false;
+  console.log('isAuthenticated ', isAuthenticated);
   return (
     <Route {...rest} render={props => (
       isAuthenticated ? (
@@ -15,4 +15,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   )
 }
 
-export default PrivateRoute
+export default PrivateRoute;

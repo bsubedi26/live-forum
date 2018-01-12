@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const CreateForm = props => {
-  const { handleCreateForum, handleOnChange } = props
+  const { handleCreateForum, handleOnChange } = props;
+
   return (
     <div>
       <form onSubmit={handleCreateForum} noValidate>
@@ -13,4 +14,4 @@ const CreateForm = props => {
   )
 }
 
-export default CreateForm
+export default CreateForm;

@@ -1,12 +1,12 @@
-import React from 'react'
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import { ConnectedRouter } from 'react-router-redux'
-import styled from 'styled-components'
+import React from 'react';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
+import styled from 'styled-components';
 
-import { Home, Login, Signup, ForumPage, ForumDetailById, ForumCreatePage, NotFoundPage } from 'containers'
-import { Header } from 'components'
-import { history } from 'util/store'
-// import PrivateRoute from './private'
+import { Home, Login, Signup, ForumPage, ForumDetailById, ForumCreatePage, NotFoundPage } from 'containers';
+import { Header } from 'components';
+import { history } from 'util/store';
+// import PrivateRoute from './private';
 
 const Container = styled.div`text-align: center;`
 
@@ -38,4 +38,4 @@ function Routes() {
   )
 }
 
-export default Routes
+export default Routes;

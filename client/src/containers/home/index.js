@@ -1,12 +1,12 @@
-import React from 'react'
-import { FadeIn } from 'animate-css-styled-components'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import React from 'react';
+import { FadeIn } from 'animate-css-styled-components';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 class Home extends React.Component {
 
   goRoute(path) {
-    this.props.dispatch(push(path))
+    this.props.dispatch(push(path));
   }
 
   render() {
