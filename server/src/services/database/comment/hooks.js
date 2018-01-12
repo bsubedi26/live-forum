@@ -1,24 +1,24 @@
 'use strict';
 const { fastJoin } = require('feathers-hooks-common');
-// const { authenticate } = require('feathers-authentication').hooks;
+const { userLoader } = require('hooks/batchLoaders');
 
-const userCommentCreatorJoins = {
+const commentCreatorResolvers = {
+  before: hook => {
+    hook._userLoader = userLoader(hook);
+  },
+
   joins: {
-    _user: () => async (comment, hook) => {
-      let query = { id: comment.creator_id, $select: ['id', 'email', 'created_at', 'updated_at'] };
-      let user = await hook.app.service('user').find({ query });
-      comment._user = user;
+    _creator: () => async (comment, hook) => {
+      let user = await hook._userLoader.load(comment.creator_id);
+      comment._creator = user;
     }
   }
 };
 
 module.exports = {
   before: {
-    all: [
-      // authenticate('jwt')
-    ],
-    find: [
-    ],
+    all: [],
+    find: [],
     get: [],
     create: [],
     update: [],
@@ -29,7 +29,7 @@ module.exports = {
   after: {
     all: [],
     find: [
-      // fastJoin(userCommentCreatorJoins)
+      fastJoin(commentCreatorResolvers)
     ],
     get: [],
     create: [],

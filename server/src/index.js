@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+require('app-module-path').addPath(__dirname);
 const logger = require('winston');
 const app = require('./app');
 const port = app.get('port');

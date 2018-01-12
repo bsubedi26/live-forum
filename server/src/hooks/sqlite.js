@@ -1,5 +1,7 @@
-// Sqlite adds t.json() data types as text,
-// therefore, stringify all the incoming json body data
+/**
+ * Sqlite adds t.json() data types as text,
+ * therefore, stringify all the incoming json body data
+*/
 const stringifyJsonForSqlite = () => async ctx => {
   // console.log('data ', ctx.data);
   if (ctx && ctx.data) {
@@ -14,5 +16,12 @@ const stringifyJsonForSqlite = () => async ctx => {
   return ctx;
 };
 
+const isSqlite = () => async ctx => {
+  const knex = ctx.app.get('knexClient');
+  return (knex.client.config.client === 'sqlite3') ? true : false;
+};
 
-module.exports = stringifyJsonForSqlite;
+module.exports = {
+  stringifyJsonForSqlite,
+  isSqlite
+};

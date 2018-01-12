@@ -1,8 +1,7 @@
 'use strict';
 const createService = require('feathers-knex');
-const createModel = require('../../../models/forum.model');
+const createModel = require('models/forum.model');
 const hooks = require('./hooks');
-
 
 module.exports = function(app) {
   const Model = createModel(app);
