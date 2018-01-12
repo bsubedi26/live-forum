@@ -1,6 +1,6 @@
 // Initializes the `topic` service on path `/topic`
 const createService = require('feathers-knex');
-const createModel = require('../../../models/topic.model');
+const createModel = require('models/topic.model');
 const hooks = require('./hooks');
 
 module.exports = function (app) {

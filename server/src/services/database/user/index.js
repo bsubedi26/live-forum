@@ -1,7 +1,7 @@
 // Initializes the `user` service on path `/user`
 // const createService = require('feathers-knex');
 const createService = require('../../lib/knex');
-const createModel = require('../../../models/user.model');
+const createModel = require('models/user.model');
 const hooks = require('./hooks');
 const t = require('tcomb');
 const validate = require('../../lib/validate');

@@ -36,14 +36,8 @@ module.exports = {
     all: [
       fastJoin(resolvers)
     ],
-    find: [
-      // joinUser(),
-      // joinComments(),
-      // joinCommentCreator()
-    ],
-    get: [
-      // joinsForGet()
-    ],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],

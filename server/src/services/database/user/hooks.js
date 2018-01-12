@@ -1,15 +1,6 @@
 // const { authenticate } = require('@feathersjs/authentication').hooks;
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
 const validateUniqueUser = require('./hooks/validateUniqueUser');
-const { omit } = require('lodash');
-
-const omitPasswordForFastJoins = () => async hook => {
-  if (hook.result.data && hook.result.data[0] && hook.result.data[0].password) {
-    // delete hook.result.data[0].password
-    hook.result = omit(hook.result.data[0], 'password')
-  }
-  return hook;
-};
 
 module.exports = {
   before: {
@@ -37,12 +28,8 @@ module.exports = {
       // MUST BE THE LAST HOOK
       protect('password'),
     ],
-    find: [
-      // omitPasswordForFastJoins()
-    ],
-    get: [
-      // omitPasswordForFastJoins()
-    ],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],

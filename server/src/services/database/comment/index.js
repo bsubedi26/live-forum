@@ -1,10 +1,9 @@
-// Initializes the `messages` service on path `/messages`
+// Initializes the `messages` service on path `/comment`
 const createService = require('feathers-knex');
-const createModel = require('../../../models/comment.model');
+const createModel = require('models/comment.model');
 const hooks = require('./hooks');
 
-module.exports = function () {
-  const app = this;
+module.exports = function (app) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 
