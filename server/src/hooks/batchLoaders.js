@@ -4,21 +4,21 @@ const { getUniqueKeys, getResultsByKey } = BatchLoader;
 const userLoader = (hook) => {
   return new BatchLoader(async (keys) => {
     const userService = hook.app.service('user');
-    let uniq = getUniqueKeys(keys);
+    let idArray = getUniqueKeys(keys);
 
-    let res = await userService.find({ query: { id: { $in: uniq }, $select: ['id', 'email'] } });
-    return res.data;
+    let response = await userService.find({ query: { id: { $in: idArray }, $select: ['id', 'email'] } });
+    return response.data;
   });
 };
 
 const commentsLoader = (hook) => {
   return new BatchLoader(async (keys) => {
     const commentService = hook.app.service('comment');
-    let uniq = getUniqueKeys(keys);
+    let idArray = getUniqueKeys(keys);
     let getRecordKeyFunc = comment => comment.forum_id;
 
-    let res = await commentService.find({ query: { forum_id: { $in: uniq } } });
-    let results = getResultsByKey(keys, res.data, getRecordKeyFunc, '[]', { defaultElem: [] });
+    let response = await commentService.find({ query: { forum_id: { $in: idArray } } });
+    let results = getResultsByKey(keys, response.data, getRecordKeyFunc, '[]', { defaultElem: [] });
     return results;
   });
 };
