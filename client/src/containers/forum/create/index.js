@@ -18,7 +18,7 @@ class ForumCreatePage extends React.Component {
     const { title, summary } = this.state;
     const payload = { title, summary, topic_id: topicId, creator_id: auth.id };
     
-    dispatch(services.forum.create(payload));
+    dispatch(services.forums.create(payload));
   }
 
   render() {

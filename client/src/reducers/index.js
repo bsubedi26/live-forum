@@ -15,10 +15,10 @@ const rootReducer = persistCombineReducers(config, {
   auth,
   router,
   
-  user: services.user.reducer,
-  forum: services.forum.reducer,
-  comment: services.comment.reducer,
-  topic: services.topic.reducer,
+  users: services.users.reducer,
+  forums: services.forums.reducer,
+  comments: services.comments.reducer,
+  topics: services.topics.reducer,
 })
 
 export default rootReducer;

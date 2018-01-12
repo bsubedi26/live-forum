@@ -51,12 +51,12 @@ class Login extends React.Component {
             </FadeIn>
 
             {/* <a href="http://localhost:3030/auth/github"> */}
-            <a href="/auth/github">
+            {/* <a href="/auth/github">
               <button className="mt-3 btn btn-default pointer">
                 Login With Github
                 <i className="fa fa-github fa-lg m-2" aria-hidden="true"></i>
               </button>
-            </a>
+            </a> */}
           </div>
         </FadeIn>
       </div>

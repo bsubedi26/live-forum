@@ -1,6 +1,6 @@
 import initialState from './state';
 import feathers from 'util/feathers';
-const user = feathers.service('user');
+const user = feathers.service('users');
 const oauth = feathers.service('oauth');
 
 const types = {

@@ -25,7 +25,7 @@ class NavbarCmp extends React.Component {
 
   // componentWillMount() {
   //   const { dispatch } = this.props
-  //   dispatch(services.topic.find())
+  //   dispatch(services.topics.find())
   //     .then(({ action }) => {
   //       console.log(action.payload.data);
   //       this.setState({ guestLinks: action.payload.data })

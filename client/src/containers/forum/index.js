@@ -25,7 +25,7 @@ class ForumPage extends React.Component {
   dispatchFind(topicId) {
     const { dispatch } = this.props;
 
-    dispatch(services.forum.find({ query: { topic_id: topicId } }))
+    dispatch(services.forums.find({ query: { topic_id: topicId } }))
     .then(({ action }) => {
       this.setState({
         forums: action.payload.data

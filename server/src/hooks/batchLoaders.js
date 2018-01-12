@@ -3,7 +3,7 @@ const { getUniqueKeys, getResultsByKey } = BatchLoader;
 
 const userLoader = (hook) => {
   return new BatchLoader(async (keys) => {
-    const userService = hook.app.service('user');
+    const userService = hook.app.service('users');
     let idArray = getUniqueKeys(keys);
 
     let response = await userService.find({ query: { id: { $in: idArray }, $select: ['id', 'email'] } });
@@ -13,7 +13,7 @@ const userLoader = (hook) => {
 
 const commentsLoader = (hook) => {
   return new BatchLoader(async (keys) => {
-    const commentService = hook.app.service('comment');
+    const commentService = hook.app.service('comments');
     let idArray = getUniqueKeys(keys);
     let getRecordKeyFunc = comment => comment.forum_id;
 

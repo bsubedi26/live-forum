@@ -19,7 +19,7 @@ class ForumDetailById extends React.Component {
     const { comment } = this.state;
     const payload = { comment, forum_id: post.id, creator_id: auth.id };
 
-    dispatch(services.comment.create(payload));
+    dispatch(services.comments.create(payload));
   }
 
   render() {
@@ -51,7 +51,7 @@ const findById = (data, props) => {
 }
 
 const mapState = (state, props) => ({
-  post: findById(state.forum.queryResult.data, props),
+  post: findById(state.forums.queryResult.data, props),
   auth: state.auth
 })
 
