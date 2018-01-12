@@ -1,6 +1,6 @@
 module.exports = function (app) {
   const db = app.get('knexClient');
-  const table = 'comment';
+  const table = 'comments';
 
   db.schema.hasTable(table).then(exists => {
 
@@ -9,8 +9,8 @@ module.exports = function (app) {
         t.increments('id').primary();
         t.string('comment').notNullable();
         
-        t.integer('forum_id').unsigned().references('id').inTable('forum');
-        t.integer('creator_id').unsigned().references('id').inTable('user');
+        t.integer('forum_id').unsigned().references('id').inTable('forums');
+        t.integer('creator_id').unsigned().references('id').inTable('users');
         t.string('creator_email').notNullable();
         t.timestamps(true, true);
 

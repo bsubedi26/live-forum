@@ -1,7 +1,7 @@
 
 module.exports = function (app) {
   const db = app.get('knexClient');
-  const table = 'forum';
+  const table = 'forums';
 
   db.schema.hasTable(table).then(exists => {
 
@@ -12,8 +12,8 @@ module.exports = function (app) {
         t.string('summary').notNullable();
         t.integer('opinions').defaultTo(0);
 
-        t.integer('topic_id').unsigned().references('id').inTable('topic');
-        t.integer('creator_id').unsigned().references('id').inTable('user');
+        t.integer('topic_id').unsigned().references('id').inTable('topics');
+        t.integer('creator_id').unsigned().references('id').inTable('users');
         t.timestamps(true, true);
 
       })

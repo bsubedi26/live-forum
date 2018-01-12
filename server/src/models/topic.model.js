@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 module.exports = function (app) {
   const knex = app.get('knexClient');
-  const tableName = 'topic';
+  const tableName = 'topics';
 
   knex.schema.hasTable(tableName).then(exists => {
     // if (exists) {

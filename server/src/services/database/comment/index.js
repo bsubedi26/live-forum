@@ -8,16 +8,16 @@ module.exports = function (app) {
   const paginate = app.get('paginate');
 
   const options = {
-    name: 'comment',
+    name: 'comments',
     Model,
     paginate
   };
 
   // Initialize our service with any options it requires
-  app.use('/comment', createService(options));
+  app.use('/comments', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('comment');
+  const service = app.service('comments');
 
   service.hooks(hooks);
   

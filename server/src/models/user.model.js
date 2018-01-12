@@ -1,6 +1,6 @@
 module.exports = function (app) {
   const knex = app.get('knexClient');
-  const table = 'user';
+  const table = 'users';
   
   // const schemaBuilder = require('knex/lib/schema/builder');
   // const tableBuilder = require('knex/lib/schema/tablebuilder');
