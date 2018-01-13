@@ -20,7 +20,7 @@ const getCommentsUsingIds = (hook) => {
     let idArray = getUniqueKeys(ids);
     let getRecordKeyFunc = comment => comment.thread_id;
 
-    let response = await commentService.find({ query: { thread_id: { $in: idArray } } });
+    let response = await commentService.find({ query: { thread_id: { $in: idArray }, $sort: { updated_at: '-1' } } });
     let results = getResultsByKey(idArray, response.data, getRecordKeyFunc, '[]', { defaultElem: [] });
     return results;
   };
