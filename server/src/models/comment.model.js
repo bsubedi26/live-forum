@@ -9,9 +9,8 @@ module.exports = function (app) {
         t.increments('id').primary();
         t.string('comment').notNullable();
         
-        t.integer('forum_id').unsigned().references('id').inTable('forums');
+        t.integer('thread_id').unsigned().references('id').inTable('threads');
         t.integer('creator_id').unsigned().references('id').inTable('users');
-        t.string('creator_email').notNullable();
         t.timestamps(true, true);
 
       })

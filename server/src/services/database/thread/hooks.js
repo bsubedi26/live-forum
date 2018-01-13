@@ -9,13 +9,13 @@ const resolvers = {
   },
 
   joins: {
-    _creator: () => async (forum, hook) => {
-      let user = await hook._userLoader.load(forum.creator_id);
-      forum._creator = user;
+    _creator: () => async (thread, hook) => {
+      let user = await hook._userLoader.load(thread.creator_id);
+      thread._creator = user;
     },
-    _comments: () => async (forum, hook) => {
-      let comments = await hook._commentsLoader.load(forum.id);
-      forum._comments = comments;
+    _comments: () => async (thread, hook) => {
+      let comments = await hook._commentsLoader.load(thread.id);
+      thread._comments = comments;
     },
   }
 };
@@ -23,8 +23,7 @@ const resolvers = {
 module.exports = {
   before: {
     all: [],
-    find: [
-    ],
+    find: [],
     get: [],
     create: [],
     update: [],

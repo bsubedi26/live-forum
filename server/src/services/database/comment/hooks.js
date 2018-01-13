@@ -30,8 +30,7 @@ module.exports = {
     all: [
       fastJoin(commentCreatorResolvers)
     ],
-    find: [
-    ],
+    find: [],
     get: [],
     create: [],
     update: [],

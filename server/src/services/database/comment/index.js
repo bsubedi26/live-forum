@@ -27,5 +27,6 @@ module.exports = function (app) {
 
     // e.g. to publish all service events to all authenticated users use
     // return app.channel('authenticated');
+    return app.channel('authenticated', 'anonymous');
   });
 };

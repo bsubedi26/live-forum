@@ -1,7 +1,7 @@
 
 module.exports = function (app) {
   const db = app.get('knexClient');
-  const table = 'forums';
+  const table = 'threads';
 
   db.schema.hasTable(table).then(exists => {
 

@@ -1,11 +1,11 @@
 const user = require('./user');
-const forum = require('./forum');
+const thread = require('./thread');
 const comment = require('./comment');
 const topic = require('./topic');
 
 module.exports = function (app) {
   app.configure(user);
-  app.configure(forum);
+  app.configure(thread);
   app.configure(comment);
   app.configure(topic);
 };

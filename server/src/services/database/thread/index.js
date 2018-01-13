@@ -1,6 +1,6 @@
 'use strict';
 const createService = require('feathers-knex');
-const createModel = require('models/forum.model');
+const createModel = require('models/thread.model');
 const hooks = require('./hooks');
 
 module.exports = function(app) {
@@ -8,16 +8,16 @@ module.exports = function(app) {
   const paginate = app.get('paginate');
 
   const options = {
-    name: 'forums',
+    name: 'threads',
     Model,
     paginate
   };
 
   // Initialize our service with any options it requires
-  app.use('/forums', createService(options));
+  app.use('/threads', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('forums');
+  const service = app.service('threads');
 
   service.hooks(hooks);
 
