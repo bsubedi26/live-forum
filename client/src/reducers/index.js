@@ -2,7 +2,9 @@
 import storage from 'redux-persist/lib/storage';
 import { persistCombineReducers } from 'redux-persist';
 import { routerReducer as router } from 'react-router-redux';
+import reduceReducers from 'reduce-reducers';
 
+import rootReducer from './root';
 import auth from './auth';
 import { services } from 'util/feathers';
 
@@ -11,7 +13,7 @@ const config = {
   storage,
 }
 
-const rootReducer = persistCombineReducers(config, {
+const allReducers = persistCombineReducers(config, {
   auth,
   router,
   
@@ -21,4 +23,7 @@ const rootReducer = persistCombineReducers(config, {
   topics: services.topics.reducer,
 })
 
-export default rootReducer;
+// STATE IS THE WHOLE STORE TREE
+const combinedReducer = reduceReducers(allReducers, rootReducer)
+
+export default combinedReducer;

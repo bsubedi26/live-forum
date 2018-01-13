@@ -1,14 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { services } from 'util/feathers';
+import feathers, { services } from 'util/feathers';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 import SingleThread from './SingleThread';
+
 
 class ThreadDetailById extends React.Component {
   state = {
     comment: '',
     comments: []
+  }
+  
+  commentService = feathers.service('comments');
+
+  initListeners() {
+    const { dispatch } = this.props;
+
+    this.commentService.on('created', (data) => {
+      dispatch({ type: 'SOCKET_COMMENTS_ON_CREATE', payload: data });
+    });
+
+  }
+
+  componentDidMount() {
+    this.initListeners();
   }
 
   handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value });

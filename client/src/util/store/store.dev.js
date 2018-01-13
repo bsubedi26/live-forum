@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from 'reducers';
 import promiseMiddleware from 'redux-promise-middleware';
 import { persistStore } from 'redux-persist';
-// import freeze from 'redux-freeze';
+import freeze from 'redux-freeze';
 
 import createHistory from 'history/createHashHistory';
 import { routerMiddleware } from 'react-router-redux';
@@ -16,7 +16,7 @@ const middlewares = [
   ReduxThunk,
   promiseMiddleware(),
   routeMiddleware,
-  // freeze
+  freeze
 ]
 const enhancers = [
   applyMiddleware(...middlewares),

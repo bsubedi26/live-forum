@@ -1,18 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { services } from 'util/feathers';
 import ThreadList from './ThreadList';
-
+import feathers, { services } from 'util/feathers';
 
 class ThreadPage extends React.Component {
   state = {
     forums: []
   }
 
+  threadService = feathers.service('threads');
+
+  initListeners() {
+    const { dispatch } = this.props;
+
+    this.threadService.on('created', (data) => {
+      console.log('THREAD:on::Created ', data);
+      // dispatch(services.threads.onCreated(data));
+      dispatch({ type: 'SOCKET_THREADS_ON_CREATE', payload: data });
+
+    });
+    
+  }
   componentDidMount() {
     const { topicId } = this.props.match.params;
     this.dispatchFind(topicId);
+    this.initListeners();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,17 +38,19 @@ class ThreadPage extends React.Component {
   dispatchFind(topicId) {
     const { dispatch } = this.props;
 
-    dispatch(services.threads.find({ query: { topic_id: topicId } }))
-    .then(({ action }) => {
-      this.setState({
-        forums: action.payload.data
-      })
-    })
-    .catch(err => console.log(err));
+    // dispatch(services.threads.find({ query: { topic_id: topicId } }))
+    dispatch(services.threads.find({ query: { topic_id: topicId, $sort: { updated_at: '-1' } } }))
+    // .then(({ action }) => {
+    //   this.setState({
+    //     forums: action.payload.data
+    //   })
+    // })
+    // .catch(err => console.log(err));
   }
 
   render() {
     const { topicId } = this.props.match.params;
+    const { threads } = this.props;
 
     return (
       <div className="row mx-auto w-75 mt-4">
@@ -46,7 +61,7 @@ class ThreadPage extends React.Component {
               Discussions
             </div>
 
-            <ThreadList forums={this.state.forums} topicId={topicId} />
+            <ThreadList threads={threads} topicId={topicId} />
           </div>
         </div>
 
@@ -59,4 +74,8 @@ class ThreadPage extends React.Component {
   }
 }
 
-export default connect(null)(ThreadPage);
+const mapState = state => ({
+  threads: state.threads.queryResult.data
+})
+
+export default connect(mapState)(ThreadPage);

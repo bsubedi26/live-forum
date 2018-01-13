@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { LineText, Title } from './common';
 
 const ThreadList = props => {
-  const { forums, topicId } = props;
+  const { threads, topicId } = props;
 
   return (
     <div className="list-group list-group-flush">
       {
-        forums.map(item => {
+        threads && threads.map(item => {
           let postDate = new Date(item.updated_at).toDateString();
 
           return (
