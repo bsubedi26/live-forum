@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { services } from 'util/feathers';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
-import SingleForum from './SingleForum';
+import SingleThread from './SingleThread';
 
-class ForumDetailById extends React.Component {
+class ThreadDetailById extends React.Component {
   state = {
     comment: '',
     comments: []
@@ -17,7 +17,7 @@ class ForumDetailById extends React.Component {
     e.preventDefault();
     const { dispatch, post, auth } = this.props;
     const { comment } = this.state;
-    const payload = { comment, forum_id: post.id, creator_id: auth.id };
+    const payload = { comment, thread_id: post.id, creator_id: auth.id };
 
     dispatch(services.comments.create(payload));
   }
@@ -27,7 +27,7 @@ class ForumDetailById extends React.Component {
 
     return (
       <div className="mx-auto w-75 mt-4">
-        <SingleForum post={post} />
+        <SingleThread post={post} />
 
         { auth.id ? 
           <CommentForm createComment={this.createComment} handleOnChange={this.handleOnChange} />
@@ -51,8 +51,8 @@ const findById = (data, props) => {
 }
 
 const mapState = (state, props) => ({
-  post: findById(state.forums.queryResult.data, props),
+  post: findById(state.threads.queryResult.data, props),
   auth: state.auth
 })
 
-export default connect(mapState)(ForumDetailById);
+export default connect(mapState)(ThreadDetailById);

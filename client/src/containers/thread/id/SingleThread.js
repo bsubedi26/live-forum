@@ -1,7 +1,7 @@
 import React from 'react';
 import { Title, LineText } from '../common';
 
-const SingleForum = props => {
+const SingleThread = props => {
   const { post } = props;
   const postDate = new Date(post.updated_at).toDateString();
 
@@ -27,4 +27,4 @@ const SingleForum = props => {
   )
 }
 
-export default SingleForum;
+export default SingleThread;

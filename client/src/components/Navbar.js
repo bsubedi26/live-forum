@@ -17,9 +17,9 @@ class NavbarCmp extends React.Component {
     activeTab: this.props.location.pathname,
     guestLinks: [
       { id: 1, name: "home", path: "/home", display: "Home" },
-      { id: 2, name: "react", path: "/forum/2", display: "React" },
-      { id: 3, name: "redux", path: "/forum/3", display: "Redux" },
-      { id: 6, name: "nodejs", path: "/forum/6", display: "NodeJS" }
+      { id: 2, name: "react", path: "/thread/2", display: "React" },
+      { id: 3, name: "redux", path: "/thread/3", display: "Redux" },
+      { id: 6, name: "nodejs", path: "/thread/6", display: "NodeJS" }
     ]
   };
 

@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { services } from 'util/feathers';
-import ForumList from './ForumList';
+import ThreadList from './ThreadList';
 
 
-class ForumPage extends React.Component {
+class ThreadPage extends React.Component {
   state = {
     forums: []
   }
@@ -25,7 +25,7 @@ class ForumPage extends React.Component {
   dispatchFind(topicId) {
     const { dispatch } = this.props;
 
-    dispatch(services.forums.find({ query: { topic_id: topicId } }))
+    dispatch(services.threads.find({ query: { topic_id: topicId } }))
     .then(({ action }) => {
       this.setState({
         forums: action.payload.data
@@ -46,7 +46,7 @@ class ForumPage extends React.Component {
               Discussions
             </div>
 
-            <ForumList forums={this.state.forums} topicId={topicId} />
+            <ThreadList forums={this.state.forums} topicId={topicId} />
           </div>
         </div>
 
@@ -59,4 +59,4 @@ class ForumPage extends React.Component {
   }
 }
 
-export default connect(null)(ForumPage);
+export default connect(null)(ThreadPage);

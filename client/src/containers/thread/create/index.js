@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { services } from 'util/feathers';
 import CreateForm from './CreateForm';
 
-class ForumCreatePage extends React.Component {
+class ThreadCreatePage extends React.Component {
   state = {
     title: '',
     summary: ''
@@ -18,7 +18,7 @@ class ForumCreatePage extends React.Component {
     const { title, summary } = this.state;
     const payload = { title, summary, topic_id: topicId, creator_id: auth.id };
     
-    dispatch(services.forums.create(payload));
+    dispatch(services.threads.create(payload));
   }
 
   render() {
@@ -52,4 +52,4 @@ const mapState = (state, props) => ({
   auth: state.auth
 })
 
-export default connect(mapState)(ForumCreatePage);
+export default connect(mapState)(ThreadCreatePage);

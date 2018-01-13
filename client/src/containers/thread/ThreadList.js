@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { LineText, Title } from './common';
 
-const ForumList = props => {
+const ThreadList = props => {
   const { forums, topicId } = props;
 
   return (
@@ -13,7 +13,7 @@ const ForumList = props => {
 
           return (
             <div key={item.id} className="list-group-item">
-              <Link to={`/forum/${topicId}/individual/${item.id}`}><Title className="text-left mb-3">{item.title}</Title></Link>
+              <Link to={`/thread/${topicId}/individual/${item.id}`}><Title className="text-left mb-3">{item.title}</Title></Link>
               <LineText className="text-left">ID: {item.creator_id} - <i className="fa fa-github m-1"></i> {item._creator.email}</LineText>
               <LineText className="text-left">
                 <span className="mr-2">{postDate}</span>
@@ -29,4 +29,4 @@ const ForumList = props => {
   )
 }
 
-export default ForumList;
+export default ThreadList;

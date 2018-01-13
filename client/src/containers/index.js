@@ -3,9 +3,9 @@ export { default as Login } from './login';
 export { default as Signup } from './signup';
 
 // FORUM
-export { default as ForumPage } from './forum';
-export { default as ForumDetailById } from './forum/id';
-export { default as ForumCreatePage } from './forum/create';
+export { default as ThreadPage } from './thread';
+export { default as ThreadDetailById } from './thread/id';
+export { default as ThreadCreatePage } from './thread/create';
 
 // 404
 export { default as NotFoundPage } from './not-found';

@@ -16,7 +16,7 @@ const rootReducer = persistCombineReducers(config, {
   router,
   
   users: services.users.reducer,
-  forums: services.forums.reducer,
+  threads: services.threads.reducer,
   comments: services.comments.reducer,
   topics: services.topics.reducer,
 })

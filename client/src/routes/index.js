@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux';
 import styled from 'styled-components';
 
-import { Home, Login, Signup, ForumPage, ForumDetailById, ForumCreatePage, NotFoundPage } from 'containers';
+import { Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers';
 import { Header } from 'components';
 import { history } from 'util/store';
 // import PrivateRoute from './private';
@@ -23,9 +23,9 @@ function Routes() {
             <Route exact path='/signup' component={Signup} />
 
             {/* FORUM */}
-            <Route exact path='/forum/:topicId' component={ForumPage} />
-            <Route exact path='/forum/:topicId/individual/:id' component={ForumDetailById} />
-            <Route exact path='/forum/:topicId/create' component={ForumCreatePage} />
+            <Route exact path='/thread/:topicId' component={ThreadPage} />
+            <Route exact path='/thread/:topicId/individual/:id' component={ThreadDetailById} />
+            <Route exact path='/thread/:topicId/create' component={ThreadCreatePage} />
 
             {/* 404 & Redirects */}
             <Redirect exact from='/' to='/home'/>
