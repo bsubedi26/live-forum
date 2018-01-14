@@ -1,4 +1,3 @@
-'use strict';
 const createService = require('feathers-knex');
 const createModel = require('models/thread.model');
 const hooks = require('./hooks');

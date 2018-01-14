@@ -9,8 +9,8 @@ module.exports = function (app) {
         t.increments('id').primary();
         t.string('comment').notNullable();
         
-        t.integer('thread_id').unsigned().references('id').inTable('threads');
-        t.integer('creator_id').unsigned().references('id').inTable('users');
+        t.integer('thread_id').unsigned().references('id').inTable('threads').onDelete('cascade');
+        t.integer('creator_id').unsigned().references('id').inTable('users').onDelete('cascade');
         t.timestamps(true, true);
 
       })

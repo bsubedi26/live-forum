@@ -1,4 +1,4 @@
-'use strict';
+const { authenticate } = require('@feathersjs/authentication').hooks;
 const { fastJoin } = require('feathers-hooks-common');
 const { userLoader } = require('hooks/batchLoaders');
 
@@ -20,10 +20,18 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [
+      authenticate('jwt')
+    ],
+    update: [
+      authenticate('jwt')
+    ],
+    patch: [
+      authenticate('jwt')
+    ],
+    remove: [
+      authenticate('jwt')
+    ]
   },
 
   after: {

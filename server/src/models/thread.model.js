@@ -12,7 +12,8 @@ module.exports = function (app) {
         t.string('summary').notNullable();
 
         t.integer('topic_id').unsigned().references('id').inTable('topics');
-        t.integer('creator_id').unsigned().references('id').inTable('users');
+        // if user is removed, remove all threads created by the user (on delete cascade)
+        t.integer('creator_id').unsigned().references('id').inTable('users').onDelete('cascade');
         t.timestamps(true, true);
 
       })
