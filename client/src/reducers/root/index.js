@@ -1,5 +1,8 @@
 import { update, updateIn } from 'timm';
 
+/**
+ * STATE IS THE WHOLE STORE TREE
+*/
 const rootReducer = (state, action) => {
   const { type, payload } = action;
 
@@ -24,20 +27,19 @@ const rootReducer = (state, action) => {
     case 'SOCKET_THREADS_ON_CREATE': {
       const { threads } = state;
 
-      return {
-        ...state,
-        threads: updateIn(threads, ['queryResult', 'data'], (data) => {
-          return [payload].concat(data);
-          // return data.map(item => {
-          //   if (item.id === payload.thread_id) {
-          //     let newObj = update(item, '_comments', (comments) => comments.concat(payload));
-          //     return newObj;
-          //   }
-
-          //   return item;
-          // })
-        })
+      // ONLY ADD DATA THAT MATCHES THE TOPIC ID THE USER IS CURRENTLY VIEWING
+      if (payload.topic_id === threads.queryResult.data[0].topic_id) {
+        return {
+          ...state,
+          threads: updateIn(threads, ['queryResult', 'data'], (data) => {
+            return [payload].concat(data);
+          })
+        }
       }
+      else {
+        return state;
+      }
+      
     }
     default: return state;
   }

@@ -8,8 +8,7 @@ import SingleThread from './SingleThread';
 
 class ThreadDetailById extends React.Component {
   state = {
-    comment: '',
-    comments: []
+    comment: ''
   }
   
   commentService = feathers.service('comments');
@@ -18,9 +17,15 @@ class ThreadDetailById extends React.Component {
     const { dispatch } = this.props;
 
     this.commentService.on('created', (data) => {
+      console.log('COMMENT:on::Created ', data);
+
       dispatch({ type: 'SOCKET_COMMENTS_ON_CREATE', payload: data });
     });
 
+  }
+
+  componentWillUnmount() {
+    this.commentService.removeAllListeners("created");
   }
 
   componentDidMount() {

@@ -8,7 +8,7 @@ const CreateForm = props => {
       <form onSubmit={handleCreateForum} noValidate>
         <input id="title" onChange={handleOnChange} className="form-control my-2" placeholder="Forum Title" />
         <textarea id="summary" onChange={handleOnChange} className="form-control my-2" rows="3" placeholder="Forum Summary"></textarea>
-        <button className="btn btn-outline-info my-2">Submit</button>
+        <button className="btn btn-outline-info my-2 pointer">Submit</button>
       </form>
     </div>
   )

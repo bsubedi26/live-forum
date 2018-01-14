@@ -3,7 +3,7 @@ import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from 'reducers';
 import promiseMiddleware from 'redux-promise-middleware';
-import { persistStore } from 'redux-persist';
+// import { persistStore } from 'redux-persist';
 import freeze from 'redux-freeze';
 
 import createHistory from 'history/createHashHistory';
@@ -48,8 +48,7 @@ export default function configureStore(initialState = {}) {
     })
   }
 
-  let persistor = persistStore(store);
-  
-
-  return { store, persistor };
+  // let persistor = persistStore(store);
+  // return { store, persistor };
+  return { store };
 }

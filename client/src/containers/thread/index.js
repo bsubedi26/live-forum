@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ThreadList from './ThreadList';
 import feathers, { services } from 'util/feathers';
+import ThreadList from './ThreadList';
+import PaginationButtons from './PaginationButtons';
 
 class ThreadPage extends React.Component {
-  state = {
-    forums: []
-  }
 
   threadService = feathers.service('threads');
 
@@ -16,13 +14,18 @@ class ThreadPage extends React.Component {
 
     this.threadService.on('created', (data) => {
       console.log('THREAD:on::Created ', data);
-      // dispatch(services.threads.onCreated(data));
       dispatch({ type: 'SOCKET_THREADS_ON_CREATE', payload: data });
-
     });
     
   }
+  
+  componentWillUnmount() {
+    console.log('UNMOUNT');
+    this.threadService.removeAllListeners("created");
+  }
+
   componentDidMount() {
+    console.log('MOUNT');
     const { topicId } = this.props.match.params;
     this.dispatchFind(topicId);
     this.initListeners();
@@ -38,30 +41,24 @@ class ThreadPage extends React.Component {
   dispatchFind(topicId) {
     const { dispatch } = this.props;
 
-    // dispatch(services.threads.find({ query: { topic_id: topicId } }))
     dispatch(services.threads.find({ query: { topic_id: topicId, $sort: { updated_at: '-1' } } }))
-    // .then(({ action }) => {
-    //   this.setState({
-    //     forums: action.payload.data
-    //   })
-    // })
-    // .catch(err => console.log(err));
   }
 
   render() {
     const { topicId } = this.props.match.params;
-    const { threads } = this.props;
+    const { threads, activeThread } = this.props;
 
     return (
       <div className="row mx-auto w-75 mt-4">
 
         <div className="col-10">
+          <PaginationButtons {...this.props} />
           <div className="card">
             <div className="card-header">
               Discussions
             </div>
 
-            <ThreadList threads={threads} topicId={topicId} />
+            <ThreadList activeThread={activeThread} threads={threads} topicId={topicId} />
           </div>
         </div>
 
@@ -74,8 +71,15 @@ class ThreadPage extends React.Component {
   }
 }
 
-const mapState = state => ({
-  threads: state.threads.queryResult.data
+const findActiveThread = (threads, props) => {
+  const topic = props.match.params.topicId;
+  const result = threads.find(item => item.topic === parseInt(topic, 10));
+  return result;
+}
+
+const mapState = (state, props) => ({
+  threads: state.threads.queryResult.data,
+  activeThread: findActiveThread(state.ui.threads, props)
 })
 
 export default connect(mapState)(ThreadPage);

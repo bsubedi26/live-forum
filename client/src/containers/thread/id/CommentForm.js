@@ -7,7 +7,7 @@ const CommentForm = props => {
       <form onSubmit={createComment} noValidate>
         <textarea id="comment" onChange={handleOnChange} className="form-control" rows="2" placeholder="Comment..."></textarea>
         <div className="card-footer text-muted">
-          <button className="btn btn-outline-info">Submit</button>
+          <button className="btn btn-outline-info pointer">Submit</button>
         </div>
       </form>
     </div>
