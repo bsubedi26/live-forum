@@ -3,6 +3,16 @@ const createService = require('feathers-knex');
 const createModel = require('models/thread.model');
 const hooks = require('./hooks');
 
+const t = require('tcomb');
+const validate = require('../../lib/validate');
+
+const schema = t.struct({
+  title: t.String,
+  summary: t.String,
+  topic_id: t.Integer,
+  creator_id: t.Integer
+});
+
 module.exports = function(app) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
@@ -19,8 +29,8 @@ module.exports = function(app) {
   // Get our initialized service so that we can register hooks and filters
   const service = app.service('threads');
 
+  validate(service, schema);
   service.hooks(hooks);
-
   service.publish(() => {
     // Here you can add event publishers to channels set up in `channels.js`
     // To publish only for a specific event use `app.publish(eventname, () => {})`

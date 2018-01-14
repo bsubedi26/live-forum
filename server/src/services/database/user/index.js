@@ -1,6 +1,5 @@
 // Initializes the `user` service on path `/user`
-// const createService = require('feathers-knex');
-const createService = require('../../lib/knex');
+const createService = require('feathers-knex');
 const createModel = require('models/user.model');
 const hooks = require('./hooks');
 const t = require('tcomb');
@@ -27,9 +26,7 @@ module.exports = function (app) {
   const service = app.service('users');
 
   validate(service, schema);
-
   service.hooks(hooks);
-
   service.publish(() => {
     // Here you can add event publishers to channels set up in `channels.js`
     // To publish only for a specific event use `app.publish(eventname, () => {})`

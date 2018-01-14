@@ -10,7 +10,6 @@ module.exports = function (app) {
         t.increments('id').primary();
         t.string('title').notNullable();
         t.string('summary').notNullable();
-        t.integer('opinions').defaultTo(0);
 
         t.integer('topic_id').unsigned().references('id').inTable('topics');
         t.integer('creator_id').unsigned().references('id').inTable('users');
