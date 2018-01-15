@@ -8,11 +8,11 @@ const getUsersUsingIds = (hook) => {
   return async (ids) => {
     const userService = hook.app.service('users');
     let idArray = getUniqueKeys(ids);
-    console.log('idArray ', idArray)
+    let getRecordKeyFunc = user => user.id;
 
     let response = await userService.find({ query: { id: { $in: idArray }, $select: ['id', 'email'] } });
-    console.log('response.data ', response.data)
-    return response.data;
+    let results = getResultsByKey(idArray, response.data, getRecordKeyFunc, '!');
+    return results;
   };
 };
 
@@ -23,6 +23,7 @@ const getCommentsUsingIds = (hook) => {
     let getRecordKeyFunc = comment => comment.thread_id;
 
     let response = await commentService.find({ query: { thread_id: { $in: idArray }, $sort: { updated_at: '-1' } } });
+    // let response = await commentService.find({ query: { thread_id: { $in: idArray } } });
     let results = getResultsByKey(idArray, response.data, getRecordKeyFunc, '[]', { defaultElem: [] });
     return results;
   };

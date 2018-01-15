@@ -5,7 +5,6 @@ import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 import SingleThread from './SingleThread';
 
-
 class ThreadDetailById extends React.Component {
   state = {
     comment: ''

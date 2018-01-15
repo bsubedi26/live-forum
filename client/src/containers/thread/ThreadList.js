@@ -37,7 +37,6 @@ const ThreadList = props => {
   }
 
   const renderWithPagination = (item, idx) => {
-    console.log('ITEM ', item);
     let postDate = new Date(item.updated_at).toDateString();
 
     return (
