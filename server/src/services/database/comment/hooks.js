@@ -25,15 +25,12 @@ module.exports = {
       authenticate('jwt')
     ],
     update: [
-      authenticate('jwt'),
       restrictToOwner({ idField: 'id', ownerField: 'creator_id' })
     ],
     patch: [
-      authenticate('jwt'),
       restrictToOwner({ idField: 'id', ownerField: 'creator_id' })
     ],
     remove: [
-      authenticate('jwt'),
       restrictToOwner({ idField: 'id', ownerField: 'creator_id' })
     ]
   },
