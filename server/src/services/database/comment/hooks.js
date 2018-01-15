@@ -1,6 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const { fastJoin } = require('feathers-hooks-common');
 const { userLoader } = require('hooks/batchLoaders');
+const { restrictToOwner } = require('feathers-authentication-hooks');
 
 const commentCreatorResolvers = {
   before: hook => {
@@ -24,13 +25,16 @@ module.exports = {
       authenticate('jwt')
     ],
     update: [
-      authenticate('jwt')
+      authenticate('jwt'),
+      restrictToOwner({ idField: 'id', ownerField: 'creator_id' })
     ],
     patch: [
-      authenticate('jwt')
+      authenticate('jwt'),
+      restrictToOwner({ idField: 'id', ownerField: 'creator_id' })
     ],
     remove: [
-      authenticate('jwt')
+      authenticate('jwt'),
+      restrictToOwner({ idField: 'id', ownerField: 'creator_id' })
     ]
   },
 
