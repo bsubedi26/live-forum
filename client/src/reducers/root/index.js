@@ -34,7 +34,7 @@ const rootReducer = (state, action) => {
         return {
           ...state,
           threads: updateIn(threads, ['queryResult', 'data'], (data) => {
-            return data.filter( item => item.id !== payload.id);
+            return data.filter(item => item.id !== payload.id);
           })
         }
       }
@@ -77,6 +77,30 @@ const rootReducer = (state, action) => {
         })
       }
 
+    }
+
+    case 'SOCKET_COMMENTS_ON_PATCHED': {
+
+      return {
+        ...state,
+        threads: updateIn(threads, ['queryResult', 'data'], (data) => {
+          return data.map(item => {
+            if (item.id === payload.thread_id) {
+              let updatedObj = update(item, '_comments', (comments) => {
+                return comments.map(comment => {
+                  if (comment.id === payload.id) {
+                    return payload;
+                  }
+                  return comment;
+                })
+              });
+              return updatedObj;
+            }
+
+            return item;
+          })
+        })
+      }
     }
 
     default: return state;

@@ -28,7 +28,7 @@ module.exports = {
       restrictToOwner({ idField: 'id', ownerField: 'creator_id' })
     ],
     patch: [
-      restrictToOwner({ idField: 'id', ownerField: 'creator_id' })
+      restrictToOwner({ idField: 'id', ownerField: 'creator_id' }),
     ],
     remove: [
       restrictToOwner({ idField: 'id', ownerField: 'creator_id' })

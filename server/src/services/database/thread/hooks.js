@@ -11,6 +11,7 @@ const resolvers = {
 
   joins: {
     _creator: () => async (thread, hook) => {
+      console.log('thread.creator_id ', thread.creator_id);
       let user = await hook._userLoader.load(thread.creator_id);
       thread._creator = user;
     },

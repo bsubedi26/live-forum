@@ -18,21 +18,24 @@ class ThreadDetailById extends React.Component {
 
     this.commentService.on('created', (data) => {
       console.log('COMMENT:on::Created ', data);
-
       dispatch({ type: 'SOCKET_COMMENTS_ON_CREATED', payload: data });
     });
 
     this.commentService.on('removed', (data) => {
-      console.log('COMMENT:on::removed ', data);
-
+      console.log('COMMENT:on::Removed ', data);
       dispatch({ type: 'SOCKET_COMMENTS_ON_REMOVED', payload: data });
     });
 
+    this.commentService.on('patched', (data) => {
+      console.log('COMMENT:on::Patched ', data);
+      dispatch({ type: 'SOCKET_COMMENTS_ON_PATCHED', payload: data });
+    });
   }
 
   componentWillUnmount() {
     this.commentService.removeAllListeners("created");
     this.commentService.removeAllListeners("removed");
+    this.commentService.removeAllListeners("patched");
   }
 
   componentDidMount() {

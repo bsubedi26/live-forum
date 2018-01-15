@@ -8,8 +8,10 @@ const getUsersUsingIds = (hook) => {
   return async (ids) => {
     const userService = hook.app.service('users');
     let idArray = getUniqueKeys(ids);
+    console.log('idArray ', idArray)
 
     let response = await userService.find({ query: { id: { $in: idArray }, $select: ['id', 'email'] } });
+    console.log('response.data ', response.data)
     return response.data;
   };
 };
