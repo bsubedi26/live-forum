@@ -16,7 +16,7 @@ class ThreadCreatePage extends React.Component {
     const { dispatch, auth } = this.props;
     const { topicId } = this.props.match.params;
     const { title, summary } = this.state;
-    const payload = { title, summary, topic_id: topicId, creator_id: auth.id };
+    const payload = { title, summary, topic_id: parseInt(topicId, 10), creator_id: auth.id };
     
     dispatch(services.threads.create(payload));
   }

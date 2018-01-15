@@ -19,13 +19,20 @@ class ThreadDetailById extends React.Component {
     this.commentService.on('created', (data) => {
       console.log('COMMENT:on::Created ', data);
 
-      dispatch({ type: 'SOCKET_COMMENTS_ON_CREATE', payload: data });
+      dispatch({ type: 'SOCKET_COMMENTS_ON_CREATED', payload: data });
+    });
+
+    this.commentService.on('removed', (data) => {
+      console.log('COMMENT:on::removed ', data);
+
+      dispatch({ type: 'SOCKET_COMMENTS_ON_REMOVED', payload: data });
     });
 
   }
 
   componentWillUnmount() {
     this.commentService.removeAllListeners("created");
+    this.commentService.removeAllListeners("removed");
   }
 
   componentDidMount() {
@@ -44,7 +51,7 @@ class ThreadDetailById extends React.Component {
   }
 
   render() {
-    const { post, auth } = this.props;
+    const { post, auth, dispatch } = this.props;
 
     return (
       <div className="mx-auto w-75 mt-4">
@@ -60,7 +67,7 @@ class ThreadDetailById extends React.Component {
 
         <hr />
         
-        <CommentList comments={post._comments} />
+        <CommentList dispatch={dispatch} auth={auth} comments={post._comments} />
       </div>
     )
   }

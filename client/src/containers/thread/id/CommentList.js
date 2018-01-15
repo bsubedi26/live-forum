@@ -1,8 +1,32 @@
 import React from 'react';
 import { Title, LineText } from '../common';
+import { services } from 'util/feathers';
 
 const CommentList = props => {
-  const { comments } = props;
+  const { comments, auth, dispatch } = props;
+
+  const handleDeleteThread = (comment) => {
+    dispatch(services.comments.remove(comment.id))
+  }
+
+  /**
+   * IF LOGGED IN USER IS OWNER OF COMMENT
+   * ALLOW EDIT OR DELETE
+  **/
+  const renderEditDeleteButtons = (item) => {
+    if (auth.id === item.creator_id) {
+      return (
+        <div>
+          <button className="btn btn-outline-info pointer ma2">Edit</button>
+          <button onClick={handleDeleteThread.bind(this, item)} className="btn btn-outline-danger pointer ma2">Delete</button>
+        </div>
+      )
+    }
+    else {
+      return null;
+    }
+  }
+
 
   return (
     <div>
@@ -19,13 +43,13 @@ const CommentList = props => {
               <p className="mt-2">
                 {item.comment}
               </p>
-              <LineText>ID: {item._creator.id} - <i className="fa fa-github m-1"></i> {item._creator.email}</LineText>
+              <LineText><strong>UserID: </strong> {item._creator.id} - {item._creator.email}</LineText>
               <LineText>
                 <span className="mr-2">{commentDate}</span>
-                {/* <span className="m-2">{item.favorites} favorites</span> */}
-                {/* <span className="m-2">{post.opinions} opinions</span> */}
               </LineText>
             </div>
+
+            {renderEditDeleteButtons(item)}
 
           </div>
         )

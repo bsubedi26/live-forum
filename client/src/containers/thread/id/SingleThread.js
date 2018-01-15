@@ -15,7 +15,8 @@ const SingleThread = props => {
         <p className="mt-2">
           {post.summary}
         </p>
-        <LineText>ID: {post._creator.id} - <i className="fa fa-github m-1"></i> {post._creator.email}</LineText>
+        <LineText><strong>UserID: </strong> {post._creator.id} - {post._creator.email}</LineText>
+
         <LineText>
           <span className="mr-2">{postDate}</span>
           <span className="mr-2">-</span>

@@ -5,30 +5,15 @@ import { update, updateIn } from 'timm';
 */
 const rootReducer = (state, action) => {
   const { type, payload } = action;
-
+  const { threads, router } = state;
+  const activeThreadRouteId = parseInt(router.location.pathname.replace('/thread/', ''), 10);
+  
   switch (type) {
-    case 'SOCKET_COMMENTS_ON_CREATE': {
-      const { threads } = state;
-      
-      return {
-        ...state,
-        threads: updateIn(threads, ['queryResult', 'data'], (data) => {
-          return data.map(item => {
-            if (item.id === payload.thread_id) {
-              let newObj = update(item, '_comments', (comments) => [payload].concat(comments));
-              return newObj;
-            }
-
-            return item;
-          })
-        })
-      }
-    }
-    case 'SOCKET_THREADS_ON_CREATE': {
-      const { threads } = state;
+    
+    case 'SOCKET_THREADS_ON_CREATED': {
 
       // ONLY ADD DATA THAT MATCHES THE TOPIC ID THE USER IS CURRENTLY VIEWING
-      if (payload.topic_id === threads.queryResult.data[0].topic_id) {
+      if (activeThreadRouteId && activeThreadRouteId === payload.topic_id) {
         return {
           ...state,
           threads: updateIn(threads, ['queryResult', 'data'], (data) => {
@@ -41,6 +26,59 @@ const rootReducer = (state, action) => {
       }
       
     }
+
+    case 'SOCKET_THREADS_ON_REMOVED': {
+
+      // ONLY REMOVE DATA THAT MATCHES THE TOPIC ID THE USER IS CURRENTLY VIEWING
+      if (activeThreadRouteId && activeThreadRouteId === payload.topic_id) {
+        return {
+          ...state,
+          threads: updateIn(threads, ['queryResult', 'data'], (data) => {
+            return data.filter( item => item.id !== payload.id);
+          })
+        }
+      }
+      else {
+        return state;
+      }
+
+    }
+
+    case 'SOCKET_COMMENTS_ON_CREATED': {
+
+      return {
+        ...state,
+        threads: updateIn(threads, ['queryResult', 'data'], (data) => {
+          return data.map(item => {
+            if (item.id === payload.thread_id) {
+              let updatedObj = update(item, '_comments', (comments) => [payload].concat(comments));
+              return updatedObj;
+            }
+
+            return item;
+          })
+        })
+      }
+    }
+
+    case 'SOCKET_COMMENTS_ON_REMOVED': {
+
+      return {
+        ...state,
+        threads: updateIn(threads, ['queryResult', 'data'], (data) => {
+          return data.map(item => {
+            if (item.id === payload.thread_id) {
+              let updatedObj = update(item, '_comments', (comments) => comments.filter(comment => comment.id !== payload.id));
+              return updatedObj;
+            }
+
+            return item;
+          })
+        })
+      }
+
+    }
+
     default: return state;
   }
 

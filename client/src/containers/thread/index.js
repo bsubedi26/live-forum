@@ -14,21 +14,26 @@ class ThreadPage extends React.Component {
 
     this.threadService.on('created', (data) => {
       console.log('THREAD:on::Created ', data);
-      dispatch({ type: 'SOCKET_THREADS_ON_CREATE', payload: data });
+      dispatch({ type: 'SOCKET_THREADS_ON_CREATED', payload: data });
+    });
+    
+    this.threadService.on('removed', (data) => {
+      console.log('THREAD:on::Removed ', data);
+      dispatch({ type: 'SOCKET_THREADS_ON_REMOVED', payload: data });
     });
     
   }
   
   componentWillUnmount() {
-    console.log('UNMOUNT');
     this.threadService.removeAllListeners("created");
+    this.threadService.removeAllListeners("removed");
   }
 
   componentDidMount() {
-    console.log('MOUNT');
     const { topicId } = this.props.match.params;
     this.dispatchFind(topicId);
     this.initListeners();
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,25 +51,29 @@ class ThreadPage extends React.Component {
 
   render() {
     const { topicId } = this.props.match.params;
-    const { threads, activeThread } = this.props;
 
     return (
-      <div className="row mx-auto w-75 mt-4">
-
-        <div className="col-10">
+      <div>
+        <div className="row justify-content-center mt-4">
           <PaginationButtons {...this.props} />
-          <div className="card">
-            <div className="card-header">
-              Discussions
-            </div>
-
-            <ThreadList activeThread={activeThread} threads={threads} topicId={topicId} />
-          </div>
         </div>
 
-        <Link to={`${this.props.location.pathname}/create`} className="col-2">
-            <button className="btn btn-outline-info pointer">New Discussion</button>
-        </Link>
+        <div className="row mx-auto w-75 mt-4">
+          <div className="col-11">
+            <div className="card">
+              <div className="card-header">
+                Discussions
+              </div>
+
+              <ThreadList {...this.props} topicId={topicId} />
+            </div>
+          </div>
+
+          <Link to={`${this.props.location.pathname}/create`} className="col-1">
+              <button className="btn btn-outline-info pointer">New Discussion</button>
+          </Link>
+        </div>
+          
         
       </div>
     )
@@ -79,7 +88,8 @@ const findActiveThread = (threads, props) => {
 
 const mapState = (state, props) => ({
   threads: state.threads.queryResult.data,
-  activeThread: findActiveThread(state.ui.threads, props)
+  activeThread: findActiveThread(state.ui.threads, props),
+  auth: state.auth
 })
 
 export default connect(mapState)(ThreadPage);
