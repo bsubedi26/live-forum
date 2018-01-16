@@ -1,13 +1,10 @@
-// const { authenticate } = require('@feathersjs/authentication').hooks;
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
 const validateUniqueUser = require('./hooks/validateUniqueUser');
 
 module.exports = {
   before: {
     all: [],
-    find: [
-      // authenticate('jwt')
-    ],
+    find: [],
     get: [],
     create: [
       validateUniqueUser(),
@@ -24,9 +21,8 @@ module.exports = {
 
   after: {
     all: [ 
-      // Make sure the password field is never sent to the client
-      // MUST BE THE LAST HOOK
-      protect('password'),
+      // Make sure the password field is never sent to the client (MUST BE THE LAST HOOK)
+      protect('password')
     ],
     find: [],
     get: [],
