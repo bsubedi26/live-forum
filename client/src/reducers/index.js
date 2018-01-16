@@ -1,6 +1,5 @@
-import { combineReducers } from 'redux';
-// import { persistCombineReducers } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
+import { persistCombineReducers } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { routerReducer as router } from 'react-router-redux';
 import reduceReducers from 'reduce-reducers';
 
@@ -9,13 +8,12 @@ import auth from './auth';
 import ui from './ui';
 import { services } from 'util/feathers';
 
-// const config = {
-//   key: 'primary',
-//   storage,
-// }
+const config = {
+  key: 'primary',
+  storage,
+}
 
-// const allReducers = persistCombineReducers(config, {
-const allReducers = combineReducers({
+const allReducers = persistCombineReducers(config, {
   auth,
   router,
   ui,
