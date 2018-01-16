@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { services } from 'util/feathers';
-import CreateForm from 'components/thread/CreateForm';
+import CreateThreadForm from 'components/thread/CreateThreadForm';
 
 class ThreadCreatePage extends React.Component {
   state = {
@@ -33,7 +33,7 @@ class ThreadCreatePage extends React.Component {
 
           <div>
             { auth.accessToken ? 
-              <CreateForm onSubmit={this.handleCreateForum} onChange={this.handleOnChange} />
+              <CreateThreadForm onSubmit={this.handleCreateForum} onChange={this.handleOnChange} />
               : 
               <div className="p-2">
                 <span>You <em>must</em> be signed in before creating a post.</span>

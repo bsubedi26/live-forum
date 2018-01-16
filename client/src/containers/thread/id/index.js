@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import feathers, { services } from 'util/feathers';
-import CommentForm from './CommentForm';
-import CommentList from './CommentList';
-import SingleThread from './SingleThread';
+import CommentForm from './common/CommentForm';
+import CommentList from './common/CommentList';
+import SingleThread from './common/SingleThread';
 
 class ThreadDetailById extends React.Component {
   state = {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Title, LineText } from '../common';
+import { Title, LineText } from 'components/common';
 import { services } from 'util/feathers';
 import { goBack } from 'react-router-redux';
-import CreateForm from 'components/thread/CreateForm';
+import CreateThreadForm from 'components/thread/CreateThreadForm';
 import { FadeIn } from 'animate-css-styled-components';
 
 class SingleThread extends React.Component {
@@ -77,7 +77,7 @@ class SingleThread extends React.Component {
           <div>{this.renderEditDeleteButtons(thread)}</div>
 
           {/* SHOW EDIT FORM WHEN EDIT IS TRUE */}
-          {this.state.showEdit ? <FadeIn><CreateForm onSubmit={this.handleEditThreadSubmit} onChange={this.handleOnChange} /></FadeIn> : null }
+          {this.state.showEdit ? <FadeIn><CreateThreadForm onSubmit={this.handleEditThreadSubmit} onChange={this.handleOnChange} /></FadeIn> : null }
 
         </div>
 

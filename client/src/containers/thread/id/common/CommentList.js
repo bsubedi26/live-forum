@@ -1,5 +1,5 @@
 import React from 'react';
-import { Title, LineText } from '../common';
+import { Title, LineText } from 'components/common';
 import { services } from 'util/feathers';
 import { FadeIn } from 'animate-css-styled-components';
 

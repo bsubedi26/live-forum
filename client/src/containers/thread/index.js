@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import feathers, { services } from 'util/feathers';
-import ThreadList from './ThreadList';
-import PaginationButtons from './PaginationButtons';
+import ThreadList from './common/ThreadList';
+import PaginationButtons from './common/PaginationButtons';
 
 class ThreadPage extends React.Component {
 
@@ -64,16 +64,17 @@ class ThreadPage extends React.Component {
                 Discussions
               </div>
 
+              {/* LIST THE ARRAY OF THREADS */}
               <ThreadList {...this.props} topicId={topicId} />
             </div>
           </div>
 
+          {/* CREATE NEW DISCUSSION BUTTON */}
           <Link to={`${this.props.location.pathname}/create`} className="col-1">
               <button className="btn btn-outline-info pointer">New Discussion</button>
           </Link>
         </div>
           
-        
       </div>
     )
   }

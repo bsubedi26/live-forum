@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LineText, Title } from './common';
+import { LineText, Title } from 'components/common';
 import { services } from 'util/feathers';
 
 const ThreadList = props => {
