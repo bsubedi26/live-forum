@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { services } from 'util/feathers';
-import CreateForm from './CreateForm';
+import CreateForm from 'components/CreateForm';
 
 class ThreadCreatePage extends React.Component {
   state = {
@@ -11,14 +11,14 @@ class ThreadCreatePage extends React.Component {
 
   handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value });
 
-  handleCreateForum = (e) => {
+  handleCreateForum = async (e) => {
     e.preventDefault();
     const { dispatch, auth } = this.props;
     const { topicId } = this.props.match.params;
     const { title, summary } = this.state;
     const payload = { title, summary, topic_id: parseInt(topicId, 10), creator_id: auth.id };
     
-    dispatch(services.threads.create(payload));
+    await dispatch(services.threads.create(payload));
   }
 
   render() {
@@ -33,7 +33,7 @@ class ThreadCreatePage extends React.Component {
 
           <div>
             { auth.accessToken ? 
-              <CreateForm handleCreateForum={this.handleCreateForum} handleOnChange={this.handleOnChange} />
+              <CreateForm onSubmit={this.handleCreateForum} onChange={this.handleOnChange} />
               : 
               <div className="p-2">
                 <span>You <em>must</em> be signed in before creating a post.</span>

@@ -11,16 +11,16 @@ class CommentList extends React.Component {
     newComment: ''
   } 
 
-  handleDeleteComment = (comment) => {
+  handleDeleteClick = async (comment) => {
     const { dispatch } = this.props;
-    dispatch(services.comments.remove(comment.id));
+    await dispatch(services.comments.remove(comment.id));
   }
 
-  handleEditComment = (comment, e) => {
+  handleEditComment = async (comment, e) => {
     e.preventDefault();
     const { newComment } = this.state;
     const { dispatch } = this.props;
-    dispatch(services.comments.patch(comment.id, { comment: newComment } ));
+    await dispatch(services.comments.patch(comment.id, { comment: newComment } ));
   }
 
   handleEditClick = (comment, e) => {
@@ -55,7 +55,7 @@ class CommentList extends React.Component {
       return (
         <div>
           <button id={item.id} onClick={this.handleEditClick.bind(this, item)} className="btn btn-outline-info pointer ma2">Edit</button>
-          <button onClick={this.handleDeleteComment.bind(this, item)} className="btn btn-outline-danger pointer ma2">Delete</button>
+          <button onClick={this.handleDeleteClick.bind(this, item)} className="btn btn-outline-danger pointer ma2">Delete</button>
         </div>
       )
     }
@@ -84,10 +84,7 @@ class CommentList extends React.Component {
         </div>
 
         {this.renderEditDeleteButtons(item)}
-
-        {/* {this.state.showEdit[item.id] ? <span>hai</span> : null} */}
         {this.state.showEdit[item.id] ? this.renderEditForm(item) : null}
-
       </div>
     )
   }
@@ -95,11 +92,7 @@ class CommentList extends React.Component {
   render() {
     const { comments } = this.props;
     
-    return (
-      <div>
-        {comments.map(this.renderComment)}
-      </div>
-    )
+    return <div>{comments.map(this.renderComment)}</div>
 }
   
 }

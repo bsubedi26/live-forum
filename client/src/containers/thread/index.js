@@ -33,7 +33,6 @@ class ThreadPage extends React.Component {
     const { topicId } = this.props.match.params;
     this.dispatchFind(topicId);
     this.initListeners();
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,10 +42,10 @@ class ThreadPage extends React.Component {
     }
   }
 
-  dispatchFind(topicId) {
+  async dispatchFind(topicId) {
     const { dispatch } = this.props;
 
-    dispatch(services.threads.find({ query: { topic_id: topicId, $sort: { updated_at: '-1' } } }))
+    await dispatch(services.threads.find({ query: { topic_id: topicId, $sort: { updated_at: '-1' } } }));
   }
 
   render() {

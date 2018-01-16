@@ -44,6 +44,26 @@ const rootReducer = (state, action) => {
 
     }
 
+    case 'SOCKET_THREADS_ON_PATCHED': {
+
+      if (activeThreadRouteId && activeThreadRouteId === payload.topic_id) {
+        return {
+          ...state,
+          threads: updateIn(threads, ['queryResult', 'data'], (data) => {
+            return data.map(item => {
+              if (item.id === payload.id) {
+                return payload;
+              }
+              return item;
+            })
+          })
+        }
+      }
+      else {
+        return state;
+      }
+    }
+
     case 'SOCKET_COMMENTS_ON_CREATED': {
 
       return {

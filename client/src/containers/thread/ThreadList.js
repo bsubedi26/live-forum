@@ -5,8 +5,6 @@ import { services } from 'util/feathers';
 
 const ThreadList = props => {
   const { threads, topicId, activeThread, auth, dispatch } = props;
-  // console.log(activeThread);
-  // console.log(threads);
 
   const getSlicedThreads = (threads) => {
     const itemPerPage = 5;
@@ -14,8 +12,8 @@ const ThreadList = props => {
     return results;
   }
 
-  const handleDeleteThread = (thread) => {
-    dispatch(services.threads.remove(thread.id))
+  const handleDeleteThread = async (thread) => {
+    await dispatch(services.threads.remove(thread.id));
   }
   
   /**
@@ -26,7 +24,7 @@ const ThreadList = props => {
     if (auth.id === item.creator_id) {
       return (
         <div>
-          <button className="btn btn-outline-info pointer ma2">Edit</button>
+          <Link to={`/thread/${topicId}/individual/${item.id}`}><button className="btn btn-outline-info pointer ma2">Edit</button></Link>
           <button onClick={handleDeleteThread.bind(this, item)} className="btn btn-outline-danger pointer ma2">Delete</button>
         </div>
       )

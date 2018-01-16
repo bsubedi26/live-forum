@@ -11,6 +11,7 @@ class ThreadDetailById extends React.Component {
   }
   
   commentService = feathers.service('comments');
+  threadService = feathers.service('threads');
 
   initListeners() {
     const { dispatch } = this.props;
@@ -29,12 +30,20 @@ class ThreadDetailById extends React.Component {
       console.log('COMMENT:on::Patched ', data);
       dispatch({ type: 'SOCKET_COMMENTS_ON_PATCHED', payload: data });
     });
+
+    this.threadService.on('patched', (data) => {
+      console.log('THREAD:on::Patched ', data);
+      dispatch({ type: 'SOCKET_THREADS_ON_PATCHED', payload: data });
+    });
+
   }
 
   componentWillUnmount() {
     this.commentService.removeAllListeners("created");
     this.commentService.removeAllListeners("removed");
     this.commentService.removeAllListeners("patched");
+
+    this.threadService.removeAllListeners("patched");
   }
 
   componentDidMount() {
@@ -43,21 +52,21 @@ class ThreadDetailById extends React.Component {
 
   handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value });
 
-  createComment = (e) => {
+  createComment = async (e) => {
     e.preventDefault();
-    const { dispatch, post, auth } = this.props;
+    const { dispatch, thread, auth } = this.props;
     const { comment } = this.state;
-    const payload = { comment, thread_id: post.id, creator_id: auth.id };
+    const payload = { comment, thread_id: thread.id, creator_id: auth.id };
 
-    dispatch(services.comments.create(payload));
+    await dispatch(services.comments.create(payload));
   }
 
   render() {
-    const { post, auth, dispatch } = this.props;
+    const { thread, auth, dispatch } = this.props;
 
     return (
       <div className="mx-auto w-75 mt-4">
-        <SingleThread post={post} />
+        <SingleThread auth={auth} thread={thread} dispatch={dispatch} />
 
         { auth.id ? 
           <CommentForm createComment={this.createComment} handleOnChange={this.handleOnChange} />
@@ -69,7 +78,7 @@ class ThreadDetailById extends React.Component {
 
         <hr />
         
-        <CommentList dispatch={dispatch} auth={auth} comments={post._comments} />
+        <CommentList dispatch={dispatch} auth={auth} comments={thread._comments} />
       </div>
     )
   }
@@ -81,7 +90,7 @@ const findById = (data, props) => {
 }
 
 const mapState = (state, props) => ({
-  post: findById(state.threads.queryResult.data, props),
+  thread: findById(state.threads.queryResult.data, props),
   auth: state.auth
 })
 

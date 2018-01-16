@@ -1,0 +1,17 @@
+import React from 'react';
+
+const CreateForm = props => {
+  const { onSubmit, onChange } = props;
+
+  return (
+    <div>
+      <form onSubmit={onSubmit} noValidate>
+        <input id="title" onChange={onChange} className="form-control my-2" placeholder="Forum Title" />
+        <textarea id="summary" onChange={onChange} className="form-control my-2" rows="3" placeholder="Forum Summary"></textarea>
+        <button className="btn btn-outline-info my-2 pointer">Submit</button>
+      </form>
+    </div>
+  )
+}
+
+export default CreateForm;
