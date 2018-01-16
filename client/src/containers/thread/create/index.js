@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { services } from 'util/feathers';
-import CreateForm from 'components/CreateForm';
+import CreateForm from 'components/thread/CreateForm';
 
 class ThreadCreatePage extends React.Component {
   state = {

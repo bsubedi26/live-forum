@@ -18,8 +18,6 @@ const FormContainer = withFormik({
     })
     .catch(err => {
       setSubmitting(false);
-      // Maybe even transform your API's errors into the same shape as Formik's!
-      // setErrors(transformMyApiErrors(errors));
     })
   },
 })

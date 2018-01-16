@@ -2,7 +2,7 @@ import React from 'react';
 import { Title, LineText } from '../common';
 import { services } from 'util/feathers';
 import { goBack } from 'react-router-redux';
-import CreateForm from 'components/CreateForm';
+import CreateForm from 'components/thread/CreateForm';
 import { FadeIn } from 'animate-css-styled-components';
 
 class SingleThread extends React.Component {

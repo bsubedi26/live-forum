@@ -1,5 +1,5 @@
 import React from 'react';
-import FormContainer from './form';
+import FormContainer from 'components/user/form';
 import { actions as AuthActions } from 'reducers/auth';
 import { connect } from 'react-redux';
 import { FadeIn } from 'animate-css-styled-components';
