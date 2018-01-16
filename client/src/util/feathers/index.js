@@ -1,6 +1,6 @@
 import feathers from '@feathersjs/client/dist/feathers.min';
 import auth from '@feathersjs/client/dist/authentication.min';
-import reduxifyAllServices from './reduxServices';
+import reduxifyAllServices, { requiresAuthServices } from './reduxServices';
 
 import fSocketio from '@feathersjs/client/dist/socketio.min';
 import io from 'socket.io-client';
@@ -29,6 +29,24 @@ export { services };
 */
 if (process.env.NODE_ENV === 'development') {
   app.hooks({
+    before: {
+      all: async hook => {
+        /**
+         * HACK TO FIX SERVICES THAT REQUIRE AUTHENTICATION AFTER BROWSER REFRESH
+         * authenticate methods (create, update, patch, remove) for services (THREADS and COMMENTS)
+        */
+        const requiresAuthMethods = ['create', 'update', 'patch', 'remove'];
+
+        if (requiresAuthServices.includes(hook.path) && requiresAuthMethods.includes(hook.method)) {
+          // console.log('Requires Auth for service: ', hook.path);
+          // console.log('Method requires auth! ', hook.method);
+          await app.authenticate();
+          return hook;
+        }
+
+        return hook;
+      }
+    },
     after: {
       all: hook => {
         let color = (['get', 'find'].indexOf(hook.method) === -1) ? 'blue' : 'green';

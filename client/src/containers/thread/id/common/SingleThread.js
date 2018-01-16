@@ -19,7 +19,6 @@ class SingleThread extends React.Component {
 
   handleDeleteClick = async (thread) => {
     const { dispatch } = this.props;
-
     await dispatch(services.threads.remove(thread.id));
     dispatch(goBack());
   }
