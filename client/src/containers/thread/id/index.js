@@ -61,6 +61,22 @@ class ThreadDetailById extends React.Component {
     await dispatch(services.comments.create(payload));
   }
 
+  renderCommentForm() {
+    const { auth } = this.props;
+    
+    if (auth.id) {
+      return (
+        <CommentForm createComment={this.createComment} handleOnChange={this.handleOnChange} />
+      )
+    }
+
+    return (
+      <div className="p-2">
+        <span>You <em>must</em> be signed in before posting a comment.</span>
+      </div>
+    )
+  }
+
   render() {
     const { thread, auth, dispatch } = this.props;
 
@@ -68,13 +84,7 @@ class ThreadDetailById extends React.Component {
       <div className="mx-auto w-75 mt-4">
         <SingleThread auth={auth} thread={thread} dispatch={dispatch} />
 
-        { auth.id ? 
-          <CommentForm createComment={this.createComment} handleOnChange={this.handleOnChange} />
-          :
-          <div className="p-2">
-            <span>You <em>must</em> be signed in before posting a comment.</span>
-          </div>
-        }
+        {this.renderCommentForm()}
 
         <hr />
         

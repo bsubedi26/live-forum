@@ -1798,6 +1798,10 @@ iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@^0.4.18:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
+identicon.js@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/identicon.js/-/identicon.js-2.3.1.tgz#0f16a0dd5e61e1a89699400cc192af4445506e5b"
+
 ieee754@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"

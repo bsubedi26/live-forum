@@ -1,8 +1,8 @@
 import React from 'react';
-import { Title, LineText } from 'components/common';
+import { LineText } from 'components/common';
 import { services } from 'util/feathers';
 import { FadeIn } from 'animate-css-styled-components';
-
+import Avatar from 'components/Avatar';
 
 class CommentList extends React.Component {
 
@@ -70,7 +70,8 @@ class CommentList extends React.Component {
     return (
       <div key={i} className="card">
         <div className="card-header">
-          <Title>{item._creator.email}</Title>
+          <Avatar avatar={item._creator.avatar} />
+          <LineText className="my-2">{item._creator.email}</LineText>
         </div>
 
         <div className="text-center">

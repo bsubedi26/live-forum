@@ -1,5 +1,6 @@
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
 const validateUniqueUser = require('./hooks/validateUniqueUser');
+const avatar = require('./hooks/avatar');
 
 module.exports = {
   before: {
@@ -8,7 +9,8 @@ module.exports = {
     get: [],
     create: [
       validateUniqueUser(),
-      hashPassword()
+      hashPassword(),
+      avatar(),
     ],
     update: [ 
       hashPassword()

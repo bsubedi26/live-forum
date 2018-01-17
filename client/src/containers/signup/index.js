@@ -17,8 +17,9 @@ class Signup extends React.Component {
     return dispatch(AuthActions.signup(formValues))
     .then(res => {
       this.setState({ error: false, errorMessage: null });
+
       dispatch(push('/login'));
-      return res
+      return res;
     })
     .catch(err => {
       // console.log('.catch ', err);
@@ -37,6 +38,7 @@ class Signup extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         <FadeIn>
@@ -46,6 +48,7 @@ class Signup extends React.Component {
 
             { this.state.error ? this.renderErrorAlert(this.state.errorMessage) : null }
             <hr className="my-4" />
+
             <FadeIn>
               <FormContainer handleSubmit={this.handleSubmit} />
             </FadeIn>

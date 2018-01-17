@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { LineText, Title } from 'components/common';
 import { services } from 'util/feathers';
+import Avatar from 'components/Avatar';
 
 const ThreadList = props => {
   const { threads, topicId, activeThread, auth, dispatch } = props;
@@ -35,13 +36,18 @@ const ThreadList = props => {
   }
 
   const renderWithPagination = (item, idx) => {
-    let postDate = new Date(item.updated_at).toDateString();
+    const postDate = new Date(item.updated_at).toDateString();
+    const { _creator } = item;
 
     return (
       <div key={item.id} className="list-group-item">
-        <Link to={`/thread/${topicId}/individual/${item.id}`}><Title className="text-left mb-3">{item.title}</Title></Link>
-        <LineText className="text-left"><strong>UserID: </strong> {item.creator_id} - {item._creator.email}</LineText>
-        <LineText className="text-left">
+        <div>
+          <Avatar style={{ float: 'left', marginRight: '8px' }} avatar={_creator.avatar} />
+          <Link to={`/thread/${topicId}/individual/${item.id}`}><Title className="text-left">{item.title}</Title></Link>
+        </div>
+        <LineText className="text-left"><strong>UserID: </strong> {item.creator_id} - {_creator.email}</LineText>
+    
+        <LineText className="text-left pt-2">
           <span className="mr-2">{postDate}</span>
           <span className="mr-2">-</span>
           <span className="mr-2">{item._comments.length} comments</span>

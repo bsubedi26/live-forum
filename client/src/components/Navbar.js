@@ -4,7 +4,7 @@ import { actions as AuthActions } from 'reducers/auth';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { push, getLocation } from 'react-router-redux';
-// import { services } from 'util/feathers';
+import Avatar from './Avatar';
 
 const NavLink = styled.li`
   background-color: ${ prop =>  prop.activeTab ? 'beige' : '' };
@@ -44,18 +44,22 @@ class NavbarCmp extends React.Component {
   }
   
   handleLogout = async (e) => {
-    e.preventDefault();
     const { dispatch } = this.props;
+    
+    e.preventDefault();
     await dispatch(AuthActions.logout());
     dispatch(push('/home'));
   }
   
   renderAuthenticated = () => {
+    const { auth } = this.props;
+
     return (
       <ul className="navbar-nav mr-auto">
         <li className="nav-item dropdown pointer">
           <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>{ this.props.auth.email }</span>
+            {/* <span>{ auth.email }</span> */}
+            <Avatar avatar={auth.avatar} />
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <a onClick={this.handleLogout} className="dropdown-item">Sign out</a>

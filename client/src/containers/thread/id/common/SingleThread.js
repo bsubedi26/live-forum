@@ -1,5 +1,6 @@
 import React from 'react';
 import { Title, LineText } from 'components/common';
+import Avatar from 'components/Avatar';
 import { services } from 'util/feathers';
 import { goBack } from 'react-router-redux';
 import CreateThreadForm from 'components/thread/CreateThreadForm';
@@ -58,7 +59,19 @@ class SingleThread extends React.Component {
     return (
       <div className="card">
         <div className="card-header">
-          <Title>{thread.title}</Title>
+
+          <div>
+            <Avatar avatar={thread._creator.avatar} />
+            <LineText className="my-2">{thread._creator.email}</LineText>
+            <Title className="my-1">{thread.title}</Title>
+          </div>
+
+          <LineText className="pt-2">
+            <span className="mr-2">{postDate}</span>
+            <span className="mr-2">-</span>
+            <span className="mr-2">{thread._comments.length} comments</span>
+          </LineText>
+
         </div>
 
         <div className="text-center">
@@ -66,12 +79,6 @@ class SingleThread extends React.Component {
             {thread.summary}
           </p>
           <LineText><strong>UserID: </strong> {thread._creator.id} - {thread._creator.email}</LineText>
-
-          <LineText>
-            <span className="mr-2">{postDate}</span>
-            <span className="mr-2">-</span>
-            <span className="mr-2">{thread._comments.length} comments</span>
-          </LineText>
 
           <div>{this.renderEditDeleteButtons(thread)}</div>
 

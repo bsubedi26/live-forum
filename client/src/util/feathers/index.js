@@ -32,5 +32,4 @@ if (process.env.NODE_ENV === 'development') {
   logger(app);
 }
 reAuthenticate(app, requiresAuthServices);
-
 export default app;

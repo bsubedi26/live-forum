@@ -10,7 +10,7 @@ const getUsersUsingIds = (hook) => {
     let idArray = getUniqueKeys(ids);
     let getRecordKeyFunc = user => user.id;
 
-    let response = await userService.find({ query: { id: { $in: idArray }, $select: ['id', 'email'] } });
+    let response = await userService.find({ query: { id: { $in: idArray }, $select: ['id', 'email', 'avatar'] } });
     let results = getResultsByKey(idArray, response.data, getRecordKeyFunc, '!');
     return results;
   };

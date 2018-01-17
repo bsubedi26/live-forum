@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import styled from 'styled-components';
 
 import { Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers';
-import { Header } from 'components';
+import Header from 'components/Header';
 import { history } from 'util/store';
 // import PrivateRoute from './private';
 

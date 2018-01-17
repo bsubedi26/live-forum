@@ -1,5 +1,5 @@
 import initialState from './state';
-import feathers from 'util/feathers';
+import feathers, { services } from 'util/feathers';
 const user = feathers.service('users');
 const oauth = feathers.service('oauth');
 
@@ -63,9 +63,12 @@ export const actions = {
   logout() {
     return dispatch => {
       dispatch({ type: types.AUTH_RESET });
-      window.localStorage.removeItem('persist:primary');
-      // window.localStorage.clear()
+      dispatch(services.threads.reset());
+      
+      // window.localStorage.removeItem('persist:primary');
+      window.localStorage.clear();
       return dispatch({ type: types.LOGOUT, payload: feathers.logout() });
+
     }
   }
 }
@@ -126,9 +129,11 @@ export default function reducer (state = initialState, action) {
     }
     
     case `${types.USER_GET}_FULFILLED`: {
+
       return {
         ...state,
-        email: payload.email
+        email: payload.email,
+        avatar: payload.avatar
       }
     }
     
