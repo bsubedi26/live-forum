@@ -24,3 +24,7 @@ body {
 .nav-user:hover {
   color: white !important;
 }
+
+.fantasy {
+  font-family: fantasy;
+}

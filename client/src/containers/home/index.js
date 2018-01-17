@@ -14,7 +14,7 @@ class Home extends React.Component {
       <div>
         <FadeIn>
           <div className="jumbotron">
-            <h1 className="display-3">Welcome, home!</h1>
+            <h1 className="display-3">Live Forum!</h1>
             <p className="lead">This is a simple forum application that demonstrates how a real time forum works.</p>
             <hr className="my-4" />
             <p>The technologies used: ReactJS, ReduxJS, BootstrapCSS, NodeJS, FeathersJS, SQL, KnexJS, & SocketIO.</p>

@@ -19,7 +19,9 @@ class NavbarCmp extends React.Component {
       { id: 1, name: "home", path: "/home", display: "Home" },
       { id: 2, name: "react", path: "/thread/2", display: "React" },
       { id: 3, name: "redux", path: "/thread/3", display: "Redux" },
-      { id: 6, name: "nodejs", path: "/thread/6", display: "NodeJS" }
+      { id: 6, name: "nodejs", path: "/thread/6", display: "NodeJS" },
+      { id: 12, name: "feathersjs", path: "/thread/12", display: "FeathersJS" },
+      { id: 13, name: "knexjs", path: "/thread/13", display: "KnexJS" }
     ]
   };
 
@@ -84,7 +86,8 @@ class NavbarCmp extends React.Component {
 
     return (
       <nav className="navbar navbar-expand-md navbar-light">
-        <a onClick={this.goRoute.bind(this, '/home')} className="navbar-brand pointer">LiveForum</a>
+        <a onClick={this.goRoute.bind(this, '/home')} className="navbar-brand fantasy pointer">LiveForum</a>
+        {/* <img width="50" height="50" onClick={this.goRoute.bind(this, '/home')} alt="logo" src="logo.png" /> */}
         {/* HAMBURGER MENU TOGGLER FOR MOBILE */}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />

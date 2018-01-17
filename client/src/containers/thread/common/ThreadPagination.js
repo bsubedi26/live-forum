@@ -1,6 +1,6 @@
 import React from 'react';
 
-class PaginationButtons extends React.Component {
+class ThreadPagination extends React.Component {
 
   state = {
     show: true
@@ -107,4 +107,4 @@ class PaginationButtons extends React.Component {
   }
 }
 
-export default PaginationButtons;
+export default ThreadPagination;

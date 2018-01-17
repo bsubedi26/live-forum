@@ -6,8 +6,8 @@ import promiseMiddleware from 'redux-promise-middleware';
 import { persistStore } from 'redux-persist';
 import freeze from 'redux-freeze';
 
-import createHistory from 'history/createHashHistory';
 import { routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createHashHistory';
 
 export const history = createHistory();
 const routeMiddleware = routerMiddleware(history);

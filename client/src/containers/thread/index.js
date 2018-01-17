@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import feathers, { services } from 'util/feathers';
 import ThreadList from './common/ThreadList';
-import PaginationButtons from './common/PaginationButtons';
+import ThreadPagination from './common/ThreadPagination';
 
 class ThreadPage extends React.Component {
 
@@ -54,7 +54,7 @@ class ThreadPage extends React.Component {
     return (
       <div>
         <div className="row justify-content-center mt-4">
-          <PaginationButtons {...this.props} />
+          <ThreadPagination {...this.props} />
 
           {/* CREATE NEW THREAD BUTTON */}
           <Link to={`${this.props.location.pathname}/create`} className="pa2">

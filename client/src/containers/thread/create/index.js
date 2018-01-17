@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { services } from 'util/feathers';
 import CreateThreadForm from 'components/thread/CreateThreadForm';
+import { FadeIn } from 'animate-css-styled-components';
 
 class ThreadCreatePage extends React.Component {
   state = {
     title: '',
-    summary: ''
+    summary: '',
+    showSuccess: false
   }
 
   handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value });
@@ -19,6 +21,7 @@ class ThreadCreatePage extends React.Component {
     const payload = { title, summary, topic_id: parseInt(topicId, 10), creator_id: auth.id };
     
     await dispatch(services.threads.create(payload));
+    this.setState({ showSuccess: true });
   }
 
   render() {
@@ -31,6 +34,13 @@ class ThreadCreatePage extends React.Component {
             <h5>You are creating a new post.</h5>
           </div>
 
+          {this.state.showSuccess ?
+            <FadeIn>
+              <div style={{fontWeight: 'bold'}} className="alert alert-success m-4 fade show" role="alert">Successfully created thread!</div>
+            </FadeIn>
+            : null
+          }
+
           <div>
             { auth.accessToken ? 
               <CreateThreadForm onSubmit={this.handleCreateForum} onChange={this.handleOnChange} />
@@ -40,7 +50,7 @@ class ThreadCreatePage extends React.Component {
               </div>
             }
           </div>
-
+            
         </div>
       </div>
     )
