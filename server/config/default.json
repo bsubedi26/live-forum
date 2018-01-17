@@ -26,15 +26,6 @@
       "database": "knex_db"
     }
   },
-  "mysql": {
-    "client": "mysql2",
-    "connection": {
-      "host": "127.0.0.1",
-      "user": "root",
-      "password": "root",
-      "database": "knex_db"
-    }
-  },
   "authentication": {
     "secret": "8c1a44c7bbeb43b6c6c52e805f4b08b35f2ee00c84c1680ccfa46dd3affcab614b3c4ad144345ccc10033b64b035b32bce8f56643145dd9534e5bbc1292cc51060d59a70997d8119346440ea73651be2c04a4b97b0c3d721c6679b65aff7af8d0cfe717e664ea2baa9e058c0ea26cf3a6b04080f55f99bb161c7404ff317f78f1b6c785d890634266f3a0fe31c6e4e90d30cd2a6abfee08869aec2811e62a256fbd792bfe866037a8bee815f765f505fcba779a6634907514b64a17a628a8feb97f34142876b96c6717e74e216ae14ec51c79f8dbc3fdb0061bf9118e27a3300ad7ce9c2d3ff0b9f0fb3b51cda1658be3caace8726f9137f09576259e02afe31",
     "strategies": [

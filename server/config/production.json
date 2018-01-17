@@ -1,8 +1,8 @@
 {
-  "host": "http://feathers-example.herokuapp.com",
+  "host": "http://live-forums.herokuapp.com",
   "cookie": {
       "enabled": true,
-      "domain": "http://feathers-example.herokuapp.com",
+      "domain": "http://live-forums.herokuapp.com",
       "name": "feathers-jwt",
       "httpOnly": false,
       "secure": true

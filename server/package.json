@@ -21,22 +21,20 @@
     "test": "test/"
   },
   "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
+    "node": "7.10.0",
+    "npm": "5.4.2"
   },
   "scripts": {
     "test": "npm run eslint && npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "start": "node src/",
-    "dev": "nodemon src/",
-    "debug": "set DEBUG=@feathersjs/authentication-oauth2:verify & npm run start",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
     "@feathersjs/authentication": "^1.4.1",
     "@feathersjs/authentication-jwt": "^1.0.0",
     "@feathersjs/authentication-local": "^1.0.0",
-    "@feathersjs/authentication-oauth2": "^1.0.2",
     "@feathersjs/configuration": "^1.0.0",
     "@feathersjs/errors": "^3.0.0",
     "@feathersjs/express": "^1.0.0",
@@ -55,13 +53,8 @@
     "helmet": "^3.9.0",
     "identicon.js": "^2.3.1",
     "knex": "^0.13.0",
-    "mysql2": "^1.5.0",
     "nodemailer-smtp-transport": "^2.7.4",
-    "passport-facebook": "^2.1.1",
-    "passport-github": "^1.1.0",
-    "passport-google-oauth20": "^1.0.0",
-    "pg": "^7.3.0",
-    "pug": "^2.0.0-rc.4",
+    "pg": "^7.4.1",
     "serve-favicon": "^2.4.5",
     "sqlite3": "^3.1.13",
     "tcomb-validation": "^3.4.1",
