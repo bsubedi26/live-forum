@@ -9,7 +9,7 @@ module.exports = function (app) {
         t.increments('id').primary();
         t.string('email').unique().notNullable();
         t.string('password').notNullable();
-        t.string('avatar');
+        t.string('avatar').notNullable();
         
         t.timestamps(true, true);
       })

@@ -56,7 +56,7 @@ class ThreadPage extends React.Component {
         <div className="row justify-content-center mt-4">
           <PaginationButtons {...this.props} />
 
-          {/* CREATE NEW DISCUSSION BUTTON */}
+          {/* CREATE NEW THREAD BUTTON */}
           <Link to={`${this.props.location.pathname}/create`} className="pa2">
             <button className="btn btn-outline-info pointer">Create New Thread</button>
           </Link>
