@@ -21,7 +21,7 @@ class CommentList extends React.Component {
     e.preventDefault();
     const { newComment } = this.state;
     const { dispatch } = this.props;
-    const payload = { comment: newComment, updated_at: new Date() };
+    const payload = { comment: newComment };
 
     await dispatch(services.comments.patch(comment.id, payload));
   }
@@ -68,8 +68,8 @@ class CommentList extends React.Component {
   }
 
   renderComment = (item, i) => {
-    const commentDate = moment(item.updated_at, 'YYYY-MM-DD HH:mm:ss').subtract(5, 'hours').format('dddd MMM D YYYY h:mm A');
-    
+    const commentDate = moment.utc(item.updated_at).local().format('dddd MMM D YYYY h:mm A');
+
     return (
       <div key={i} className="card">
         <div className="card-header">

@@ -31,7 +31,7 @@ class SingleThread extends React.Component {
     e.preventDefault();
     const { dispatch, thread } = this.props;
     const { title, summary } = this.state;
-    const payload = { title, summary, updated_at: new Date() };
+    const payload = { title, summary };
 
     await dispatch(services.threads.patch(thread.id, payload));
     this.setState({ showEdit: false });

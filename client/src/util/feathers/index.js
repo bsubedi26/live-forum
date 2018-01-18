@@ -1,7 +1,7 @@
 import feathers from '@feathersjs/client/dist/feathers.min';
 import auth from '@feathersjs/client/dist/authentication.min';
 import reduxifyAllServices, { requiresAuthServices } from './reduxServices';
-import { logger, reAuthenticate } from './hooks';
+import { logger, reAuthenticate, updateAtDate } from './hooks';
 
 import fSocketio from '@feathersjs/client/dist/socketio.min';
 import io from 'socket.io-client';
@@ -35,5 +35,8 @@ else {
   // temporary console log override when in production
   console.log = function() {};
 }
+
 reAuthenticate(app, requiresAuthServices);
+updateAtDate(app);
+
 export default app;

@@ -37,10 +37,7 @@ const ThreadList = props => {
   }
 
   const renderWithPagination = (item, idx) => {
-    // const postDate = new Date(item.updated_at).toDateString();
-    // const postDate = moment(item.created_at).tz('America/New_York').format('dddd MMM D YYYY h:mm A');
-    const postDate = moment(item.updated_at, 'YYYY-MM-DD HH:mm:ss').subtract(5, 'hours').format('dddd MMM D YYYY h:mm A');
-
+    const postDate = moment.utc(item.updated_at).local().format('dddd MMM D YYYY h:mm A');
     const { _creator } = item;
 
     return (
