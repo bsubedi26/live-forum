@@ -12,6 +12,7 @@
     "gh-pages": "^1.1.0",
     "history": "^4.7.2",
     "hover.css": "^2.2.1",
+    "moment": "^2.20.1",
     "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",

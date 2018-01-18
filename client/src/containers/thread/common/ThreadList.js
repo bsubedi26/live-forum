@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { LineText, Title } from 'components/common';
 import { services } from 'util/feathers';
 import Avatar from 'components/Avatar';
+import moment from 'moment';
 
 const ThreadList = props => {
   const { threads, topicId, activeThread, auth, dispatch } = props;
@@ -36,7 +37,10 @@ const ThreadList = props => {
   }
 
   const renderWithPagination = (item, idx) => {
-    const postDate = new Date(item.updated_at).toDateString();
+    // const postDate = new Date(item.updated_at).toDateString();
+    // const postDate = moment(item.created_at).tz('America/New_York').format('dddd MMM D YYYY h:mm A');
+    const postDate = moment(item.updated_at, 'YYYY-MM-DD HH:mm:ss').subtract(5, 'hours').format('dddd MMM D YYYY h:mm A');
+
     const { _creator } = item;
 
     return (

@@ -5,6 +5,7 @@ import { services } from 'util/feathers';
 import { goBack } from 'react-router-redux';
 import CreateThreadForm from 'components/thread/CreateThreadForm';
 import { FadeIn } from 'animate-css-styled-components';
+import moment from 'moment';
 
 class SingleThread extends React.Component {
   state = {
@@ -30,7 +31,7 @@ class SingleThread extends React.Component {
     e.preventDefault();
     const { dispatch, thread } = this.props;
     const { title, summary } = this.state;
-    const payload = { title, summary };
+    const payload = { title, summary, updated_at: new Date() };
 
     await dispatch(services.threads.patch(thread.id, payload));
     this.setState({ showEdit: false });
@@ -53,9 +54,8 @@ class SingleThread extends React.Component {
 
   render() {
     const { thread } = this.props;
-    
-    const postDate = new Date(thread.updated_at).toDateString();
-    
+    const postDate = moment(thread.updated_at, 'YYYY-MM-DD HH:mm:ss').subtract(5, 'hours').format('dddd MMM D YYYY h:mm A');
+
     return (
       <div className="card">
         <div className="card-header">

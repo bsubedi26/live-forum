@@ -3,6 +3,7 @@ import { LineText } from 'components/common';
 import { services } from 'util/feathers';
 import { FadeIn } from 'animate-css-styled-components';
 import Avatar from 'components/Avatar';
+import moment from 'moment';
 
 class CommentList extends React.Component {
 
@@ -20,7 +21,9 @@ class CommentList extends React.Component {
     e.preventDefault();
     const { newComment } = this.state;
     const { dispatch } = this.props;
-    await dispatch(services.comments.patch(comment.id, { comment: newComment } ));
+    const payload = { comment: newComment, updated_at: new Date() };
+
+    await dispatch(services.comments.patch(comment.id, payload));
   }
 
   handleEditClick = (comment, e) => {
@@ -65,7 +68,7 @@ class CommentList extends React.Component {
   }
 
   renderComment = (item, i) => {
-    let commentDate = new Date(item.updated_at).toDateString();
+    const commentDate = moment(item.updated_at, 'YYYY-MM-DD HH:mm:ss').subtract(5, 'hours').format('dddd MMM D YYYY h:mm A');
     
     return (
       <div key={i} className="card">
