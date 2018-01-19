@@ -24,6 +24,6 @@ const allReducers = persistCombineReducers(config, {
   topics: services.topics.reducer,
 })
 
-const combinedReducer = reduceReducers(allReducers, rootReducer)
+const combinedReducer = reduceReducers(allReducers, rootReducer);
 
 export default combinedReducer;

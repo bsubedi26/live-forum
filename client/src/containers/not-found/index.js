@@ -24,8 +24,8 @@ class NotFound extends React.Component {
             <p className="lead">The page you request was not found.</p>
             <hr className="my-4" />
             <p className="lead">
-              <button onClick={this.route.bind(this, '/home')} className="btn btn-primary btn-lg pointer hvr-float-shadow hvr-bounce-to-right">Go Home</button>
-              <button onClick={this.goBack.bind(this)} className="btn btn-info btn-lg pointer hvr-float-shadow hvr-bounce-to-right mx-3">Go Back</button>
+              <button onClick={this.route.bind(this, '/home')} className="btn btn-primary btn-lg pointer">Go Home</button>
+              <button onClick={this.goBack.bind(this)} className="btn btn-info btn-lg pointer mx-3">Go Back</button>
             </p>
           </div>
         </FadeIn>

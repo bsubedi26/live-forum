@@ -15,11 +15,13 @@ class Home extends React.Component {
         <FadeIn>
           <div className="jumbotron">
             <h1 className="display-3">Live Forum!</h1>
+            <button className="btn btn-primary btn-lg pointer">Primary</button>
+            
             <p className="lead">This is a simple forum application that demonstrates how a real time forum works.</p>
             <hr className="my-4" />
             <p>The technologies used: ReactJS, ReduxJS, BootstrapCSS, NodeJS, FeathersJS, SQL, KnexJS, & SocketIO.</p>
             <p className="lead">
-              <button onClick={this.goRoute.bind(this, '/thread/2')} className="btn btn-outline-primary btn-lg pointer hvr-float-shadow hvr-bounce-to-right">Learn more</button>
+              <button onClick={this.goRoute.bind(this, '/thread/2')} className="btn btn-outline-primary btn-lg pointer ">Learn more</button>
             </p>
           </div>
         </FadeIn>
