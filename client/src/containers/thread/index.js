@@ -53,7 +53,9 @@ class ThreadPage extends React.Component {
 
     return (
       <div>
-        <div className="row justify-content-center mt-4">
+
+        
+        <div className="d-flex justify-content-center mt-4">
           <ThreadPagination {...this.props} />
 
           {/* CREATE NEW THREAD BUTTON */}
@@ -72,7 +74,6 @@ class ThreadPage extends React.Component {
               <ThreadList {...this.props} topicId={topicId} />
             </div>
           </div>
-
           
         </div>
           

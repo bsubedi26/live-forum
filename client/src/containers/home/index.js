@@ -2,10 +2,14 @@ import React from 'react';
 import { FadeIn } from 'animate-css-styled-components';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import HeaderSection from './common/HeaderSection';
+import ExploreSection from './common/ExploreSection';
+import CreateSection from './common/CreateSection';
+import Footer from 'components/Footer';
 
 class Home extends React.Component {
 
-  goRoute(path) {
+  goRoute = (path) => {
     this.props.dispatch(push(path));
   }
 
@@ -13,6 +17,13 @@ class Home extends React.Component {
     return (
       <div>
         <FadeIn>
+          <HeaderSection {...this.props} />
+          <ExploreSection goRoute={this.goRoute}></ExploreSection>
+          <CreateSection goRoute={this.goRoute}></CreateSection>
+          <Footer />
+        </FadeIn>
+
+        {/* 
           <div className="jumbotron">
             <h1 className="display-3">Live Forum!</h1>
             <button className="btn btn-chocolate btn-lg pointer">Primary</button>
@@ -22,8 +33,8 @@ class Home extends React.Component {
             <p className="lead">
               <button onClick={this.goRoute.bind(this, '/thread/2')} className="btn btn-outline-primary btn-lg pointer ">Learn more</button>
             </p>
-          </div>
-        </FadeIn>
+          </div> 
+        */}
       </div>
     )
   }

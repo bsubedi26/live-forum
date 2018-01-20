@@ -4,9 +4,9 @@ import { ConnectedRouter } from 'react-router-redux';
 import styled from 'styled-components';
 
 import { Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers';
-import Header from 'components/Header';
 import { history } from 'util/store';
-// import PrivateRoute from './private';
+import Header from 'components/Header';
+// import Footer from 'components/Footer';
 
 const Container = styled.div`text-align: center;`
 
@@ -16,7 +16,6 @@ function Routes() {
       <Container>
         <Header />
         <ConnectedRouter history={history}>
-
           <Switch>
             <Route exact path="/home" component={Home} />
             <Route exact path='/login' component={Login} />
@@ -32,6 +31,8 @@ function Routes() {
             <Route component={NotFoundPage} />
           </Switch>
         </ConnectedRouter>
+
+        {/* <Footer /> */}
 
       </Container>
     </Router>

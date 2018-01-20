@@ -7,9 +7,9 @@ import moment from 'moment';
 
 const ThreadList = props => {
   const { threads, topicId, activeThread, auth, dispatch } = props;
+  const itemPerPage = 5;
 
   const getSlicedThreads = (threads) => {
-    const itemPerPage = 5;
     const results = threads.slice((activeThread.active - 1) * itemPerPage, activeThread.active * itemPerPage);
     return results;
   }

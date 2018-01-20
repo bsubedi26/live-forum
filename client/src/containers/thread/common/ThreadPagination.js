@@ -3,7 +3,8 @@ import React from 'react';
 class ThreadPagination extends React.Component {
 
   state = {
-    show: true
+    show: true,
+    itemsPerPage: 5
   }
 
   setActive(active, e) {
@@ -41,9 +42,10 @@ class ThreadPagination extends React.Component {
 
   renderNavPagination() {
     const { activeThread, threads } = this.props;
+    const { itemsPerPage } = this.state;
+
     let navListCmps = [];
     let counter = 1;
-    let itemsPerPage = 5;
 
     for (let i = 0; i < threads.length; i += itemsPerPage) {
       navListCmps.push(
@@ -76,7 +78,7 @@ class ThreadPagination extends React.Component {
 
   renderNext() {
     const { threads, activeThread } = this.props;
-    let itemsPerPage = 5;
+    const { itemsPerPage } = this.state;
     let lastIndex = Math.ceil(threads.length / itemsPerPage);
 
     if (activeThread.active === lastIndex) {

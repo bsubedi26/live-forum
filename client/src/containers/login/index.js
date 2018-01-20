@@ -6,11 +6,6 @@ import { FadeIn } from 'animate-css-styled-components';
 import { push } from 'react-router-redux';
 
 class Login extends React.Component {
-  state = {
-    error: false,
-    errorMessage: null
-  }
-
   handleSubmit = (formValues) => {
     const { dispatch } = this.props;
     const credentials = { ...formValues, strategy: 'local' };
@@ -18,23 +13,13 @@ class Login extends React.Component {
     
     return dispatch(AuthActions.authenticate(credentials))
     .then(res => {
-      this.setState({ error: false, errorMessage: null });
       dispatch(push('/thread/2'));
     })
     .catch(err => {
       // console.log(err);
-      this.setState({ error: true, errorMessage: err.message });
       return Promise.reject(err);
     })
-    
   }
-
-  renderErrorAlert = (message) => 
-  (
-    <div className="alert alert-danger" role="alert">
-      { message }
-    </div>
-  )
 
   render() {
     return (
@@ -44,10 +29,9 @@ class Login extends React.Component {
               <h1 className="display-3">Login Below!</h1>
               <p className="lead">Login to access the featured content and information.</p>
             
-            { this.state.error ? this.renderErrorAlert(this.state.errorMessage) : null }
             <hr className="my-4" />
             <FadeIn>
-              <FormContainer handleSubmit={this.handleSubmit} />
+              <FormContainer buttonWidth25 handleSubmit={this.handleSubmit} />
             </FadeIn>
 
             {/* <a href="http://localhost:3030/auth/github"> */}
