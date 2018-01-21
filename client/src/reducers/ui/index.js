@@ -1,26 +1,28 @@
+const options = [
+  {
+    topic: 2,
+    active: 1
+  },
+  {
+    topic: 3,
+    active: 1
+  },
+  {
+    topic: 6,
+    active: 1
+  },
+  {
+    topic: 12,
+    active: 1
+  },
+  {
+    topic: 13,
+    active: 1
+  }
+]
 const State = {
-  threads: [
-    {
-      topic: 2,
-      active: 1
-    },
-    {
-      topic: 3,
-      active: 1
-    },
-    {
-      topic: 6,
-      active: 1
-    },
-    {
-      topic: 12,
-      active: 1
-    },
-    {
-      topic: 13,
-      active: 1
-    }
-  ]
+  threads: [...options],
+  comments: [...options],
 }
 
 const uiReducer = (state = State, action) => {
@@ -28,7 +30,7 @@ const uiReducer = (state = State, action) => {
 
   switch (type) {
 
-    case 'UI_SET_THREAD_ACTIVE': {
+    case 'UI_SET_THREADS_ACTIVE': {
       const { active, topic } = payload;
 
       return {
@@ -45,7 +47,7 @@ const uiReducer = (state = State, action) => {
       }
     }
     
-    case 'UI_SET_THREAD_PREVIOUS': {
+    case 'UI_SET_THREADS_PREVIOUS': {
       const { topic } = payload;
 
       return {
@@ -62,7 +64,7 @@ const uiReducer = (state = State, action) => {
       }
     }
     
-    case 'UI_SET_THREAD_NEXT': {
+    case 'UI_SET_THREADS_NEXT': {
       const { topic } = payload;
       
       return {

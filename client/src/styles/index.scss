@@ -1,8 +1,9 @@
-// BASE
+// CUSTOMIZE
 @import "base/root";
 @import 'base/home';
-@import 'base/nav';
 @import 'base/font';
 
 // IMPORT ALL OF BOOTSTRAP
 @import "node_modules/bootstrap/scss/bootstrap";
+// OVERRIDE
+@import 'base/nav';

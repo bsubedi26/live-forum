@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import feathers, { services } from 'util/feathers';
 import ThreadList from './common/ThreadList';
 import ThreadPagination from './common/ThreadPagination';
+import { findActiveThread } from 'reducers/ui/selectors';
 
 class ThreadPage extends React.Component {
 
@@ -53,10 +54,9 @@ class ThreadPage extends React.Component {
 
     return (
       <div>
-
-        
         <div className="d-flex justify-content-center mt-4">
           <ThreadPagination {...this.props} />
+          {/* <Pagination {...this.props} itemsPerPage={5} name="threads" data={threads} /> */}
 
           {/* CREATE NEW THREAD BUTTON */}
           <Link to={`${this.props.location.pathname}/create`} className="pa2">
@@ -72,6 +72,7 @@ class ThreadPage extends React.Component {
 
               {/* LIST THE ARRAY OF THREADS */}
               <ThreadList {...this.props} topicId={topicId} />
+              {/* <PaginationList {...this.props} topicId={topicId} itemsPerPage={5} name="threads" data={threads} auth={auth} /> */}
             </div>
           </div>
           
@@ -82,15 +83,9 @@ class ThreadPage extends React.Component {
   }
 }
 
-const findActiveThread = (threads, props) => {
-  const topic = props.match.params.topicId;
-  const result = threads.find(item => item.topic === parseInt(topic, 10));
-  return result;
-}
-
 const mapState = (state, props) => ({
   threads: state.threads.queryResult.data,
-  activeThread: findActiveThread(state.ui.threads, props),
+  activeThread: findActiveThread(state, props),
   auth: state.auth
 })
 

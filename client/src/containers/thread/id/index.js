@@ -79,9 +79,9 @@ class ThreadDetailById extends React.Component {
 
   render() {
     const { thread, auth, dispatch } = this.props;
-
     return (
       <div className="mx-auto w-75 mt-4">
+
         <SingleThread auth={auth} thread={thread} dispatch={dispatch} />
 
         {this.renderCommentForm()}
@@ -89,6 +89,7 @@ class ThreadDetailById extends React.Component {
         <hr />
         
         <CommentList dispatch={dispatch} auth={auth} comments={thread._comments} />
+        {/* <PaginationList {...this.props} topicId={activeThread.topic} itemsPerPage={5} name="comments" data={thread._comments} auth={auth} /> */}
       </div>
     )
   }

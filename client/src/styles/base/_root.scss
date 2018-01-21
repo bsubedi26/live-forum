@@ -3,3 +3,15 @@ $theme-colors: (
   "chocolate": chocolate,
   // "info": rgb(60, 158, 55),
 );
+
+.pointer {
+  cursor: pointer;
+}
+
+.nav-user:hover {
+  color: white !important;
+}
+
+.fantasy {
+  font-family: fantasy;
+}
