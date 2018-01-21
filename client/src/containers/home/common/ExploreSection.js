@@ -12,16 +12,18 @@ class ExploreSection extends React.Component {
         {/* EXPLORE SECTION */}
         <div id="explore-section" className="py-4">
           <div className="container text-white text-center">
-            <h1 className="display-4">Explore</h1>
+            <h3 className="display-4">Explore</h3>
             <div className="p-4">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid officiis est at dolor quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid officiis.
+                Live Forum is an application that demonstrates how a realtime forum works. It uses feathersJS as a service/model layer to persist to sql database and retrieves realtime notification using socketIO.
               </p>
             </div>
             <button onClick={this.goRoute.bind(this, '/thread/2')} className="btn btn-outline-light pointer">Find Out More</button>
           </div>
         </div>
-        <div id="explore-connect-section" className="py-5">
+
+        {/* EXPLORE & CONNECT */}
+        {/* <div id="explore-connect-section" className="py-5">
           <div className="container">
             <div className="row">
               <div className="col-md-6">
@@ -56,7 +58,11 @@ class ExploreSection extends React.Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+        {/* END EXPLORE & CONNECT */}
+
+
+
       </div>
     );
   }
