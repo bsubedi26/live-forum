@@ -11,7 +11,7 @@ const validateUniqueUser = () => {
 
     const user = await hook.service.find({ query: { email } });
     if (user.total > 0) {
-      console.log('The provided user already exists: ', user);
+      // console.log('The provided user already exists: ', user);
       const userAlreadyExists = new errors.BadRequest('The provided email already exists. Try again.');
       throw userAlreadyExists;
     }

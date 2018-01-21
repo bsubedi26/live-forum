@@ -7,7 +7,7 @@ const _randomBytes = (size) => {
       if (err) rej(err);
       let hash = buf.toString('hex');
       res(hash);
-    })
+    });
   });
 };
 

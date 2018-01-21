@@ -27,7 +27,7 @@ module.exports = (service, schema, options) => {
         })
         .catch(err => {
           return next(err);
-        })
+        });
       }
     }
   });

@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const s = {
+const style = {
     label: {
         fontSize: '1.2rem'
     }
@@ -15,7 +15,7 @@ const FormFields = (props) => {
         <form onSubmit={handleSubmit} noValidate>
             {errors.message ? <div className="alert alert-danger" role="alert">{errors.message}</div> : null}
             <div className="form-group">
-                <label style={s.label}>Email Address</label>
+                <label style={style.label}>Email Address</label>
                 <input
                     type="email"
                     name="email"
@@ -29,7 +29,7 @@ const FormFields = (props) => {
             </div>
 
             <div className="form-group">
-                <label style={s.label}>Password</label>
+                <label style={style.label}>Password</label>
                 <input
                     type="password"
                     name="password"
