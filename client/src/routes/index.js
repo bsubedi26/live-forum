@@ -8,13 +8,16 @@ import { history } from 'util/store';
 import Header from 'components/Header';
 // import Footer from 'components/Footer';
 
-const Container = styled.div`text-align: center;`
+const Container = styled.div`
+  text-align: center;
+`
 
 function Routes() {
   return (
     <Router>
       <Container>
-        <Header />
+        <Header/>
+
         <ConnectedRouter history={history}>
           <Switch>
             <Route exact path="/home" component={Home} />

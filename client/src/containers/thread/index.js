@@ -5,6 +5,7 @@ import feathers, { services } from 'util/feathers';
 import ThreadList from './common/ThreadList';
 import ThreadPagination from './common/ThreadPagination';
 import { findActiveThread } from 'reducers/ui/selectors';
+import Sidebar from 'components/Sidebar';
 
 class ThreadPage extends React.Component {
 
@@ -53,30 +54,39 @@ class ThreadPage extends React.Component {
     const { topicId } = this.props.match.params;
 
     return (
-      <div>
-        <div className="d-flex justify-content-center mt-4">
-          <ThreadPagination {...this.props} />
-          {/* <Pagination {...this.props} itemsPerPage={5} name="threads" data={threads} /> */}
+      <div className="row mx-0">
 
-          {/* CREATE NEW THREAD BUTTON */}
-          <Link to={`${this.props.location.pathname}/create`} className="pa2">
-            <button className="btn btn-outline-info pointer">Create New Thread</button>
-          </Link>
+          {/* SIDEBAR */}
+          <Sidebar />
 
-        </div>
+          <div className="col-10">
+              {/* PAGINATION BUTTONS */}
+              <div className="d-flex justify-content-center mt-4">
+                <ThreadPagination {...this.props} />
+                {/* <Pagination {...this.props} itemsPerPage={5} name="threads" data={threads} /> */}
 
-        <div className="row mx-auto w-75 mt-4">
-          <div className="col-12">
-            <div className="card">
-              <div className="card-header">Threads</div>
+                {/* CREATE NEW THREAD BUTTON */}
+                <Link to={`${this.props.location.pathname}/create`} className="pa2">
+                  <button className="btn btn-outline-info pointer">Create New Thread</button>
+                </Link>
 
-              {/* LIST THE ARRAY OF THREADS */}
-              <ThreadList {...this.props} topicId={topicId} />
-              {/* <PaginationList {...this.props} topicId={topicId} itemsPerPage={5} name="threads" data={threads} auth={auth} /> */}
-            </div>
+              </div>
+
+              {/* <div className="row mx-auto w-75 mt-4"> */}
+              <div className="d-flex mt-4">
+                <div className="col-md-12">
+                  <div className="card">
+                    <div className="card-header">Threads</div>
+
+                    {/* LIST THE ARRAY OF THREADS */}
+                    <ThreadList {...this.props} topicId={topicId} />
+                    {/* <PaginationList {...this.props} topicId={topicId} itemsPerPage={5} name="threads" data={threads} auth={auth} /> */}
+                  </div>
+                </div>
+                
+              </div>
+            
           </div>
-          
-        </div>
           
       </div>
     )

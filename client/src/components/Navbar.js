@@ -7,22 +7,14 @@ import { push, getLocation } from 'react-router-redux';
 import Avatar from './Avatar';
 
 const NavLink = styled.li`
-  background-color: ${ prop =>  prop.activeTab ? 'beige' : '' };
+  background-color: ${ prop => prop.activeTab ? '#d9e2cf' : '' };
 `
 
 class NavbarCmp extends React.Component {
 
   state = {
     isOpen: false,
-    activeTab: this.props.location.pathname,
-    guestLinks: [
-      { id: 1, name: "home", path: "/home", display: "Home" },
-      { id: 2, name: "react", path: "/thread/2", display: "React" },
-      { id: 3, name: "redux", path: "/thread/3", display: "Redux" },
-      { id: 6, name: "nodejs", path: "/thread/6", display: "NodeJS" },
-      { id: 12, name: "feathersjs", path: "/thread/12", display: "FeathersJS" },
-      { id: 13, name: "knexjs", path: "/thread/13", display: "KnexJS" }
-    ]
+    activeTab: this.props.location.pathname
   };
 
   // componentWillMount() {
@@ -95,14 +87,12 @@ class NavbarCmp extends React.Component {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            { this.state.guestLinks.map((link) => 
-              (
-                <NavLink activeTab={routerLocation.pathname.includes(link.path)} onClick={this.goRoute.bind(this, link.path)} className="nav-item pointer mx-2" key={link.name}>
-                  <a className="nav-link">{link.display}</a>
-                </NavLink>    
-              )
-            )}
-      
+            <NavLink activeTab={routerLocation.pathname.includes('/home')} onClick={this.goRoute.bind(this, 'home')} className="nav-item pointer mx-2">
+              <a className="nav-link">Home</a>
+            </NavLink> 
+            <NavLink activeTab={routerLocation.pathname.includes('/thread')} onClick={this.goRoute.bind(this, '/thread/2')} className="nav-item pointer mx-2">
+              <a className="nav-link">Forums</a>
+            </NavLink> 
           </ul>
 
           <form className="form-inline mr-5">
