@@ -2,13 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { actions as AuthActions } from 'reducers/auth';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { push, getLocation } from 'react-router-redux';
 import Avatar from './Avatar';
-
-const NavLink = styled.li`
-  background-color: ${ prop => prop.activeTab ? '#d9e2cf' : '' };
-`
+import { NavLink } from './common';
 
 class NavbarCmp extends React.Component {
 

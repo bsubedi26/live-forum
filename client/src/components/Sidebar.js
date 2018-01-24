@@ -1,16 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { push, getLocation } from 'react-router-redux';
-import Modal from './Modal';
-
-const NavLink = styled.li`
-  background-color: ${ prop => prop.activeTab ? '#d9e2cf' : ''};
-`
+import ModalForm from './ModalForm';
+import { NavLink } from './common';
 
 class Sidebar extends React.Component {
   state = {
+    showModal: false,
     toggle: false,
     activeTab: this.props.location.pathname,
     topicLinks: [
@@ -25,11 +22,16 @@ class Sidebar extends React.Component {
   toggleCollapse = (e) => {
     this.setState({ toggle: !this.state.toggle });
   }
+  toggleModal = () => {
+    this.setState({ showModal: !this.state.showModal });
+  }
+
   handleSubmitCreateTopic = (values) => {
     console.log('CREATE TOPIC VALUES: ', values);
   }
 
   goRoute(path) {
+    console.log(this.state)
     this.props.dispatch(push(path));
   }
 
@@ -64,12 +66,13 @@ class Sidebar extends React.Component {
             </ul>
           </div>
 
-          <li data-toggle="modal" data-target="#modalCmp" className="p-1">
+          <li onClick={this.toggleModal} className="p-1">
             <i className="fa fa-plus p-2" aria-hidden="true"></i>
-            <span className="lead font-weight-bold">Create Topic</span>
+            <span className="lead font-weight-bold">Create</span>
           </li>
         </ul>
-        <Modal onSubmit={this.handleSubmitCreateTopic} title="Create Topic" inputs={ ['Name', 'Area'] }/>
+        
+        <ModalForm toggleModal={this.toggleModal} showModal={this.state.showModal} onSubmit={this.handleSubmitCreateTopic} title="Create Topic" inputs={ ['Name', 'Area'] }/>
       </div>
     )
   }
