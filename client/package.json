@@ -40,7 +40,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start:all": "npm-run-all -p watch-css start",
-    "build:all": "npm-run-all build-css build-js",
+    "build:all": "npm-run-all build-css build",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "predeploy": "npm run build",
