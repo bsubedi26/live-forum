@@ -12,16 +12,6 @@ class NavbarCmp extends React.Component {
     isOpen: false,
     activeTab: this.props.location.pathname
   };
-
-  // componentWillMount() {
-  //   const { dispatch } = this.props
-  //   dispatch(services.topics.find())
-  //     .then(({ action }) => {
-  //       console.log(action.payload.data);
-  //       this.setState({ guestLinks: action.payload.data })
-  //     })
-  //     .catch(err => console.log(err))
-  // }
   
   goRoute(path) {
     this.props.dispatch(push(path));
@@ -35,8 +25,8 @@ class NavbarCmp extends React.Component {
   
   handleLogout = async (e) => {
     const { dispatch } = this.props;
-    
     e.preventDefault();
+
     await dispatch(AuthActions.logout());
     dispatch(push('/home'));
   }
@@ -83,10 +73,10 @@ class NavbarCmp extends React.Component {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <NavLink activeTab={routerLocation.pathname.includes('/home')} onClick={this.goRoute.bind(this, 'home')} className="nav-item pointer mx-2">
+            <NavLink activeTab={routerLocation.pathname.includes('/home')} onClick={this.goRoute.bind(this, '/home')} className="nav-item pointer mx-2">
               <a className="nav-link">Home</a>
             </NavLink> 
-            <NavLink activeTab={routerLocation.pathname.includes('/thread')} onClick={this.goRoute.bind(this, '/thread/2')} className="nav-item pointer mx-2">
+            <NavLink activeTab={routerLocation.pathname.includes('/thread')} onClick={this.goRoute.bind(this, '/thread/1')} className="nav-item pointer mx-2">
               <a className="nav-link">Forums</a>
             </NavLink> 
           </ul>

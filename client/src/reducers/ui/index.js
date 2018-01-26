@@ -1,34 +1,37 @@
-const options = [
-  {
-    topic: 2,
-    active: 1
-  },
-  {
-    topic: 3,
-    active: 1
-  },
-  {
-    topic: 6,
-    active: 1
-  },
-  {
-    topic: 12,
-    active: 1
-  },
-  {
-    topic: 13,
-    active: 1
-  }
-]
 const State = {
-  threads: [...options],
-  comments: [...options],
+  threads: []
 }
 
 const uiReducer = (state = State, action) => {
   const { type, payload } = action;
 
   switch (type) {
+
+    case 'UI_UPDATE_THREADS_TOPICS': {
+      const { data } = payload;
+
+      if (Array.isArray(data)) {
+        return {
+          ...state,
+          threads: data.map(topic => {
+            let obj = {};
+            obj.topic = topic.id;
+            obj.active = 1;
+            return obj;
+          })
+        }
+      }
+      else {
+        let obj = {};
+        obj.topic = payload.id;
+        obj.active = 1;
+        return {
+          ...state,
+          threads: state.threads.concat(obj)
+        }
+      }
+      
+    }
 
     case 'UI_SET_THREADS_ACTIVE': {
       const { active, topic } = payload;

@@ -28,7 +28,7 @@ class ModalForm extends React.Component {
       return (
         <div key={idx} className="form-group">
           <label htmlFor={input}>{input}</label>
-          <input ref={input} type="text" className="form-control" />
+          <input ref={input} type="text" className="form-control" placeholder={input} />
         </div>
       )
     })

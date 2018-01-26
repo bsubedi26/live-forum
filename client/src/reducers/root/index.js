@@ -7,9 +7,9 @@ const rootReducer = (state, action) => {
   const { type, payload } = action;
   const { threads, router } = state;
   const activeThreadRouteId = parseInt(router.location.pathname.replace('/thread/', ''), 10);
-  
+
   switch (type) {
-    
+
     case 'SOCKET_THREADS_ON_CREATED': {
 
       // ONLY ADD DATA THAT MATCHES THE TOPIC ID THE USER IS CURRENTLY VIEWING
@@ -24,7 +24,7 @@ const rootReducer = (state, action) => {
       else {
         return state;
       }
-      
+
     }
 
     case 'SOCKET_THREADS_ON_REMOVED': {
@@ -122,6 +122,16 @@ const rootReducer = (state, action) => {
         })
       }
     }
+
+    case 'SOCKET_TOPICS_ON_CREATED': {
+      return {
+        ...state,
+        topics: updateIn(state.topics, ['queryResult', 'data'], (data) => {
+          return data.concat(payload);
+        })
+      }
+    }
+
 
     default: return state;
   }

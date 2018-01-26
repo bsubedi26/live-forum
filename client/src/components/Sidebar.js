@@ -4,19 +4,44 @@ import { connect } from 'react-redux';
 import { push, getLocation } from 'react-router-redux';
 import ModalForm from './ModalForm';
 import { NavLink } from './common';
+import feathers, { services } from 'util/feathers';
 
 class Sidebar extends React.Component {
   state = {
     showModal: false,
     toggle: false,
     activeTab: this.props.location.pathname,
-    topicLinks: [
-      { id: 2, name: "react", path: "/thread/2", display: "React" },
-      { id: 3, name: "redux", path: "/thread/3", display: "Redux" },
-      { id: 6, name: "nodejs", path: "/thread/6", display: "NodeJS" },
-      { id: 12, name: "feathersjs", path: "/thread/12", display: "FeathersJS" },
-      { id: 13, name: "knexjs", path: "/thread/13", display: "KnexJS" }
-    ]
+    pathRoot: '/thread',
+    topicLinks: []
+    // topicLinks: [
+    //   { id: 2, name: "react", path: "/thread/2", display: "React" },
+    //   { id: 3, name: "redux", path: "/thread/3", display: "Redux" },
+    //   { id: 6, name: "nodejs", path: "/thread/6", display: "NodeJS" }
+    // ]
+  }
+
+  topicService = feathers.service('topics');
+
+  initListeners() {
+    const { dispatch } = this.props;
+
+    this.topicService.on('created', (data) => {
+      console.log('TOPIC:on::Created ', data);
+      dispatch({ type: 'SOCKET_TOPICS_ON_CREATED', payload: data });
+      dispatch({ type: 'UI_UPDATE_THREADS_TOPICS', payload: data });
+    });
+   
+  }
+
+  componentWillUnmount() {
+    this.topicService.removeAllListeners("created");
+  }
+  
+  async componentWillMount() {
+    const { dispatch } = this.props;
+    this.initListeners();
+    const { value } = await dispatch(services.topics.find());
+    dispatch({ type: 'UI_UPDATE_THREADS_TOPICS', payload: value });
   }
 
   toggleCollapse = (e) => {
@@ -26,12 +51,17 @@ class Sidebar extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   }
 
-  handleSubmitCreateTopic = (values) => {
-    console.log('CREATE TOPIC VALUES: ', values);
+  handleSubmitCreateTopic = async (values) => {
+    const { dispatch } = this.props;
+    const displayName = values["Topic Name"].charAt(0).toUpperCase() + values["Topic Name"].slice(1);
+
+    await dispatch(services.topics.create({
+      name: values["Topic Name"],
+      display: displayName
+    }));
   }
 
   goRoute(path) {
-    console.log(this.state)
     this.props.dispatch(push(path));
   }
 
@@ -42,7 +72,8 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { routerLocation } = this.props;
+    const { pathRoot } = this.state;
+    const { routerLocation, topics } = this.props;
 
     return (
       <div className="col-2 d-none d-md-block p-0 sidebar-container">
@@ -55,9 +86,9 @@ class Sidebar extends React.Component {
           </li>
           <div className="collapse" id="topicList">
             <ul className="navbar-nav mr-auto">
-              {this.state.topicLinks.map((link) =>
+              {topics.map((link) =>
                 (
-                  <NavLink activeTab={routerLocation.pathname.includes(link.path)} onClick={this.goRoute.bind(this, link.path)} className="nav-item pointer mx-2" key={link.name}>
+                  <NavLink activeTab={routerLocation.pathname.includes(`${pathRoot}/${link.id}`)} onClick={this.goRoute.bind(this, `${link.id}`)} className="nav-item pointer mx-2" key={link.name}>
                     <a className="nav-link">{link.display}</a>
                   </NavLink>
                 )
@@ -72,7 +103,7 @@ class Sidebar extends React.Component {
           </li>
         </ul>
         
-        <ModalForm toggleModal={this.toggleModal} showModal={this.state.showModal} onSubmit={this.handleSubmitCreateTopic} title="Create Topic" inputs={ ['Name', 'Area'] }/>
+        <ModalForm toggleModal={this.toggleModal} showModal={this.state.showModal} onSubmit={this.handleSubmitCreateTopic} title="Create Topic" inputs={ ['Topic Name'] }/>
       </div>
     )
   }
@@ -80,7 +111,8 @@ class Sidebar extends React.Component {
 
 
 const mapState = state => ({
-  routerLocation: getLocation(state)
+  routerLocation: getLocation(state),
+  topics: state.topics.queryResult.data
 })
 
 export default withRouter(connect(mapState)(Sidebar));

@@ -95,7 +95,7 @@ class ThreadPage extends React.Component {
 
 const mapState = (state, props) => ({
   threads: state.threads.queryResult.data,
-  activeThread: findActiveThread(state, props),
+  activeThread: findActiveThread(state, props) || {},
   auth: state.auth
 })
 

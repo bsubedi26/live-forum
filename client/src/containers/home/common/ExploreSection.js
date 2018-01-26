@@ -18,7 +18,7 @@ class ExploreSection extends React.Component {
                 Live Forum is an application that demonstrates how a realtime forum works. It uses feathersJS as a service/model layer to persist to sql database and retrieves realtime notification using socketIO.
               </p>
             </div>
-            <button onClick={this.goRoute.bind(this, '/thread/2')} className="btn btn-outline-light pointer">Find Out More</button>
+            <button onClick={this.goRoute.bind(this, '/thread/1')} className="btn btn-outline-light pointer">Find Out More</button>
           </div>
         </div>
 

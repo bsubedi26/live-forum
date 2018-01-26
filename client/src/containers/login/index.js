@@ -13,7 +13,7 @@ class Login extends React.Component {
     
     return dispatch(AuthActions.authenticate(credentials))
     .then(res => {
-      dispatch(push('/thread/2'));
+      dispatch(push('/thread/1'));
     })
     .catch(err => {
       // console.log(err);
