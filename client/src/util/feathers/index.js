@@ -1,8 +1,9 @@
-import feathers from '@feathersjs/feathers';
-import fSocketio from '@feathersjs/socketio-client';
-import auth from '@feathersjs/authentication-client';
+import feathers from '@feathersjs/client/dist/feathers.min';
+import auth from '@feathersjs/client/dist/authentication.min';
+import fSocketio from '@feathersjs/client/dist/socketio.min';
 
 import io from 'socket.io-client';
+
 // import fRest from '@feathersjs/client/dist/rest';
 // import axios from 'axios';
 import reduxifyAllServices, { requiresAuthServices } from './reduxServices';
