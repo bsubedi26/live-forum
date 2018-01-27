@@ -2,11 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push, getLocation } from 'react-router-redux';
-import ModalForm from './ModalForm';
-import { NavLink } from './common';
+import ModalForm from '../ModalForm';
+import { NavLink } from '../common';
 import feathers, { services } from 'util/feathers';
 
-class Sidebar extends React.Component {
+class SidebarContent extends React.Component {
   state = {
     showModal: false,
     toggle: false,
@@ -30,13 +30,13 @@ class Sidebar extends React.Component {
       dispatch({ type: 'SOCKET_TOPICS_ON_CREATED', payload: data });
       dispatch({ type: 'UI_UPDATE_THREADS_TOPICS', payload: data });
     });
-   
+
   }
 
   componentWillUnmount() {
     this.topicService.removeAllListeners("created");
   }
-  
+
   async componentWillMount() {
     const { dispatch } = this.props;
     this.initListeners();
@@ -76,9 +76,9 @@ class Sidebar extends React.Component {
     const { routerLocation, topics } = this.props;
 
     return (
-      <div className="col-2 d-none d-md-block p-0 sidebar-container">
+      <div>
         <ul className="list-unstyled sidebar-ul">
-          <li className="p-1" onClick={this.toggleCollapse} data-toggle="collapse" data-target="#topicList">
+          <li className="p-1 sidebar-hover pointer" onClick={this.toggleCollapse} data-toggle="collapse" data-target="#topicList">
             {
               this.state.toggle ? this.renderIcon('down') : this.renderIcon('right')
             }
@@ -88,7 +88,7 @@ class Sidebar extends React.Component {
             <ul className="navbar-nav mr-auto">
               {topics.map((link) =>
                 (
-                  <NavLink activeTab={routerLocation.pathname.includes(`${pathRoot}/${link.id}`)} onClick={this.goRoute.bind(this, `${link.id}`)} className="nav-item pointer mx-2" key={link.name}>
+                  <NavLink activeTab={routerLocation.pathname.includes(`${pathRoot}/${link.id}`)} onClick={this.goRoute.bind(this, `${link.id}`)} className="nav-item pointer sidebar-hover mx-2" key={link.name}>
                     <a className="nav-link">{link.display}</a>
                   </NavLink>
                 )
@@ -97,13 +97,13 @@ class Sidebar extends React.Component {
             </ul>
           </div>
 
-          <li onClick={this.toggleModal} className="p-1">
+          <li onClick={this.toggleModal} className="p-1 sidebar-hover pointer">
             <i className="fa fa-plus p-2" aria-hidden="true"></i>
             <span className="lead font-weight-bold">Create</span>
           </li>
         </ul>
-        
-        <ModalForm toggleModal={this.toggleModal} showModal={this.state.showModal} onSubmit={this.handleSubmitCreateTopic} title="Create Topic" inputs={ ['Topic Name'] }/>
+
+        <ModalForm toggleModal={this.toggleModal} showModal={this.state.showModal} onSubmit={this.handleSubmitCreateTopic} title="Create Topic" inputs={['Topic Name']} />
       </div>
     )
   }
@@ -115,4 +115,4 @@ const mapState = state => ({
   topics: state.topics.queryResult.data
 })
 
-export default withRouter(connect(mapState)(Sidebar));
+export default withRouter(connect(mapState)(SidebarContent));

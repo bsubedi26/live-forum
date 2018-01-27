@@ -5,7 +5,7 @@ import feathers, { services } from 'util/feathers';
 import ThreadList from './common/ThreadList';
 import ThreadPagination from './common/ThreadPagination';
 import { findActiveThread } from 'reducers/ui/selectors';
-import Sidebar from 'components/Sidebar';
+import SidebarFixed from 'components/sidebar';
 
 class ThreadPage extends React.Component {
 
@@ -18,14 +18,14 @@ class ThreadPage extends React.Component {
       console.log('THREAD:on::Created ', data);
       dispatch({ type: 'SOCKET_THREADS_ON_CREATED', payload: data });
     });
-    
+
     this.threadService.on('removed', (data) => {
       console.log('THREAD:on::Removed ', data);
       dispatch({ type: 'SOCKET_THREADS_ON_REMOVED', payload: data });
     });
-    
+
   }
-  
+
   componentWillUnmount() {
     this.threadService.removeAllListeners("created");
     this.threadService.removeAllListeners("removed");
@@ -56,38 +56,43 @@ class ThreadPage extends React.Component {
     return (
       <div className="row mx-0">
 
-          {/* SIDEBAR */}
-          <Sidebar />
+        {/* SIDEBAR */}
+        <div className="d-none d-md-block">
+          <SidebarFixed />
+        </div>
 
-          <div className="col-10">
-              {/* PAGINATION BUTTONS */}
-              <div className="d-flex justify-content-center mt-4">
-                <ThreadPagination {...this.props} />
-                {/* <Pagination {...this.props} itemsPerPage={5} name="threads" data={threads} /> */}
+        {/* PLACEHOLDER SPACE FOR SIDEBAR */}
+        <div className="col-4"></div>
 
-                {/* CREATE NEW THREAD BUTTON */}
-                <Link to={`${this.props.location.pathname}/create`} className="pa2">
-                  <button className="btn btn-outline-info pointer">Create New Thread</button>
-                </Link>
+        <div className="col-md-8">
+          {/* PAGINATION BUTTONS */}
+          <div className="d-flex justify-content-center mt-4">
+            <ThreadPagination {...this.props} />
+            {/* <Pagination {...this.props} itemsPerPage={5} name="threads" data={threads} /> */}
 
-              </div>
+            {/* CREATE NEW THREAD BUTTON */}
+            <Link to={`${this.props.location.pathname}/create`} className="pa2">
+              <button className="btn btn-outline-info pointer">Create New Thread</button>
+            </Link>
 
-              {/* <div className="row mx-auto w-75 mt-4"> */}
-              <div className="d-flex mt-4">
-                <div className="col-md-12">
-                  <div className="card">
-                    <div className="card-header">Threads</div>
-
-                    {/* LIST THE ARRAY OF THREADS */}
-                    <ThreadList {...this.props} topicId={topicId} />
-                    {/* <PaginationList {...this.props} topicId={topicId} itemsPerPage={5} name="threads" data={threads} auth={auth} /> */}
-                  </div>
-                </div>
-                
-              </div>
-            
           </div>
-          
+
+          {/* <div className="row mx-auto w-75 mt-4"> */}
+          <div className="d-flex mt-4">
+            <div className="col-md-12">
+              <div className="card">
+                <div className="card-header">Threads</div>
+
+                {/* LIST THE ARRAY OF THREADS */}
+                <ThreadList {...this.props} topicId={topicId} />
+                {/* <PaginationList {...this.props} topicId={topicId} itemsPerPage={5} name="threads" data={threads} auth={auth} /> */}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
     )
   }
