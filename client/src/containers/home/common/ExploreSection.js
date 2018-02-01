@@ -13,8 +13,8 @@ class ExploreSection extends React.Component {
         <div id="explore-section" className="py-4">
           <div className="container text-white text-center">
             <h3 className="display-4">Explore</h3>
-            <div className="p-4">
-              <p>
+            <div className="p-2">
+              <p className="lead">
                 Live Forum is an application that demonstrates how a realtime forum works. It uses feathersJS as a service/model layer to persist to sql database and retrieves realtime notification using socketIO.
               </p>
             </div>

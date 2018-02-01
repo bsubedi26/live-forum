@@ -52,6 +52,7 @@ class ThreadCreatePage extends React.Component {
           </div>
             
         </div>
+
       </div>
     )
   }

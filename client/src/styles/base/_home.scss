@@ -1,11 +1,11 @@
-$bg-color: #333;
-$font-color: #fff;
+$dark-gray: #333;
+$dark-red: #886969;
 $dark-overlay: rgba(0,0,0,0.7);
-$blue-color: #008ed6;
+$light-blue: #008ed6;
 
 // HOME
 #home-section {
-  background: url("../assets/images/home-overlay.jpg") no-repeat;
+  background: url("../assets/images/home-overlay.jpeg") no-repeat;
   min-height: 700px;
   background-size: cover;
   background-attachment: fixed;
@@ -30,7 +30,7 @@ $blue-color: #008ed6;
 
 // EXPLORE
 #explore-section {
-  background: $bg-color;
+  background: $dark-red;
 }
 #explore-connect-section {
   background: white;
@@ -44,8 +44,8 @@ $blue-color: #008ed6;
 
 // CREATE
 #create-section {
-  background: $blue-color;
+  background: $light-blue;
 }
 #create-passion-section {
-  background: $bg-color;
+  background: $dark-gray;
 }

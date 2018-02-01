@@ -1,6 +1,7 @@
 import React from 'react';
 import FormContainer from 'components/user/form';
 import { actions as AuthActions } from 'reducers/auth';
+import { push } from 'react-router-redux';
 
 class HeaderSection extends React.Component {
 
@@ -9,6 +10,7 @@ class HeaderSection extends React.Component {
     return dispatch(AuthActions.signup(values))
       .then(res => {
         setSubmitting(false);
+        dispatch(push({ pathname: '/login', state: { message: 'Congratulations! Signup was successful.', type: 'success' } }));
         return res;
       })
       .catch(err => {
@@ -25,12 +27,12 @@ class HeaderSection extends React.Component {
               <div className="container">
                 <div className="row">
                   <div className="col-lg-8 d-none d-lg-block text-white">
-                    <h1 className="display-4">
+                    {/* <h1 className="display-4">
                         <strong>Live Forum</strong> is an application that demonstrates how a <em>realtime</em> forum works.
-                    </h1>
+                    </h1> */}
                     <div className="row pt-2">
                       <div className="col">
-                        <h2 className="display-5 text-left text-chocolate">Frontend:</h2>
+                        <h2 className="display-5 text-left">Frontend:</h2>
                         <ul className="list-unstyled text-left">
                           <li>
                             <i className="fa fa-check m-2" />
@@ -76,7 +78,7 @@ class HeaderSection extends React.Component {
                           </li>
                           <li>
                             <i className="fa fa-check m-2" />
-                            <span className="h5">Knex</span>
+                            <span className="h5">SocketIO</span>
                           </li>
 
                         </ul>
