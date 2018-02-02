@@ -1,7 +1,7 @@
 module.exports = function (app) {
   const knex = app.get('knexClient');
   const table = 'users';
-  
+
   knex.schema.hasTable(table).then(exists => {
 
     if (!exists) {
@@ -10,7 +10,8 @@ module.exports = function (app) {
         t.string('email').unique().notNullable();
         t.string('password').notNullable();
         t.string('avatar').notNullable();
-        
+
+        t.integer('login_attempts').defaultTo(4);
         t.timestamps(true, true);
       })
         .then(() => console.log(`Created ${table} table`))

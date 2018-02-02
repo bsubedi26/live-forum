@@ -4,7 +4,7 @@ const logger = require('./hooks/logger');
 const { isSqlite, stringifyJsonForSqlite } = require('./hooks/sqlite');
 const isRest = require('./hooks/isRest');
 const preventChangeIfNoId = require('./hooks/preventChangeIfNoId');
-
+const setUpdatedAtDate = require('./hooks/setUpdatedAtDate');
 
 module.exports = {
   before: {
@@ -19,7 +19,8 @@ module.exports = {
       iff((isRest()), preventChangeIfNoId())
     ],
     patch: [
-      iff((isRest()), preventChangeIfNoId())
+      iff((isRest()), preventChangeIfNoId()),
+      setUpdatedAtDate()
     ],
     remove: [
       iff((isRest()), preventChangeIfNoId())
@@ -39,7 +40,7 @@ module.exports = {
   },
 
   error: {
-    all: [ 
+    all: [
       logger()
     ],
     find: [],

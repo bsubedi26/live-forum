@@ -12,14 +12,14 @@ const socketio = require('@feathersjs/socketio');
 
 const handler = require('@feathersjs/errors/handler');
 const notFound = require('@feathersjs/errors/not-found');
-const { profiler }  = require('feathers-profiler');
+const { profiler } = require('feathers-profiler');
 
 const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
 const knex = require('./knex');
-const authentication = require('./authentication');
+const authentication = require('./services/lib/authentication');
 
 const app = express(feathers());
 
@@ -34,7 +34,7 @@ app.configure(configuration())
     .use('/', express.static(app.get('public')));
 
 
-    // Load Feathers Core
+// Load Feathers Core
 app.configure(rest())
     .configure(socketio())
     .configure(knex)
