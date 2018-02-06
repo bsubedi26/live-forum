@@ -36,7 +36,10 @@ app.configure(configuration())
 
 // Load Feathers Core
 app.configure(rest())
-    .configure(socketio())
+    .configure(socketio({
+        pingInterval: 10000,
+        pingTimeout: 50000
+    }))
     .configure(knex)
     .configure(middleware)
     .configure(channels)
