@@ -8,6 +8,9 @@ const errors = require('@feathersjs/errors');
 const validateUserExists = () => {
   return async hook => {
     const { email } = hook.data;
+    if (hook.data.accessToken) {
+      return hook;
+    }
 
     const user = await hook.app.service('users').find({ query: { email } });
 

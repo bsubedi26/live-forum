@@ -8,8 +8,8 @@ module.exports = function (config) {
   return {
     before: {
       create: [
-        validateUserExists(),
-        validateLoginAttempts(),
+        // validateUserExists(),
+        // validateLoginAttempts(),
         authentication.hooks.authenticate(config.strategies),
       ],
       remove: [
@@ -19,7 +19,7 @@ module.exports = function (config) {
 
     error: {
       create: [
-        setLoginError(),
+        // setLoginError(),
       ]
     }
   };
