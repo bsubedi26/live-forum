@@ -16,7 +16,7 @@ const middlewares = [
   ReduxThunk,
   promiseMiddleware(),
   routeMiddleware,
-  freeze
+  freeze,
 ]
 const enhancers = [
   applyMiddleware(...middlewares),

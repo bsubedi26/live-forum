@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { services } from 'util/feathers';
 import qs from 'query-string';
-
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import './blog.css';
 
 class Blog extends React.Component {
@@ -24,12 +24,17 @@ class Blog extends React.Component {
     return query;
   }
 
+  delay = (timer) => {
+    return new Promise(resolve => setTimeout(resolve, timer));
+  }
+
   async dispatchFind() {
     const { dispatch } = this.props;
     const query = this.getQuery();
-
-    const r = await dispatch(services.blog.find({ query }));
-    console.log(r);
+    this.props.dispatch(showLoading('nav-top'));
+    await this.delay(300);
+    await dispatch(services.blog.find({ query }));
+    this.props.dispatch(hideLoading('nav-top'));
   }
 
   parseLocationUrl = search => {
@@ -68,7 +73,7 @@ class Blog extends React.Component {
     const { active } = this.state;
 
     return (
-      <li className={`page-item pointer ${active === counter ? 'pagination-active' : null}`} key={counter} onClick={this.handleBtnClick.bind(this, counter)}>
+      <li className={`page-item pointer mx-1 ${active === counter ? 'pagination-active' : ''}`} key={counter} onClick={this.handleBtnClick.bind(this, counter)}>
         <a className="page-link">{counter}</a>
       </li>
     )
