@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { actions as AuthActions } from 'reducers/auth';
-import { connect } from 'react-redux';
 import { push, getLocation } from 'react-router-redux';
+import { connect } from 'react-redux';
+
+import { actions as AuthActions } from 'reducers/auth';
 import Avatar from './Avatar';
 import { NavLink } from './common';
 
@@ -75,10 +76,14 @@ class NavbarCmp extends React.Component {
           <ul className="navbar-nav mr-auto">
             <NavLink activeTab={routerLocation.pathname.includes('/home')} onClick={this.goRoute.bind(this, '/home')} className="nav-item pointer mx-2">
               <a className="nav-link">Home</a>
-            </NavLink> 
+            </NavLink>
             <NavLink activeTab={routerLocation.pathname.includes('/thread')} onClick={this.goRoute.bind(this, '/thread/1')} className="nav-item pointer mx-2">
               <a className="nav-link">Forums</a>
-            </NavLink> 
+            </NavLink>
+            <NavLink activeTab={routerLocation.pathname.includes('/blog')} onClick={this.goRoute.bind(this, '/blog?page=1')} className="nav-item pointer mx-2">
+              <a className="nav-link">Blog</a>
+            </NavLink>
+ 
           </ul>
 
           <form className="form-inline mr-5">

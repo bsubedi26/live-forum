@@ -3,9 +3,10 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux';
 import styled from 'styled-components';
 
-import { Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers';
+import { BlogMain, Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers';
 import { history } from 'util/store';
-import Header from 'components/Header';
+import LoadingBar from 'components/LoadingBar';
+import Navbar from 'components/Navbar';
 // import Footer from 'components/Footer';
 
 const Container = styled.div`
@@ -16,10 +17,12 @@ function Routes() {
   return (
     <Router>
       <Container>
-        <Header/>
+        <LoadingBar />
+        <Navbar />
 
         <ConnectedRouter history={history}>
           <Switch>
+            <Route exact path="/blog" component={BlogMain} />
             <Route exact path="/home" component={Home} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/signup' component={Signup} />
