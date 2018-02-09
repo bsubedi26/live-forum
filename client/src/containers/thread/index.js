@@ -7,6 +7,7 @@ import ThreadPagination from './common/ThreadPagination';
 import { findActiveThread } from 'reducers/ui/selectors';
 import SidebarFixed from 'components/sidebar';
 import ThreadHeader from './common/Header';
+import Toast from 'components/toast';
 
 class ThreadPage extends React.Component {
 
@@ -14,9 +15,13 @@ class ThreadPage extends React.Component {
 
   initListeners() {
     const { dispatch } = this.props;
+    const { topicId } = this.props.match.params;
 
     this.threadService.on('created', (data) => {
       console.log('THREAD:on::Created ', data);
+      if (data.topic_id === parseInt(this.topicId, 10)) {
+        this.props.dispatch({ type: 'UI/TOAST_TOGGLE', payload: { active: true, message: `New thread created by: ${data._creator.email}` } });
+      }
       dispatch({ type: 'SOCKET_THREADS_ON_CREATED', payload: data });
     });
 
@@ -34,6 +39,7 @@ class ThreadPage extends React.Component {
 
   componentDidMount() {
     const { topicId } = this.props.match.params;
+    this.topicId = topicId;
     this.dispatchFind(topicId);
     this.initListeners();
   }
@@ -41,6 +47,7 @@ class ThreadPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       const { topicId } = nextProps.match.params;
+      this.topicId = topicId;
       this.dispatchFind(topicId);
     }
   }
@@ -57,6 +64,7 @@ class ThreadPage extends React.Component {
 
     return (
       <div className="row mx-0">
+        <Toast />
 
         {/* SIDEBAR */}
         <div className="d-none d-md-block">
@@ -105,7 +113,8 @@ class ThreadPage extends React.Component {
 
 const findActiveTopic = (data, props) => {
   const { topicId } = props.match.params;
-  return data.find(topic => topic.id === parseInt(topicId, 10))
+  let topic = data.find(topic => topic.id === parseInt(topicId, 10))
+  return topic
 }
 
 const mapState = (state, props) => ({

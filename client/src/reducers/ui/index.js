@@ -1,11 +1,21 @@
 const State = {
-  threads: []
+  threads: [],
+  toast: {
+    active: false,
+    message: ''
+  }
 }
 
 const uiReducer = (state = State, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case 'UI/TOAST_TOGGLE': {
+      return {
+        ...state,
+        toast: payload
+      }
+    }
 
     case 'UI_UPDATE_THREADS_TOPICS': {
       const { data } = payload;
