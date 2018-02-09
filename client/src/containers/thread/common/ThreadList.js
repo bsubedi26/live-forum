@@ -68,4 +68,32 @@ const ThreadList = props => {
   )
 }
 
-export default ThreadList;
+
+const Thread = props => {
+  const { thread } = props;
+  const postDate = moment.utc(thread.updated_at).local().format('dddd MMM D YYYY h:mm A');
+  const { _creator } = thread;
+
+  return (
+    <div key={thread.id} className="list-group-item">
+      <div>
+        <Avatar style={{ float: 'left', marginRight: '8px' }} avatar={_creator.avatar} />
+        <Link to={`/thread/${thread.topic_id}/individual/${thread.id}`}><Title className="text-left">{thread.title}</Title></Link>
+      </div>
+      <LineText className="text-left"><strong>UserID: </strong> {thread.creator_id} - {_creator.email}</LineText>
+
+      <LineText className="text-left pt-2">
+        <span className="mr-2">{postDate}</span>
+        <span className="mr-2">-</span>
+        <span className="mr-2">{thread._comments.length} comments</span>
+      </LineText>
+
+      {/* {renderEditDeleteButtons(thread)} */}
+    </div>
+  )
+}
+
+export {
+  Thread,
+  ThreadList
+};

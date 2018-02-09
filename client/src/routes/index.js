@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux';
 import styled from 'styled-components';
 
-import { BlogMain, Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers';
+import { Scroller, BlogMain, Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers';
 import { history } from 'util/store';
 import LoadingBar from 'components/LoadingBar';
 import Navbar from 'components/Navbar';
@@ -19,13 +19,13 @@ function Routes() {
       <Container>
         <LoadingBar />
         <Navbar />
-
         <ConnectedRouter history={history}>
           <Switch>
             <Route exact path="/blog" component={BlogMain} />
             <Route exact path="/home" component={Home} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/signup' component={Signup} />
+            <Route exact path='/scroller' component={Scroller} />
 
             {/* FORUM */}
             <Route exact path='/thread/:topicId' component={ThreadPage} />

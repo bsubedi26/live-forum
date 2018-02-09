@@ -8,7 +8,6 @@ import ExploreSection from './common/ExploreSection';
 // import CreateSection from './common/CreateSection';
 // import Footer from 'components/Footer';
 
-
 class Home extends React.Component {
 
   goRoute = (path) => {

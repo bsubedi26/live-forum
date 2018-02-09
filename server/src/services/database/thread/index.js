@@ -4,6 +4,7 @@ const hooks = require('./hooks');
 
 const t = require('tcomb');
 const validate = require('../../lib/validate');
+// const seed = require('./hooks/seed');
 
 const schema = t.struct({
   title: t.String,
@@ -30,6 +31,8 @@ module.exports = function(app) {
 
   validate(service, schema);
   service.hooks(hooks);
+  // seed(service);
+
   service.publish(() => {
     // Here you can add event publishers to channels set up in `channels.js`
     // To publish only for a specific event use `app.publish(eventname, () => {})`

@@ -78,10 +78,13 @@ class NavbarCmp extends React.Component {
               <a className="nav-link">Home</a>
             </NavLink>
             <NavLink activeTab={routerLocation.pathname.includes('/thread')} onClick={this.goRoute.bind(this, '/thread/1')} className="nav-item pointer mx-2">
-              <a className="nav-link">Forums</a>
+              <a className="nav-link">Threads</a>
             </NavLink>
             <NavLink activeTab={routerLocation.pathname.includes('/blog')} onClick={this.goRoute.bind(this, '/blog?page=1')} className="nav-item pointer mx-2">
-              <a className="nav-link">Blog</a>
+              <a className="nav-link">Pagination Example</a>
+            </NavLink>
+            <NavLink activeTab={routerLocation.pathname.includes('/scroller')} onClick={this.goRoute.bind(this, '/scroller')} className="nav-item pointer mx-2">
+              <a className="nav-link">Infinite Scroll Example</a>
             </NavLink>
  
           </ul>

@@ -117,7 +117,6 @@ class Blog extends React.Component {
             )
           })}
         </ul>
-            
       </div>
     )
   }

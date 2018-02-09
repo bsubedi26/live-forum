@@ -20,6 +20,13 @@ const seed = async service => {
     await service.create(payload)
   }
 
+  for (i of topics) {
+    var title = faker.lorem.words()
+    var summary = faker.lorem.sentences()
+    const payload = { title, summary, topic_id: 3, creator_id: i }
+    await service.create(payload)
+  }
+
 }
 
 module.exports = seed;

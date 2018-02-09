@@ -133,6 +133,17 @@ const rootReducer = (state, action) => {
     }
 
 
+    case 'THREADS/FIND_LIMIT_CONCAT': {
+      return {
+        ...state,
+        threads: updateIn(threads, ['queryResult', 'data'], (data) => {
+            return data.concat(payload.data);
+        })
+
+      }
+    }
+
+
     default: return state;
   }
 

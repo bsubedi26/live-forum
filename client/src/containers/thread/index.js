@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import feathers, { services } from 'util/feathers';
-import ThreadList from './common/ThreadList';
+import { ThreadList } from './common/ThreadList';
 import ThreadPagination from './common/ThreadPagination';
 import { findActiveThread } from 'reducers/ui/selectors';
 import SidebarFixed from 'components/sidebar';
+import ThreadHeader from './common/Header';
 
 class ThreadPage extends React.Component {
 
@@ -52,6 +53,7 @@ class ThreadPage extends React.Component {
 
   render() {
     const { topicId } = this.props.match.params;
+    const { topic } = this.props;
 
     return (
       <div className="row mx-0">
@@ -81,7 +83,9 @@ class ThreadPage extends React.Component {
           <div className="d-flex mt-4">
             <div className="col-md-12">
               <div className="card">
-                <div className="card-header">Threads</div>
+                <div className="card-header">
+                  <ThreadHeader topic={topic} />
+                </div>
 
                 {/* LIST THE ARRAY OF THREADS */}
                 <ThreadList {...this.props} topicId={topicId} />
@@ -98,8 +102,15 @@ class ThreadPage extends React.Component {
   }
 }
 
+
+const findActiveTopic = (data, props) => {
+  const { topicId } = props.match.params;
+  return data.find(topic => topic.id === parseInt(topicId, 10))
+}
+
 const mapState = (state, props) => ({
   threads: state.threads.queryResult.data,
+  topic: findActiveTopic(state.topics.queryResult.data, props),
   activeThread: findActiveThread(state, props) || {},
   auth: state.auth
 })
