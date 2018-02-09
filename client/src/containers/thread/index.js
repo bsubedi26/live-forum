@@ -7,7 +7,7 @@ import ThreadPagination from './common/ThreadPagination';
 import { findActiveThread } from 'reducers/ui/selectors';
 import SidebarFixed from 'components/sidebar';
 import ThreadHeader from './common/Header';
-import Toast from 'components/toast';
+import Toast from 'components/Toast';
 
 class ThreadPage extends React.Component {
 
