@@ -1,0 +1,24 @@
+.nav-user:hover {
+  color: white !important;
+}
+.fantasy {
+  font-family: fantasy;
+}
+.dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+/* SIDEBAR */
+.sidebar-container .sidebar-ul li {
+  cursor: pointer;
+}
+
+.sidebar-hover:hover {
+  background-color: var(--dim-green);
+  color: white;
+}
+
+.sidebar-container {
+  background-color: var(--gray-white);
+}
