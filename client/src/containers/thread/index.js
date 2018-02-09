@@ -9,51 +9,6 @@ import SidebarFixed from 'components/sidebar';
 import ThreadHeader from './common/Header';
 import Toast from 'components/Toast';
 
-// threadService = feathers.service('threads');
-
-// initListeners() {
-//   const { dispatch } = this.props;
-
-//   this.threadService.on('created', (data) => {
-//     console.log('THREAD:on::Created ', data);
-//     console.log('this.topicId: ', this.topicId);
-
-//     if (data.topic_id === parseInt(this.topicId, 10)) {
-//       this.props.dispatch({ type: 'UI/TOAST_TOGGLE', payload: { active: true, message: `New thread created by: ${data._creator.email}` } });
-//     }
-//     dispatch({ type: 'SOCKET_THREADS_ON_CREATED', payload: data });
-//   });
-
-//   this.threadService.on('removed', (data) => {
-//     console.log('THREAD:on::Removed ', data);
-//     dispatch({ type: 'SOCKET_THREADS_ON_REMOVED', payload: data });
-//   });
-
-// }
-
-// componentWillUnmount() {
-//   this.threadService.removeAllListeners("created");
-//   this.threadService.removeAllListeners("removed");
-// }
-
-// componentDidMount() {
-//   const { topicId } = this.props.match.params;
-//   this.topicId = topicId;
-//   this.dispatchFind(topicId);
-//   this.initListeners();
-// }
-
-// componentWillReceiveProps(nextProps) {
-//   if (nextProps.location.pathname !== this.props.location.pathname) {
-//     const { topicId } = nextProps.match.params;
-//     console.log('changed topicId ', topicId)
-//     this.topicId = topicId;
-//     console.log('set this.topicId ', this.topicId)
-//     this.dispatchFind(topicId);
-//   }
-// }
-
-
 class ThreadPage extends React.Component {
   state = {
     topicId: 1
