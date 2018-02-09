@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import 'styles/toast.css'
+import 'styles/components/toast.css'
 
 const style = {
   backgroundColor: '#84845b'
