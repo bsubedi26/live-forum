@@ -1,41 +1,47 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import 'styles/components/toast.css'
+import classNames from 'classnames'
 
-const style = {
-  backgroundColor: '#84845b'
+const getStyle = () => {
+  return {
+    backgroundColor: '#84845b'
+  }
 }
 
 class Toast extends React.Component {
-  static propTypes = {
-    toast: PropTypes.object.isRequired
+  state = {
+    active: false,
+    message: '',
+    duration: 3000
   }
 
-  showToast = () => {
-    const { dispatch } = this.props
-    let toast = this.toast
-    toast.className = "show"
+  show = (message) => {
+    this.setState({ active: true, message })
+  }
+  
+  close = (message) => {
+    this.setState({ active: false, message: '' })
+  }
+
+  renderToast = () => {
     setTimeout(() => {
-        toast.className = toast.className.replace("show", "")
-        dispatch({ type: 'UI/TOAST_TOGGLE', payload: { active: false, message: '' } })
-    }, 3000)
+      // isMounted check to avoid calling setState if component has unmounted
+      if (this.updater.isMounted(this)) {
+        this.close()
+      }
+    }, this.state.duration)
   }
 
   render() {
-    const { toast } = this.props
+    const { active, message } = this.state
+    const className = classNames({ show: active })
 
     return (
       <div>
-        <div ref={(toast) => this.toast = toast} style={style} id="toast">{toast.message}</div>
-        {toast.active ?  this.showToast() : null}
+        <div id="toast" style={getStyle()} className={className}>{message}</div>
+        {active ?  this.renderToast() : null}
       </div>
     )
   }
 }
 
-const mapState = state => ({
-  toast: state.ui.toast
-})
-
-export default connect(mapState)(Toast)
+export default Toast

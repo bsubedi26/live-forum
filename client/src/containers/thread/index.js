@@ -24,7 +24,7 @@ class ThreadPage extends React.Component {
       // if the new thread's topic equals the currently viewed topic thread
       // dispatch the toast notifying all the users viewing the thread
       if (data.topic_id === parseInt(this.state.topicId, 10)) {
-        this.props.dispatch({ type: 'UI/TOAST_TOGGLE', payload: { active: true, message: `New thread created by: ${data._creator.email}` } });
+        this.toast.show(`New thread created by: ${data._creator.email}`);
       }
       dispatch({ type: 'SOCKET_THREADS_ON_CREATED', payload: data });
     });
@@ -68,8 +68,8 @@ class ThreadPage extends React.Component {
 
     return (
       <div className="row mx-0">
-        <Toast />
-
+        <Toast ref={cmp => this.toast = cmp} />
+        
         {/* SIDEBAR */}
         <div className="d-none d-md-block">
           <SidebarFixed />
@@ -117,8 +117,8 @@ class ThreadPage extends React.Component {
 
 const findActiveTopic = (data, props) => {
   const { topicId } = props.match.params;
-  let topic = data.find(topic => topic.id === parseInt(topicId, 10))
-  return topic
+  let topic = data.find(topic => topic.id === parseInt(topicId, 10));
+  return topic;
 }
 
 const mapState = (state, props) => ({

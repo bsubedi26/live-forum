@@ -11,7 +11,6 @@ import { logger, reAuthenticate, updateAtDate } from './hooks';
 
 
 const HOST = process.env.NODE_ENV === 'production' ? '//live-forums.herokuapp.com' : 'http://localhost:3030';
-// const HOST = 'http://localhost:3030';
 const socket = io(HOST);
 // const rest = fRest(HOST);
 const app = feathers()
@@ -22,6 +21,11 @@ const app = feathers()
   }));
 
 const services = reduxifyAllServices(app);
+
+app.io.on('connect_error', error => {
+  console.log('Cannot connect to server using sockets. Closing connection...');
+  app.io.close();
+});
 
 export { services };
 
