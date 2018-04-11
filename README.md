@@ -10,7 +10,7 @@ A live forum application built with the following technologies:
 
 ### Getting Started
 
-1. Client setup
+1) Client setup
 
     ```
     cd path/to/client/folder
@@ -18,7 +18,7 @@ A live forum application built with the following technologies:
     npm start
     ```
 
-2. Server setup
+2) Server setup
 
     ```
     cd path/to/server/folder
