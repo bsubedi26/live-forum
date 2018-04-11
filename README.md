@@ -1,4 +1,4 @@
-# LiveForum
+# Live-Forum
 A live forum application built with the following technologies:
 
 * [React](https://facebook.github.io/react/)
