@@ -1,35 +1,27 @@
 // Application hooks that run for every service
-const { iff } = require('feathers-hooks-common');
-const logger = require('./hooks/logger');
-const { isSqlite, stringifyJsonForSqlite } = require('./hooks/sqlite');
-const isRest = require('./hooks/isRest');
-const preventChangeIfNoId = require('./hooks/preventChangeIfNoId');
-const setUpdatedAtDate = require('./hooks/setUpdatedAtDate');
+// const { iff } = require('feathers-hooks-common')
+const colorlogger = require('./hooks/colorlogger')
 
 module.exports = {
   before: {
     all: [
-      logger(),
-      iff((isSqlite()), stringifyJsonForSqlite()),
+      colorlogger()
     ],
     find: [],
     get: [],
     create: [],
     update: [
-      iff((isRest()), preventChangeIfNoId())
     ],
     patch: [
-      iff((isRest()), preventChangeIfNoId()),
-      setUpdatedAtDate()
+      // iff((isRest()), preventChangeIfNoId())
     ],
     remove: [
-      iff((isRest()), preventChangeIfNoId())
     ]
   },
 
   after: {
     all: [
-      logger(),
+      colorlogger()
     ],
     find: [],
     get: [],
@@ -41,7 +33,7 @@ module.exports = {
 
   error: {
     all: [
-      logger()
+      colorlogger()
     ],
     find: [],
     get: [],
@@ -50,4 +42,4 @@ module.exports = {
     patch: [],
     remove: []
   }
-};
+}

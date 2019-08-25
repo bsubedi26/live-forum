@@ -1,3 +1,3 @@
-const isRest = () => async hook => hook.params.provider === 'rest';
+const isRest = () => async hook => hook.params.provider === 'rest'
 
-module.exports = isRest;
+module.exports = isRest

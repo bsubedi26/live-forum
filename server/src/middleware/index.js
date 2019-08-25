@@ -1,8 +1,7 @@
-const logRequestUrl = require('./logRequestUrl');
+const logRequestUrl = require('./logRequestUrl')
 
-module.exports = function (app) { // eslint-disable-line no-unused-vars
-  // Add your custom middleware here. Remember, that
-  // in Express the order matters
+const moduleExports = function (app) {
+  app.use(logRequestUrl())
+}
 
-  app.use(logRequestUrl());
-};
+module.exports = moduleExports
