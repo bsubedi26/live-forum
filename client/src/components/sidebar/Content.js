@@ -33,11 +33,11 @@ class SidebarContent extends React.Component {
 
   }
 
-  componentWillUnmount() {
+  componentDidUnmount() {
     this.topicService.removeAllListeners("created");
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     const { dispatch } = this.props;
     this.initListeners();
     const { value } = await dispatch(services.topics.find());

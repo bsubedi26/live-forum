@@ -1,48 +1,60 @@
-const assert = require('assert');
-const rp = require('request-promise');
-const app = require('../src/app');
+const assert = require('assert')
+const rp = require('request-promise')
+const url = require('url')
+const app = require('../src/app')
+
+const port = app.get('port') || 3030
+const getUrl = pathname => url.format({
+  hostname: app.get('host') || 'localhost',
+  protocol: 'http',
+  port,
+  pathname
+})
 
 describe('Feathers application tests', () => {
-  before(function(done) {
-    this.server = app.listen(3030);
-    this.server.once('listening', () => done());
-  });
+  let server
 
-  after(function(done) {
-    this.server.close(done);
-  });
+  beforeAll(function (done) {
+    server = app.listen(port)
+    server.once('listening', () => {
+      setTimeout(() => done(), 500)
+    })
+  })
 
-  it('starts and shows the index page', async () => {
-    const body = await rp('http://localhost:3030');
-    assert.ok(body.indexOf('<html') !== -1);
-  });
+  afterAll(function (done) {
+    server.close()
+    setTimeout(() => done(), 500)
+  })
 
-  
-  // describe('404', function() {
-  //   it('shows a 404 HTML page', () => {
-  //     return rp({
-  //       url: 'http://localhost:3030/path/to/nowhere',
-  //       headers: {
-  //         'Accept': 'text/html'
-  //       }
-  //     }).catch(res => {
-  //       assert.equal(res.statusCode, 404);
-  //       assert.ok(res.error.indexOf('<html') !== -1);
-  //     });
-  //   });
+  it('starts and shows the index page', () => {
+    return rp(getUrl()).then(body =>
+      assert.ok(body.indexOf('<html>') !== -1, 'response does not contain <html>')
+    )
+  })
 
-  //   it('shows a 404 JSON error without stack trace', () => {
-  //     return rp({
-  //       url: 'http://localhost:3030/path/to/nowhere',
-  //       json: true
-  //     }).catch(res => {
-  //       assert.equal(res.statusCode, 404);
-  //       assert.equal(res.error.code, 404);
-  //       assert.equal(res.error.message, 'Page not found');
-  //       assert.equal(res.error.name, 'NotFound');
-  //     });
-  //   });
-  // });
+  describe('404', function () {
+    it('shows a 404 HTML page', () => {
+      return rp({
+        url: getUrl('path/to/nowhere'),
+        headers: {
+          Accept: 'text/html'
+        }
+      }).catch(res => {
+        assert.strictEqual(res.statusCode, 404, 'unexpected statusCode')
+        assert.ok(res.error.indexOf('<html>') !== -1, 'error does not contain <html>')
+      })
+    })
 
-
-});
+    it('shows a 404 JSON error without stack trace', () => {
+      return rp({
+        url: getUrl('path/to/nowhere'),
+        json: true
+      }).catch(res => {
+        assert.strictEqual(res.statusCode, 404, 'unexpected statusCode')
+        assert.strictEqual(res.error.code, 404, 'unexpected error.code')
+        assert.strictEqual(res.error.message, 'Page not found', 'unexpected error.message')
+        assert.strictEqual(res.error.name, 'NotFound', 'unexpected error.name')
+      })
+    })
+  })
+})

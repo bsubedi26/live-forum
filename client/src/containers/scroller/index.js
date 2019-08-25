@@ -18,9 +18,8 @@ class Home extends React.Component {
     return parseInt(rand, 10)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { dispatch } = this.props
-
     let components = []
     for (let i = 0; i < 5; i++) {
       let singleComponent = <SingleComponent dispatch={dispatch} color={colors[i]} key={this.randomKey()} />

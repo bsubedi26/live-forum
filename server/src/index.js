@@ -1,14 +1,32 @@
+
 /* eslint-disable no-console */
-require('app-module-path').addPath(__dirname);
-const logger = require('winston');
-const app = require('./app');
-const port = process.env.NODE_ENV === 'production' ? process.env.PORT : app.get('port');
-const server = app.listen(port);
+// Start the server. (Can be re-generated.)
+// !code: preface // !end
+const logger = require('./utils/logger')
+const app = require('./app')
+const seedData = require('./utils/seed-data')
+// !code: imports // !end
+// !code: init // !end
 
-process.on('unhandledRejection', (reason, p) =>
+const port = app.get('port')
+const server = app.listen(port)
+// !code: init2 // !end
+
+process.on('unhandledRejection', (reason, p) => {
+  // !<DEFAULT> code: unhandled_rejection_log
   logger.error('Unhandled Rejection at: Promise ', p, reason)
-);
+  // !end
+  // !code: unhandled_rejection // !end
+})
 
-server.on('listening', () =>
+server.on('listening', async () => {
+  // !<DEFAULT> code: listening_log
   logger.info('Feathers application started on http://%s:%d', app.get('host'), port)
-);
+  // !end
+  // !code: listening // !end
+  await seedData(app)
+  // !code: listening1 // !end
+})
+
+// !code: funcs // !end
+// !code: end // !end

@@ -95,7 +95,6 @@ class CommentList extends React.Component {
 
   render() {
     const { comments } = this.props;
-    
     return <div>{comments.map(this.renderComment)}</div>
 }
   

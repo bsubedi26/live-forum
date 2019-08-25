@@ -1,10 +1,4 @@
 {
-  "host": "http://live-forums.herokuapp.com",
-  "cookie": {
-      "enabled": true,
-      "domain": "http://live-forums.herokuapp.com",
-      "name": "feathers-jwt",
-      "httpOnly": false,
-      "secure": true
-    }
+  "host": "forum-server-app.feathersjs.com",
+  "port": "PORT"
 }
