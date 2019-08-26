@@ -1,8 +1,9 @@
 :root {
   --dark-gray: #333;
   --dim-red: #886969;
-  --dark-overlay: rgba(0,0,0,0.7);
+  --dark-overlay: rgba(68, 62, 62, 0.7);
   --light-blue: #008ed6;
   --dim-green: #7a8272;
+  --light-green: #d9e2cf;
   --gray-white: #F5F5F5;
 }

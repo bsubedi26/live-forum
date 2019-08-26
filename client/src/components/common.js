@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Title = styled.h3`
   font-size: 1.1rem;
@@ -10,5 +10,5 @@ export const LineText = styled.h5`
 `
 
 export const NavLink = styled.li`
-  background-color: ${ prop => prop.activeTab ? '#d9e2cf' : ''};
+  background-color: ${prop => prop.activeTab ? '#d9e2cf' : ''};
 `

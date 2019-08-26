@@ -1,21 +1,24 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/es/integration/react';
+import React from 'react'
+import { render } from 'react-dom'
+import { Router } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+import setGlobalState from './state'
+import App from './App'
 
-import configureStore from 'util/store';
-import Routes from 'routes';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'styles/index.css'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import 'styles/index.css';
+setGlobalState()
 
-const { store, persistor } = configureStore();
-render(
-  <Provider store={store}>
-    <PersistGate persistor={persistor}>
-        <Routes />
-    </PersistGate>
-  </Provider>,
-  document.getElementById('root')
-)
+export const history = createBrowserHistory()
+
+const RenderView = () => {
+  return (
+    <Router history={history}>
+      <App />
+    </Router>
+  )
+}
+
+render(RenderView(), document.getElementById('root'))

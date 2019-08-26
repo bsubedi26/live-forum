@@ -1,75 +1,70 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import FormContainer from 'components/user/form';
-import { actions as AuthActions } from 'reducers/auth';
-import { connect } from 'react-redux';
-import { FadeIn } from 'animate-css-styled-components';
-import { push } from 'react-router-redux';
+import React from 'react'
+import { withRouter, Link } from 'react-router-dom'
+import { FadeIn } from 'animate-css-styled-components'
+import { useGlobal } from 'reactn'
 
-class Login extends React.Component {
-  handleSubmit = (formValues) => {
-    const { dispatch } = this.props;
-    const credentials = { ...formValues, strategy: 'local' };
-    // const credentials = { ...formValues, strategy: 'facebook' };
-    
-    return dispatch(AuthActions.authenticate(credentials))
-    .then(res => {
-      dispatch(push('/thread/1'));
-    })
-    .catch(err => {
-      // console.log(err);
-      return Promise.reject(err);
-    })
+import UserForm from 'components/user/form/create'
+import ReplaceIfAlertMessage from 'components/Alerts'
+import { get, authenticate, verifyToken } from '../../services/User'
+
+const initialValues = {
+  email: '',
+  password: '',
+  strategy: 'local'
+}
+
+const Login = ({ location, history }) => {
+  const [, setAuthState] = useGlobal('auth')
+  const alertMsg = location.state && location.state.message
+  const onFormSuccess = async ({ accessToken }) => {
+    const decodeToken = await verifyToken(accessToken)
+    const user = await get(decodeToken.userId)
+    setAuthState({ accessToken, decodeToken, user })
+    history.push('/home', { message: 'Login Successful.' })
   }
+  // const onFormSuccess = () => history.push('/thread/1', { message: 'Login Successful.' })
 
-  renderAlert = state => {
-    const { message, type } = state;
+  return (
+    <div className='mx-auto w-75'>
+      <FadeIn>
+        <div className='jumbotron'>
+          <ReplaceIfAlertMessage message={alertMsg} type='success'>
+            <h1 className='display-3'>Login Below!</h1>
+          </ReplaceIfAlertMessage>
+          <p className='lead'>Login to access the featured content and information.</p>
+          <span>
+            Don't have an Account?
+            <Link
+              className='pa1'
+              to={{
+                pathname: '/signup',
+                state: { message: 'Signup for an account below!' }
+              }}
+            >
+                Register here.
+            </Link>
+          </span>
+          <hr className='my-4' />
+          <FadeIn>
+            <UserForm
+              onSubmitAction={authenticate}
+              onSuccessAction={onFormSuccess}
+              initialValues={initialValues}
+            />
+          </FadeIn>
 
-    return (
-      <div className={`alert alert-${type}`} role="alert">
-        <h4 className="fw-400">{message}</h4>
-      </div>
-    )
-  }
-
-  render() {
-    const { location } = this.props;
-
-    return (
-      <div className="mx-auto w-75">
-        <FadeIn>
-          <div className="jumbotron">
-            {location.state && location.state.message ? this.renderAlert(location.state) : <h1 className="display-3">Login Below!</h1>}
-              <p className="lead">Login to access the featured content and information.</p>
-              <span>
-                Don't have an Account?
-                <Link
-                  style={{padding: '5px'}}
-                  to={{
-                    pathname: '/signup',
-                    state: { message: 'Signup for an account below!' }
-                  }}
-                >
-                Register here.</Link>
-              </span>
-            <hr className="my-4" />
-            <FadeIn>
-              <FormContainer buttonWidth25 handleSubmit={this.handleSubmit} />
-            </FadeIn>
-
-            {/* <a href="http://localhost:3030/auth/github"> */}
-            {/* <a href="/auth/github">
+          {/* <a href="http://localhost:3030/auth/github"> */}
+          {/* <a href="/auth/github">
               <button className="mt-3 btn btn-default pointer">
                 Login With Github
                 <i className="fa fa-github fa-lg m-2" aria-hidden="true"></i>
               </button>
             </a> */}
-          </div>
-        </FadeIn>
-      </div>
-   
-    )
-  }
+        </div>
+      </FadeIn>
+    </div>
+
+  )
 }
 
-export default connect(null)(Login);
+export default withRouter(Login)

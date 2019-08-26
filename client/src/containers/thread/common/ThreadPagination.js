@@ -53,7 +53,8 @@ class ThreadPagination extends React.Component {
           className={`page-item pointer ${ this.state.show ? (activeThread.active === counter ? 'active' : null) : null }`}
           key={i} onClick={this.setActive.bind(this, counter)} 
         >
-          <a className="page-link">{counter}</a>
+          {/* <a className="page-link">{counter}</a> */}
+          <span className="page-link">{counter}</span>
         </li>
       )
         counter++;
