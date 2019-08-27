@@ -1,66 +1,50 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { services } from 'util/feathers';
-import CreateThreadForm from 'components/thread/CreateThreadForm';
-import { FadeIn } from 'animate-css-styled-components';
+import React from 'react'
+import { useGlobal } from 'reactn'
+import CreateThreadForm from 'components/Forms/thread/create'
+import { Thread } from 'services'
+import Alerts from 'components/Alerts'
 
-class ThreadCreatePage extends React.Component {
-  state = {
+const ThreadCreatePage = ({ match }) => {
+  const [state, setState] = React.useState({
     title: '',
     summary: '',
     showSuccess: false
+  })
+  const [auth] = useGlobal('auth')
+
+  const handleOnChange = ({ target }) => setState({ ...state, [target.id]: target.value })
+
+  const handleCreateForum = async (e) => {
+    e.preventDefault()
+    const { topicId } = match.params
+    const { title, summary } = state
+    const payload = { title, summary, topic_id: parseInt(topicId, 10), creator_id: auth.user.id }
+    await Thread.create(payload)
+    setState({ showSuccess: true })
   }
 
-  handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value });
-
-  handleCreateForum = async (e) => {
-    e.preventDefault();
-    const { dispatch, auth } = this.props;
-    const { topicId } = this.props.match.params;
-    const { title, summary } = this.state;
-    const payload = { title, summary, topic_id: parseInt(topicId, 10), creator_id: auth.id };
-    
-    await dispatch(services.threads.create(payload));
-    this.setState({ showSuccess: true });
-  }
-
-  render() {
-    const { auth } = this.props;
-
-    return (
-      <div className="mx-auto w-75 mt-4">
-        <div className="card">
-          <div className="card-header">
-            <h5>You are creating a new post.</h5>
-          </div>
-
-          {this.state.showSuccess ?
-            <FadeIn>
-              <div style={{fontWeight: 'bold'}} className="alert alert-success m-4 fade show" role="alert">Successfully created thread!</div>
-            </FadeIn>
-            : null
-          }
-
-          <div>
-            { auth.accessToken ? 
-              <CreateThreadForm onSubmit={this.handleCreateForum} onChange={this.handleOnChange} />
-              : 
-              <div className="p-2">
-                <span>You <em>must</em> be signed in before creating a post.</span>
-              </div>
-            }
-          </div>
-            
+  return (
+    <div className='mx-auto w-75 mt-4'>
+      <div className='card'>
+        <div className='card-header'>
+          <h5>You are creating a new thread.</h5>
         </div>
 
+        {state.showSuccess
+          ? <Alerts type='success' message='Successfully created thread!' />
+          : null}
+
+        {auth.accessToken
+          ? <CreateThreadForm onSubmit={handleCreateForum} onChange={handleOnChange} />
+          : (
+            <div className='p-2'>
+              <span>You <em>must</em> be signed in before creating a thread.</span>
+            </div>
+          )}
       </div>
-    )
-  }
+
+    </div>
+  )
 }
 
-
-const mapState = (state, props) => ({
-  auth: state.auth
-})
-
-export default connect(mapState)(ThreadCreatePage);
+export default ThreadCreatePage

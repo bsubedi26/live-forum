@@ -1,13 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-class Avatar extends React.Component {
-  render() {
-    const { avatar, style } = this.props;
+const Avatar = ({ avatar, style }) => (
+  <img alt='user avatar' style={style} width='50' height='50' src={`data:image/png;base64,${avatar}`} />
+)
 
-    return (
-      <img alt="user avatar" style={style} width="50" height="50" src={`data:image/png;base64,${avatar}`} />
-    )
-  }
-}
-
-export default Avatar;
+export default Avatar

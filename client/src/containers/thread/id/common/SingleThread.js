@@ -1,96 +1,74 @@
-import React from 'react';
-import { Title, LineText } from 'components/common';
-import Avatar from 'components/Avatar';
-import { services } from 'util/feathers';
-import { goBack } from 'react-router-redux';
-import CreateThreadForm from 'components/thread/CreateThreadForm';
-import { FadeIn } from 'animate-css-styled-components';
-import moment from 'moment';
+import React from 'react'
+import { useGlobal } from 'reactn'
+import { withRouter } from 'react-router-dom'
+import { Title, LineText } from 'components/common'
+import { FadeIn } from 'animate-css-styled-components'
+import moment from 'moment'
+import { Thread } from 'services'
+import Avatar from 'components/Avatar'
+import EditForm from 'components/Forms/thread/create'
+import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
 
-class SingleThread extends React.Component {
-  state = {
-    showEdit: false,
+const ThreadHeaderInfo = ({ thread }) => {
+  const postDate = moment(thread.updated_at, 'YYYY-MM-DD HH:mm:ss').format('dddd MMM D YYYY h:mm A')
+  return (
+    <>
+      <div>
+        <Avatar avatar={thread._creator.avatar} />
+        <Title className='my-3'>Title: {thread.title}</Title>
+        <LineText className='my-2'>Posted By:{thread._creator.email}</LineText>
+      </div>
+
+      <LineText className='pt-2'>
+        <span className='mr-2'>{postDate}</span>
+        <span className='mr-2'>-</span>
+        <span className='mr-2'>{thread._comments.length} comments</span>
+      </LineText>
+    </>
+  )
+}
+const SingleThread = ({ auth, thread, history }) => {
+  const [state, setState] = React.useState({
+    showEditForm: false,
     title: '',
     summary: ''
+  })
+  const [, setThread] = useGlobal('thread')
+
+  const handleOnChange = ({ target }) => setState({ ...state, [target.id]: target.value })
+
+  const handleEditThreadSubmit = async (event) => {
+    console.log('handleEditThreadSubmit: ')
+    event.preventDefault()
+    const { title, summary } = state
+    const payload = { title, summary }
+    const updatedData = await Thread.patch(thread.id, payload)
+    setThread(updatedData)
+    setState({ ...state, showEditForm: false })
   }
 
-  handleEditClick = (thread) => {
-    this.setState({ showEdit: true });
+  const removeThread = async () => {
+    await Thread.remove(thread.id)
+    history.goBack()
   }
 
+  return (
+    <div className='card'>
+      <div className='card-header m'>
+        <ThreadHeaderInfo thread={thread} />
+      </div>
+      <div className='text-center'>
+        <p className='mt-2'>{thread.summary}</p>
+        <LineText><strong>UserID: </strong> {thread._creator.id}</LineText>
 
-  handleDeleteClick = async (thread) => {
-    const { dispatch } = this.props;
-    await dispatch(services.threads.remove(thread.id));
-    dispatch(goBack());
-  }
+        {auth.user && auth.user.id === thread.creator_id ? <EditAndDeleteButtons onEdit={() => setState({ ...state, showEditForm: true })} onDelete={removeThread} /> : null}
 
-  handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value });
-
-  handleEditThreadSubmit = async (e) => {
-    e.preventDefault();
-    const { dispatch, thread } = this.props;
-    const { title, summary } = this.state;
-    const payload = { title, summary };
-
-    await dispatch(services.threads.patch(thread.id, payload));
-    this.setState({ showEdit: false });
-  }
-
-  renderEditDeleteButtons = (thread) => {
-    const { auth } = this.props;
-    if (auth.id === thread.creator_id) {
-      return (
-        <div>
-          <button id={thread.id} onClick={this.handleEditClick.bind(this, thread)} className="btn btn-outline-info pointer ma2">Edit</button>
-          <button onClick={this.handleDeleteClick.bind(this, thread)} className="btn btn-outline-danger pointer ma2">Delete</button>
-        </div>
-      )
-    }
-    else {
-      return null;
-    }
-  }
-
-  render() {
-    const { thread } = this.props;
-    const postDate = moment(thread.updated_at, 'YYYY-MM-DD HH:mm:ss').subtract(5, 'hours').format('dddd MMM D YYYY h:mm A');
-
-    return (
-      <div className="card">
-        <div className="card-header">
-
-          <div>
-            <Avatar avatar={thread._creator.avatar} />
-            <LineText className="my-2">{thread._creator.email}</LineText>
-            <Title className="my-1">{thread.title}</Title>
-          </div>
-
-          <LineText className="pt-2">
-            <span className="mr-2">{postDate}</span>
-            <span className="mr-2">-</span>
-            <span className="mr-2">{thread._comments.length} comments</span>
-          </LineText>
-
-        </div>
-
-        <div className="text-center">
-          <p className="mt-2">
-            {thread.summary}
-          </p>
-          <LineText><strong>UserID: </strong> {thread._creator.id} - {thread._creator.email}</LineText>
-
-          <div>{this.renderEditDeleteButtons(thread)}</div>
-
-          {/* SHOW EDIT FORM WHEN EDIT IS TRUE */}
-          {this.state.showEdit ? <FadeIn><CreateThreadForm onSubmit={this.handleEditThreadSubmit} onChange={this.handleOnChange} /></FadeIn> : null }
-
-        </div>
+        {state.showEditForm ? <FadeIn><EditForm onSubmit={handleEditThreadSubmit} onChange={handleOnChange} /></FadeIn> : null}
 
       </div>
-    )
-  }
-  
+
+    </div>
+  )
 }
 
-export default SingleThread;
+export default withRouter(SingleThread)

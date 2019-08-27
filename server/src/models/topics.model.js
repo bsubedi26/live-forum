@@ -10,20 +10,19 @@ class Topic extends Model {
   static get jsonSchema () {
     return {
       type: 'object',
-      required: ['name', 'display'],
+      required: ['name'],
       properties: {
-        name: { type: 'string' },
-        display: { type: 'string' }
+        name: { type: 'string' }
       }
     }
   }
 
   $beforeInsert () {
-    this.created_at = this.updated_at = new Date()
+    this.created_at = this.updated_at = new Date().toISOString()
   }
 
   $beforeUpdate () {
-    this.updated_at = new Date()
+    this.updated_at = new Date().toISOString()
   }
 }
 
@@ -34,8 +33,7 @@ module.exports = function (app) {
     if (!exists) {
       knex.schema.createTable(TABLE_NAME, table => {
         table.increments('id')
-        table.string('name').notNullable()
-        table.string('display').notNullable()
+        table.string('name').notNullable().unique()
 
         table.timestamp('created_at')
         table.timestamp('updated_at')

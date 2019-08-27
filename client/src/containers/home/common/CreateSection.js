@@ -1,10 +1,6 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom'
 class CreateSection extends React.Component {
-  goRoute = (path) => {
-    this.props.goRoute(path);
-  }
-
   render() {
     return (
       <div>
@@ -14,7 +10,7 @@ class CreateSection extends React.Component {
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid officiis est at dolor quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid officiis.
             </p>
-            <button onClick={this.goRoute.bind(this, '/thread/2')} className="btn btn-outline-light pointer">Find Out More</button>
+            <Link to='/thread/2' className='btn btn-outline-light pointer'>Find Out More</Link>
           </div>
         </div>
         <div id="create-passion-section" className="py-4">

@@ -1,24 +1,20 @@
-import React from 'react';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 class ExploreSection extends React.Component {
-  
-  goRoute = (path) => {
-    this.props.goRoute(path);
-  }
-
-  render() {
+  render () {
     return (
       <div>
         {/* EXPLORE SECTION */}
-        <div id="explore-section" className="py-4">
-          <div className="container text-white text-center">
-            <h3 className="display-4">Explore</h3>
-            <div className="p-2">
-              <p className="lead">
+        <div id='explore-section' className='py-5'>
+          <div className='container text-white text-center'>
+            <h3 className='display-4'>Explore</h3>
+            <div className='p-2'>
+              <p className='lead'>
                 Live Forum is an application that demonstrates how a realtime forum works. It uses feathersJS as a service/model layer to persist to sql database and retrieves realtime notification using socketIO.
               </p>
             </div>
-            <button onClick={this.goRoute.bind(this, '/thread/1')} className="btn btn-outline-light pointer">Find Out More</button>
+            <Link to='/thread/1' className='btn btn-outline-light pointer'>Find Out More</Link>
           </div>
         </div>
 
@@ -61,11 +57,9 @@ class ExploreSection extends React.Component {
         </div> */}
         {/* END EXPLORE & CONNECT */}
 
-
-
       </div>
-    );
+    )
   }
 };
 
-export default ExploreSection;
+export default ExploreSection
