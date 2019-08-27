@@ -3,13 +3,13 @@
  * @param {Object} app
  */
 
-export default function updateAtDate(app) {
+export default function updateAtDate (app) {
   app.hooks({
     before: {
       patch: async hook => {
-        hook.data = { ...hook.data, updated_at: new Date() };
-        return hook;
+        hook.data = { ...hook.data, updated_at: new Date() }
+        return hook
       }
     }
-  });
+  })
 }

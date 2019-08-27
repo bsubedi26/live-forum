@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Routes from './Routes'
 import Navbar from 'components/Navbar'
-import Footer from 'components/Footer'
+// import Footer from 'components/Footer'
 
 const WholePageWrapper = styled.div`
   text-align: center;
@@ -19,6 +19,6 @@ export default () => (
     <RouteWrapper>
       <Routes />
     </RouteWrapper>
-    <Footer />
+    {/* <Footer /> */}
   </WholePageWrapper>
 )

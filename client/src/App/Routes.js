@@ -2,7 +2,16 @@ import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 // import { Scroller, BlogMain, Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers'
-import { Home, Login, Signup, ThreadsPage, NotFoundPage } from 'containers'
+import {
+  Home,
+  Login,
+  Signup,
+  ThreadsPage,
+  ThreadPage,
+  ThreadCreatePage,
+  ThreadDetailById,
+  NotFoundPage
+} from 'containers'
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = window.localStorage.getItem('feathers-jwt')
@@ -31,9 +40,9 @@ const Routes = () => {
 
       {/* FORUM */}
       <Route exact path='/threads' component={ThreadsPage} />
-      {/* <Route exact path='/thread/:topicId' component={ThreadPage} /> */}
-      {/* <Route exact path='/thread/:topicId/individual/:id' component={ThreadDetailById} /> */}
-      {/* <Route exact path='/thread/:topicId/create' component={ThreadCreatePage} /> */}
+      <Route exact path='/thread/:topicId' component={ThreadPage} />
+      <Route exact path='/thread/:topicId/individual/:threadId' component={ThreadDetailById} />
+      <Route exact path='/thread/:topicId/create' component={ThreadCreatePage} />
 
       {/* 404 & Redirects */}
       <Redirect exact from='/' to='/home' />

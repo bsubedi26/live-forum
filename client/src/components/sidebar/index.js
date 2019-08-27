@@ -327,7 +327,7 @@ class SidebarFixed extends Component {
     return (
       <div {...rootProps}>
         <div className={this.props.sidebarClassName} style={sidebarStyle} ref={this.saveSidebarRef}>
-          {this.props.sidebar}
+          <SidebarContent {...this.props} />
         </div>
         <div
           className={this.props.overlayClassName}
@@ -371,7 +371,7 @@ SidebarFixed.propTypes = {
   overlayClassName: PropTypes.string,
 
   // sidebar content to render
-  sidebar: PropTypes.node.isRequired,
+  sidebar: PropTypes.node,
 
   // boolean if sidebar should be docked
   docked: PropTypes.bool,
@@ -404,10 +404,7 @@ SidebarFixed.propTypes = {
   defaultSidebarWidth: PropTypes.number
 }
 
-const sidebarContent = <SidebarContent />
-
 SidebarFixed.defaultProps = {
-  sidebar: sidebarContent,
   docked: true,
   open: false,
   transitions: true,

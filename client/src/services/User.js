@@ -1,10 +1,11 @@
 import app from '../util/feathers'
 
-const UserService = app.service('users')
+export const SERVICE_NAME = 'users'
+export const Service = app.service(SERVICE_NAME)
 
-export const signup = (payload) => UserService.create(payload)
-export const find = (payload) => UserService.find(payload)
-export const get = (id) => UserService.get(id)
+export const signup = (payload) => Service.create(payload)
+export const find = (payload) => Service.find(payload)
+export const get = (id) => Service.get(id)
 
 // Auth
 

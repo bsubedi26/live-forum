@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import UserFormCreate from 'components/user/form/create'
+import UserFormCreate from 'components/Forms/user/create'
 import { FadeIn } from 'animate-css-styled-components'
 import { signup } from '../../services/User'
 import ReplaceIfAlertMessage from 'components/Alerts'
@@ -20,7 +20,6 @@ const Signup = ({ location, history }) => {
           <ReplaceIfAlertMessage message={alertMsg}>
             <h1 className='display-3'>Signup Below!</h1>
           </ReplaceIfAlertMessage>
-          {/* <p className='lead'>Join the community to access featured content and information.</p> */}
           <span>
               Already have an Account?
             <Link

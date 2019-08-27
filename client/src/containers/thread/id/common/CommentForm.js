@@ -1,17 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-const CommentForm = props => {
-  const { createComment, handleOnChange } = props;
-  return (
-    <div className="mt-3 card">
-      <form onSubmit={createComment} noValidate>
-        <textarea id="comment" onChange={handleOnChange} className="form-control" rows="2" placeholder="Comment..."></textarea>
-        <div className="card-footer text-muted">
-          <button className="btn btn-outline-info pointer">Submit</button>
-        </div>
-      </form>
-    </div>
-  )
-}
+const CommentForm = ({ onSubmit, onChange, value }) => (
+  <div className='mt-3 card'>
+    <form onSubmit={onSubmit}>
+      <textarea id='comment' onChange={onChange} value={value} className='form-control' rows='2' placeholder='Comment...' required />
+      <div className='card-footer text-muted'>
+        <button className='btn btn-outline-info pointer'>Submit</button>
+      </div>
+    </form>
+  </div>
+)
 
-export default CommentForm;
+export default CommentForm

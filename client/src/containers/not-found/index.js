@@ -12,7 +12,6 @@ const NotFound = () => {
           <hr className='my-4' />
           <p className='lead'>
             <Link to='/home' className='btn btn-outline-primary btn-lg pointer'>Go Home</Link>
-            {/* <button onClick={this.goBack.bind(this)} className="btn btn-outline-info btn-lg pointer mx-3">Go Back</button> */}
           </p>
         </div>
       </FadeIn>

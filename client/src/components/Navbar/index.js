@@ -2,9 +2,9 @@ import React from 'react'
 import { useGlobal } from 'reactn'
 import { Link, withRouter } from 'react-router-dom'
 
-import { LinkStyled, LinkActiveStyled } from './styled'
+import { LinkStyled, LinkActiveStyled } from 'components/Link'
 import Avatar from '../Avatar'
-import { logout } from 'services/User'
+import { User } from 'services'
 
 const navRoutes = [
   { label: 'home', route: '/home' },
@@ -17,7 +17,6 @@ const LoggedInLinks = ({ user, onLogout }) => (
   <ul className='navbar-nav mr-auto'>
     <li className='nav-item dropdown pointer'>
       <a className='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-        {/* <span>{user.email}</span> */}
         <Avatar avatar={user.avatar} />
       </a>
       <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
@@ -30,8 +29,8 @@ const LoggedInLinks = ({ user, onLogout }) => (
 const NotLoggedInLinks = () => {
   return (
     <div>
-      <Link to='/login' className='btn btn-outline-primary pointer mx-1 nav-user'><span>Login</span></Link>
       <Link to='/signup' className='btn btn-outline-info pointer mx-1 nav-user'><span>Signup</span></Link>
+      <Link to='/login' className='btn btn-outline-primary pointer mx-1 nav-user'><span>Login</span></Link>
     </div>
   )
 }
@@ -54,7 +53,7 @@ const NavbarCmp = ({ location, history }) => {
   const onLogout = async (e) => {
     e.preventDefault()
     setAuth({})
-    await logout()
+    await User.logout()
     history.push('/home')
   }
 

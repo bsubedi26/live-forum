@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import UserFormCreate from 'components/user/form/create'
+import UserFormCreate from 'components/Forms/user/create'
 import { signup } from 'services/User'
 
 const clientItems = [

@@ -6,10 +6,14 @@ import io from 'socket.io-client'
 
 // import fRest from '@feathersjs/client/dist/rest';
 // import axios from 'axios';
-import reduxifyAllServices, { requiresAuthServices } from './reduxServices'
-import { logger, reAuthenticate, updateAtDate } from './hooks'
+// import reduxifyAllServices, { requiresAuthServices } from './reduxServices'
+import reduxifyAllServices from './reduxServices'
+// import { logger, reAuthenticate, updateAtDate } from './hooks'
 
-const HOST = process.env.NODE_ENV === 'production' ? '//live-forums.herokuapp.com' : 'http://localhost:3030'
+const HOST = process.env.NODE_ENV === 'production'
+  ? process.env.PRODUCTION_API_URL
+  : 'http://localhost:3030'
+
 const socket = io(HOST)
 // const rest = fRest(HOST);
 const app = feathers()
@@ -28,21 +32,15 @@ app.io.on('connect_error', error => {
 
 // export const requiresAuthServices = ['threads', 'comments']
 
-export const publicServices = ['users', 'topics', 'blog']
+export const publicServices = ['users', 'topics']
 
 export { services }
 
 /**
  *  FEATHERS GLOBAL HOOKS
 */
-if (process.env.NODE_ENV === 'development') {
-  logger(app)
-} else {
-  // temporary console log override when in production
-  console.log = function () {}
-}
-
-reAuthenticate(app, requiresAuthServices)
-updateAtDate(app)
+// logger(app)
+// reAuthenticate(app, requiresAuthServices)
+// updateAtDate(app)
 
 export default app

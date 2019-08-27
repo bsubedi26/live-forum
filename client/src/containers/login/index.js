@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { FadeIn } from 'animate-css-styled-components'
 import { useGlobal } from 'reactn'
 
-import UserForm from 'components/user/form/create'
+import UserForm from 'components/Forms/user/create'
 import ReplaceIfAlertMessage from 'components/Alerts'
 import { get, authenticate, verifyToken } from '../../services/User'
 
@@ -20,9 +20,14 @@ const Login = ({ location, history }) => {
     const decodeToken = await verifyToken(accessToken)
     const user = await get(decodeToken.userId)
     setAuthState({ accessToken, decodeToken, user })
-    history.push('/home', { message: 'Login Successful.' })
+
+    history.push('/thread/1', { message: 'Login Successful.' })
+    // if (document.referrer !== '' && !document.referrer.includes('/signup')) {
+    //   history.go(-1)
+    // } else {
+    //   history.push('/threads', { message: 'Login Successful.' })
+    // }
   }
-  // const onFormSuccess = () => history.push('/thread/1', { message: 'Login Successful.' })
 
   return (
     <div className='mx-auto w-75'>

@@ -8,7 +8,7 @@ import ExploreSection from './common/ExploreSection'
 const HomePage = () => (
   <FadeIn>
     <HeaderSection />
-    <ExploreSection></ExploreSection>
+    <ExploreSection />
     {/* <CreateSection></CreateSection> */}
   </FadeIn>
 )

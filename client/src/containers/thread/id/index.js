@@ -1,108 +1,71 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import feathers, { services } from 'util/feathers';
-import CommentForm from './common/CommentForm';
-import CommentList from './common/CommentList';
-import SingleThread from './common/SingleThread';
+import React from 'react'
+import { useGlobal } from 'reactn'
+import CommentForm from './common/CommentForm'
+import SingleThread from './common/SingleThread'
+import CommentList from './common/CommentList'
+import { Thread, Comment } from 'services'
+import { fetchAndSet } from 'state'
+import Pagination from 'components/Pagination'
+import { getSlicedPages } from 'util/helpers'
 
-class ThreadDetailById extends React.Component {
-  state = {
+const ITEMS_PER_PAGE = 5
+
+const ThreadDetailById = ({ match }) => {
+  const [state, setState] = React.useState({
     comment: ''
-  }
-  
-  commentService = feathers.service('comments');
-  threadService = feathers.service('threads');
+  })
+  const [currentPage, setCurrentPage] = React.useState(1)
 
-  initListeners() {
-    const { dispatch } = this.props;
-
-    this.commentService.on('created', (data) => {
-      console.log('COMMENT:on::Created ', data);
-      dispatch({ type: 'SOCKET_COMMENTS_ON_CREATED', payload: data });
-    });
-
-    this.commentService.on('removed', (data) => {
-      console.log('COMMENT:on::Removed ', data);
-      dispatch({ type: 'SOCKET_COMMENTS_ON_REMOVED', payload: data });
-    });
-
-    this.commentService.on('patched', (data) => {
-      console.log('COMMENT:on::Patched ', data);
-      dispatch({ type: 'SOCKET_COMMENTS_ON_PATCHED', payload: data });
-    });
-
-    this.threadService.on('patched', (data) => {
-      console.log('THREAD:on::Patched ', data);
-      dispatch({ type: 'SOCKET_THREADS_ON_PATCHED', payload: data });
-    });
-
+  const onPaginationChange = (selected) => {
+    if (selected === 'previous') return setCurrentPage(currentPage - 1)
+    if (selected === 'next') return setCurrentPage(currentPage + 1)
+    return setCurrentPage(selected)
   }
 
-  componentWillUnmount() {
-    this.commentService.removeAllListeners("created");
-    this.commentService.removeAllListeners("removed");
-    this.commentService.removeAllListeners("patched");
+  const [auth] = useGlobal('auth')
+  const [thread, setThread] = useGlobal('thread')
 
-    this.threadService.removeAllListeners("patched");
+  React.useEffect(() => {
+    fetchAndSet(Thread.get, 'thread', match.params.threadId)
+  }, [match.params.threadId])
+
+  const onChange = ({ target }) => setState({ [target.id]: target.value })
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    const { comment } = state
+    const payload = { comment, thread_id: match.params.threadId, creator_id: auth.user.id }
+    const createdData = await Comment.create(payload)
+    setThread({
+      ...thread,
+      _comments: [createdData].concat(thread._comments)
+    })
+    setState({ comment: '' })
   }
 
-  componentDidMount() {
-    this.initListeners();
-  }
+  const hasComments = () => thread._comments && thread._comments.length > 0
 
-  handleOnChange = (e) => this.setState({ [e.target.id]: e.target.value });
+  return (
+    <div className='mx-auto w-75 mt-4'>
+      {Object.keys(thread).length > 0 ? <SingleThread {...{ auth, thread }} /> : null}
+      {auth.accessToken
+        ? <CommentForm onSubmit={onSubmit} onChange={onChange} value={state.comment} />
+        : <div className='pv2'><span>You <em>must</em> be signed in before posting a comment.</span></div>}
+      <hr />
+      {hasComments() ? <CommentList auth={auth} comments={getSlicedPages(thread._comments, { currentPage, ITEMS_PER_PAGE })} /> : null}
+      {hasComments()
+        ? (
+          <Pagination
+            totalPages={Math.ceil(thread._comments.length / ITEMS_PER_PAGE)}
+            itemsPerPage={ITEMS_PER_PAGE}
+            onPageChange={onPaginationChange}
+            onPageChangeFunc={setCurrentPage}
+            currentPage={currentPage}
+          />
+        ) : null}
 
-  createComment = async (e) => {
-    e.preventDefault();
-    const { dispatch, thread, auth } = this.props;
-    const { comment } = this.state;
-    const payload = { comment, thread_id: thread.id, creator_id: auth.id };
-
-    await dispatch(services.comments.create(payload));
-  }
-
-  renderCommentForm() {
-    const { auth } = this.props;
-    
-    if (auth.id) {
-      return (
-        <CommentForm createComment={this.createComment} handleOnChange={this.handleOnChange} />
-      )
-    }
-
-    return (
-      <div className="p-2">
-        <span>You <em>must</em> be signed in before posting a comment.</span>
-      </div>
-    )
-  }
-
-  render() {
-    const { thread, auth, dispatch } = this.props;
-    return (
-      <div className="mx-auto w-75 mt-4">
-
-        <SingleThread auth={auth} thread={thread} dispatch={dispatch} />
-
-        {this.renderCommentForm()}
-
-        <hr />
-        
-        <CommentList dispatch={dispatch} auth={auth} comments={thread._comments} />
-        {/* <PaginationList {...this.props} topicId={activeThread.topic} itemsPerPage={5} name="comments" data={thread._comments} auth={auth} /> */}
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
-const findById = (data, props) => {
-  const { id } = props.match.params;
-  return data.find(item => item.id === parseInt(id, 10));
-}
-
-const mapState = (state, props) => ({
-  thread: findById(state.threads.queryResult.data, props),
-  auth: state.auth
-})
-
-export default connect(mapState)(ThreadDetailById);
+export default ThreadDetailById

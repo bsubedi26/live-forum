@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const LinkStyled = styled(Link).attrs({
-  className: 'nav-link pointer mx-2 text-capitalize'
+  className: 'nav-link pointer mx-2 ttc'
 })``
 
 export const LinkActiveStyled = styled.div.attrs({

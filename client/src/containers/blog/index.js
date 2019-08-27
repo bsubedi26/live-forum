@@ -2,9 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { services } from 'util/feathers';
-import qs from 'query-string';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import './blog.css';
+
+const qs = {
+  parse(str = '') {
+    const output = str
+      .slice(1)
+      .split('&')
+      .reduce((acc, item) => {
+        const [key, value] = item.split('=')
+        acc[key] = value
+        return acc
+      }, {})
+
+    return output
+  }
+}
 
 class Blog extends React.Component {
   state = {

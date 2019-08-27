@@ -14,7 +14,7 @@ const SidebarContainer = (props) => {
 
   return (
     <div style={style}>
-      <SidebarContent />
+      <SidebarContent data={props.data} />
     </div>
   )
 }

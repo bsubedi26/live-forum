@@ -1,36 +1,30 @@
 import React from 'react'
-import { findByTopicId } from 'services/Thread'
+import { Link } from 'react-router-dom'
+import { useGlobal } from 'reactn'
+import { Topic } from 'services'
+import { fetchAndSet } from 'state'
 
-const style = {
-  container: {
-    backgroundColor: '#0f7844'
-  }
+const renderTopic = topic => {
+  return (
+    <Link key={topic.id} className='pa4 ma3 bg-moon-gray blue' to={`/thread/${topic.id}`}>
+      <h4 className='bodoni ttc'>{topic.name}</h4>
+    </Link>
+  )
 }
 
-const ThreadsList = ({ topic }) => {
-  const renderTopic = topic => {
-    return (
-      <div style={style.container} className='py-4'>
-        <div className='container text-white text-center'>
-          <h3 className='display-4'>{topic.display} Thread</h3>
-          <div className='p-2'>
-            <p className='lead'>
-              Currently viewing {topic.name}.
-            </p>
-          </div>
+const Topics = ({ topics }) => (
+  topics.map(renderTopic)
+)
 
-        </div>
-      </div>
-    )
-  }
-  const handleFind = async () => {
-    const response = await findByTopicId(1)
-    console.log('response: ', response)
-  }
+const ThreadsList = ({ topic }) => {
+  const [topics] = useGlobal('topics')
+  React.useEffect(() => {
+    fetchAndSet(Topic.find, 'topics')
+  }, [true])
+
   return (
-    <div>
-      {topic && topic.display ? this.renderTopic(topic) : null}
-      <button onClick={handleFind}>Go</button>
+    <div className='flex flex-wrap'>
+      {topics.length ? <Topics topics={topics} /> : <p>Loading...</p>}
     </div>
   )
 }

@@ -1,57 +1,45 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 
-class ModalForm extends React.Component {
-  
-  clearInputs() {
-    for (let input in this.refs) {
-      this.refs[input].value = "";
-    }
+const ModalForm = ({ inputs, onSubmit, toggleModal, title, showModal }) => {
+  const [formState, setState] = useState({})
+  const modalSubmit = (e) => {
+    e.preventDefault()
+    toggleModal()
+    return onSubmit(formState)
+    // return onSubmit()
   }
-
-  modalSubmit = (e) => {
-    e.preventDefault();
-    const { onSubmit, toggleModal } = this.props;
-    const results = {};
-
-    for (let input in this.refs) {
-      results[input] = this.refs[input].value;
-    }
-    toggleModal();
-    this.clearInputs();
-    return onSubmit(results);
-  }
-
-  renderFormGroup(inputs) {
-    return inputs.map((input, idx) => {
-      return (
-        <div key={idx} className="form-group">
-          <label htmlFor={input}>{input}</label>
-          <input ref={input} type="text" className="form-control" placeholder={input} />
-        </div>
-      )
+  const onChange = e => {
+    setState({
+      ...formState,
+      [e.target.id]: e.target.value
     })
   }
- 
-  render() {
-    const { showModal, toggleModal, title, inputs } = this.props;
 
-    return (
-      <div>
-        <Modal isOpen={showModal} toggle={toggleModal} className={this.props.className}>
-          <ModalHeader toggle={toggleModal}>{title}</ModalHeader>
-          <ModalBody>
-            <form onSubmit={this.modalSubmit}>
-              {this.renderFormGroup(inputs)}
-              <hr />
-              <button type="submit" className="btn btn-outline-primary btn-block pointer">Submit</button>
-            </form>
-          </ModalBody>
-        </Modal>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Modal isOpen={showModal} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>{title}</ModalHeader>
+        <ModalBody>
+          <form onSubmit={modalSubmit}>
+            {
+              inputs.map(({ label, value }, idx) => {
+                return (
+                  <div key={idx} className='form-group'>
+                    <label htmlFor={value}>{label}</label>
+                    <input id={value} type='text' className='form-control' placeholder={label} onChange={onChange} />
+                  </div>
+                )
+              })
+            }
+            <hr />
+            <button type='submit' className='btn btn-outline-primary btn-block pointer'>Submit</button>
+          </form>
+        </ModalBody>
+      </Modal>
+    </div>
+  )
 }
 
 ModalForm.propTypes = {
@@ -62,4 +50,4 @@ ModalForm.propTypes = {
   inputs: PropTypes.array.isRequired
 }
 
-export default ModalForm;
+export default ModalForm

@@ -9,7 +9,7 @@ const Footer = () => (
         <div className='row'>
           <div className='col'>
             <div className='py-4'>
-              <p className='text-right'>Copyright © 2018 <a rel='noopener noreferrer' target='_blank' href='//github.com/bsubedi26'>Bibek Subedi</a>
+              <p className='text-right'>Copyright © 2019 <a rel='noopener noreferrer' target='_blank' href='//github.com/bsubedi26'>Bibek Subedi</a>
                 {/* <button data-toggle="modal" data-target="#contactModal" className="btn btn-outline-primary mx-2 pointer">Contact Us</button> */}
               </p>
             </div>

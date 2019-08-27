@@ -1,5 +1,5 @@
-export { default as Scroller } from './scroller'
-export { default as BlogMain } from './blog'
+// export { default as Scroller } from './scroller'
+// export { default as BlogMain } from './blog'
 
 export { default as Home } from './home'
 export { default as Login } from './login'

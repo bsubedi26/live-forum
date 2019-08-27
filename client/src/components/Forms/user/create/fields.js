@@ -18,7 +18,6 @@ const ErrorField = ({ field }) => (
 
 const FormFields = (props) => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting } = props
-  // const btnClass = classNames('btn btn-outline-primary pointer', { 'btn-block': btnBlock, 'w-25': buttonWidth25 })
 
   return (
     <form onSubmit={handleSubmit} noValidate>
@@ -33,6 +32,7 @@ const FormFields = (props) => {
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.email}
+          autoFocus
         />
         {touched.email && errors.email && <ErrorField field={errors.email} />}
       </div>
