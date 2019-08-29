@@ -2,7 +2,7 @@ const createService = require('feathers-knex')
 const createModel = require('../../models/comments.model')
 const hooks = require('./comments.hooks')
 
-const name = 'movies'
+const name = 'comments'
 
 module.exports = function (app) {
   const Model = createModel(app)

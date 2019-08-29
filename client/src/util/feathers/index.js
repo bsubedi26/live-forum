@@ -8,7 +8,7 @@ import io from 'socket.io-client'
 // import axios from 'axios';
 // import reduxifyAllServices, { requiresAuthServices } from './reduxServices'
 import reduxifyAllServices from './reduxServices'
-// import { logger, reAuthenticate, updateAtDate } from './hooks'
+import { logger } from './hooks'
 
 const HOST = process.env.NODE_ENV === 'production'
   ? process.env.PRODUCTION_API_URL
@@ -39,7 +39,7 @@ export { services }
 /**
  *  FEATHERS GLOBAL HOOKS
 */
-// logger(app)
+logger(app)
 // reAuthenticate(app, requiresAuthServices)
 
 export default app

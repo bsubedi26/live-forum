@@ -8,6 +8,7 @@ import { Thread } from 'services'
 import Avatar from 'components/Avatar'
 import EditForm from 'components/Forms/thread/create'
 import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
+import { UserName } from 'components/User'
 
 const ThreadHeaderInfo = ({ thread }) => {
   const postDate = moment(thread.updated_at, 'YYYY-MM-DD HH:mm:ss').format('dddd MMM D YYYY h:mm A')
@@ -16,13 +17,14 @@ const ThreadHeaderInfo = ({ thread }) => {
       <div>
         {thread._creator.avatar ? <Avatar avatar={thread._creator.avatar} /> : null}
         <Title className='my-3'>Title: {thread.title}</Title>
-        <LineText className='my-2'>Posted By:{thread._creator.email}</LineText>
+        <LineText className='my-2'>Posted By: <UserName user={thread._creator} /></LineText>
       </div>
 
       <LineText className='pt-2'>
         <span className='mr-2'>{postDate}</span>
         <span className='mr-2'>-</span>
-        <span className='mr-2'>{thread._comments.length} comments</span>
+        {thread._comments && <span className='mr-2'>{thread._comments.length} comments</span>}
+
       </LineText>
     </>
   )
