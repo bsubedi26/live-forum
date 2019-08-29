@@ -1,6 +1,6 @@
 const createService = require('feathers-knex')
 const createModel = require('../../models/users_followers.model')
-const hooks = require('./hooks')
+const hooks = require('./users_followers.hooks')
 
 const name = 'users_followers'
 
