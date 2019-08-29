@@ -1,8 +1,8 @@
 const createService = require('feathers-knex')
-const createModel = require('../../models/topics.model')
-const hooks = require('./topics.hooks')
+const createModel = require('../../models/users_followers.model')
+const hooks = require('./hooks')
 
-const name = 'topics'
+const name = 'users_followers'
 
 module.exports = function (app) {
   const Model = createModel(app)

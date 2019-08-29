@@ -1,22 +1,24 @@
-// Initializes the `users` service on path `/users`
-const createService = require('feathers-objection')
+const createService = require('feathers-knex')
 const createModel = require('../../models/users.model')
 const hooks = require('./users.hooks')
 
+const name = 'users'
+
 module.exports = function (app) {
-  const model = createModel(app)
+  const Model = createModel(app)
   const paginate = app.get('paginate')
 
   const options = {
-    model,
+    name,
+    Model,
     paginate
   }
 
   // Initialize our service with any options it requires
-  app.use('/users', createService(options))
+  app.use(`/${name}`, createService(options))
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('users')
+  const service = app.service(name)
 
   service.hooks(hooks)
 }

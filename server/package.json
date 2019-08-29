@@ -53,6 +53,7 @@
     "cross-env": "^5.2.0",
     "feathers-authentication-hooks": "^0.3.1",
     "feathers-hooks-common": "^4.20.7",
+    "feathers-knex": "^6.0.2",
     "feathers-objection": "^2.0.1",
     "helmet": "^3.20.0",
     "identicon.js": "^2.3.3",

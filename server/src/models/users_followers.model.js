@@ -1,4 +1,4 @@
-const TABLE_NAME = 'comments'
+const TABLE_NAME = 'users_followers'
 
 module.exports = function (app) {
   const knex = app.get('knex')
@@ -6,11 +6,10 @@ module.exports = function (app) {
   knex.schema.hasTable(TABLE_NAME).then(exists => {
     if (!exists) {
       knex.schema.createTable(TABLE_NAME, table => {
-        table.increments('id').primary()
-        table.string('comment').notNullable()
+        table.increments('id')
 
-        table.integer('thread_id').unsigned().references('id').inTable('threads').onDelete('cascade')
-        table.integer('creator_id').unsigned().references('id').inTable('users').onDelete('cascade')
+        table.integer('follower_id').unsigned().references('users.id').onDelete('cascade')
+        table.integer('following_id').unsigned().references('users.id').onDelete('cascade')
 
         table.timestamps(true, true)
       })

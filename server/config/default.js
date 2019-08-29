@@ -6,11 +6,6 @@ module.exports = {
     default: 25,
     max: 50
   },
-  tests: {
-    environmentsAllowingSeedData: [
-      'seeding-data'
-    ]
-  },
   sqlite3: {
     client: 'sqlite3',
     connection: {

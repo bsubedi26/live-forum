@@ -1,31 +1,4 @@
-const { Model } = require('objection')
-
 const TABLE_NAME = 'threads'
-
-class Thread extends Model {
-  static get tableName () {
-    return TABLE_NAME
-  }
-
-  static get jsonSchema () {
-    return {
-      type: 'object',
-      required: ['title', 'summary'],
-      properties: {
-        title: { type: 'string' },
-        summary: { type: 'string' }
-      }
-    }
-  }
-
-  $beforeInsert () {
-    this.created_at = this.updated_at = new Date().toISOString()
-  }
-
-  $beforeUpdate () {
-    this.updated_at = new Date().toISOString()
-  }
-}
 
 module.exports = function (app) {
   const knex = app.get('knex')
@@ -36,8 +9,7 @@ module.exports = function (app) {
         table.increments('id').primary()
         table.string('title').notNullable()
         table.string('summary').notNullable()
-        table.timestamp('created_at')
-        table.timestamp('updated_at')
+        table.timestamps(true, true)
 
         table.integer('topic_id').unsigned().references('id').inTable('topics')
         table.integer('creator_id').unsigned().references('id').inTable('users').onDelete('cascade')
@@ -48,5 +20,5 @@ module.exports = function (app) {
   })
     .catch(e => console.error(`Error creating ${TABLE_NAME} table`, e))
 
-  return Thread
+  return knex
 }

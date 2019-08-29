@@ -17,8 +17,9 @@ const channels = require('./channels')
 const generatorSpecs = require('../feathers-gen-specs.json')
 
 const logger = require('./utils/logger')
-const objection = require('./utils/objection')
 const authentication = require('./utils/authentication')
+
+const knex = require('./knex')
 
 const app = express(feathers())
 
@@ -36,14 +37,13 @@ app.configure(configuration())
 // Load Feathers Core
 app.configure(express.rest())
 app.configure(authentication)
+app.configure(knex)
 app.configure(socketio({
   pingInterval: 10000,
   pingTimeout: 50000
 }))
-  .configure(objection)
   .configure(middleware)
   .configure(channels)
-  // .configure(authentication)
   .configure(services)
 
 // Load Final handlers

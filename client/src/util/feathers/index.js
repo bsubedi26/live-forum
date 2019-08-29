@@ -41,6 +41,5 @@ export { services }
 */
 // logger(app)
 // reAuthenticate(app, requiresAuthServices)
-// updateAtDate(app)
 
 export default app

@@ -1,22 +1,24 @@
-const createService = require('feathers-objection')
+const createService = require('feathers-knex')
 const createModel = require('../../models/threads.model')
 const hooks = require('./threads.hooks')
 
+const name = 'threads'
+
 module.exports = function (app) {
-  const model = createModel(app)
+  const Model = createModel(app)
   const paginate = app.get('paginate')
 
   const options = {
-    name: 'threads',
-    model,
+    name,
+    Model,
     paginate
   }
 
   // Initialize our service with any options it requires
-  app.use('/threads', createService(options))
+  app.use(`/${name}`, createService(options))
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('threads')
+  const service = app.service(name)
 
   service.hooks(hooks)
   service.publish(() => {
