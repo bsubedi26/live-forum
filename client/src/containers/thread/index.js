@@ -5,7 +5,6 @@ import ThreadList from './common/ThreadList'
 import SidebarFixed from 'components/sidebar'
 import ThreadHeader from './common/Header'
 import Pagination from 'components/Pagination'
-// import Toast from 'components/Toast'
 import { Thread, Topic } from 'services'
 import { fetchAndSet } from 'state'
 import { getSlicedPages } from 'util/helpers'
@@ -54,7 +53,6 @@ const ThreadPage = ({ match }) => {
               />
             ) : null
           }
-
           <Link to={`${match.url}/create`} className='pa2'>
             <button className='btn btn-outline-info pointer'>Create New Thread</button>
           </Link>

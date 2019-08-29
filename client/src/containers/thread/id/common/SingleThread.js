@@ -14,7 +14,7 @@ const ThreadHeaderInfo = ({ thread }) => {
   return (
     <>
       <div>
-        <Avatar avatar={thread._creator.avatar} />
+        {thread._creator.avatar ? <Avatar avatar={thread._creator.avatar} /> : null}
         <Title className='my-3'>Title: {thread.title}</Title>
         <LineText className='my-2'>Posted By:{thread._creator.email}</LineText>
       </div>

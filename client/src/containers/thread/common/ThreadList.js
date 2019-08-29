@@ -8,7 +8,7 @@ const ThreadList = ({ items }) => {
   return items.map(thread => (
     <div key={thread.id} className='list-group-item'>
       <div>
-        <Avatar style={{ float: 'left', marginRight: '8px' }} avatar={thread._creator.avatar} />
+        {thread._creator.avatar ? <Avatar style={{ float: 'left', marginRight: '8px' }} avatar={thread._creator.avatar} /> : null}
         <Link to={`/thread/${thread.topic_id}/individual/${thread.id}`}><Title className='text-left'>{thread.title}</Title></Link>
       </div>
       <LineText className='text-left'><strong>UserID: </strong> {thread.creator_id} - {thread._creator.email}</LineText>

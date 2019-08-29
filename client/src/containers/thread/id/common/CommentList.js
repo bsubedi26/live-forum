@@ -48,7 +48,7 @@ const CommentItem = ({ item, auth }) => {
   return (
     <div className='card'>
       <div className='card-header'>
-        <Avatar avatar={item._creator.avatar} />
+        {item._creator.avatar ? <Avatar avatar={item._creator.avatar} /> : null}
         <LineText className='my-2'>{item._creator.email}</LineText>
       </div>
 

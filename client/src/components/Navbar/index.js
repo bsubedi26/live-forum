@@ -17,7 +17,7 @@ const LoggedInLinks = ({ user, onLogout }) => (
   <ul className='navbar-nav mr-auto'>
     <li className='nav-item dropdown pointer'>
       <a className='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-        <Avatar avatar={user.avatar} />
+        {user.avatar ? <Avatar avatar={user.avatar} /> : null}
       </a>
       <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
         <a onClick={onLogout} className='dropdown-item'>Sign out</a>
