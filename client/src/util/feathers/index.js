@@ -1,10 +1,6 @@
 import feathers from '@feathersjs/client'
 import fReactive from 'feathers-reactive'
 
-// import feathers from '@feathersjs/client/dist/feathers.min'
-// import auth from '@feathersjs/client/dist/authentication.min'
-// import fSocketio from '@feathersjs/client/dist/socketio.min'
-
 import io from 'socket.io-client'
 import reduxifyAllServices from './reduxServices'
 import { logger } from './hooks'
