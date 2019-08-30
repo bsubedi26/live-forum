@@ -63,7 +63,6 @@ const ThreadDetailById = ({ match }) => {
             currentPage={currentPage}
           />
         ) : null}
-
     </div>
   )
 }

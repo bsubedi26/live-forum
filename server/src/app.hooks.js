@@ -1,6 +1,7 @@
 // Application hooks that run for every service
 // const { iff } = require('feathers-hooks-common')
 const colorlogger = require('./hooks/colorlogger')
+const setUpdatedAtColumn = require('./hooks/setUpdatedAtColumn')
 
 module.exports = {
   before: {
@@ -11,9 +12,10 @@ module.exports = {
     get: [],
     create: [],
     update: [
+      setUpdatedAtColumn
     ],
     patch: [
-      // iff((isRest()), preventChangeIfNoId())
+      setUpdatedAtColumn
     ],
     remove: [
     ]

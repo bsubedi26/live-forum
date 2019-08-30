@@ -1,22 +1,29 @@
-// Initializes the `movies` service on path `/movies`
-const createService = require('feathers-objection')
+const createService = require('feathers-knex')
 const createModel = require('../../models/movies.model')
 const hooks = require('./movies.hooks')
+
+const name = 'movies'
 
 module.exports = function (app) {
   const Model = createModel(app)
   const paginate = app.get('paginate')
 
   const options = {
-    model: Model,
+    name,
+    Model,
     paginate
   }
 
-  // Initialize our service with any options it requires
-  app.use('/movies', createService(options))
+  app.use(`/${name}`, createService(options))
 
-  // Get our initialized service so that we can register hooks and filters
-  const service = app.service('movies')
+  const service = app.service(name)
 
   service.hooks(hooks)
+  try {
+    service.publish((d) => {
+      return app.channel(['authenticated', 'anonymous'])
+    })
+  } catch (err) {
+    console.log('err: ', err)
+  }
 }

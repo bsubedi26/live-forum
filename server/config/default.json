@@ -1,0 +1,41 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 25,
+    "max": 50
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "iB/fFmg37SruKVBBF/FXZp00xr8=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "sqlite3": {
+    "client": "sqlite3",
+    "connection": {
+      "filename": "./db2.sqlite"
+    }
+  },
+  "mysql": {
+		"client": "mysql2",
+		"connection": "mysql://root:root@localhost:3306/live_forum_db"
+	}
+}

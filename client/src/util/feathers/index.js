@@ -1,25 +1,20 @@
-import feathers from '@feathersjs/client/dist/feathers.min'
-import auth from '@feathersjs/client/dist/authentication.min'
-import fSocketio from '@feathersjs/client/dist/socketio.min'
+import feathers from '@feathersjs/client'
+import fReactive from 'feathers-reactive'
 
 import io from 'socket.io-client'
-
-// import fRest from '@feathersjs/client/dist/rest';
-// import axios from 'axios';
-// import reduxifyAllServices, { requiresAuthServices } from './reduxServices'
 import reduxifyAllServices from './reduxServices'
-// import { logger, reAuthenticate, updateAtDate } from './hooks'
+import { logger } from './hooks'
 
-const HOST = process.env.NODE_ENV === 'production'
-  ? process.env.PRODUCTION_API_URL
-  : 'http://localhost:3030'
+const HOST = 'http://localhost:3030'
 
 const socket = io(HOST)
-// const rest = fRest(HOST);
+
 const app = feathers()
-  .configure(fSocketio(socket))
-  // .configure(rest.axios(axios))
-  .configure(auth({
+  .configure(feathers.socketio(socket))
+  .configure(fReactive({
+    idField: 'id'
+  }))
+  .configure(feathers.authentication({
     storage: window.localStorage
   }))
 
@@ -39,8 +34,7 @@ export { services }
 /**
  *  FEATHERS GLOBAL HOOKS
 */
-// logger(app)
+logger(app)
 // reAuthenticate(app, requiresAuthServices)
-// updateAtDate(app)
 
 export default app

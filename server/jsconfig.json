@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+      "baseUrl": "./src",
+      "checkJs": true
+  },
+  "typeAcquisition": {
+    "enable": true
+  },
+  "exclude": [
+      "node_modules"
+  ],
+  "include": [
+    "src/**/*"
+  ]
+}

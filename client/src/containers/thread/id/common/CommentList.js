@@ -5,6 +5,7 @@ import { FadeIn } from 'animate-css-styled-components'
 import Avatar from 'components/Avatar'
 import moment from 'moment'
 import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
+import { UserName } from 'components/User'
 import { Comment } from 'services'
 
 const EditForm = ({ comment, setComment, handleEdit }) => {
@@ -48,15 +49,15 @@ const CommentItem = ({ item, auth }) => {
   return (
     <div className='card'>
       <div className='card-header'>
-        <Avatar avatar={item._creator.avatar} />
-        <LineText className='my-2'>{item._creator.email}</LineText>
+        {item._creator.avatar ? <Avatar avatar={item._creator.avatar} /> : null}
+        <LineText className='my-2'> <UserName user={item._creator} /></LineText>
       </div>
 
       <div className='text-center'>
         <p className='mt-2'>
           {item.comment}
         </p>
-        <LineText><strong>UserID: </strong> {item._creator.id} - {item._creator.email}</LineText>
+        <LineText><strong>UserID: </strong> {item._creator.id} - <UserName user={item._creator} /></LineText>
         <LineText>
           <span className='mr-2'>{commentDate}</span>
         </LineText>
