@@ -1,9 +1,9 @@
-const { Model } = require('objection')
+const knex = require('knex')
 
 module.exports = function (app) {
-  // const { client, connection } = app.get('mysql')
   const { client, connection } = app.get('sqlite3')
-  const knexConfig = {
+  // const { client, connection } = app.get('mysql')
+  const config = {
     client,
     connection,
     useNullAsDefault: true,
@@ -13,8 +13,7 @@ module.exports = function (app) {
       }
     }
   }
-  const knex = require('knex')(knexConfig)
+  const db = knex(config)
 
-  Model.knex(knex)
-  app.set('knex', knex)
+  app.set('knex', db)
 }

@@ -1,8 +1,8 @@
 const createService = require('feathers-knex')
-const createModel = require('../../models/comments.model')
-const hooks = require('./comments.hooks')
+const createModel = require('../../models/users_followers.model')
+const hooks = require('./users_followers.hooks')
 
-const name = 'comments'
+const name = 'users_followers'
 
 module.exports = function (app) {
   const Model = createModel(app)
@@ -21,6 +21,4 @@ module.exports = function (app) {
   const service = app.service(name)
 
   service.hooks(hooks)
-
-  app.publish(() => app.channel('authenticated', 'anonymous'))
 }

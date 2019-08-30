@@ -28,7 +28,7 @@ node_modules
 .lock-wscript
 
 # IDEs and editors (shamelessly copied from @angular/cli's .gitignore)
-.idea/
+/.idea
 .project
 .classpath
 .c9/
@@ -38,7 +38,6 @@ node_modules
 
 # IDE - VSCode
 .vscode/*
-!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
@@ -107,12 +106,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-### Language ###
-# TypeScript
-compiled/
-
 # Others
 lib/
 data/
-.env
-.DS_Store
