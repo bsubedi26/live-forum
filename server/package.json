@@ -14,10 +14,11 @@
   "bugs": {},
   "directories": {
     "lib": "src",
-    "test": "test/"
+    "test": "test/",
+    "config": "config/"
   },
   "engines": {
-    "node": "^10.0.0",
+    "node": "^12.0.0",
     "npm": ">= 3.0.0"
   },
   "standard": {
@@ -30,46 +31,38 @@
   },
   "scripts": {
     "test": "NODE_ENV=development jest",
-    "test:all": "npm run lint && cross-env NODE_ENV=y npm run mocha",
     "lint": "node_modules/.bin/standard",
     "dev": "nodemon src/",
     "dev:seed": "nodemon src/ --seed",
     "start": "node src/",
-    "start:seed": "cross-env NODE_ENV=y node src/ --seed",
-    "mocha": "mocha test/ --recursive --exit --timeout 10000"
+    "jest": "jest  --forceExit"
   },
   "dependencies": {
-    "@feathers-plus/test-utils": "^0.3.6",
-    "@feathersjs/authentication": "^2.1.16",
-    "@feathersjs/authentication-jwt": "^2.0.10",
-    "@feathersjs/authentication-local": "^1.2.9",
-    "@feathersjs/configuration": "^2.0.6",
-    "@feathersjs/errors": "^3.3.6",
-    "@feathersjs/express": "^1.3.1",
-    "@feathersjs/feathers": "^3.3.1",
-    "@feathersjs/socketio": "^3.2.9",
+    "@feathersjs/authentication": "^4.3.0",
+    "@feathersjs/authentication-local": "^4.3.0",
+    "@feathersjs/authentication-oauth": "^4.3.0",
+    "@feathersjs/configuration": "^4.3.0",
+    "@feathersjs/errors": "^4.3.0",
+    "@feathersjs/express": "^4.3.0",
+    "@feathersjs/feathers": "^4.3.0",
+    "@feathersjs/socketio": "^4.3.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "cross-env": "^5.2.0",
     "feathers-authentication-hooks": "^0.3.1",
     "feathers-hooks-common": "^4.20.7",
     "feathers-knex": "^6.0.2",
-    "feathers-objection": "^2.0.1",
-    "helmet": "^3.20.0",
+    "helmet": "^3.20.1",
     "identicon.js": "^2.3.3",
-    "knex": "^0.19.2",
-    "lodash.merge": "^4.6.2",
-    "mysql2": "^1.6.5",
-    "objection": "^1.6.9",
+    "knex": "^0.19.3",
+    "lodash": "^4.17.15",
     "serve-favicon": "^2.5.0",
     "sqlite3": "^4.1.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "axios": "^0.19.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.1",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "standard": "^14.0.2"
+    "standard": "^14.1.0"
   }
 }

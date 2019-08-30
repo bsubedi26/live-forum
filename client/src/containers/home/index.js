@@ -7,20 +7,24 @@ import ExploreSection from './common/ExploreSection'
 // import CreateSection from './common/CreateSection'
 
 const HomePage = () => {
+  app.service('movies')
+    .on('created', data => {
+      console.log('onCreated: ', data)
+    })
   app.service('movies').watch()
     .find().subscribe(data => {
-      console.log('data: ', data)
+      console.log('rxjs subscribe find: ', data)
     })
 
-  const cr = async () => {
-    const res = await app.service('movies').create({ text: 'ww' })
+  const create = async () => {
+    const res = await app.service('movies').create({ text: 'creating' })
     console.log('res: ', res)
   }
 
   return (
     <FadeIn>
+      {/* <button onClick={() => create()}>Create</button> */}
       <HeaderSection />
-      <button onClick={() => cr()}>CAC</button>
       <ExploreSection />
       {/* <CreateSection></CreateSection> */}
     </FadeIn>

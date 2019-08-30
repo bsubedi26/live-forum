@@ -1,10 +1,11 @@
-import feathers from '@feathersjs/client/dist/feathers.min'
-import auth from '@feathersjs/client/dist/authentication.min'
-import fSocketio from '@feathersjs/client/dist/socketio.min'
+import feathers from '@feathersjs/client'
 import fReactive from 'feathers-reactive'
 
-import io from 'socket.io-client'
+// import feathers from '@feathersjs/client/dist/feathers.min'
+// import auth from '@feathersjs/client/dist/authentication.min'
+// import fSocketio from '@feathersjs/client/dist/socketio.min'
 
+import io from 'socket.io-client'
 import reduxifyAllServices from './reduxServices'
 import { logger } from './hooks'
 
@@ -13,11 +14,11 @@ const HOST = 'http://localhost:3030'
 const socket = io(HOST)
 
 const app = feathers()
-  .configure(fSocketio(socket))
+  .configure(feathers.socketio(socket))
   .configure(fReactive({
     idField: 'id'
   }))
-  .configure(auth({
+  .configure(feathers.authentication({
     storage: window.localStorage
   }))
 

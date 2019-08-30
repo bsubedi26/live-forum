@@ -5,7 +5,7 @@ import { useGlobal } from 'reactn'
 
 import UserForm from 'components/Forms/user/create'
 import ReplaceIfAlertMessage from 'components/Alerts'
-import { get, authenticate, verifyToken } from '../../services/User'
+import { authenticate } from '../../services/User'
 
 const initialValues = {
   email: '',
@@ -16,17 +16,9 @@ const initialValues = {
 const Login = ({ location, history }) => {
   const [, setAuthState] = useGlobal('auth')
   const alertMsg = location.state && location.state.message
-  const onFormSuccess = async ({ accessToken }) => {
-    const decodeToken = await verifyToken(accessToken)
-    const user = await get(decodeToken.userId)
-    setAuthState({ accessToken, decodeToken, user })
-
+  const onFormSuccess = async ({ accessToken, user, authentication }) => {
+    setAuthState({ accessToken, user, authentication })
     history.push('/thread/1', { message: 'Login Successful.' })
-    // if (document.referrer !== '' && !document.referrer.includes('/signup')) {
-    //   history.go(-1)
-    // } else {
-    //   history.push('/threads', { message: 'Login Successful.' })
-    // }
   }
 
   return (
