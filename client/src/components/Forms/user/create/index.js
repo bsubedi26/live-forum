@@ -4,8 +4,8 @@ import { Formik } from 'formik'
 import FormFields from './fields'
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required(), // .email()
-  password: Yup.string().required()
+  email: Yup.string().required('Email is a required field'), // .email()
+  password: Yup.string().required('Password is a required field')
 })
 
 const onSubmit = (handleSubmit, handleSuccess) => async (data, Form) => {

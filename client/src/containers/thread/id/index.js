@@ -3,9 +3,9 @@ import { useGlobal } from 'reactn'
 import CommentForm from './common/CommentForm'
 import SingleThread from './common/SingleThread'
 import CommentList from './common/CommentList'
+import Pagination, { getSlicedPages } from 'components/Pagination'
 import { Thread, Comment } from 'services'
 import { fetchAndSet } from 'state'
-import Pagination, { getSlicedPages } from 'components/Pagination'
 
 const ITEMS_PER_PAGE = 5
 

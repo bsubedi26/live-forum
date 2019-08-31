@@ -55,6 +55,7 @@
     "identicon.js": "^2.3.3",
     "knex": "^0.19.3",
     "lodash": "^4.17.15",
+    "pg": "^7.12.1",
     "serve-favicon": "^2.5.0",
     "sqlite3": "^4.1.0",
     "winston": "^3.2.1"

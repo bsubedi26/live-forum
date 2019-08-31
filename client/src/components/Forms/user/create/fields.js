@@ -48,7 +48,7 @@ const FormFields = (props) => {
           onBlur={handleBlur}
           value={values.password}
         />
-        {touched.email && errors.email && <ErrorField field={errors.password} />}
+        {touched.password && errors.password && <ErrorField field={errors.password} />}
       </div>
 
       <button type='submit' disabled={isSubmitting} className='bw0 br2 pa3 black fw1 tc ttu tracked'>
