@@ -5,8 +5,7 @@ import SingleThread from './common/SingleThread'
 import CommentList from './common/CommentList'
 import { Thread, Comment } from 'services'
 import { fetchAndSet } from 'state'
-import Pagination from 'components/Pagination'
-import { getSlicedPages } from 'util/helpers'
+import Pagination, { getSlicedPages } from 'components/Pagination'
 
 const ITEMS_PER_PAGE = 5
 

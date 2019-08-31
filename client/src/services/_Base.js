@@ -8,7 +8,7 @@ function getCrudFunctions (Service) {
   }
 }
 
-function BaseCrud ({ Service, SERVICE_NAME, ...childFunctions }) {
+function BaseCrud ({ Service, ...childFunctions }) {
   const withCrudFunctions = {
     ...Service,
     ...getCrudFunctions(Service),

@@ -4,10 +4,9 @@ import { useGlobal } from 'reactn'
 import ThreadList from './common/ThreadList'
 import SidebarFixed from 'components/sidebar'
 import ThreadHeader from './common/Header'
-import Pagination from 'components/Pagination'
+import Pagination, { getSlicedPages } from 'components/Pagination'
 import { Thread, Topic } from 'services'
 import { fetchAndSet } from 'state'
-import { getSlicedPages } from 'util/helpers'
 
 const ITEMS_PER_PAGE = 6
 

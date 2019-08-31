@@ -12,7 +12,8 @@ const initialState = {
   comments: {},
   topics: [],
   topic: {},
-  blog: {}
+  blog: {},
+  movies: []
 }
 
 export const fetchAndSet = (fetchFunc, stateKey, fetchFuncOption) => {

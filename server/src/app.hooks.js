@@ -17,8 +17,7 @@ module.exports = {
     patch: [
       setUpdatedAtColumn
     ],
-    remove: [
-    ]
+    remove: []
   },
 
   after: {

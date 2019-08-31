@@ -20,7 +20,7 @@ const ThreadsList = ({ topic }) => {
   const [topics] = useGlobal('topics')
   React.useEffect(() => {
     fetchAndSet(Topic.find, 'topics')
-  }, [true])
+  }, [])
 
   return (
     <div className='flex flex-wrap'>

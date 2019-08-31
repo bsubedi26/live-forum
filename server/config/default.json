@@ -31,7 +31,7 @@
   "sqlite3": {
     "client": "sqlite3",
     "connection": {
-      "filename": "./db2.sqlite"
+      "filename": "./db3.sqlite"
     }
   },
   "mysql": {

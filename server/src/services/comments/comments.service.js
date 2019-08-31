@@ -22,5 +22,5 @@ module.exports = function (app) {
 
   service.hooks(hooks)
 
-  app.publish(() => app.channel('authenticated', 'anonymous'))
+  service.publish(data => app.channel(['authenticated', 'anonymous']))
 }

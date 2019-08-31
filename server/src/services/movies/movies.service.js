@@ -19,11 +19,5 @@ module.exports = function (app) {
   const service = app.service(name)
 
   service.hooks(hooks)
-  try {
-    service.publish((d) => {
-      return app.channel(['authenticated', 'anonymous'])
-    })
-  } catch (err) {
-    console.log('err: ', err)
-  }
+  service.publish(data => app.channel(['authenticated', 'anonymous']))
 }

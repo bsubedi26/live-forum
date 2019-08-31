@@ -4,14 +4,6 @@ function createModel (app) {
   const knex = app.get('knex')
 
   knex.schema.hasTable(TABLE_NAME).then(exists => {
-    // if (exists) {
-    //   knex.schema.table(TABLE_NAME, table => {
-    //     table.boolean('active').defaultTo(true)
-    //     table.string('roles').defaultTo('member')
-    //   })
-    //     .then(() => console.log(`Created ${TABLE_NAME} table`))
-    //     .catch(e => console.error(`Error creating ${TABLE_NAME} table`, e))
-    // }
     if (!exists) {
       knex.schema.createTable(TABLE_NAME, table => {
         table.increments('id')
@@ -21,6 +13,8 @@ function createModel (app) {
 
         table.string('avatar')
         table.integer('login_attempts').defaultTo(4)
+        table.boolean('active').defaultTo(true)
+        table.string('roles').defaultTo('member')
 
         table.timestamps(true, true)
       })

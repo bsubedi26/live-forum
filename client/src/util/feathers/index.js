@@ -1,8 +1,6 @@
 import feathers from '@feathersjs/client'
 import fReactive from 'feathers-reactive'
-
 import io from 'socket.io-client'
-import reduxifyAllServices from './reduxServices'
 import { logger } from './hooks'
 
 const HOST = 'http://localhost:3030'
@@ -18,23 +16,14 @@ const app = feathers()
     storage: window.localStorage
   }))
 
-const services = reduxifyAllServices(app)
-
 app.io.on('connect_error', error => {
   console.log('Cannot connect to server using sockets. Closing connection... ', error)
   app.io.close()
 })
 
-// export const requiresAuthServices = ['threads', 'comments']
-
-export const publicServices = ['users', 'topics']
-
-export { services }
-
 /**
  *  FEATHERS GLOBAL HOOKS
 */
 logger(app)
-// reAuthenticate(app, requiresAuthServices)
 
 export default app

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import { useGlobal } from 'reactn'
 import { Link, withRouter } from 'react-router-dom'
@@ -16,7 +17,7 @@ const navRoutes = [
 const LoggedInLinks = ({ user, onLogout }) => (
   <ul className='navbar-nav mr-auto'>
     <li className='nav-item dropdown pointer'>
-      <a className='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+      <a className='nav-link dropdown-toggle' id='navbarDropdown' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
         {user.avatar ? <Avatar avatar={user.avatar} /> : null}
       </a>
       <div className='dropdown-menu' aria-labelledby='navbarDropdown'>

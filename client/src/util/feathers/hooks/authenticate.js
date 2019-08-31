@@ -6,11 +6,10 @@
  */
 
 export default function reAuthenticate (app, requiresAuthServices) {
+  const requiresAuthMethods = ['create', 'update', 'patch', 'remove']
   app.hooks({
     before: {
       all: async hook => {
-        const requiresAuthMethods = ['create', 'update', 'patch', 'remove']
-
         if (requiresAuthServices.includes(hook.path) && requiresAuthMethods.includes(hook.method)) {
           // console.log('Requires Auth for service: ', hook.path, hook.method);
           await app.authenticate()
