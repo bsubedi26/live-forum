@@ -10,7 +10,9 @@ import {
   ThreadPage,
   ThreadCreatePage,
   ThreadDetailById,
-  NotFoundPage
+  NotFoundPage,
+  ChannelsPage,
+  ChannelById
 } from 'containers'
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -43,6 +45,10 @@ const Routes = () => {
       <Route exact path='/thread/:topicId' component={ThreadPage} />
       <Route exact path='/thread/:topicId/individual/:threadId' component={ThreadDetailById} />
       <Route exact path='/thread/:topicId/create' component={ThreadCreatePage} />
+
+      {/* CHANNELS */}
+      <Route exact path='/channels' component={ChannelsPage} />
+      <Route exact path='/channels/:id' component={ChannelById} />
 
       {/* 404 & Redirects */}
       <Redirect exact from='/' to='/home' />

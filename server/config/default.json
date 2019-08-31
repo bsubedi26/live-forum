@@ -37,5 +37,9 @@
   "mysql": {
 		"client": "mysql2",
 		"connection": "mysql://root:root@localhost:3306/live_forum_db"
+  },
+  "pg": {
+		"client": "pg",
+		"connection": "postgres://postgres:root@localhost:5432/live_forum_db"
 	}
 }

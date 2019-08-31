@@ -1,5 +1,6 @@
 import { setGlobal } from 'reactn'
 import addReactNDevTools from 'reactn-devtools' // needs redux dep
+import './reducers'
 
 addReactNDevTools()
 
@@ -16,6 +17,10 @@ const initialState = {
   movies: []
 }
 
+const setGlobalState = () => (
+  setGlobal(initialState)
+)
+
 export const fetchAndSet = (fetchFunc, stateKey, fetchFuncOption) => {
   setGlobal(
     fetchFunc(fetchFuncOption)
@@ -27,9 +32,5 @@ export const fetchAndSet = (fetchFunc, stateKey, fetchFuncOption) => {
       .catch(err => ({ error: err }))
   )
 }
-
-const setGlobalState = () => (
-  setGlobal(initialState)
-)
 
 export default setGlobalState

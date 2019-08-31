@@ -46,7 +46,7 @@ ModalForm.propTypes = {
   title: PropTypes.string.isRequired,
   toggleModal: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
+  showModal: PropTypes.bool,
   inputs: PropTypes.array.isRequired
 }
 

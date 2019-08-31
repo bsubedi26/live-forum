@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import Routes from './Routes'
-import FeathersListener from 'util/feathers/EventListener'
+import FeathersEventListener from 'util/feathers/EventListener'
+import FeathersAuthListener from 'util/feathers/AuthListener'
 import Navbar from 'components/Navbar'
-// import Footer from 'components/Footer'
 
 const WholePageWrapper = styled.div`
   text-align: center;
@@ -14,16 +14,16 @@ const RouteWrapper = styled.div`
   text-align: center;
 `
 
-export default () => (
-  <WholePageWrapper>
-    {/* LISTENERS */}
-    <FeathersListener />
-    {/* PAGE VIEW */}
-    <Navbar />
-    <RouteWrapper>
-      {/* DYNAMIC ROUTES */}
-      <Routes />
-    </RouteWrapper>
-    {/* <Footer /> */}
-  </WholePageWrapper>
-)
+export default () => {
+  return (
+    <WholePageWrapper>
+      {/* Listeners - does not render anything */}
+      <FeathersAuthListener />
+      <FeathersEventListener />
+      <Navbar />
+      <RouteWrapper>
+        <Routes />
+      </RouteWrapper>
+    </WholePageWrapper>
+  )
+}

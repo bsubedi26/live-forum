@@ -43,7 +43,7 @@ const onUpdated = ({ state, setGlobal, service }) => data => {
   }
 }
 
-const FeathersListener = () => {
+export default () => {
   const [state, setGlobal] = useGlobal()
   useEffect(() => {
     const addEventListeners = (state, setGlobal) => {
@@ -60,5 +60,3 @@ const FeathersListener = () => {
 
   return null
 }
-
-export default FeathersListener
