@@ -1,2 +1,2 @@
 export { default as logger } from './logger'
-export { default as reAuthenticate } from './reAuthenticate'
+export { default as authenticate } from './authenticate'

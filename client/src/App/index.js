@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Routes from './Routes'
+import FeathersListener from 'util/feathers/EventListener'
 import Navbar from 'components/Navbar'
 // import Footer from 'components/Footer'
 
@@ -15,8 +16,12 @@ const RouteWrapper = styled.div`
 
 export default () => (
   <WholePageWrapper>
+    {/* LISTENERS */}
+    <FeathersListener />
+    {/* PAGE VIEW */}
     <Navbar />
     <RouteWrapper>
+      {/* DYNAMIC ROUTES */}
       <Routes />
     </RouteWrapper>
     {/* <Footer /> */}

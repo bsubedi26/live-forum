@@ -19,4 +19,5 @@ module.exports = function (app) {
   const service = app.service(name)
 
   service.hooks(hooks)
+  service.publish(data => app.channel(['authenticated', 'anonymous']))
 }
