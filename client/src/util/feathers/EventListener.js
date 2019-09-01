@@ -1,8 +1,7 @@
 /* eslint-disable */
 import { useEffect } from 'react'
 import { useGlobal } from 'reactn'
-import Services from '../../services'
-console.log('Services: ', Services);
+import Services from './Services'
 
 const onCreated = ({ state, setGlobal, service }) => data => {
   console.log(`${service.path}: created: `, data)
@@ -47,16 +46,16 @@ const onUpdated = ({ state, setGlobal, service }) => data => {
 export default () => {
   const [state, setGlobal] = useGlobal()
   useEffect(() => {
-    // const addEventListeners = (state, setGlobal) => {
-    //   for (var serviceName in Services) {
-    //     const service = Services[serviceName]
-    //     service.on('created', onCreated({ state, setGlobal, service }))
-    //     service.on('removed', onRemoved({ state, setGlobal, service }))
-    //     service.on('patched', onPatched({ state, setGlobal, service }))
-    //     service.on('updated', onUpdated({ state, setGlobal, service }))
-    //   }
-    // }
-    // addEventListeners(state, setGlobal)
+    const addEventListeners = (state, setGlobal) => {
+      for (var serviceName in Services) {
+        const service = Services[serviceName]
+        service.on('created', onCreated({ state, setGlobal, service }))
+        service.on('removed', onRemoved({ state, setGlobal, service }))
+        service.on('patched', onPatched({ state, setGlobal, service }))
+        service.on('updated', onUpdated({ state, setGlobal, service }))
+      }
+    }
+    addEventListeners(state, setGlobal)
   }, [])
 
   return null

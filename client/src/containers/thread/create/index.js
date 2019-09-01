@@ -1,7 +1,7 @@
 import React from 'react'
 import { useGlobal } from 'reactn'
 import CreateThreadForm from 'components/Forms/thread/create'
-import Services from 'services'
+import Services from 'util/feathers/Services'
 import Alerts from 'components/Alerts'
 
 const ThreadCreatePage = ({ match }) => {

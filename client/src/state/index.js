@@ -12,7 +12,8 @@ const initialState = {
   thread: {},
   comments: {},
   topics: [],
-  topic: {}
+  topic: {},
+  movies: []
 }
 
 const setGlobalState = () => (

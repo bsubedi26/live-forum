@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import ModalForm from '../ModalForm'
 import { LinkStyled, LinkActiveStyled } from 'components/Link'
-import Services from 'services'
+import Services from 'util/feathers/Services'
 
 const SidebarContent = ({ data, location }) => {
   const [state, setState] = React.useState({

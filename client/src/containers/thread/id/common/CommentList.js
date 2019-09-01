@@ -6,7 +6,7 @@ import Avatar from 'components/Avatar'
 import moment from 'moment'
 import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
 import { UserName } from 'components/User'
-import Services from 'services'
+import Services from 'util/feathers/Services'
 
 const EditForm = ({ comment, setComment, handleEdit }) => {
   return (

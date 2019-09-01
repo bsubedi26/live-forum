@@ -4,7 +4,7 @@ import CommentForm from './common/CommentForm'
 import SingleThread from './common/SingleThread'
 import CommentList from './common/CommentList'
 import Pagination, { getSlicedPages } from 'components/Pagination'
-import Services from 'services'
+import Services from 'util/feathers/Services'
 
 const ITEMS_PER_PAGE = 5
 
@@ -26,12 +26,11 @@ const ThreadDetailById = ({ match }) => {
   React.useEffect(() => {
     const fetchData = async (threadId) => {
       const data = await Services.Thread.get(threadId)
-
       setThread(data)
     }
 
     fetchData(match.params.threadId)
-  }, [match.params.threadId])
+    }, [match.params.threadId]) // eslint-disable-line
 
   const onChange = ({ target }) => setState({ [target.id]: target.value })
 

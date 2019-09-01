@@ -5,7 +5,7 @@ import ThreadList from './common/ThreadList'
 import SidebarFixed from 'components/sidebar'
 import ThreadHeader from './common/Header'
 import Pagination, { getSlicedPages } from 'components/Pagination'
-import Services from 'services'
+import Services from 'util/feathers/Services'
 
 const ITEMS_PER_PAGE = 6
 
@@ -20,7 +20,11 @@ const ThreadPage = ({ match }) => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const { data: topicData } = await Services.Topic.find()
+      const { data: topicData } = await Services.Topic.find({
+        query: {
+          $sort: { updated_at: 1 }
+        }
+      })
       const { data: threadData } = await Services.Thread.find({
         query: {
           topic_id: topicId
@@ -31,7 +35,7 @@ const ThreadPage = ({ match }) => {
       setTopics(topicData)
     }
     fetchData()
-  }, [topicId])
+  }, [topicId]) // eslint-disable-line
 
   const onPaginationChange = (selected) => {
     if (selected === 'previous') return setCurrentPage(currentPage - 1)

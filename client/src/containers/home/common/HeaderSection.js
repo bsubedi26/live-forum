@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import UserFormCreate from 'components/Forms/user/create'
-import Services from 'services'
+import Services from 'util/feathers/Services'
 const { User } = Services
 
 const clientItems = [

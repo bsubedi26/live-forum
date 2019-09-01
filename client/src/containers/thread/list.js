@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useGlobal } from 'reactn'
-import Services from 'services'
+import Services from 'util/feathers/Services'
 
 const renderTopic = topic => {
   return (
@@ -19,13 +19,12 @@ const ThreadsList = ({ topic }) => {
   const [topics, setTopics] = useGlobal('topics')
   React.useEffect(() => {
     const fetchData = async () => {
-      console.log('setTopics: ', setTopics)
       const { data } = await Services.Topic.find()
 
       setTopics(data)
     }
     fetchData()
-  }, [])
+  }, []) // eslint-disable-line
 
   return (
     <div className='flex flex-wrap'>

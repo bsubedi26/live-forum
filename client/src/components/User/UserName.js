@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGlobal } from 'reactn'
-import Services from 'services'
+import Services from 'util/feathers/Services'
 
 export default ({ user = {} }) => {
   const [auth] = useGlobal('auth')
