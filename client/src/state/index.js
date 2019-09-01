@@ -1,7 +1,7 @@
 import { setGlobal } from 'reactn'
-import addReactNDevTools from 'reactn-devtools' // needs redux as dev dep
 import './reducers'
 
+import addReactNDevTools from 'reactn-devtools' // needs redux as dev dep
 addReactNDevTools()
 
 const initialState = {
@@ -13,7 +13,8 @@ const initialState = {
   comments: {},
   topics: [],
   topic: {},
-  movies: []
+  movies: [],
+  channelRooms: []
 }
 
 const setGlobalState = () => (

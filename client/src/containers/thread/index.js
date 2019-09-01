@@ -2,16 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useGlobal } from 'reactn'
 import ThreadList from './common/ThreadList'
-import SidebarFixed from 'components/sidebar'
 import ThreadHeader from './common/Header'
 import Pagination, { getSlicedPages } from 'components/Pagination'
 import Services from 'util/feathers/Services'
+import SidebarContent from 'components/Sidebar/Content'
+import SidebarFixed from 'components/Sidebar'
 
 const ITEMS_PER_PAGE = 6
 
 const getTotalPages = (items) => Math.ceil(items.length / ITEMS_PER_PAGE)
 
-const ThreadPage = ({ match }) => {
+const ThreadPage = ({ location, match }) => {
   const [threads, setThreads] = useGlobal('threads')
   const [topics, setTopics] = useGlobal('topics')
   const { topicId } = match.params
@@ -48,7 +49,11 @@ const ThreadPage = ({ match }) => {
       {/* <Toast ref={cmp => this.toast = cmp} /> */}
 
       <div className='d-none d-md-block'>
-        {topics.length > 0 ? <SidebarFixed data={topics} /> : null}
+        {topics.length > 0 ? (
+          <SidebarFixed minWidth={180} maxWidth={260}>
+            <SidebarContent data={topics} location={location} />
+          </SidebarFixed>
+        ) : null}
       </div>
 
       <div className='col-4' />
@@ -68,9 +73,7 @@ const ThreadPage = ({ match }) => {
           <Link to={`${match.url}/create`} className='pa2'>
             <button className='btn btn-outline-info pointer'>Create New Thread</button>
           </Link>
-
         </div>
-
         <div className='d-flex mt-4'>
           <div className='col-md-12'>
             <div className='card'>
@@ -80,11 +83,8 @@ const ThreadPage = ({ match }) => {
               {threads.length > 0 ? <ThreadList items={getSlicedPages(threads, { currentPage, ITEMS_PER_PAGE })} /> : null}
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
   )
 }

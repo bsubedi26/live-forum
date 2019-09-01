@@ -48,7 +48,7 @@ const Routes = () => {
 
       {/* CHANNELS */}
       <Route exact path='/channels' component={ChannelsPage} />
-      <Route exact path='/channels/:id' component={ChannelById} />
+      <Route exact path='/channel/:id' component={ChannelById} />
 
       {/* 404 & Redirects */}
       <Redirect exact from='/' to='/home' />

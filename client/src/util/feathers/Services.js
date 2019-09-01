@@ -7,7 +7,8 @@ const Services = {
   Comment: app.service('comments'),
   ChannelRoom: app.service('channels/rooms'),
   UserFollower: app.service('users_followers'),
-  Movies: app.service('movies')
+  Movies: app.service('movies'),
+  Channel: app.service('channels/rooms')
 }
 
 export default Services
