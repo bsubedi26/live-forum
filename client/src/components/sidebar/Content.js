@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import ModalForm from '../ModalForm'
 import { LinkStyled, LinkActiveStyled } from 'components/Link'
-import { Topic } from 'services'
+import Services from 'services'
 
 const SidebarContent = ({ data, location }) => {
   const [state, setState] = React.useState({
@@ -20,7 +20,7 @@ const SidebarContent = ({ data, location }) => {
   }
 
   const onCreateTopic = async (topic) => {
-    await Topic.create(topic)
+    await Services.Topic.create(topic)
   }
 
   const renderIcon = (type) => {

@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useGlobal } from 'reactn'
-import { Topic } from 'services'
-import { fetchAndSet } from 'state'
+import Services from 'services'
 
 const renderTopic = topic => {
   return (
@@ -17,9 +16,15 @@ const Topics = ({ topics }) => (
 )
 
 const ThreadsList = ({ topic }) => {
-  const [topics] = useGlobal('topics')
+  const [topics, setTopics] = useGlobal('topics')
   React.useEffect(() => {
-    fetchAndSet(Topic.find, 'topics')
+    const fetchData = async () => {
+      console.log('setTopics: ', setTopics)
+      const { data } = await Services.Topic.find()
+
+      setTopics(data)
+    }
+    fetchData()
   }, [])
 
   return (

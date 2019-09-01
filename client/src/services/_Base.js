@@ -9,12 +9,11 @@ function getCrudFunctions (Service) {
 }
 
 function BaseCrud ({ Service, ...childFunctions }) {
-  const withCrudFunctions = {
+  return {
     ...Service,
     ...getCrudFunctions(Service),
     ...childFunctions
   }
-  return withCrudFunctions
 }
 
 export default BaseCrud

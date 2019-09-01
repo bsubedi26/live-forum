@@ -1,4 +1,4 @@
-import * as Services from '../services'
+import Services from '../services'
 import { addReducer } from 'reactn'
 
 addReducer('user/authenticate', async (state, dispatch, payload) => {

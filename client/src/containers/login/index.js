@@ -5,7 +5,7 @@ import { useGlobal } from 'reactn'
 
 import UserForm from 'components/Forms/user/create'
 import ReplaceIfAlertMessage from 'components/Alerts'
-import { authenticate } from '../../services/User'
+import app from 'util/feathers'
 
 const initialValues = {
   email: '',
@@ -44,7 +44,7 @@ const Login = ({ location, history }) => {
           <hr className='my-4' />
           <FadeIn>
             <UserForm
-              onSubmitAction={authenticate}
+              onSubmitAction={formData => app.authenticate(formData)}
               onSuccessAction={onFormSuccess}
               initialValues={initialValues}
             />

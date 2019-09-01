@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import { LinkStyled, LinkActiveStyled } from 'components/Link'
 import Avatar from '../Avatar'
-import { User } from 'services'
+import app from 'util/feathers'
 
 const navRoutes = [
   { label: 'home', route: '/home' },
@@ -54,7 +54,7 @@ const NavbarCmp = ({ location, history }) => {
   const onLogout = async (e) => {
     e.preventDefault()
     setAuth({})
-    await User.logout()
+    await app.logout()
     history.push('/home')
   }
 

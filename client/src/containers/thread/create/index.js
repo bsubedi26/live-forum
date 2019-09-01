@@ -1,7 +1,7 @@
 import React from 'react'
 import { useGlobal } from 'reactn'
 import CreateThreadForm from 'components/Forms/thread/create'
-import { Thread } from 'services'
+import Services from 'services'
 import Alerts from 'components/Alerts'
 
 const ThreadCreatePage = ({ match }) => {
@@ -19,7 +19,7 @@ const ThreadCreatePage = ({ match }) => {
     const { topicId } = match.params
     const { title, summary } = state
     const payload = { title, summary, topic_id: parseInt(topicId, 10), creator_id: auth.user.id }
-    await Thread.create(payload)
+    await Services.Thread.create(payload)
     setState({ showSuccess: true })
   }
 

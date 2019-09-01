@@ -6,7 +6,7 @@ import Avatar from 'components/Avatar'
 import moment from 'moment'
 import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
 import { UserName } from 'components/User'
-import { Comment } from 'services'
+import Services from 'services'
 
 const EditForm = ({ comment, setComment, handleEdit }) => {
   return (
@@ -29,7 +29,7 @@ const CommentItem = ({ item, auth }) => {
 
   const handleEdit = async (event) => {
     event.preventDefault()
-    const updatedData = await Comment.patch(item.id, { comment })
+    const updatedData = await Services.Comment.patch(item.id, { comment })
     setThread({
       ...thread,
       _comments: thread._comments.map(item => item.id === updatedData.id ? updatedData : item)

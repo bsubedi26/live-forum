@@ -1,12 +1,12 @@
 import React from 'react'
 import { useGlobal } from 'reactn'
-import { UserFollower } from 'services'
+import Services from 'services'
 
 export default ({ user = {} }) => {
   const [auth] = useGlobal('auth')
 
   const onClick = async () => {
-    const res = await UserFollower.create({
+    const res = await Services.UserFollower.create({
       follower_id: auth.user.id,
       following_id: user.id
     })

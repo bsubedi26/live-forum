@@ -5,23 +5,32 @@ import ThreadList from './common/ThreadList'
 import SidebarFixed from 'components/sidebar'
 import ThreadHeader from './common/Header'
 import Pagination, { getSlicedPages } from 'components/Pagination'
-import { Thread, Topic } from 'services'
-import { fetchAndSet } from 'state'
+import Services from 'services'
 
 const ITEMS_PER_PAGE = 6
 
 const getTotalPages = (items) => Math.ceil(items.length / ITEMS_PER_PAGE)
 
 const ThreadPage = ({ match }) => {
-  const [threads] = useGlobal('threads')
-  const [topics] = useGlobal('topics')
+  const [threads, setThreads] = useGlobal('threads')
+  const [topics, setTopics] = useGlobal('topics')
   const { topicId } = match.params
 
   const [currentPage, setCurrentPage] = React.useState(1)
 
   React.useEffect(() => {
-    fetchAndSet(Thread.findByTopicId, 'threads', { id: topicId })
-    fetchAndSet(Topic.find, 'topics')
+    const fetchData = async () => {
+      const { data: topicData } = await Services.Topic.find()
+      const { data: threadData } = await Services.Thread.find({
+        query: {
+          topic_id: topicId
+        }
+      })
+
+      setThreads(threadData)
+      setTopics(topicData)
+    }
+    fetchData()
   }, [topicId])
 
   const onPaginationChange = (selected) => {

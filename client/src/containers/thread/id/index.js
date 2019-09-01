@@ -4,8 +4,7 @@ import CommentForm from './common/CommentForm'
 import SingleThread from './common/SingleThread'
 import CommentList from './common/CommentList'
 import Pagination, { getSlicedPages } from 'components/Pagination'
-import { Thread, Comment } from 'services'
-import { fetchAndSet } from 'state'
+import Services from 'services'
 
 const ITEMS_PER_PAGE = 5
 
@@ -25,7 +24,13 @@ const ThreadDetailById = ({ match }) => {
   const [thread, setThread] = useGlobal('thread')
 
   React.useEffect(() => {
-    fetchAndSet(Thread.get, 'thread', match.params.threadId)
+    const fetchData = async (threadId) => {
+      const data = await Services.Thread.get(threadId)
+
+      setThread(data)
+    }
+
+    fetchData(match.params.threadId)
   }, [match.params.threadId])
 
   const onChange = ({ target }) => setState({ [target.id]: target.value })
@@ -34,7 +39,7 @@ const ThreadDetailById = ({ match }) => {
     e.preventDefault()
     const { comment } = state
     const payload = { comment, thread_id: match.params.threadId, creator_id: auth.user.id }
-    const createdData = await Comment.create(payload)
+    const createdData = await Services.Comment.create(payload)
     setThread({
       ...thread,
       _comments: [createdData].concat(thread._comments)

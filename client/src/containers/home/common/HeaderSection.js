@@ -1,7 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import UserFormCreate from 'components/Forms/user/create'
-import { signup } from 'services/User'
+import Services from 'services'
+const { User } = Services
 
 const clientItems = [
   { label: 'React' },
@@ -71,7 +72,7 @@ const HeaderSection = ({ history }) => {
                     <h2 className='fw-1'>Sign Up Now</h2>
                     <hr />
                     <UserFormCreate
-                      onSubmitAction={signup}
+                      onSubmitAction={formData => User.create(formData)}
                       onSuccessAction={onFormSuccess}
                       initialValues={initialValues}
                     />

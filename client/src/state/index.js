@@ -1,5 +1,5 @@
 import { setGlobal } from 'reactn'
-import addReactNDevTools from 'reactn-devtools' // needs redux dep
+import addReactNDevTools from 'reactn-devtools' // needs redux as dev dep
 import './reducers'
 
 addReactNDevTools()
@@ -12,25 +12,11 @@ const initialState = {
   thread: {},
   comments: {},
   topics: [],
-  topic: {},
-  blog: {},
-  movies: []
+  topic: {}
 }
 
 const setGlobalState = () => (
   setGlobal(initialState)
 )
-
-export const fetchAndSet = (fetchFunc, stateKey, fetchFuncOption) => {
-  setGlobal(
-    fetchFunc(fetchFuncOption)
-      .then((response) => {
-        return response.data
-          ? ({ [stateKey]: response.data })
-          : ({ [stateKey]: response })
-      })
-      .catch(err => ({ error: err }))
-  )
-}
 
 export default setGlobalState

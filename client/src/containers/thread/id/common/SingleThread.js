@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { Title, LineText } from 'components/common'
 import { FadeIn } from 'animate-css-styled-components'
 import moment from 'moment'
-import { Thread } from 'services'
+import Services from 'services'
 import Avatar from 'components/Avatar'
 import EditForm from 'components/Forms/thread/create'
 import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
@@ -44,13 +44,13 @@ const SingleThread = ({ auth, thread, history }) => {
     event.preventDefault()
     const { title, summary } = state
     const payload = { title, summary }
-    const updatedData = await Thread.patch(thread.id, payload)
+    const updatedData = await Services.Thread.patch(thread.id, payload)
     setThread(updatedData)
     setState({ ...state, showEditForm: false })
   }
 
   const removeThread = async () => {
-    await Thread.remove(thread.id)
+    await Services.Thread.remove(thread.id)
     history.goBack()
   }
 

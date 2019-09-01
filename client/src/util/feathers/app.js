@@ -1,5 +1,5 @@
 import feathers from '@feathersjs/client'
-import fReactive from 'feathers-reactive'
+// import fReactive from 'feathers-reactive'
 import io from 'socket.io-client'
 // import { logger } from './hooks'
 
@@ -9,9 +9,9 @@ const socket = io(HOST)
 
 const app = feathers()
   .configure(feathers.socketio(socket))
-  .configure(fReactive({
-    idField: 'id'
-  }))
+  // .configure(fReactive({
+  //   idField: 'id'
+  // }))
   .configure(feathers.authentication({
     storage: window.localStorage
   }))

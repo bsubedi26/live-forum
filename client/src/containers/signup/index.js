@@ -2,8 +2,10 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import UserFormCreate from 'components/Forms/user/create'
 import { FadeIn } from 'animate-css-styled-components'
-import { signup } from '../../services/User'
 import ReplaceIfAlertMessage from 'components/Alerts'
+import Services from '../../services'
+
+const { User } = Services
 
 const initialValues = {
   email: '',
@@ -36,7 +38,7 @@ const Signup = ({ location, history }) => {
           <hr className='my-4' />
           <FadeIn>
             <UserFormCreate
-              onSubmitAction={signup}
+              onSubmitAction={formData => User.create(formData)}
               onSuccessAction={onFormSuccess}
               initialValues={initialValues}
             />
