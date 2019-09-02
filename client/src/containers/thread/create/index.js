@@ -1,7 +1,6 @@
 import React from 'react'
-import { useGlobal } from 'reactn'
+import { useGlobal, useDispatch } from 'reactn'
 import CreateThreadForm from 'components/Forms/thread/create'
-import { Thread } from 'services'
 import Alerts from 'components/Alerts'
 
 const ThreadCreatePage = ({ match }) => {
@@ -11,6 +10,7 @@ const ThreadCreatePage = ({ match }) => {
     showSuccess: false
   })
   const [auth] = useGlobal('auth')
+  const threadCreate = useDispatch('threads/create')
 
   const handleOnChange = ({ target }) => setState({ ...state, [target.id]: target.value })
 
@@ -19,7 +19,7 @@ const ThreadCreatePage = ({ match }) => {
     const { topicId } = match.params
     const { title, summary } = state
     const payload = { title, summary, topic_id: parseInt(topicId, 10), creator_id: auth.user.id }
-    await Thread.create(payload)
+    await threadCreate(payload)
     setState({ showSuccess: true })
   }
 

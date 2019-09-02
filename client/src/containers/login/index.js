@@ -5,7 +5,8 @@ import { useGlobal } from 'reactn'
 
 import UserForm from 'components/Forms/user/create'
 import ReplaceIfAlertMessage from 'components/Alerts'
-import { authenticate } from '../../services/User'
+import app from 'util/feathers'
+import SidebarFixed from 'components/Sidebar'
 
 const initialValues = {
   email: '',
@@ -22,7 +23,8 @@ const Login = ({ location, history }) => {
   }
 
   return (
-    <div className='mx-auto w-75'>
+    <div>
+      <SidebarFixed />
       <FadeIn>
         <div className='jumbotron'>
           <ReplaceIfAlertMessage message={alertMsg} type='success'>
@@ -44,7 +46,7 @@ const Login = ({ location, history }) => {
           <hr className='my-4' />
           <FadeIn>
             <UserForm
-              onSubmitAction={authenticate}
+              onSubmitAction={formData => app.authenticate(formData)}
               onSuccessAction={onFormSuccess}
               initialValues={initialValues}
             />

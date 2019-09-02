@@ -7,4 +7,5 @@ export const Title = styled.h3`
 export const LineText = styled.h5`
   font-size: 0.8rem;
   opacity: 0.7;
+  margin: 0;
 `

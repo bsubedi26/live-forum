@@ -1,8 +1,8 @@
 // // https://medium.com/@Charles_Stover/how-to-convert-withrouter-to-a-react-hook-19bb02a29ed6
 // // mount > effect1 ... effect2 > update > effect1 ... effect2 > unmount
 
-// import React from 'react'
-// import { useForceUpdate } from './useForceUpdate'
+import React from 'react'
+import { useForceUpdate } from './useForceUpdate'
 
 // const CC = () => {
 //   useReactRouter()
@@ -22,16 +22,15 @@
 //   )
 // }
 
-// const useReactRouter = () => {
-//   const forceUpdate = useForceUpdate();
-
-//   const routerContext = React.useContext(__RouterContext);
-//   /* TODO */
-//   return routerContext;
-// };
+export const useReactRouter = () => {
+  const routerContext = React.useContext(window.__RouterContext)
+  console.log('routerContext: ', routerContext)
+  /* TODO */
+  return routerContext
+}
 
 // The effect is to subscribe and return the unsubscribe function.
-// useEffect(
-//   () => routerContext.history.listen(forceUpdate),
-//   [routerContext]
-// )
+React.useEffect(
+  () => window.routerContext.history.listen(useForceUpdate()),
+  [window.routerContext]
+)

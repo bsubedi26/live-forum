@@ -1,10 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import ModalForm from '../ModalForm'
-import { LinkStyled, LinkActiveStyled } from 'components/Link'
-import { Topic } from 'services'
+import { useDispatch } from 'reactn'
+import ModalForm from './ModalForm'
+import LinkComp from 'components/Link'
 
 const SidebarContent = ({ data, location }) => {
+  const topicCreate = useDispatch('topics/create')
+
   const [state, setState] = React.useState({
     showModal: false,
     toggle: false,
@@ -12,15 +14,15 @@ const SidebarContent = ({ data, location }) => {
   })
 
   const toggleCollapse = (e) => {
-    setState({ toggle: !state.toggle })
+    setState({ ...state, toggle: !state.toggle })
   }
 
   const toggleModal = () => {
-    setState({ showModal: !state.showModal })
+    setState({ ...state, showModal: !state.showModal })
   }
 
   const onCreateTopic = async (topic) => {
-    await Topic.create(topic)
+    await topicCreate(topic)
   }
 
   const renderIcon = (type) => {
@@ -39,17 +41,12 @@ const SidebarContent = ({ data, location }) => {
           <span className='lead font-weight-bold'>Topics</span>
         </li>
         <div className='collapse' id='topicList'>
-          <ul className='navbar-nav mr-auto'>
+          <ul className='navbar-nav mr-auto' style={{ height: 300, overflowY: 'scroll' }}>
             {data.map((link) =>
               (
-                <LinkActiveStyled isActive={location.pathname.includes(`/${link.id}`)} key={link.id}>
-                  <LinkStyled to={`${link.id}`}>
-                    {link.name}
-                  </LinkStyled>
-                </LinkActiveStyled>
+                <LinkComp isActive={location.pathname.includes(`/${link.id}`)} to={`/thread/${link.id}`} label={link.name} key={link.id} className='ml-3' />
               )
             )}
-
           </ul>
         </div>
 

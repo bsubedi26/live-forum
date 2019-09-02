@@ -1,36 +1,32 @@
+import app from 'util/feathers/app'
 import { setGlobal } from 'reactn'
-import addReactNDevTools from 'reactn-devtools' // needs redux dep
-import './reducers'
+import Services from 'util/feathers/Services'
+import { makeReducers } from './reducers'
+import authState from './auth'
 
+import addReactNDevTools from 'reactn-devtools' // needs redux as dev dep
 addReactNDevTools()
 
-const initialState = {
-  auth: {},
+const serviceStates = {
   users: [],
-  user: {},
+  user: null,
   threads: [],
-  thread: {},
-  comments: {},
+  thread: null,
+  comments: [],
   topics: [],
-  topic: {},
-  blog: {},
-  movies: []
+  topic: null,
+  movies: [],
+  auth: authState,
+  app
 }
 
-const setGlobalState = () => (
-  setGlobal(initialState)
-)
+const initialState = {
+  ...serviceStates
+}
 
-export const fetchAndSet = (fetchFunc, stateKey, fetchFuncOption) => {
-  setGlobal(
-    fetchFunc(fetchFuncOption)
-      .then((response) => {
-        return response.data
-          ? ({ [stateKey]: response.data })
-          : ({ [stateKey]: response })
-      })
-      .catch(err => ({ error: err }))
-  )
+const setGlobalState = () => {
+  makeReducers(Services)
+  return setGlobal(initialState)
 }
 
 export default setGlobalState

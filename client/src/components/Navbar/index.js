@@ -3,13 +3,15 @@ import React from 'react'
 import { useGlobal } from 'reactn'
 import { Link, withRouter } from 'react-router-dom'
 
-import { LinkStyled, LinkActiveStyled } from 'components/Link'
+import LinkComp from 'components/Link'
 import Avatar from '../Avatar'
-import { User } from 'services'
+import app from 'util/feathers'
 
 const navRoutes = [
   { label: 'home', route: '/home' },
-  { label: 'threads', route: '/threads' }
+  { label: 'threads', route: '/threads' },
+  { label: 'channels', route: '/channels' },
+  { label: 'channels/anon', route: '/channel/anonymous' },
   // { label: 'pagination example', route: '/blog?page=1' },
   // { label: 'Infinite Scroll Example', route: '/scroller' }
 ]
@@ -40,11 +42,7 @@ const renderNavRoute = location => (item, id) => {
   const { route } = item
   const isActive = location.pathname.includes(route)
   return (
-    <LinkActiveStyled isActive={isActive} key={id}>
-      <LinkStyled to={route}>
-        {item.label}
-      </LinkStyled>
-    </LinkActiveStyled>
+    <LinkComp isActive={isActive} to={route} label={item.label} key={id} />
   )
 }
 
@@ -54,7 +52,7 @@ const NavbarCmp = ({ location, history }) => {
   const onLogout = async (e) => {
     e.preventDefault()
     setAuth({})
-    await User.logout()
+    await app.logout()
     history.push('/home')
   }
 

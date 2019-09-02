@@ -8,17 +8,17 @@ import { UserName } from 'components/User'
 const ThreadList = ({ items }) => {
   return items.map(thread => (
     <div key={thread.id} className='list-group-item'>
-      <div>
-        {thread._creator.avatar ? <Avatar style={{ float: 'left', marginRight: '8px' }} avatar={thread._creator.avatar} /> : null}
-        <Link to={`/thread/${thread.topic_id}/individual/${thread.id}`}><Title className='text-left'>{thread.title}</Title></Link>
-      </div>
-      <LineText className='text-left'><strong>UserID: </strong> {thread.creator_id} - <UserName user={thread._creator} /></LineText>
+      <div className='d-flex flex-column text-left'>
+        {thread._creator.avatar ? <Avatar style={{ float: 'left', marginBottom: '8px' }} avatar={thread._creator.avatar} /> : null}
+        <LineText><strong>UserID: </strong> {thread.creator_id} - <UserName user={thread._creator} /></LineText>
 
-      <LineText className='text-left pt-2'>
-        <span className='mr-2'>{moment.utc(thread.updated_at).local().format('dddd MMM D YYYY h:mm A')}</span>
-        <span className='mr-2'>-</span>
-        {thread._comments && <span className='mr-2'>{thread._comments.length} comments</span>}
-      </LineText>
+        <LineText>
+          <span className='mr-2'>{moment.utc(thread.updated_at).local().format('dddd MMM D YYYY h:mm A')}</span>
+          <span className='mr-2'>-</span>
+          {thread._comments && <span className='mr-2'>{thread._comments.length} comments</span>}
+        </LineText>
+        <Link to={`/thread/${thread.topic_id}/individual/${thread.id}`}><Title>{thread.title}</Title></Link>
+      </div>
     </div>
   ))
 }

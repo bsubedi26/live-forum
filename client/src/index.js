@@ -7,6 +7,8 @@ import App from './App'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'shards-ui/dist/css/shards.min.css'
+import 'styles/shards-dashboard.css'
 import 'styles/index.css'
 
 setGlobalState()

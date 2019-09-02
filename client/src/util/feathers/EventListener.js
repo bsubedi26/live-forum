@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { useEffect } from 'react'
 import { useGlobal } from 'reactn'
-import Services from '../../services'
+import Services from './Services'
 
 const onCreated = ({ state, setGlobal, service }) => data => {
   console.log(`${service.path}: created: `, data)

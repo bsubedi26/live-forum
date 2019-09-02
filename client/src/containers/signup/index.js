@@ -1,9 +1,10 @@
 import React from 'react'
+import { useDispatch } from 'reactn'
 import { Link, withRouter } from 'react-router-dom'
 import UserFormCreate from 'components/Forms/user/create'
 import { FadeIn } from 'animate-css-styled-components'
-import { signup } from '../../services/User'
 import ReplaceIfAlertMessage from 'components/Alerts'
+import SidebarFixed from 'components/Sidebar'
 
 const initialValues = {
   email: '',
@@ -11,10 +12,12 @@ const initialValues = {
 }
 
 const Signup = ({ location, history }) => {
+  const userCreate = useDispatch('users/create')
   const onFormSuccess = () => history.push('/login', { message: 'Signup Successful. Login Below.' })
   const alertMsg = location.state && location.state.message
   return (
-    <div className='mx-auto w-75'>
+    <div>
+      <SidebarFixed />
       <FadeIn>
         <div className='jumbotron'>
           <ReplaceIfAlertMessage message={alertMsg}>
@@ -36,7 +39,7 @@ const Signup = ({ location, history }) => {
           <hr className='my-4' />
           <FadeIn>
             <UserFormCreate
-              onSubmitAction={signup}
+              onSubmitAction={formData => userCreate(formData)}
               onSuccessAction={onFormSuccess}
               initialValues={initialValues}
             />

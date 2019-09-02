@@ -1,14 +1,14 @@
-// Application hooks that run for every service
-// const { iff } = require('feathers-hooks-common')
+// Application before/after/error hooks that runs for all services
 const colorlogger = require('./hooks/colorlogger')
 const setUpdatedAtColumn = require('./hooks/setUpdatedAtColumn')
+const updateParamQuery = require('./hooks/updateParamQuery')
 
 module.exports = {
   before: {
     all: [
       colorlogger()
     ],
-    find: [],
+    find: [updateParamQuery({ updated_at: -1 })],
     get: [],
     create: [],
     update: [
