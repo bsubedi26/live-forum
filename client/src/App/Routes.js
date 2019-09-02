@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
-// import { Scroller, BlogMain, Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers'
 import {
   Login,
   Signup,
@@ -54,7 +53,6 @@ const Routes = () => {
       <Route component={NotFoundPage} />
 
     </Switch>
-
   )
 }
 

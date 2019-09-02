@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useGlobal, useDispatch } from 'reactn'
 import { getRandomColor, getTextColor } from 'util/helpers'
+import SidebarFixed from 'components/Sidebar'
 
 const getStyle = () => {
   const randomColor = getRandomColor()
@@ -32,8 +33,11 @@ const ThreadsList = ({ topic }) => {
   }, [topicsFind])
 
   return (
-    <div className='flex flex-wrap'>
-      {topics.length > 0 ? <Topics topics={topics} /> : <p>Loading...</p>}
+    <div>
+      <SidebarFixed />
+      <div className='flex flex-wrap'>
+        {topics.length > 0 ? <Topics topics={topics} /> : <p>Loading...</p>}
+      </div>
     </div>
   )
 }

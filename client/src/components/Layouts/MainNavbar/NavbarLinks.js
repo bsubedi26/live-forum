@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
 import LinkComp from 'components/Link'
-import { navRoutes } from './shared'
+import { navRoutes } from 'data/shared'
 
 const Wrapper = styled.div`
   .navbar-nav {

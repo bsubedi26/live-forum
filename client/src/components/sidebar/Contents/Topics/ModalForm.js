@@ -8,7 +8,6 @@ const ModalForm = ({ inputs, onSubmit, toggleModal, title, showModal }) => {
     e.preventDefault()
     toggleModal()
     return onSubmit(formState)
-    // return onSubmit()
   }
   const onChange = e => {
     setState({

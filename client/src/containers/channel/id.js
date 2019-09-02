@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch, useGlobal } from 'reactn'
 import styled from 'styled-components'
-import Sidebar from 'components/SidebarOld'
 import useCreate from 'hooks/useCreate'
+import SidebarFixed from 'components/Sidebar'
 
 const Container = styled.div.attrs({ className: 'container' })`
   border: 1px solid;
@@ -38,7 +38,7 @@ export default ({ match }) => {
 
   return (
     <>
-      <Sidebar />
+      <SidebarFixed />
       <Container>
         <Wrapper>
           id: {id}

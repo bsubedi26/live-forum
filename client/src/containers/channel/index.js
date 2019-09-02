@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useGlobal } from 'reactn'
 import { Link } from 'react-router-dom'
+import SidebarFixed from 'components/Sidebar'
 
 const LinkItem = ({ item }) => (
   <Link to={`/channel/${item}`}>
@@ -19,17 +20,19 @@ export default () => {
   }, [channelRoomsFind])
 
   return (
-    <div className='container'>
-      <div className='row'>
-        {
-          channelRooms && channelRooms.length > 0 ? (
-            channelRooms.map((item, i) => (
-              <LinkItem item={item} key={i} />
-            ))
-          ) : <div>Loading...</div>
-        }
+    <div>
+      <SidebarFixed />
+      <div className='container'>
+        <div className='row'>
+          {
+            channelRooms && channelRooms.length > 0 ? (
+              channelRooms.map((item, i) => (
+                <LinkItem item={item} key={i} />
+              ))
+            ) : <div>Loading...</div>
+          }
+        </div>
       </div>
     </div>
-
   )
 }

@@ -4,8 +4,8 @@ import classNames from 'classnames'
 import { Col } from 'shards-react'
 
 import SidebarHeader from './Header'
-import SidebarNavItems from './NavItems'
-// import MobileSearchBar from './MobileSearchBar'
+import { MobileToggleButton, MobileDrawer } from './MobileToggle'
+// import DefaultNavItems from './DefaultNavItems'
 
 const containerClass = classNames(
   'main-sidebar',
@@ -16,18 +16,22 @@ const containerClass = classNames(
   'd-md-block'
 )
 
-const Wrapper = styled.div`
-  .navbar-nav, .main-sidebar {
-    /* border: 3px solid red; */
-    @media (max-width: 767.98px) {
-      /* display: none; */
-    }
+const WrapperWithSidebar = styled.div`
+  .main-sidebar {
+    height: calc(100vh);
+  }
+`
+const WrapperNoSidebar = styled.div`
+  .main-sidebar {
+    height: auto;
   }
 `
 
 const MainSidebar = ({ children, items }) => {
+  const [isDrawerOpen, setDrawerOpen] = React.useState(false)
+  const WrapperComp = children ? WrapperWithSidebar : WrapperNoSidebar
   return (
-    <Wrapper>
+    <WrapperComp>
       <Col
         tag='aside'
         className={containerClass}
@@ -36,9 +40,27 @@ const MainSidebar = ({ children, items }) => {
         sm={{ size: 12 }}
       >
         <SidebarHeader />
-        {children || <SidebarNavItems {...{ items }} />}
+        {children}
       </Col>
-    </Wrapper>
+      <MobileToggleButton {...{ isDrawerOpen, setDrawerOpen }} />
+      {
+        isDrawerOpen && (
+          <MobileDrawer {...{ isDrawerOpen, setDrawerOpen }} />
+        )
+      }
+      {/* {
+        children && (
+          <>
+            <MobileToggleButton {...{ isDrawerOpen, setDrawerOpen }} />
+            {
+              isDrawerOpen && (
+                <MobileDrawer {...{ isDrawerOpen, setDrawerOpen }} />
+              )
+            }
+          </>
+        )
+      } */}
+    </WrapperComp>
   )
 }
 

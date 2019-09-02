@@ -32,7 +32,7 @@ function makeFind (service) {
   addReducer(dispatchName, async (state, dispatch, payload) => {
     // if (!isEmpty(state[service.path])) return // check if data already exists in state before fetching
     const response = await service.find(payload)
-    console.log('response: ', response)
+    // console.log('response: ', response)
     return {
       [service.path]: response.data ? response.data : response
     }

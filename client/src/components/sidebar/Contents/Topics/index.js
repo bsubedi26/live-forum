@@ -14,11 +14,11 @@ const SidebarContent = ({ data, location }) => {
   })
 
   const toggleCollapse = (e) => {
-    setState({ toggle: !state.toggle })
+    setState({ ...state, toggle: !state.toggle })
   }
 
   const toggleModal = () => {
-    setState({ showModal: !state.showModal })
+    setState({ ...state, showModal: !state.showModal })
   }
 
   const onCreateTopic = async (topic) => {
@@ -41,7 +41,7 @@ const SidebarContent = ({ data, location }) => {
           <span className='lead font-weight-bold'>Topics</span>
         </li>
         <div className='collapse' id='topicList'>
-          <ul className='navbar-nav mr-auto'>
+          <ul className='navbar-nav mr-auto' style={{ height: 300, overflowY: 'scroll' }}>
             {data.map((link) =>
               (
                 <LinkComp isActive={location.pathname.includes(`/${link.id}`)} to={`/thread/${link.id}`} label={link.name} key={link.id} className='ml-3' />

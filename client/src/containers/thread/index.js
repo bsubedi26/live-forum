@@ -41,7 +41,8 @@ const ThreadPage = ({ location, match }) => {
 
   return (
     <div className='row mx-0'>
-      <div className='d-none d-md-block col-lg-3 col-md-3 p-0'>
+      {/* <div className='d-none d-md-block col-lg-3 col-md-3 p-0'> */}
+      <div className='col-lg-3 col-md-3 p-0'>
         {topics.length > 0 ? (
           <SidebarFixed>
             <SidebarContentTopics data={topics} location={location} />
