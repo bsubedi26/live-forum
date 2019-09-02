@@ -7,8 +7,9 @@ const Services = {
   Comment: app.service('comments'),
   ChannelRoom: app.service('channels/rooms'),
   UserFollower: app.service('users_followers'),
-  Movies: app.service('movies'),
-  Channel: app.service('channels/rooms')
+  Movies: app.service('movies')
 }
+
+export const servicePaths = Object.keys(Services).map(key => Services[key].path)
 
 export default Services

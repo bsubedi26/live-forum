@@ -1,5 +1,5 @@
 import React from 'react'
-import useChannelRooms from 'hooks/useChannelRooms'
+import { useDispatch, useGlobal } from 'reactn'
 import { Link } from 'react-router-dom'
 
 const LinkItem = ({ item }) => (
@@ -10,20 +10,24 @@ const LinkItem = ({ item }) => (
   </Link>
 )
 
-export default ({ match }) => {
-  console.log('match: ', match)
-  const [channelRooms] = useChannelRooms()
-  console.log('channelRooms: ', channelRooms)
+export default () => {
+  const [channelRooms] = useGlobal('channels/rooms')
+  const channelRoomsFind = useDispatch('channels/rooms/find')
+
+  React.useEffect(() => {
+    channelRoomsFind()
+  }, [channelRoomsFind])
+
   return (
     <div className='container'>
       <div className='row'>
-        {/* {
-          channelRooms.length > 0 ? (
+        {
+          channelRooms && channelRooms.length > 0 ? (
             channelRooms.map((item, i) => (
               <LinkItem item={item} key={i} />
             ))
-          ) : null
-        } */}
+          ) : <div>Loading...</div>
+        }
       </div>
     </div>
 

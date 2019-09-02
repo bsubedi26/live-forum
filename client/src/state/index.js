@@ -1,24 +1,32 @@
+import app from 'util/feathers/app'
 import { setGlobal } from 'reactn'
-import './reducers'
+import Services from 'util/feathers/Services'
+import { makeReducers } from './reducers'
+import authState from './auth'
 
 import addReactNDevTools from 'reactn-devtools' // needs redux as dev dep
 addReactNDevTools()
 
-const initialState = {
-  auth: {},
-  users: [],
-  user: {},
-  threads: [],
-  thread: {},
-  comments: {},
-  topics: [],
-  topic: {},
-  movies: [],
-  channelRooms: []
+const serviceStates = {
+  users: null,
+  user: null,
+  threads: null,
+  thread: null,
+  comments: null,
+  topics: null,
+  topic: null,
+  movies: null,
+  auth: authState,
+  app
 }
 
-const setGlobalState = () => (
-  setGlobal(initialState)
-)
+const initialState = {
+  ...serviceStates
+}
+
+const setGlobalState = () => {
+  makeReducers(Services)
+  return setGlobal(initialState)
+}
 
 export default setGlobalState

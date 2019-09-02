@@ -38,7 +38,7 @@ const CommentItem = ({ item, auth }) => {
   }
 
   const handleDeleteClick = async () => {
-    const removedData = await Comment.remove(item.id)
+    const removedData = await Services.Comment.remove(item.id)
     setThread({
       ...thread,
       _comments: thread._comments.filter(item => item.id !== removedData.id)

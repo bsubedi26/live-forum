@@ -3,7 +3,7 @@ import React from 'react'
 import { useGlobal } from 'reactn'
 import { Link, withRouter } from 'react-router-dom'
 
-import { LinkStyled, LinkActiveStyled } from 'components/Link'
+import LinkComp from 'components/Link'
 import Avatar from '../Avatar'
 import app from 'util/feathers'
 
@@ -42,11 +42,7 @@ const renderNavRoute = location => (item, id) => {
   const { route } = item
   const isActive = location.pathname.includes(route)
   return (
-    <LinkActiveStyled isActive={isActive} key={id}>
-      <LinkStyled to={route}>
-        {item.label}
-      </LinkStyled>
-    </LinkActiveStyled>
+    <LinkComp isActive={isActive} to={route} label={item.label} key={id} />
   )
 }
 

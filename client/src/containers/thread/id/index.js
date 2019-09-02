@@ -1,17 +1,19 @@
 import React from 'react'
-import { useGlobal } from 'reactn'
+import { useGlobal, useDispatch } from 'reactn'
 import CommentForm from './common/CommentForm'
 import SingleThread from './common/SingleThread'
 import CommentList from './common/CommentList'
 import Pagination, { getSlicedPages } from 'components/Pagination'
-import Services from 'util/feathers/Services'
 
 const ITEMS_PER_PAGE = 5
 
 const ThreadDetailById = ({ match }) => {
-  const [state, setState] = React.useState({
-    comment: ''
-  })
+  const [auth] = useGlobal('auth')
+  const [thread, setThread] = useGlobal('threads/get')
+  const threadGet = useDispatch('threads/get')
+  const commentCreate = useDispatch('comments/create')
+
+  const [formState, setFormState] = React.useState({ comment: '' })
   const [currentPage, setCurrentPage] = React.useState(1)
 
   const onPaginationChange = (selected) => {
@@ -20,39 +22,35 @@ const ThreadDetailById = ({ match }) => {
     return setCurrentPage(selected)
   }
 
-  const [auth] = useGlobal('auth')
-  const [thread, setThread] = useGlobal('thread')
-
   React.useEffect(() => {
-    const fetchData = async (threadId) => {
-      const data = await Services.Thread.get(threadId)
-      setThread(data)
+    const fetchData = (threadId) => {
+      threadGet(threadId)
     }
 
     fetchData(match.params.threadId)
-    }, [match.params.threadId]) // eslint-disable-line
+  }, [match.params.threadId, threadGet])
 
-  const onChange = ({ target }) => setState({ [target.id]: target.value })
+  const onChange = ({ target }) => setFormState({ ...formState, [target.id]: target.value })
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    const { comment } = state
+    const { comment } = formState
     const payload = { comment, thread_id: match.params.threadId, creator_id: auth.user.id }
-    const createdData = await Services.Comment.create(payload)
+    const createdData = await commentCreate(payload)
     setThread({
       ...thread,
       _comments: [createdData].concat(thread._comments)
     })
-    setState({ comment: '' })
+    setFormState({ comment: '' })
   }
 
-  const hasComments = () => thread._comments && thread._comments.length > 0
+  const hasComments = () => thread && thread._comments && thread._comments.length > 0
 
   return (
     <div className='mx-auto w-75 mt-4'>
-      {Object.keys(thread).length > 0 ? <SingleThread {...{ auth, thread }} /> : null}
+      {thread ? <SingleThread {...{ auth, thread }} /> : null}
       {auth.accessToken
-        ? <CommentForm onSubmit={onSubmit} onChange={onChange} value={state.comment} />
+        ? <CommentForm onSubmit={onSubmit} onChange={onChange} value={formState.comment} />
         : <div className='pv2'><span>You <em>must</em> be signed in before posting a comment.</span></div>}
       <hr />
       {hasComments() ? <CommentList auth={auth} comments={getSlicedPages(thread._comments, { currentPage, ITEMS_PER_PAGE })} /> : null}

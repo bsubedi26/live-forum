@@ -3,14 +3,9 @@ import styled from 'styled-components'
 import Routes from './Routes'
 import FeathersEventListener from 'util/feathers/EventListener'
 import FeathersAuthListener from 'util/feathers/AuthListener'
-import Navbar from 'components/Navbar'
+import DefaultLayout from '../components/Layouts'
 
 const WholePageWrapper = styled.div`
-  text-align: center;
-`
-
-const RouteWrapper = styled.div`
-  padding-top: 1rem;
   text-align: center;
 `
 
@@ -20,10 +15,10 @@ export default () => {
       {/* Listeners - does not render anything */}
       <FeathersAuthListener />
       <FeathersEventListener />
-      <Navbar />
-      <RouteWrapper>
+      {/* LAYOUT/ROUTES */}
+      <DefaultLayout>
         <Routes />
-      </RouteWrapper>
+      </DefaultLayout>
     </WholePageWrapper>
   )
 }

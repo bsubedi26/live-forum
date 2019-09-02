@@ -14,6 +14,6 @@ export default ({ user = {} }) => {
   }
 
   return auth.accessToken
-    ? <button onClick={() => onClick()}>{user.email}</button>
+    ? <button onClick={() => onClick()} className='btn btn-outline-primary' style={{ padding: 6 }}>{user.email}</button>
     : <span>{user.email}</span>
 }

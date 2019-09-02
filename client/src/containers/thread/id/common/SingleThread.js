@@ -30,12 +30,12 @@ const ThreadHeaderInfo = ({ thread }) => {
   )
 }
 const SingleThread = ({ auth, thread, history }) => {
+  const [, setThread] = useGlobal('thread')
   const [state, setState] = React.useState({
     showEditForm: false,
     title: '',
     summary: ''
   })
-  const [, setThread] = useGlobal('thread')
 
   const handleOnChange = ({ target }) => setState({ ...state, [target.id]: target.value })
 

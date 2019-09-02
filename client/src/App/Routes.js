@@ -3,7 +3,6 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 
 // import { Scroller, BlogMain, Home, Login, Signup, ThreadPage, ThreadDetailById, ThreadCreatePage, NotFoundPage } from 'containers'
 import {
-  Home,
   Login,
   Signup,
   ThreadsPage,
@@ -34,11 +33,10 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
 const Routes = () => {
   return (
     <Switch>
-      {/* <Route exact path="/blog" component={BlogMain} /> */}
-      <Route exact path='/home' component={Home} />
+      {/* <Route exact path='/home' component={Home} /> */}
       <Route exact path='/login' component={Login} />
       <Route exact path='/signup' component={Signup} />
-      {/* <Route exact path='/scroller' component={Scroller} /> */}
+      {/* <Route exact path="/blog" component={BlogMain} /> */}
 
       {/* FORUM */}
       <Route exact path='/threads' component={ThreadsPage} />
@@ -51,8 +49,10 @@ const Routes = () => {
       <Route exact path='/channel/:id' component={ChannelById} />
 
       {/* 404 & Redirects */}
-      <Redirect exact from='/' to='/home' />
+      <Redirect exact from='/' to='/threads' />
+      <Redirect exact from='/home' to='/threads' />
       <Route component={NotFoundPage} />
+
     </Switch>
 
   )

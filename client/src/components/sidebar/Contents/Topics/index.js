@@ -1,10 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { useDispatch } from 'reactn'
 import ModalForm from './ModalForm'
-import { LinkStyled, LinkActiveStyled } from 'components/Link'
-import Services from 'util/feathers/Services'
+import LinkComp from 'components/Link'
 
 const SidebarContent = ({ data, location }) => {
+  const topicCreate = useDispatch('topics/create')
+
   const [state, setState] = React.useState({
     showModal: false,
     toggle: false,
@@ -20,7 +22,7 @@ const SidebarContent = ({ data, location }) => {
   }
 
   const onCreateTopic = async (topic) => {
-    await Services.Topic.create(topic)
+    await topicCreate(topic)
   }
 
   const renderIcon = (type) => {
@@ -42,11 +44,7 @@ const SidebarContent = ({ data, location }) => {
           <ul className='navbar-nav mr-auto'>
             {data.map((link) =>
               (
-                <LinkActiveStyled isActive={location.pathname.includes(`/${link.id}`)} key={link.id}>
-                  <LinkStyled to={`${link.id}`} className='ml-5'>
-                    {link.name}
-                  </LinkStyled>
-                </LinkActiveStyled>
+                <LinkComp isActive={location.pathname.includes(`/${link.id}`)} to={`/thread/${link.id}`} label={link.name} key={link.id} className='ml-3' />
               )
             )}
           </ul>

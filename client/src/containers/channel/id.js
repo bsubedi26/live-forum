@@ -1,9 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { useGlobal } from 'reactn'
+import { useDispatch, useGlobal } from 'reactn'
 import styled from 'styled-components'
-import Sidebar from 'components/Sidebar'
-import useChannelRooms from 'hooks/useChannelRooms'
+import Sidebar from 'components/SidebarOld'
 import useCreate from 'hooks/useCreate'
 
 const Container = styled.div.attrs({ className: 'container' })`
@@ -19,12 +17,16 @@ const Wrapper = styled.div`
 `
 
 export default ({ match }) => {
-  // const [activeId, setActiveId] = React.useState(0)
-  // const [channelRooms, setChannelRooms] = useGlobal('channelRooms')
-
   const [message, setMessage] = React.useState('')
-  const [channelRooms2] = useChannelRooms()
-  console.log('channelRooms2: ', channelRooms2)
+
+  const [channelRooms] = useGlobal('channels/rooms')
+  console.log('channelRooms: ', channelRooms)
+  const dispatchFind = useDispatch('channels/rooms/find')
+
+  React.useEffect(() => {
+    dispatchFind()
+  }, [dispatchFind])
+
   const [, handleCreate] = useCreate('movies')
 
   const onSubmit = async e => {
