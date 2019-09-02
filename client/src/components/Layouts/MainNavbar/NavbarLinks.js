@@ -8,7 +8,7 @@ import { navRoutes } from './shared'
 const Wrapper = styled.div`
   .navbar-nav {
     @media(min-width: 768px) {
-      margin-left: 130px;
+      margin-left: 150px;
     }
   }
 `
@@ -25,10 +25,7 @@ const NavbarCmp = ({ location, history, auth, setAuth }) => {
   return (
     <Wrapper>
       <nav className='navbar navbar-expand-md navbar-light'>
-        {/* <Link to='/' className='navbar-brand fantasy pointer'>LiveForum</Link> */}
-        {/* <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
-          <span className='navbar-toggler-icon' />
-        </button> */}
+        {/* <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'><span className='navbar-toggler-icon' /></button> */}
 
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav'>

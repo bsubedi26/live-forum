@@ -1,12 +1,11 @@
 import React from 'react'
-import { useGlobal } from 'reactn'
+import { useGlobal, useDispatch } from 'reactn'
 import { LineText } from 'components/common'
 import { FadeIn } from 'animate-css-styled-components'
 import Avatar from 'components/Avatar'
 import moment from 'moment'
 import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
 import { UserName } from 'components/User'
-import Services from 'util/feathers/Services'
 
 const EditForm = ({ comment, setComment, handleEdit }) => {
   return (
@@ -22,14 +21,18 @@ const EditForm = ({ comment, setComment, handleEdit }) => {
 }
 
 const CommentItem = ({ item, auth }) => {
-  const [thread, setThread] = useGlobal('thread')
+  const [thread, setThread] = useGlobal('threads/get')
+  const commentPatch = useDispatch('comments/patch')
+  const commentRemove = useDispatch('comments/remove')
+
   const [comment, setComment] = React.useState('')
   const [showEditForm, setShowEditForm] = React.useState(false)
   const commentDate = moment.utc(item.updated_at).local().format('dddd MMM D YYYY h:mm A')
 
-  const handleEdit = async (event) => {
+  const commentEditSubmit = async (event) => {
     event.preventDefault()
-    const updatedData = await Services.Comment.patch(item.id, { comment })
+    const globalState = await commentPatch(item.id, { comment })
+    const updatedData = globalState['comments/patch']
     setThread({
       ...thread,
       _comments: thread._comments.map(item => item.id === updatedData.id ? updatedData : item)
@@ -37,8 +40,9 @@ const CommentItem = ({ item, auth }) => {
     setComment('')
   }
 
-  const handleDeleteClick = async () => {
-    const removedData = await Services.Comment.remove(item.id)
+  const commentRemoveSubmit = async () => {
+    const globalState = await commentRemove(item.id)
+    const removedData = globalState['comments/remove']
     setThread({
       ...thread,
       _comments: thread._comments.filter(item => item.id !== removedData.id)
@@ -63,9 +67,9 @@ const CommentItem = ({ item, auth }) => {
         </LineText>
       </div>
       {auth.user && auth.user.id === item.creator_id
-        ? <EditAndDeleteButtons onEdit={() => setShowEditForm(true)} onDelete={handleDeleteClick} />
+        ? <EditAndDeleteButtons onEdit={() => setShowEditForm(true)} onDelete={commentRemoveSubmit} />
         : null}
-      {showEditForm ? <EditForm {...{ handleEdit, setComment, comment }} /> : null}
+      {showEditForm ? <EditForm {...{ handleEdit: commentEditSubmit, setComment, comment }} /> : null}
     </div>
   )
 }

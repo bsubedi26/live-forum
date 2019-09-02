@@ -32,6 +32,7 @@ function makeFind (service) {
   addReducer(dispatchName, async (state, dispatch, payload) => {
     // if (!isEmpty(state[service.path])) return // check if data already exists in state before fetching
     const response = await service.find(payload)
+    console.log('response: ', response)
     return {
       [service.path]: response.data ? response.data : response
     }
@@ -63,7 +64,7 @@ function makeGet (service) {
 
 function makeRemove (service) {
   const dispatchName = `${service.path}/remove`
-  addReducer(dispatchName, async (state, dispatch, { id }) => {
+  addReducer(dispatchName, async (state, dispatch, id, payload) => {
     // console.log('dispatching service ', dispatchName)
     const data = await service.remove(id)
     // console.log('data: ', data)
@@ -75,10 +76,9 @@ function makeRemove (service) {
 
 function makePatch (service) {
   const dispatchName = `${service.path}/patch`
-  addReducer(dispatchName, async (state, dispatch, { id, payload }) => {
+  addReducer(dispatchName, async (state, dispatch, id, payload) => {
     // console.log('dispatching service ', dispatchName)
     const data = await service.patch(id, payload)
-    // console.log('data: ', data)
     return {
       [dispatchName]: data
     }

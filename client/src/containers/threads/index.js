@@ -18,7 +18,6 @@ const renderTopic = topic => {
     <Link key={topic.id} className='pa4 ma3' to={`/thread/${topic.id}`} style={{ backgroundColor }}>
       <h4 className='bodoni ttc' style={{ color }}>{topic.name}</h4>
     </Link>
-
   )
 }
 
@@ -34,7 +33,7 @@ const ThreadsList = ({ topic }) => {
 
   return (
     <div className='flex flex-wrap'>
-      {topics ? <Topics topics={topics} /> : <p>Loading...</p>}
+      {topics.length > 0 ? <Topics topics={topics} /> : <p>Loading...</p>}
     </div>
   )
 }

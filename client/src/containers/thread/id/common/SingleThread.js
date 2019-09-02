@@ -1,36 +1,17 @@
 import React from 'react'
-import { useGlobal } from 'reactn'
+import { useGlobal, useDispatch } from 'reactn'
 import { withRouter } from 'react-router-dom'
-import { Title, LineText } from 'components/common'
+import { LineText } from 'components/common'
 import { FadeIn } from 'animate-css-styled-components'
-import moment from 'moment'
-import Services from 'util/feathers/Services'
-import Avatar from 'components/Avatar'
 import EditForm from 'components/Forms/thread/create'
 import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
-import { UserName } from 'components/User'
+import ThreadHeaderInfo from './HeaderInfo'
 
-const ThreadHeaderInfo = ({ thread }) => {
-  const postDate = moment(thread.updated_at, 'YYYY-MM-DD HH:mm:ss').format('dddd MMM D YYYY h:mm A')
-  return (
-    <>
-      <div>
-        {thread._creator.avatar ? <Avatar avatar={thread._creator.avatar} /> : null}
-        <Title className='my-3'>Title: {thread.title}</Title>
-        <LineText className='my-2'>Posted By: <UserName user={thread._creator} /></LineText>
-      </div>
+const SingleThread = ({ auth, history }) => {
+  const [thread, setThread] = useGlobal('threads/get')
+  const threadPatch = useDispatch('threads/patch')
 
-      <LineText className='pt-2'>
-        <span className='mr-2'>{postDate}</span>
-        <span className='mr-2'>-</span>
-        {thread._comments && <span className='mr-2'>{thread._comments.length} comments</span>}
-
-      </LineText>
-    </>
-  )
-}
-const SingleThread = ({ auth, thread, history }) => {
-  const [, setThread] = useGlobal('thread')
+  const threadRemove = useDispatch('threads/remove')
   const [state, setState] = React.useState({
     showEditForm: false,
     title: '',
@@ -40,17 +21,17 @@ const SingleThread = ({ auth, thread, history }) => {
   const handleOnChange = ({ target }) => setState({ ...state, [target.id]: target.value })
 
   const handleEditThreadSubmit = async (event) => {
-    console.log('handleEditThreadSubmit: ')
     event.preventDefault()
     const { title, summary } = state
     const payload = { title, summary }
-    const updatedData = await Services.Thread.patch(thread.id, payload)
+    const globalState = await threadPatch(thread.id, payload)
+    const updatedData = globalState['threads/patch']
     setThread(updatedData)
     setState({ ...state, showEditForm: false })
   }
 
   const removeThread = async () => {
-    await Services.Thread.remove(thread.id)
+    await threadRemove(thread.id)
     history.goBack()
   }
 

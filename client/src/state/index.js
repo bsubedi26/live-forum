@@ -8,14 +8,14 @@ import addReactNDevTools from 'reactn-devtools' // needs redux as dev dep
 addReactNDevTools()
 
 const serviceStates = {
-  users: null,
+  users: [],
   user: null,
-  threads: null,
+  threads: [],
   thread: null,
-  comments: null,
-  topics: null,
+  comments: [],
+  topics: [],
   topic: null,
-  movies: null,
+  movies: [],
   auth: authState,
   app
 }

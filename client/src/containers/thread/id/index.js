@@ -36,7 +36,8 @@ const ThreadDetailById = ({ match }) => {
     e.preventDefault()
     const { comment } = formState
     const payload = { comment, thread_id: match.params.threadId, creator_id: auth.user.id }
-    const createdData = await commentCreate(payload)
+    const globalState = await commentCreate(payload)
+    const createdData = globalState['comments/create']
     setThread({
       ...thread,
       _comments: [createdData].concat(thread._comments)
@@ -48,8 +49,8 @@ const ThreadDetailById = ({ match }) => {
 
   return (
     <div className='mx-auto w-75 mt-4'>
-      {thread ? <SingleThread {...{ auth, thread }} /> : null}
-      {auth.accessToken
+      {thread ? <SingleThread {...{ auth }} /> : null}
+      {auth.accessToken && thread
         ? <CommentForm onSubmit={onSubmit} onChange={onChange} value={formState.comment} />
         : <div className='pv2'><span>You <em>must</em> be signed in before posting a comment.</span></div>}
       <hr />
