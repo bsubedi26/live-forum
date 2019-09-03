@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { Col } from 'shards-react'
 
 import SidebarHeader from './Header'
-import { MobileToggleButton, MobileDrawer } from './MobileToggle'
+import MobileToggle from './MobileToggle'
 // import DefaultNavItems from './DefaultNavItems'
 
 const containerClass = classNames(
@@ -42,24 +42,7 @@ const MainSidebar = ({ children, items }) => {
         <SidebarHeader />
         {children}
       </Col>
-      <MobileToggleButton {...{ isDrawerOpen, setDrawerOpen }} />
-      {
-        isDrawerOpen && (
-          <MobileDrawer {...{ isDrawerOpen, setDrawerOpen }} />
-        )
-      }
-      {/* {
-        children && (
-          <>
-            <MobileToggleButton {...{ isDrawerOpen, setDrawerOpen }} />
-            {
-              isDrawerOpen && (
-                <MobileDrawer {...{ isDrawerOpen, setDrawerOpen }} />
-              )
-            }
-          </>
-        )
-      } */}
+      <MobileToggle {...{ isDrawerOpen, setDrawerOpen }} />
     </WrapperComp>
   )
 }
