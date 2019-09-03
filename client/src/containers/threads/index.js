@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGlobal, useDispatch } from 'reactn'
-import SidebarFixed from 'components/Sidebar'
+import SidebarFixed from 'components/SidebarFixed'
 import BoxLink from 'components/BoxLink'
 
 const renderTopic = topic => (

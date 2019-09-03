@@ -4,8 +4,8 @@ import { useGlobal, useDispatch } from 'reactn'
 import ThreadList from './common/ThreadList'
 import ThreadHeader from './common/Header'
 import Pagination, { getSlicedPages } from 'components/Pagination'
-import SidebarContentTopics from 'components/Sidebar/Contents/Topics'
-import SidebarFixed from 'components/Sidebar'
+import SidebarContentTopics from 'components/SidebarFixed/Contents/Topics'
+import SidebarFixed from 'components/SidebarFixed'
 
 const ITEMS_PER_PAGE = 6
 

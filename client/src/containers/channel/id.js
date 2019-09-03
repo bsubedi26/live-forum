@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useGlobal } from 'reactn'
 import styled from 'styled-components'
 import useCreate from 'hooks/useCreate'
-import SidebarFixed from 'components/Sidebar'
+import SidebarFixed from 'components/SidebarFixed'
 
 const Container = styled.div.attrs({ className: 'container' })`
   border: 1px solid;
