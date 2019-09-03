@@ -19,7 +19,7 @@ const useClickOutside = (elRef, setDrawerOpen) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [])
+  }, [elRef, setDrawerOpen])
   return [setDrawerOpen]
 }
 
