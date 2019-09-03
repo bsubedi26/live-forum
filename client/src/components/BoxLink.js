@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { desaturate, lighten } from 'polished'
+import { desaturate, lighten, readableColor } from 'polished'
 import { Link } from 'react-router-dom'
-import { getRandomColor, getTextColor } from 'util/helpers'
+import { getRandomColor } from 'util/helpers'
 
 const Label = styled.h4`
   font-family: Bodoni MT, serif;
@@ -26,7 +26,7 @@ const LinkStyled = styled(Link)`
 
 export default ({ to, label }) => {
   const bg = getRandomColor()
-  const color = getTextColor(bg)
+  const color = readableColor(bg)
 
   return (
     <LinkStyled {...{ to, bg, color }}>

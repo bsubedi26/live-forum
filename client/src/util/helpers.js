@@ -14,13 +14,3 @@ export const getRandomColor = () => {
   const randColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
   return isValidHex(randColor) ? randColor : getRandomColor()
 }
-
-export function getTextColor (hexColor) {
-  return (decimalFromColor(hexColor) < 0xffffff / 2)
-    ? '#FFFFFF' : '#000000'
-}
-
-function decimalFromColor (hex) {
-  const number = '0x' + hex.substring(1)
-  return parseInt(number, 16)
-}
