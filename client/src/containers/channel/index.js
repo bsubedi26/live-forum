@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useGlobal } from 'reactn'
 import { Link } from 'react-router-dom'
-import SidebarFixed from 'components/Sidebar'
+import SidebarFixed from 'components/SidebarFixed'
 
 const LinkItem = ({ item }) => (
   <Link to={`/channel/${item}`}>

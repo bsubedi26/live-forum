@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import UserFormCreate from 'components/Forms/user/create'
 import { FadeIn } from 'animate-css-styled-components'
 import ReplaceIfAlertMessage from 'components/Alerts'
-import SidebarFixed from 'components/Sidebar'
+import SidebarFixed from 'components/SidebarFixed'
 
 const initialValues = {
   email: '',

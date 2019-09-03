@@ -6,7 +6,7 @@ import { useGlobal } from 'reactn'
 import UserForm from 'components/Forms/user/create'
 import ReplaceIfAlertMessage from 'components/Alerts'
 import app from 'util/feathers'
-import SidebarFixed from 'components/Sidebar'
+import SidebarFixed from 'components/SidebarFixed'
 
 const initialValues = {
   email: '',
