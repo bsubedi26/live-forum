@@ -8,15 +8,9 @@ export const isEmpty = (data) => {
   return !data
 }
 
-export const getRandomColor = () => '#' + ((1 << 24) * Math.random() | 0).toString(16)
+const isValidHex = hex => /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hex)
 
-export function getTextColor (hexColor) {
-  return (decimalFromColor(hexColor) < 0xffffff / 2)
-    ? '#FFFFFF' : '#000000'
-}
-
-function decimalFromColor (hex) {
-  var number = '0x' + hex.substring(1)
-
-  return parseInt(number, 16)
+export const getRandomColor = () => {
+  const randColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
+  return isValidHex(randColor) ? randColor : getRandomColor()
 }

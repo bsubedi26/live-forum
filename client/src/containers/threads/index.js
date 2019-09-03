@@ -1,26 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useGlobal, useDispatch } from 'reactn'
-import { getRandomColor, getTextColor } from 'util/helpers'
 import SidebarFixed from 'components/Sidebar'
+import BoxLink from 'components/BoxLink'
 
-const getStyle = () => {
-  const randomColor = getRandomColor()
-  const textColor = getTextColor(randomColor)
-  return {
-    backgroundColor: randomColor,
-    color: textColor
-  }
-}
-
-const renderTopic = topic => {
-  const { backgroundColor, color } = getStyle()
-  return (
-    <Link key={topic.id} className='pa4 ma3' to={`/thread/${topic.id}`} style={{ backgroundColor }}>
-      <h4 className='bodoni ttc' style={{ color }}>{topic.name}</h4>
-    </Link>
-  )
-}
+const renderTopic = topic => (
+  <BoxLink key={topic.id} to={`/thread/${topic.id}`} label={topic.name} />
+)
 
 const Topics = ({ topics }) => topics.map(renderTopic)
 
