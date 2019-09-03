@@ -5,6 +5,8 @@ import { navRoutes } from 'staticData/shared'
 import LinkComp from 'components/Link'
 import setDrawerCloseOnClickOutside from 'hooks/useClickOutside'
 
+// ${animation(['rotate', '1s', 'ease-in-out'], ['colorchange', '2s'])};
+
 export const drawerAnimation = keyframes`
   0% {
     width: 0px;
@@ -24,8 +26,8 @@ const DrawerWrapper = styled.div`
   @media(min-width: 768px) {
     display: none;
   }
-  display: ${props => props.isDrawerOpen ? 'block' : 'none'};
 
+  display: ${props => props.isDrawerOpen ? 'block' : 'none'};
   animation-name: ${drawerAnimation};
   animation-duration: .8s;
   animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -33,12 +35,11 @@ const DrawerWrapper = styled.div`
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-direction: normal;
-  /* animation-direction: ${props => props.isDrawerOpen ? 'normal' : 'reverse'}; */
 `
 
 const MobileDrawer = ({ isDrawerOpen, setDrawerOpen }) => {
   const wrapperRef = useRef()
-  setDrawerCloseOnClickOutside(wrapperRef, setDrawerOpen)
+  setDrawerCloseOnClickOutside(setDrawerOpen, wrapperRef)
 
   return (
     <DrawerWrapper {...{ isDrawerOpen }} ref={wrapperRef}>

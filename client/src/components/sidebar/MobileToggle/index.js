@@ -12,10 +12,13 @@ const MenuIconWrapper = styled.button.attrs({
   background-color: white;
 `
 
-const MobileToggle = ({ isDrawerOpen, setDrawerOpen }) => {
-  const handleMenuClick = () => {
-    setDrawerOpen(!isDrawerOpen)
+const MobileToggle = () => {
+  const [isDrawerOpen, setDrawerOpen] = React.useState(false)
+
+  const handleMenuClick = (e) => {
+    return setDrawerOpen(!isDrawerOpen)
   }
+
   return (
     <nav className='nav'>
       <MenuIconWrapper onClick={handleMenuClick}>

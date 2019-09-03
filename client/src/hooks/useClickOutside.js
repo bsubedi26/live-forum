@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 
-const useClickOutside = (elRef, setDrawerOpen) => {
+const useClickOutside = (setDrawerOpen, elRef) => {
   // console.log('---useClickOutside: ')
   useEffect(() => {
     const handleClickOutside = e => {
-    // console.log('clicked anywhere: ')
       if (elRef.current.contains(e.target)) {
       // inside elRef container clicked
         // console.log('inside click: ')
