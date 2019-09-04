@@ -1,13 +1,14 @@
 import app from 'util/feathers'
 
 const Services = {
-  User: app.service('users'),
-  Thread: app.service('threads'),
-  Topic: app.service('topics'),
-  Comment: app.service('comments'),
-  ChannelRoom: app.service('channels/rooms'),
-  UserFollower: app.service('users_followers'),
-  Movies: app.service('movies')
+  users: app.service('users'),
+  threads: app.service('threads'),
+  topics: app.service('topics'),
+  comments: app.service('comments'),
+  'channels/rooms': app.service('channels/rooms'),
+  users_followers: app.service('users_followers'),
+  movies: app.service('movies'),
+  messages: app.service('messages')
 }
 
 export const servicePaths = Object.keys(Services).map(key => Services[key].path)

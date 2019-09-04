@@ -18,9 +18,14 @@ module.exports = function (app) {
   const service = app.service('messages')
 
   service.hooks(hooks)
-  // service.publish((data, context) => {
-  //   // Filter the channels to only authenticated
-  //   return app.channel(`room/${data.roomId}`)
-  //     .filter(connection => connection.user._id.toString() !== data.userId.toString())
-  // })
+  service.publish((data, context) => {
+    // console.log('data: ', data)
+    const currentChannel = app.channel(data.channel)
+    return currentChannel
+    // return currentChannel
+    //   .filter(connection => {
+    //     if (!connection.user) return true // send message to not logged in users
+    //     return connection.user.id !== data.creator_id
+    //   })
+  })
 }

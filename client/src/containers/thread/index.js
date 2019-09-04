@@ -43,26 +43,24 @@ const ThreadPage = ({ location, match }) => {
     <div className='row mx-0'>
       {/* <div className='d-none d-md-block col-lg-3 col-md-3 p-0'> */}
       <div className='col-lg-3 col-md-3 p-0'>
-        {topics.length > 0 ? (
+        {topics && (
           <SidebarFixed>
             <SidebarContentTopics data={topics} location={location} />
           </SidebarFixed>
-        ) : null}
+        )}
       </div>
       <div className='col-lg-9 col-md-9 col-sm-12'>
         <div className='d-flex justify-content-center mt-4 flex-wrap'>
-          {
-            threads.length > 0 ? (
-              <Pagination
-                totalPages={getTotalPages(threads)}
-                itemsPerPage={ITEMS_PER_PAGE}
-                onPageChange={onPaginationChange}
-                onPageChangeFunc={setCurrentPage}
-                currentPage={currentPage}
-              />
-            ) : null
-          }
-          {threads.length > 0 && (
+          {threads && (
+            <Pagination
+              totalPages={getTotalPages(threads)}
+              itemsPerPage={ITEMS_PER_PAGE}
+              onPageChange={onPaginationChange}
+              onPageChangeFunc={setCurrentPage}
+              currentPage={currentPage}
+            />
+          )}
+          {threads && (
             <Link to={`${match.url}/create`} className='pa2'>
               <button className='btn btn-outline-info pointer'>Create New Thread</button>
             </Link>
@@ -73,9 +71,9 @@ const ThreadPage = ({ location, match }) => {
           <div className='col-md-12'>
             <div className='card'>
               <div className='card-header'>
-                {topics.length > 0 && <ThreadHeader topic={topics.find(t => t.id === parseInt(topicId, 10))} />}
+                {topics && <ThreadHeader topic={topics.find(t => t.id === parseInt(topicId, 10))} />}
               </div>
-              {threads.length > 0 ? <ThreadList items={getSlicedPages(threads, { currentPage, ITEMS_PER_PAGE })} /> : null}
+              {threads && <ThreadList items={getSlicedPages(threads, { currentPage, ITEMS_PER_PAGE })} />}
             </div>
           </div>
         </div>

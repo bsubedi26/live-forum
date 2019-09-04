@@ -9,8 +9,8 @@ module.exports = function (app) {
         table.increments('id').primary()
         table.string('comment').notNullable()
 
-        table.integer('thread_id').unsigned().references('id').inTable('threads').onDelete('cascade')
-        table.integer('creator_id').unsigned().references('id').inTable('users').onDelete('cascade')
+        table.integer('thread_id').unsigned().references('threads.id').onDelete('cascade')
+        table.integer('creator_id').unsigned().references('users.id').onDelete('cascade')
 
         table.timestamps(true, true)
       })

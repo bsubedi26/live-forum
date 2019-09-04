@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FadeIn } from 'animate-css-styled-components'
+import ContainerLayout from 'wrappers/ContainerLayout'
 
 const NotFound = () => {
   return (
-    <div>
+    <ContainerLayout>
       <FadeIn>
         <div className='jumbotron'>
           <h1 className='display-3'>Oh No! 404!</h1>
@@ -15,7 +16,7 @@ const NotFound = () => {
           </p>
         </div>
       </FadeIn>
-    </div>
+    </ContainerLayout>
   )
 }
 

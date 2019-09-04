@@ -33,12 +33,12 @@ export default ({ user, onLogout }) => {
         <span className='d-none d-md-inline-block'>{user.email}</span>
       </DropdownToggle>
       <Collapse tag={DropdownMenu} right small open={visible}>
-        <DropdownItem tag={Link} to='user-profile'>
+        <DropdownItem tag={Link} to='/user/profile'>
           <i className='material-icons'>&#xE7FD;</i> Profile
         </DropdownItem>
-        <DropdownItem tag={Link} to='edit-user-profile'>
+        {/* <DropdownItem tag={Link} to='edit-user-profile'>
           <i className='material-icons'>&#xE8B8;</i> Edit Profile
-        </DropdownItem>
+        </DropdownItem> */}
         <DropdownItem tag={Link} to='file-manager-list'>
           <i className='material-icons'>&#xE2C7;</i> Files
         </DropdownItem>

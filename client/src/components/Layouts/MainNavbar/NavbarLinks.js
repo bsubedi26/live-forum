@@ -21,12 +21,10 @@ const renderNavRoute = location => (item, id) => {
   )
 }
 
-const NavbarCmp = ({ location, history, auth, setAuth }) => {
+const NavbarCmp = ({ location }) => {
   return (
     <Wrapper>
       <nav className='navbar navbar-expand-md navbar-light'>
-        {/* <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'><span className='navbar-toggler-icon' /></button> */}
-
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav'>
             {navRoutes.map(renderNavRoute(location))}

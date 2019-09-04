@@ -17,7 +17,7 @@ module.exports = function (app) {
       // const user = connection.user
 
       // The connection is no longer anonymous, remove it
-      app.channel('anonymous').leave(connection)
+      // app.channel('anonymous').leave(connection)
 
       // Add it to the authenticated user channel
       app.channel('authenticated').join(connection)

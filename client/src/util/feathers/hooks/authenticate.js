@@ -12,7 +12,7 @@ export default function reAuthenticate (app, requiresAuthServices) {
       all: async hook => {
         if (requiresAuthServices.includes(hook.path) && requiresAuthMethods.includes(hook.method)) {
           // console.log('Requires Auth for service: ', hook.path, hook.method);
-          await app.authenticate()
+          // await app.authenticate()
           return hook
         }
 

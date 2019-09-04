@@ -4,7 +4,8 @@ import { useGlobal } from 'reactn'
 import Services from './Services'
 
 const onCreated = ({ state, setGlobal, service }) => data => {
-  console.log(`${service.path}: created: `, data)
+  console.log(`-- EventListener ${service.path}: created: `, data)
+  // console.log('state[service.path]: ', state[service.path]);
   const stateList = state[service.path]
   if (stateList) {
     setGlobal({
@@ -14,7 +15,7 @@ const onCreated = ({ state, setGlobal, service }) => data => {
 }
 
 const onRemoved = ({ state, setGlobal, service }) => data => {
-  console.log(`${service.path}: removed: `, data)
+  console.log(`-- EventListener ${service.path}: removed: `, data)
   const stateList = state[service.path]
   if (stateList) {
     setGlobal({
@@ -24,7 +25,7 @@ const onRemoved = ({ state, setGlobal, service }) => data => {
 }
 
 const onPatched = ({ state, setGlobal, service }) => data => {
-  console.log(`${service.path}: patched: `, data)
+  console.log(`-- EventListener ${service.path}: patched: `, data)
   const stateList = state[service.path]
   if (stateList) {
     setGlobal({
@@ -34,7 +35,7 @@ const onPatched = ({ state, setGlobal, service }) => data => {
 }
 
 const onUpdated = ({ state, setGlobal, service }) => data => {
-  console.log(`${service.path}: updated: `, data)
+  console.log(`-- EventListener ${service.path}: updated: `, data)
   const stateList = state[service.path]
   if (stateList) {
     setGlobal({

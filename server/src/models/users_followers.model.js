@@ -1,5 +1,9 @@
 const TABLE_NAME = 'users_followers'
 
+const makeFkUserRef = (table, columnName) => {
+  return table.integer(columnName).notNullable().unsigned().references('users.id').onDelete('cascade')
+}
+
 module.exports = function (app) {
   const knex = app.get('knex')
 
@@ -8,9 +12,9 @@ module.exports = function (app) {
       knex.schema.createTable(TABLE_NAME, table => {
         table.increments('id')
 
-        table.integer('follower_id').unsigned().references('users.id').onDelete('cascade')
-        table.integer('following_id').unsigned().references('users.id').onDelete('cascade')
-
+        makeFkUserRef(table, 'follower_id')
+        makeFkUserRef(table, 'following_id')
+        table.unique(['follower_id', 'following_id'])
         table.timestamps(true, true)
       })
         .then(() => console.log(`Created ${TABLE_NAME} table`))

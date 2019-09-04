@@ -8,8 +8,8 @@ function createModel (app) {
       knex.schema.createTable(TABLE_NAME, table => {
         table.increments('id')
 
-        table.string('email').unique()
-        table.string('password')
+        table.string('email').unique().notNullable()
+        table.string('password').notNullable()
 
         table.string('avatar')
         table.integer('login_attempts').defaultTo(4)

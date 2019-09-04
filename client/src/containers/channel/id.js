@@ -1,13 +1,8 @@
 import React from 'react'
 import { useDispatch, useGlobal } from 'reactn'
 import styled from 'styled-components'
-import useCreate from 'hooks/useCreate'
-import SidebarFixed from 'components/SidebarFixed'
-
-const Container = styled.div.attrs({ className: 'container' })`
-  border: 1px solid;
-  height: 90vh;
-`
+import { CardLink } from './common'
+import ContainerLayout from 'wrappers/ContainerLayout'
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,38 +11,70 @@ const Wrapper = styled.div`
   height: 100%;
 `
 
-export default ({ match }) => {
-  const [message, setMessage] = React.useState('')
+const Input = styled.input.attrs({ className: 'form-control' })`
+  width: 100%;
+`
 
+const ChannelRoomsList = ({ items }) => {
+  return items.map((item, i) => (
+    <CardLink item={item} key={i} />
+  ))
+}
+
+const MessageList = ({ items }) => {
+  return items.map((item) => {
+    return (
+      <div className='card mb-3' key={item.id}>
+        <p>{item.id}</p>
+        <p>{item.text}</p>
+        <p>{item.channel}</p>
+        <p>{item.updated_at}</p>
+      </div>
+    )
+  })
+}
+
+export default ({ match }) => {
+  const { id: channelName } = match.params
+  const [formMessageText, setFormMesageText] = React.useState('')
+
+  const [auth] = useGlobal('auth')
   const [channelRooms] = useGlobal('channels/rooms')
-  console.log('channelRooms: ', channelRooms)
-  const dispatchFind = useDispatch('channels/rooms/find')
+  const dispatchChannelFind = useDispatch('channels/rooms/find')
+
+  const [messageState] = useGlobal('messages')
+  const dispatchMessageFind = useDispatch('messages/find')
+  const dispatchMessageCreate = useDispatch('messages/create')
 
   React.useEffect(() => {
-    dispatchFind()
-  }, [dispatchFind])
-
-  const [, handleCreate] = useCreate('movies')
+    dispatchChannelFind()
+    dispatchMessageFind({
+      query: {
+        channel: channelName
+      }
+    })
+  }, [dispatchChannelFind, dispatchMessageFind, channelName])
 
   const onSubmit = async e => {
     e.preventDefault()
-    await handleCreate({ text: message })
+    await dispatchMessageCreate({
+      text: formMessageText,
+      channel: channelName,
+      creator_id: auth.user.id || 1 // TODO: remove harcoded user id for to allow anonymous users id: 1 is admin
+    })
   }
-
-  const { id } = match.params
-
   return (
-    <>
-      <SidebarFixed />
-      <Container>
-        <Wrapper>
-          id: {id}
-          <form onSubmit={onSubmit}>
-            <input name='message' type='text' onChange={e => setMessage(e.target.value)} />
-          </form>
-        </Wrapper>
-      </Container>
-    </>
+    <ContainerLayout>
+      <Wrapper>
+        <div className='row'>
+          {channelRooms.length && <ChannelRoomsList items={channelRooms} />}
+        </div>
+        <form onSubmit={onSubmit} className='my-4'>
+          <Input name='message' type='text' onChange={e => setFormMesageText(e.target.value)} />
+        </form>
+        {messageState && <MessageList items={messageState} />}
+      </Wrapper>
+    </ContainerLayout>
 
   )
 }

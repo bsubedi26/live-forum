@@ -10,7 +10,8 @@ import {
   ThreadDetailById,
   NotFoundPage,
   ChannelsPage,
-  ChannelById
+  ChannelById,
+  UserProfilePage
 } from 'containers'
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -47,9 +48,13 @@ const Routes = () => {
       <Route exact path='/channels' component={ChannelsPage} />
       <Route exact path='/channel/:id' component={ChannelById} />
 
+      {/* USERS */}
+      <Route exact path='/user/profile' component={UserProfilePage} />
+
       {/* 404 & Redirects */}
       <Redirect exact from='/' to='/threads' />
       <Redirect exact from='/home' to='/threads' />
+      <Route exact path='/noop' component={() => <div />} />
       <Route component={NotFoundPage} />
 
     </Switch>
