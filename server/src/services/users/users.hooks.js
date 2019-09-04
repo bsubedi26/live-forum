@@ -15,9 +15,17 @@ module.exports = {
       hashPassword('password'),
       makeAvatar()
     ],
-    update: [hashPassword('password'), authenticate('jwt')],
-    patch: [hashPassword('password'), authenticate('jwt')],
-    remove: [authenticate('jwt')]
+    update: [
+      hashPassword('password'),
+      authenticate('jwt')
+    ],
+    patch: [
+      hashPassword('password'),
+      authenticate('jwt')
+    ],
+    remove: [
+      authenticate('jwt')
+    ]
   },
 
   after: {

@@ -45,7 +45,7 @@ const ThreadDetailById = ({ match }) => {
     setFormState({ comment: '' })
   }
 
-  const hasComments = () => thread && thread._comments && thread._comments.length > 0
+  const hasComments = () => thread && thread._comments && thread._comments.length
 
   return (
     <div className='mx-auto w-75 mt-4'>

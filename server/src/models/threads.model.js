@@ -11,8 +11,8 @@ module.exports = function (app) {
         table.string('summary').notNullable()
         table.timestamps(true, true)
 
-        table.integer('topic_id').unsigned().references('id').inTable('topics')
-        table.integer('creator_id').unsigned().references('id').inTable('users').onDelete('cascade')
+        table.integer('topic_id').unsigned().references('topics.id').onDelete('cascade')
+        table.integer('creator_id').unsigned().references('users.id').onDelete('cascade')
       })
         .then(() => console.log(`Created ${TABLE_NAME} table`))
         .catch(e => console.error(`Error creating ${TABLE_NAME} table`, e))

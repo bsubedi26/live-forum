@@ -8,7 +8,7 @@ import NavbarLinks from './NavbarLinks'
 import NavbarNav from './NavbarNav'
 
 const MainNavbar = ({ layout, stickyTop }) => {
-  const [auth, setAuth] = useGlobal('auth')
+  const [auth] = useGlobal('auth')
   const appLogout = useDispatch('app/logout')
 
   const onLogout = async (e) => {
@@ -26,8 +26,8 @@ const MainNavbar = ({ layout, stickyTop }) => {
     <div className={classes}>
       <Container className='p-0'>
         <Navbar type='light' className='align-items-stretch flex-md-nowrap p-0'>
-          <NavbarLinks {...{ auth, setAuth }} />
-          <NavbarNav {...{ auth, setAuth, onLogout }} />
+          <NavbarLinks {...{ auth }} />
+          <NavbarNav {...{ auth, onLogout }} />
         </Navbar>
       </Container>
     </div>

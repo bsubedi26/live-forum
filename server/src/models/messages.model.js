@@ -5,10 +5,10 @@ module.exports = function (app) {
     if (!exists) {
       db.schema.createTable(tableName, table => {
         table.increments('id')
-        table.string('text')
-        table.string('channel')
+        table.string('text').notNullable()
+        table.string('channel').notNullable()
 
-        table.integer('creator_id').unsigned().references('users.id')
+        table.integer('creator_id').notNullable().unsigned().references('users.id').onDelete('cascade')
         table.timestamps(true, true)
       })
         .then(() => console.log(`Created ${tableName} table`))

@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import UserFormCreate from 'components/Forms/user/create'
 import { FadeIn } from 'animate-css-styled-components'
 import ReplaceIfAlertMessage from 'components/Alerts'
-import SidebarFixed from 'components/SidebarFixed'
+import ContainerLayout from 'wrappers/ContainerLayout'
 
 const initialValues = {
   email: '',
@@ -16,8 +16,7 @@ const Signup = ({ location, history }) => {
   const onFormSuccess = () => history.push('/login', { message: 'Signup Successful. Login Below.' })
   const alertMsg = location.state && location.state.message
   return (
-    <div>
-      <SidebarFixed />
+    <ContainerLayout>
       <FadeIn>
         <div className='jumbotron'>
           <ReplaceIfAlertMessage message={alertMsg}>
@@ -46,7 +45,7 @@ const Signup = ({ location, history }) => {
           </FadeIn>
         </div>
       </FadeIn>
-    </div>
+    </ContainerLayout>
   )
 }
 

@@ -2,6 +2,19 @@ import { addReducer } from 'reactn'
 // import { isEmpty } from 'util/helpers'
 
 /**
+ * Create initial state for services
+ *
+ */
+
+export function makeServiceState (Services) {
+  var result = {}
+  for (var serviceName in Services) {
+    result[serviceName] = []
+  }
+  return result
+}
+
+/**
  * Dynamically creates reducers from provided services
  * @param {Object} services
  * @returns {null}

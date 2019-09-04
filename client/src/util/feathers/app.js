@@ -4,12 +4,15 @@ import { logger } from './hooks'
 
 const HOST = 'http://localhost:3030'
 
+export const storageKey = 'feathers-jwt'
+
 const socket = io(HOST)
 
 const app = feathers()
   .configure(feathers.socketio(socket))
   .configure(feathers.authentication({
-    storage: window.localStorage
+    storage: window.localStorage,
+    storageKey
   }))
 
 app.io.on('connect_error', error => {

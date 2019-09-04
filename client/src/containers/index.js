@@ -8,6 +8,10 @@ export { default as ThreadPage } from './thread'
 export { default as ThreadDetailById } from './thread/id'
 export { default as ThreadCreatePage } from './thread/create'
 
+// USER
+export { default as UserProfilePage } from './user/profile'
+
+// CHANNELS
 export { default as ChannelsPage } from './channel'
 export { default as ChannelById } from './channel/id'
 

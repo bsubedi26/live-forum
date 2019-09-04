@@ -2,15 +2,18 @@
 const colorlogger = require('./hooks/colorlogger')
 const setUpdatedAtColumn = require('./hooks/setUpdatedAtColumn')
 const updateParamQuery = require('./hooks/updateParamQuery')
+const { validateEmptyData } = require('./hooks/validate')
 
 module.exports = {
   before: {
     all: [
       colorlogger()
     ],
-    find: [updateParamQuery({ updated_at: -1 })],
+    find: [updateParamQuery('$sort', { updated_at: -1 })],
     get: [],
-    create: [],
+    create: [
+      validateEmptyData
+    ],
     update: [
       setUpdatedAtColumn
     ],

@@ -1,8 +1,8 @@
-const updateParamQuery = sortParams => async hook => {
+const updateParamQuery = (field, param) => async hook => {
   const { query } = hook.params
 
-  if (query && !query.$sort) {
-    query.$sort = sortParams
+  if (query && !query[field]) {
+    query[field] = param
   }
   return hook
 }

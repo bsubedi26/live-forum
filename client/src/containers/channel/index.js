@@ -1,38 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useGlobal } from 'reactn'
-import { Link } from 'react-router-dom'
-import SidebarFixed from 'components/SidebarFixed'
-
-const LinkItem = ({ item }) => (
-  <Link to={`/channel/${item}`}>
-    <div className='card mx-3 p-3'>
-      {item}
-    </div>
-  </Link>
-)
+import { CardLink } from './common'
+import ContainerLayout from 'wrappers/ContainerLayout'
+import Loading from 'components/Loading'
 
 export default () => {
   const [channelRooms] = useGlobal('channels/rooms')
   const channelRoomsFind = useDispatch('channels/rooms/find')
 
-  React.useEffect(() => {
+  useEffect(() => {
     channelRoomsFind()
   }, [channelRoomsFind])
 
   return (
-    <div>
-      <SidebarFixed />
-      <div className='container'>
-        <div className='row'>
-          {
-            channelRooms && channelRooms.length > 0 ? (
-              channelRooms.map((item, i) => (
-                <LinkItem item={item} key={i} />
-              ))
-            ) : <div>Loading...</div>
-          }
-        </div>
+    <ContainerLayout>
+      <div className='row'>
+        {
+          channelRooms.length ? (
+            channelRooms.map((item, i) => (
+              <CardLink item={item} key={i} />
+            ))
+          ) : <Loading />
+        }
       </div>
-    </div>
+    </ContainerLayout>
   )
 }

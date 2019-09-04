@@ -6,7 +6,7 @@ import { useGlobal } from 'reactn'
 import UserForm from 'components/Forms/user/create'
 import ReplaceIfAlertMessage from 'components/Alerts'
 import app from 'util/feathers'
-import SidebarFixed from 'components/SidebarFixed'
+import ContainerLayout from 'wrappers/ContainerLayout'
 
 const initialValues = {
   email: '',
@@ -23,8 +23,7 @@ const Login = ({ location, history }) => {
   }
 
   return (
-    <div>
-      <SidebarFixed />
+    <ContainerLayout>
       <FadeIn>
         <div className='jumbotron'>
           <ReplaceIfAlertMessage message={alertMsg} type='success'>
@@ -61,7 +60,7 @@ const Login = ({ location, history }) => {
             </a> */}
         </div>
       </FadeIn>
-    </div>
+    </ContainerLayout>
 
   )
 }

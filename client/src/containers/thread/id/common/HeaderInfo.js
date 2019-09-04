@@ -1,8 +1,8 @@
 import React from 'react'
-import { Title, LineText } from 'components/common'
+import { LineText } from 'components/common'
 import moment from 'moment'
 import Avatar from 'components/Avatar'
-import { UserName } from 'components/User'
+import { UserLink } from 'components/User'
 
 export default ({ thread }) => {
   const postDate = moment(thread.updated_at, 'YYYY-MM-DD HH:mm:ss').format('dddd MMM D YYYY h:mm A')
@@ -10,8 +10,8 @@ export default ({ thread }) => {
     <>
       <div>
         {thread._creator.avatar ? <Avatar avatar={thread._creator.avatar} /> : null}
-        <Title className='my-3'>Title: {thread.title}</Title>
-        <LineText className='my-2'>Posted By: <UserName user={thread._creator} /></LineText>
+        <h3 className='my-3'>Title: {thread.title}</h3>
+        <LineText className='my-2'>Posted By: <UserLink user={thread._creator} /></LineText>
       </div>
 
       <LineText className='pt-2'>
