@@ -1,20 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 const { fastJoin } = require('feathers-hooks-common')
-const { userLoader } = require('../../hooks/batchLoaders')
 const { restrictToOwner } = require('feathers-authentication-hooks')
-
-const commentCreatorResolvers = {
-  before: hook => {
-    hook._userLoader = userLoader(hook)
-  },
-
-  joins: {
-    _creator: () => async (comment, hook) => {
-      const user = await hook._userLoader.load(comment.creator_id)
-      comment._creator = user
-    }
-  }
-}
+const { UserLoader } = require('../../hooks/batchLoaders')
 
 module.exports = {
   before: {
@@ -37,7 +24,13 @@ module.exports = {
 
   after: {
     all: [
-      fastJoin(commentCreatorResolvers)
+
+      fastJoin({
+        before: UserLoader.set,
+        joins: {
+          _creator: UserLoader.use('creator_id', '_creator')
+        }
+      })
     ],
     find: [],
     get: [],
