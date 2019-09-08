@@ -1,7 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks
 
-// const removeField = require('../../hooks/removeField')
+const removeField = require('../../hooks/removeField') // eslint-disable-line
 const validateUniqueUser = require('./hooks/validateUniqueUser')
 const makeAvatar = require('./hooks/avatar')
 

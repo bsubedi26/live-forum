@@ -9,9 +9,9 @@ export default ({ thread }) => {
   return (
     <>
       <div>
-        {thread._creator.avatar ? <Avatar avatar={thread._creator.avatar} /> : null}
+        {thread._user.avatar ? <Avatar avatar={thread._user.avatar} /> : null}
         <h3 className='my-3'>Title: {thread.title}</h3>
-        <LineText className='my-2'>Posted By: <UserLink user={thread._creator} /></LineText>
+        <LineText className='my-2'>Posted By: <UserLink user={thread._user} /></LineText>
       </div>
 
       <LineText className='pt-2'>

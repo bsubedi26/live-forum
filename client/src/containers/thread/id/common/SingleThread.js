@@ -42,7 +42,7 @@ const SingleThread = ({ auth, history }) => {
       </div>
       <div className='text-center'>
         <p className='mt-2'>{thread.summary}</p>
-        <LineText><strong>UserID: </strong> {thread._creator.id}</LineText>
+        <LineText><strong>UserID: </strong> {thread._user.id}</LineText>
 
         {auth.user && auth.user.id === thread.creator_id ? <EditAndDeleteButtons onEdit={() => setState({ ...state, showEditForm: true })} onDelete={removeThread} /> : null}
 

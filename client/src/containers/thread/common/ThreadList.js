@@ -9,8 +9,8 @@ const ThreadList = ({ items }) => {
   return items.map(thread => (
     <div key={thread.id} className='list-group-item'>
       <div className='d-flex flex-column text-left'>
-        {thread._creator.avatar ? <Avatar style={{ float: 'left', marginBottom: '8px' }} avatar={thread._creator.avatar} /> : null}
-        <LineText><strong>UserID: </strong> {thread.creator_id} - <UserLink user={thread._creator} /></LineText>
+        {thread._user.avatar ? <Avatar style={{ float: 'left', marginBottom: '8px' }} avatar={thread._user.avatar} /> : null}
+        <LineText><strong>UserID: </strong> {thread.creator_id} - <UserLink user={thread._user} /></LineText>
 
         <LineText>
           <span className='mr-2'>{moment.utc(thread.updated_at).local().format('dddd MMM D YYYY h:mm A')}</span>
