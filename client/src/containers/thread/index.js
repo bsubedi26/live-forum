@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useGlobal, useDispatch } from 'reactn'
 import ThreadList from './common/ThreadList'
 import ThreadHeader from './common/Header'
-import Pagination, { getSlicedPages } from 'components/Pagination'
+import Pagination, { getSlicedPages } from 'components/pagination'
 import SidebarContentTopics from 'components/SidebarFixed/Contents/Topics'
 import SidebarFixed from 'components/SidebarFixed'
 

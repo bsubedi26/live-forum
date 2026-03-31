@@ -51,7 +51,7 @@ const FormFields = (props) => {
         {touched.password && errors.password && <ErrorField field={errors.password} />}
       </div>
 
-      <button type='submit' disabled={isSubmitting} className='bw0 br2 pa3 black fw1 tc ttu tracked'>
+      <button type='submit' disabled={isSubmitting} className='btn btn-outline-primary'>
         {isSubmitting ? <i className='p-1 fa fa-spinner fa-spin' /> : null} Submit
       </button>
 

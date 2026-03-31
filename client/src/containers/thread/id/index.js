@@ -3,7 +3,7 @@ import { useGlobal, useDispatch } from 'reactn'
 import CommentForm from './common/CommentForm'
 import SingleThread from './common/SingleThread'
 import CommentList from './common/CommentList'
-import Pagination, { getSlicedPages } from 'components/Pagination'
+import Pagination, { getSlicedPages } from 'components/pagination'
 
 const ITEMS_PER_PAGE = 5
 

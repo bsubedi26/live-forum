@@ -31,6 +31,17 @@ app.configure(configuration())
   .use(favicon(path.join(app.get('public'), 'favicon.ico')))
   .use('/', express.static(app.get('public')))
 
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.method !== 'GET') return next()
+    if (req.path.startsWith('/socket.io')) return next()
+    if (req.path.includes('.')) return next()
+    const accept = req.headers.accept || ''
+    if (!accept.includes('text/html')) return next()
+    res.sendFile(path.join(app.get('public'), 'index.html'))
+  })
+}
+
 // Load Feathers Core
 app.configure(express.rest())
 app.configure(knex)

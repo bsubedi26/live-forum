@@ -1,3 +1,5 @@
+const fs = require('fs')
+const path = require('path')
 const knex = require('knex')
 
 const isSqlite = () => ({
@@ -11,10 +13,14 @@ const isSqlite = () => ({
 
 module.exports = function (app) {
   const { client, connection } = app.get('sqlite3')
-  //  const { client, connection } = app.get('pg')
+  const filename = process.env.SQLITE_PATH || connection.filename
+  const absolute = path.isAbsolute(filename)
+    ? filename
+    : path.resolve(process.cwd(), filename)
+  fs.mkdirSync(path.dirname(absolute), { recursive: true })
   const config = {
     client,
-    connection,
+    connection: { ...connection, filename: absolute },
     ...isSqlite()
   }
   const db = knex(config)
