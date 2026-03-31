@@ -34,6 +34,7 @@
     "lint": "node_modules/.bin/standard",
     "dev": "nodemon src/",
     "dev:seed": "nodemon src/ --seed",
+    "seed": "node src/ --seed",
     "start": "node src/",
     "jest": "jest  --forceExit"
   },
