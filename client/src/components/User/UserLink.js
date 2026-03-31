@@ -10,7 +10,6 @@ export default ({ user = {} }) => {
       follower_id: auth.user.id,
       following_id: user.id
     })
-    console.log('UserFollower response: ', res)
   }
 
   return auth.accessToken

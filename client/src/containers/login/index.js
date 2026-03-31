@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { withRouter, Link } from 'react-router-dom'
 import { FadeIn } from 'animate-css-styled-components'
 import { useGlobal } from 'reactn'
@@ -7,12 +8,24 @@ import UserForm from 'components/Forms/user/create'
 import ReplaceIfAlertMessage from 'components/Alerts'
 import app from 'util/feathers'
 import ContainerLayout from 'wrappers/ContainerLayout'
+import { Eyebrow, GlassPanel, PageTitle, SectionDescription } from 'components/common'
 
 const initialValues = {
   email: '',
   password: '',
   strategy: 'local'
 }
+
+const AuthPanel = styled(GlassPanel)`
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem;
+`
+
+const HelperText = styled.p`
+  margin: 1rem 0 0;
+  color: var(--text-muted);
+`
 
 const Login = ({ location, history }) => {
   const [, setAuthState] = useGlobal('auth')
@@ -23,42 +36,38 @@ const Login = ({ location, history }) => {
   }
 
   return (
-    <ContainerLayout>
+    <ContainerLayout maxWidth='900px'>
       <FadeIn>
-        <div className='jumbotron'>
+        <AuthPanel>
           <ReplaceIfAlertMessage message={alertMsg} type='success'>
-            <h1 className='display-3'>Login Below!</h1>
+            <Eyebrow>Welcome Back</Eyebrow>
+            <PageTitle>Sign in to continue the conversation.</PageTitle>
           </ReplaceIfAlertMessage>
-          <p className='lead'>Login to access the featured content and information.</p>
-          <span>
-            Don't have an Account?
+          <SectionDescription>
+            Access your threads, follow replies in real time, and jump back into the threads that matter to you.
+          </SectionDescription>
+          <HelperText>
+            Don&apos;t have an account?
             <Link
-              className='pa1'
+              className='ml-2'
               to={{
                 pathname: '/signup',
                 state: { message: 'Signup for an account below!' }
               }}
             >
-                Register here.
+              Register here.
             </Link>
-          </span>
-          <hr className='my-4' />
-          <FadeIn>
-            <UserForm
-              onSubmitAction={formData => app.authenticate(formData)}
-              onSuccessAction={onFormSuccess}
-              initialValues={initialValues}
-            />
-          </FadeIn>
-
-          {/* <a href="http://localhost:3030/auth/github"> */}
-          {/* <a href="/auth/github">
-              <button className="mt-3 btn btn-default pointer">
-                Login With Github
-                <i className="fa fa-github fa-lg m-2" aria-hidden="true"></i>
-              </button>
-            </a> */}
-        </div>
+          </HelperText>
+          <div className='mt-4'>
+            <FadeIn>
+              <UserForm
+                onSubmitAction={formData => app.authenticate(formData)}
+                onSuccessAction={onFormSuccess}
+                initialValues={initialValues}
+              />
+            </FadeIn>
+          </div>
+        </AuthPanel>
       </FadeIn>
     </ContainerLayout>
 

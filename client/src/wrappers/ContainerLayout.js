@@ -1,13 +1,14 @@
 import React from 'react'
 import SidebarFixed from 'components/SidebarFixed'
+import { ContentFrame, PageShell } from 'components/common'
 
-export default ({ children }) => {
+export default ({ children, maxWidth = '1180px' }) => {
   return (
-    <>
-      <SidebarFixed />
-      <div className='container my-4'>
+    <PageShell>
+      <ContentFrame maxWidth={maxWidth}>
         {children}
-      </div>
-    </>
+      </ContentFrame>
+      <SidebarFixed />
+    </PageShell>
   )
 }

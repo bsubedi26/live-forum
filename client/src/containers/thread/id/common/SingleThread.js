@@ -1,11 +1,19 @@
 import React from 'react'
+import styled from 'styled-components'
 import { useGlobal, useDispatch } from 'reactn'
 import { withRouter } from 'react-router-dom'
-import { LineText } from 'components/common'
 import { FadeIn } from 'animate-css-styled-components'
 import EditForm from 'components/Forms/thread/create'
 import EditAndDeleteButtons from 'components/Forms/EditAndDeleteButtons'
+import { FeatureCard, LineText } from 'components/common'
 import ThreadHeaderInfo from './HeaderInfo'
+
+const Summary = styled.p`
+  margin: 0;
+  color: var(--text-default);
+  font-size: 1rem;
+  line-height: 1.9;
+`
 
 const SingleThread = ({ auth, history }) => {
   const [thread, setThread] = useGlobal('threads/get')
@@ -36,21 +44,19 @@ const SingleThread = ({ auth, history }) => {
   }
 
   return (
-    <div className='card'>
-      <div className='card-header m'>
+    <FeatureCard className='mb-4'>
+      <div className='app-card-header'>
         <ThreadHeaderInfo thread={thread} />
       </div>
-      <div className='text-center'>
-        <p className='mt-2'>{thread.summary}</p>
-        <LineText><strong>UserID: </strong> {thread._user.id}</LineText>
+      <div className='app-card-body text-left'>
+        <Summary>{thread.summary}</Summary>
+        <LineText className='d-block mt-3'>UserID: {thread._user.id}</LineText>
 
         {auth.user && auth.user.id === thread.creator_id ? <EditAndDeleteButtons onEdit={() => setState({ ...state, showEditForm: true })} onDelete={removeThread} /> : null}
 
-        {state.showEditForm ? <FadeIn><EditForm onSubmit={handleEditThreadSubmit} onChange={handleOnChange} /></FadeIn> : null}
-
+        {state.showEditForm ? <FadeIn><div className='mt-3'><EditForm onSubmit={handleEditThreadSubmit} onChange={handleOnChange} /></div></FadeIn> : null}
       </div>
-
-    </div>
+    </FeatureCard>
   )
 }
 

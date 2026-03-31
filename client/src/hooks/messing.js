@@ -24,7 +24,6 @@ import { useForceUpdate } from './useForceUpdate'
 
 export const useReactRouter = () => {
   const routerContext = React.useContext(window.__RouterContext)
-  console.log('routerContext: ', routerContext)
   /* TODO */
   return routerContext
 }

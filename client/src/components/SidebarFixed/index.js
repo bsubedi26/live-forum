@@ -31,19 +31,11 @@ const MainSidebar = ({ children, items }) => {
   const [isDrawerOpen, setDrawerOpen] = React.useState(false)
   const WrapperComp = children ? WrapperWithSidebar : WrapperNoSidebar
   return (
-    <WrapperComp>
-      <Col
-        tag='aside'
-        className={containerClass}
-        lg={{ size: 2 }}
-        md={{ size: 3 }}
-        sm={{ size: 12 }}
-      >
-        <SidebarHeader />
-        {children}
-      </Col>
-      <MobileToggle {...{ isDrawerOpen, setDrawerOpen }} />
-    </WrapperComp>
+    <div>
+      {children}
+
+      {/* <MobileToggle {...{ isDrawerOpen, setDrawerOpen }} /> */}
+    </div>
   )
 }
 

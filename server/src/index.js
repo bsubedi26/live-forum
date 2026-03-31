@@ -13,7 +13,7 @@ server.on('listening', async () => {
   try {
     logger.info('Seeding data...')
     await seedInitialData(app)
-    logger.info('Initial data is ready')
+    logger.info('Initial seed data done...')
   } catch (error) {
     logger.error('Failed to seed initial data: %s', error.message)
   }

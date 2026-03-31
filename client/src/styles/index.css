@@ -7,6 +7,223 @@
 @import url('./components/home.css');
 @import url('./components/toast.css');
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--text-default);
+  background: var(--bg-base);
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 34%),
+    radial-gradient(circle at top right, rgba(217, 119, 6, 0.12), transparent 28%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+#root {
+  min-height: 100vh;
+}
+
 a {
-  font-family: Poppins;
+  color: var(--accent-strong);
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+a:hover {
+  color: var(--color-navy-950);
+  text-decoration: none;
+}
+
+p,
+span,
+label,
+button,
+input,
+textarea {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-strong);
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.main-content {
+  min-height: 100vh;
+}
+
+.container,
+.container-fluid {
+  position: relative;
+}
+
+.app-shell-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.app-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+}
+
+.app-card-header {
+  padding: 1.5rem 1.5rem 0;
+}
+
+.app-card-body {
+  padding: 1.5rem;
+}
+
+.btn,
+button.btn {
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.75rem 1.3rem;
+  box-shadow: none;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.btn:hover,
+button.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+}
+
+.btn-outline-primary,
+.btn-outline-info {
+  color: var(--accent-strong);
+  border-color: rgba(31, 61, 91, 0.24);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-info:hover,
+.btn-outline-info:focus {
+  color: var(--color-white);
+  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+}
+
+.btn-outline-danger {
+  color: #b42318;
+  border-color: rgba(180, 35, 24, 0.24);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+  color: var(--color-white);
+  border-color: #b42318;
+  background: #b42318;
+}
+
+.form-control,
+.form-control-lg {
+  min-height: 3.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-default);
+  box-shadow: none;
+  padding: 0.85rem 1rem;
+}
+
+textarea.form-control {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.form-control:focus,
+.form-control-lg:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+.alert {
+  border-radius: 18px;
+  border: 1px solid transparent;
+}
+
+.list-group-item {
+  border: 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  padding: 1.35rem 1.5rem;
+  background: transparent;
+}
+
+.list-group-item:first-child {
+  border-top: 0;
+}
+
+.jumbotron {
+  margin-bottom: 0;
+  padding: 2.25rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-soft);
+  border-radius: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+.lead {
+  color: var(--text-muted);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .app-shell-container {
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+
+  .jumbotron {
+    padding: 1.5rem;
+    border-radius: 22px;
+  }
+
+  .app-card-header,
+  .app-card-body,
+  .list-group-item {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }

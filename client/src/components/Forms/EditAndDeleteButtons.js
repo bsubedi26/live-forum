@@ -1,11 +1,12 @@
 import React from 'react'
+import { ButtonRow } from 'components/common'
 
 const EditAndDeleteButtons = ({ onEdit, onDelete }) => {
   return (
-    <div>
-      <button onClick={onEdit} className='btn btn-outline-info pointer ma2'>Edit</button>
-      <button onClick={onDelete} className='btn btn-outline-danger pointer ma2'>Delete</button>
-    </div>
+    <ButtonRow className='mt-3'>
+      <button onClick={onEdit} className='btn btn-outline-info pointer'>Edit</button>
+      <button onClick={onDelete} className='btn btn-outline-danger pointer'>Delete</button>
+    </ButtonRow>
   )
 }
 

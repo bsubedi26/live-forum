@@ -5,33 +5,31 @@ import { withRouter } from 'react-router-dom'
 import LinkComp from 'components/Link'
 import { navRoutes } from 'staticData/shared'
 
-const Wrapper = styled.div`
-  .navbar-nav {
-    @media(min-width: 768px) {
-      margin-left: 150px;
-    }
-  }
+const LinksList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 `
 
 const renderNavRoute = location => (item, id) => {
   const { route } = item
   const isActive = location.pathname.includes(route)
   return (
-    <LinkComp isActive={isActive} to={route} label={item.label} key={id} />
+    <li key={id}>
+      <LinkComp isActive={isActive} to={route} label={item.label} />
+    </li>
   )
 }
 
 const NavbarCmp = ({ location }) => {
   return (
-    <Wrapper>
-      <nav className='navbar navbar-expand-md navbar-light'>
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav'>
-            {navRoutes.map(renderNavRoute(location))}
-          </ul>
-        </div>
-      </nav>
-    </Wrapper>
+    <LinksList>
+      {navRoutes.map(renderNavRoute(location))}
+    </LinksList>
   )
 }
 

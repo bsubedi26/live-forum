@@ -1,25 +1,37 @@
 import React from 'react'
-import { LineText } from 'components/common'
+import styled from 'styled-components'
+import { LineText, MetaRow } from 'components/common'
 import moment from 'moment'
 import Avatar from 'components/Avatar'
 import { UserLink } from 'components/User'
+
+const HeaderLayout = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+`
+
+const Title = styled.h2`
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 700;
+`
 
 export default ({ thread }) => {
   const postDate = moment(thread.updated_at, 'YYYY-MM-DD HH:mm:ss').format('dddd MMM D YYYY h:mm A')
   return (
     <>
-      <div>
+      <HeaderLayout>
         {thread._user.avatar ? <Avatar avatar={thread._user.avatar} /> : null}
-        <h3 className='my-3'>Title: {thread.title}</h3>
-        <LineText className='my-2'>Posted By: <UserLink user={thread._user} /></LineText>
-      </div>
-
-      <LineText className='pt-2'>
-        <span className='mr-2'>{postDate}</span>
-        <span className='mr-2'>-</span>
-        {thread._comments && <span className='mr-2'>{thread._comments.length} comments</span>}
-
-      </LineText>
+        <div>
+          <Title>{thread.title}</Title>
+          <MetaRow>
+            <LineText>Posted by <UserLink user={thread._user} /></LineText>
+            <LineText>{postDate}</LineText>
+            {thread._comments && <LineText>{thread._comments.length} comments</LineText>}
+          </MetaRow>
+        </div>
+      </HeaderLayout>
     </>
   )
 }

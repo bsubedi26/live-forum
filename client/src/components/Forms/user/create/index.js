@@ -9,10 +9,8 @@ const validationSchema = Yup.object().shape({
 })
 
 const onSubmit = (handleSubmit, handleSuccess) => async (data, Form) => {
-  // console.log('data: ', data)
   handleSubmit(data)
     .then(response => {
-      // console.log('response: ', response)
       Form.setSubmitting(false)
       handleSuccess(response)
     })

@@ -2,131 +2,215 @@ const logger = require('./logger')
 
 const WAIT_MS = 100
 const WAIT_TIMEOUT_MS = 10000
+const SEED_COUNTS = {
+  users: 10,
+  topics: 25,
+  threads: 60,
+  comments: 100,
+  followers: 20,
+  rooms: 25,
+  messages: 60
+}
 
 const seedUsers = [
   { email: 'admin@liveforum.dev', password: 'password123', roles: 'admin' },
   { email: 'alice@liveforum.dev', password: 'password123', roles: 'member' },
   { email: 'bob@liveforum.dev', password: 'password123', roles: 'member' },
   { email: 'carol@liveforum.dev', password: 'password123', roles: 'member' },
-  { email: 'dylan@liveforum.dev', password: 'password123', roles: 'member' }
+  { email: 'dylan@liveforum.dev', password: 'password123', roles: 'member' },
+  { email: 'erin@liveforum.dev', password: 'password123', roles: 'member' },
+  { email: 'farah@liveforum.dev', password: 'password123', roles: 'member' },
+  { email: 'gabriel@liveforum.dev', password: 'password123', roles: 'member' },
+  { email: 'henry@liveforum.dev', password: 'password123', roles: 'member' },
+  { email: 'ivy@liveforum.dev', password: 'password123', roles: 'member' }
 ]
 
 const seedTopics = [
   'Announcements',
+  'Introductions',
+  'Product Feedback',
   'Frontend',
   'Backend',
-  'DevOps'
+  'API Design',
+  'Database',
+  'DevOps',
+  'Testing',
+  'Accessibility',
+  'Performance',
+  'Security',
+  'Realtime',
+  'Mobile',
+  'Design Systems',
+  'Community',
+  'Moderation',
+  'Show and Tell',
+  'Career Growth',
+  'Open Source',
+  'Documentation',
+  'Tooling',
+  'AI Builders',
+  'Remote Work',
+  'Off Topic'
 ]
 
-const seedThreads = [
-  {
-    title: 'Welcome to Live Forum',
-    summary: 'Introduce yourself, share what you are building, and say what you want from the community.',
-    topic: 'Announcements',
-    creator: 'admin@liveforum.dev'
-  },
-  {
-    title: 'React patterns the client already uses',
-    summary: 'A quick thread for discussing the current component structure, global state patterns, and where to simplify.',
-    topic: 'Frontend',
-    creator: 'alice@liveforum.dev'
-  },
-  {
-    title: 'Feathers services worth expanding',
-    summary: 'Let us collect ideas for useful hooks, joins, and query patterns that would make the forum feel richer.',
-    topic: 'Backend',
-    creator: 'bob@liveforum.dev'
-  },
-  {
-    title: 'Docker workflow for local development',
-    summary: 'Share notes on getting the stack running consistently and what should be improved in the local setup.',
-    topic: 'DevOps',
-    creator: 'carol@liveforum.dev'
-  },
-  {
-    title: 'What should the homepage highlight?',
-    summary: 'Gather ideas for a better first impression and which features should be easiest to discover.',
-    topic: 'Announcements',
-    creator: 'dylan@liveforum.dev'
-  },
-  {
-    title: 'Thread and comment UX wishlist',
-    summary: 'Talk about pagination, editing, moderation, and little quality-of-life improvements that would help.',
-    topic: 'Frontend',
-    creator: 'admin@liveforum.dev'
+const seedRooms = [
+  'anonymous',
+  'general',
+  'introductions',
+  'product',
+  'frontend',
+  'backend',
+  'api',
+  'database',
+  'devops',
+  'testing',
+  'accessibility',
+  'performance',
+  'security',
+  'realtime',
+  'mobile',
+  'design-system',
+  'community',
+  'moderation',
+  'show-and-tell',
+  'career',
+  'open-source',
+  'documentation',
+  'tooling',
+  'ai-builders',
+  'random'
+]
+
+const threadTitleLeads = [
+  'Best practices for',
+  'How are teams handling',
+  'Lessons learned from',
+  'What would improve',
+  'Current challenges with',
+  'A practical guide to',
+  'Patterns we keep reusing in',
+  'Where should we simplify',
+  'Ideas for scaling',
+  'What is working well in',
+  'Open discussion on',
+  'Field notes about'
+]
+
+const threadSummaryLeads = [
+  'Share recent wins, blockers, and patterns that feel durable.',
+  'Looking for examples from real projects rather than generic advice.',
+  'Would love concrete tradeoffs, screenshots, or implementation notes.',
+  'Trying to gather realistic opinions before changing the current flow.',
+  'This thread is for practical tactics we can test in the app this week.',
+  'Curious how other teams are balancing speed, quality, and maintainability.'
+]
+
+const commentOpeners = [
+  'We tried something similar last quarter and the biggest surprise was',
+  'In our setup, the most reliable improvement came from',
+  'I would start small here and focus first on',
+  'A mistake we made early on was',
+  'The part that deserves more attention is',
+  'One thing users noticed immediately was',
+  'What helped our team move faster was',
+  'From the community side, the strongest signal has been'
+]
+
+const commentClosers = [
+  'keeping the UX obvious for new members.',
+  'documenting the edge cases before adding more features.',
+  'measuring the baseline before calling the change a success.',
+  'making moderation tools easier to reach.',
+  'shipping a simple version and watching how people actually use it.',
+  'cleaning up naming so the data model stays easy to reason about.',
+  'protecting the happy path without over-engineering the first pass.',
+  'testing the realtime flow with enough sample data to feel believable.'
+]
+
+const messageOpeners = [
+  'Morning check-in:',
+  'Quick note:',
+  'Heads up:',
+  'Sharing a small win:',
+  'Question for the room:',
+  'Status update:',
+  'A thing worth testing:',
+  'Today I noticed:'
+]
+
+const messageBodies = [
+  'the latest seed content makes this space feel much closer to a real community.',
+  'we should use this room to collect examples before making UI changes.',
+  'the current build is stable enough to invite a round of feedback.',
+  'I found a smoother way to explain the workflow to new contributors.',
+  'there is still room to polish the empty states and first-run experience.',
+  'more realistic sample records helped surface a couple of awkward edge cases.',
+  'the conversation flow feels better when each room has its own tone and context.',
+  'it would be useful to pin a short starter prompt here for newcomers.'
+]
+
+const buildSeedThreads = () => {
+  return Array.from({ length: SEED_COUNTS.threads }, (_, index) => {
+    const topic = seedTopics[index % seedTopics.length]
+    const creator = seedUsers[index % seedUsers.length].email
+    const titleLead = threadTitleLeads[index % threadTitleLeads.length]
+    const summaryLead = threadSummaryLeads[index % threadSummaryLeads.length]
+
+    return {
+      title: `${titleLead} ${topic.toLowerCase()} right now?`,
+      summary: `${summaryLead} We want grounded feedback on ${topic.toLowerCase()} as the forum grows. Case ${index + 1}.`,
+      topic,
+      creator
+    }
+  })
+}
+
+const buildSeedComments = threads => {
+  return Array.from({ length: SEED_COUNTS.comments }, (_, index) => {
+    const thread = threads[index % threads.length]
+    const creator = seedUsers[(index + 2) % seedUsers.length].email
+    const opener = commentOpeners[index % commentOpeners.length]
+    const closer = commentClosers[index % commentClosers.length]
+
+    return {
+      thread: thread.title,
+      creator,
+      comment: `${opener} ${thread.topic.toLowerCase()}, especially around thread "${thread.title}". I would keep iterating on ${closer}`
+    }
+  })
+}
+
+const buildSeedFollowers = () => {
+  const followers = []
+
+  for (let index = 0; index < SEED_COUNTS.followers; index += 1) {
+    const follower = seedUsers[index % seedUsers.length].email
+    const following = seedUsers[(index + 3 + Math.floor(index / seedUsers.length)) % seedUsers.length].email
+    followers.push([follower, following])
   }
-]
 
-const seedComments = [
-  {
-    thread: 'Welcome to Live Forum',
-    creator: 'alice@liveforum.dev',
-    comment: 'I am using this project to learn Feathers and realtime updates. Happy to be here.'
-  },
-  {
-    thread: 'Welcome to Live Forum',
-    creator: 'bob@liveforum.dev',
-    comment: 'Looking forward to testing the thread, comment, and follower flows with realistic sample data.'
-  },
-  {
-    thread: 'React patterns the client already uses',
-    creator: 'carol@liveforum.dev',
-    comment: 'The global state helpers make the app easy to follow, but a few screens could use clearer loading states.'
-  },
-  {
-    thread: 'Feathers services worth expanding',
-    creator: 'dylan@liveforum.dev',
-    comment: 'A notifications service and better topic statistics would be a nice next step.'
-  },
-  {
-    thread: 'Docker workflow for local development',
-    creator: 'admin@liveforum.dev',
-    comment: 'Getting a predictable local database path solved most of the friction for me.'
-  },
-  {
-    thread: 'Thread and comment UX wishlist',
-    creator: 'alice@liveforum.dev',
-    comment: 'Inline comment submission feels good already. Surfacing author info more clearly would help too.'
-  }
-]
+  return followers
+}
 
-const seedFollowers = [
-  ['alice@liveforum.dev', 'admin@liveforum.dev'],
-  ['bob@liveforum.dev', 'alice@liveforum.dev'],
-  ['carol@liveforum.dev', 'bob@liveforum.dev'],
-  ['dylan@liveforum.dev', 'alice@liveforum.dev'],
-  ['admin@liveforum.dev', 'carol@liveforum.dev']
-]
+const buildSeedMessages = () => {
+  return Array.from({ length: SEED_COUNTS.messages }, (_, index) => {
+    const channel = seedRooms[(index + 1) % seedRooms.length]
+    const creator = seedUsers[index % seedUsers.length].email
+    const opener = messageOpeners[index % messageOpeners.length]
+    const body = messageBodies[index % messageBodies.length]
 
-const seedRooms = ['anonymous', 'general', 'frontend', 'backend', 'devops', 'random']
+    return {
+      channel,
+      creator,
+      text: `${opener} In #${channel}, ${body}`
+    }
+  })
+}
 
-const seedMessages = [
-  {
-    channel: 'general',
-    creator: 'admin@liveforum.dev',
-    text: 'Welcome to the general room. Use this space for broad project conversation.'
-  },
-  {
-    channel: 'frontend',
-    creator: 'alice@liveforum.dev',
-    text: 'The thread list is already pretty usable. Seed data should make it easier to polish the experience.'
-  },
-  {
-    channel: 'backend',
-    creator: 'bob@liveforum.dev',
-    text: 'Feathers hooks are doing a lot of nice work here. More sample records will help us validate the joins.'
-  },
-  {
-    channel: 'devops',
-    creator: 'carol@liveforum.dev',
-    text: 'Once local setup feels effortless, onboarding gets much easier.'
-  },
-  {
-    channel: 'random',
-    creator: 'dylan@liveforum.dev',
-    text: 'This is the room for off-topic ideas, experiments, and quick check-ins.'
-  }
-]
+const seedThreads = buildSeedThreads()
+const seedComments = buildSeedComments(seedThreads)
+const seedFollowers = buildSeedFollowers()
+const seedMessages = buildSeedMessages()
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -158,6 +242,19 @@ const getLookupMap = (items, key) => {
 const setSeedRooms = app => {
   const currentRooms = Array.isArray(app.channels) ? app.channels : []
   app.channels = Array.from(new Set(currentRooms.concat(seedRooms)))
+}
+
+const clearExistingData = async app => {
+  const knex = app.get('knex')
+
+  await knex('messages').del()
+  await knex('comments').del()
+  await knex('users_followers').del()
+  await knex('threads').del()
+  await knex('topics').del()
+  await knex('users').del()
+
+  logger.info('Cleared existing seedable data before reseeding')
 }
 
 const ensureUsers = async app => {
@@ -270,6 +367,7 @@ const seedInitialData = async app => {
 
   await waitForTables(knex, ['users', 'topics', 'threads', 'comments', 'users_followers', 'messages'])
   setSeedRooms(app)
+  await clearExistingData(app)
 
   const users = await ensureUsers(app)
   const topics = await ensureTopics(app)

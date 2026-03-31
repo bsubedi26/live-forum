@@ -4,7 +4,6 @@ import app from 'util/feathers/app'
 import { isEmpty } from 'util/helpers'
 
 export default (service) => {
-  console.log('----useService')
   const [state, setState] = useGlobal()
 
   useEffect(() => {

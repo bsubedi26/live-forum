@@ -1,15 +1,22 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useGlobal, useDispatch } from 'reactn'
 import ThreadList from './common/ThreadList'
 import ThreadHeader from './common/Header'
 import Pagination, { getSlicedPages } from 'components/pagination'
 import SidebarContentTopics from 'components/SidebarFixed/Contents/Topics'
-import SidebarFixed from 'components/SidebarFixed'
+import Loading from 'components/Loading'
+import ContainerLayout from 'wrappers/ContainerLayout'
+import { ButtonRow, FeatureCard, TwoColumnLayout } from 'components/common'
 
 const ITEMS_PER_PAGE = 6
 
 const getTotalPages = (items) => Math.ceil(items.length / ITEMS_PER_PAGE)
+
+const PageActionLink = styled(Link)`
+  display: inline-flex;
+`
 
 const ThreadPage = ({ location, match }) => {
   const [threads] = useGlobal('threads')
@@ -40,45 +47,49 @@ const ThreadPage = ({ location, match }) => {
   }
 
   return (
-    <div className='row mx-0'>
-      {/* <div className='d-none d-md-block col-lg-3 col-md-3 p-0'> */}
-      <div className='col-lg-3 col-md-3 p-0'>
-        {topics && (
-          <SidebarFixed>
-            <SidebarContentTopics data={topics} location={location} />
-          </SidebarFixed>
-        )}
-      </div>
-      <div className='col-lg-9 col-md-9 col-sm-12'>
-        <div className='d-flex justify-content-center mt-4 flex-wrap'>
-          {threads && (
-            <Pagination
-              totalPages={getTotalPages(threads)}
-              itemsPerPage={ITEMS_PER_PAGE}
-              onPageChange={onPaginationChange}
-              onPageChangeFunc={setCurrentPage}
-              currentPage={currentPage}
-            />
+    <ContainerLayout>
+      <TwoColumnLayout>
+        <div>
+          {topics ? (
+            <FeatureCard className='p-3 p-lg-4'>
+              <SidebarContentTopics data={topics} location={location} />
+            </FeatureCard>
+          ) : (
+            <Loading text='Loading threads...' />
           )}
-          {threads && (
-            <Link to={`${match.url}/create`} className='pa2'>
+        </div>
+        <div>
+          <ButtonRow className='justify-content-between mb-3'>
+            {threads ? (
+              <Pagination
+                totalPages={getTotalPages(threads)}
+                itemsPerPage={ITEMS_PER_PAGE}
+                onPageChange={onPaginationChange}
+                onPageChangeFunc={setCurrentPage}
+                currentPage={currentPage}
+              />
+            ) : <div />}
+            <PageActionLink to={`${match.url}/create`}>
               <button className='btn btn-outline-info pointer'>Create New Thread</button>
-            </Link>
-          )}
-
-        </div>
-        <div className='d-flex mt-4'>
-          <div className='col-md-12'>
-            <div className='card'>
-              <div className='card-header'>
-                {topics && <ThreadHeader topic={topics.find(t => t.id === parseInt(topicId, 10))} />}
-              </div>
-              {threads && <ThreadList items={getSlicedPages(threads, { currentPage, ITEMS_PER_PAGE })} />}
+            </PageActionLink>
+          </ButtonRow>
+          <FeatureCard className='overflow-hidden'>
+            <div className='app-card-header'>
+              {topics && <ThreadHeader topic={topics.find(t => t.id === parseInt(topicId, 10))} />}
             </div>
-          </div>
+            <div className='app-card-body pt-0'>
+              {threads ? (
+                <div className='list-group list-group-flush'>
+                  <ThreadList items={getSlicedPages(threads, { currentPage, ITEMS_PER_PAGE })} />
+                </div>
+              ) : (
+                <Loading text='Loading threads...' />
+              )}
+            </div>
+          </FeatureCard>
         </div>
-      </div>
-    </div>
+      </TwoColumnLayout>
+    </ContainerLayout>
   )
 }
 

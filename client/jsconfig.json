@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-      "baseUrl": "./src",
-      "checkJs": true
+    "baseUrl": "./src",
+    "checkJs": true,
+    "jsx": "react-jsx"
   },
   "typeAcquisition": {
     "enable": true
   },
   "exclude": [
-      "node_modules"
+    "node_modules"
   ],
   "include": [
     "src/**/*"

@@ -6,7 +6,7 @@ import FeathersAuthListener from 'util/feathers/AuthListener'
 import DefaultLayout from '../components/Layouts'
 
 const WholePageWrapper = styled.div`
-  text-align: center;
+  min-height: 100vh;
 `
 
 export default () => {

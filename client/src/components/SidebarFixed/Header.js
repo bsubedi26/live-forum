@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react'
 import { Navbar, NavbarBrand } from 'shards-react'
 
@@ -13,6 +12,7 @@ const Logo = () => (
 )
 
 const SidebarHeader = ({ header = 'Live Forum' }) => {
+  // if (true) return null;
   return (
     <div className='main-navbar'>
       <Navbar

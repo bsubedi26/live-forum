@@ -1,67 +1,54 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Container, Row, Nav, NavItem, NavLink } from 'shards-react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-const MainFooter = ({ contained, menuItems, copyright }) => (
-  <footer className='main-footer d-flex p-2 px-3 bg-white border-top'>
-    <Container fluid={contained}>
-      <Row>
-        <Nav>
-          {menuItems.map((item, idx) => (
-            <NavItem key={idx}>
-              <NavLink tag={Link} to={item.to}>
-                {item.title}
-              </NavLink>
-            </NavItem>
-          ))}
-        </Nav>
-        <span className='copyright ml-auto my-auto mr-2'>{copyright}</span>
-      </Row>
-    </Container>
-  </footer>
+const Footer = styled.footer`
+  padding: 0 1rem 1.5rem;
+`
+
+const FooterInner = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  color: var(--text-muted);
+  font-size: 0.92rem;
+`
+
+const FooterNav = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+`
+
+const FooterLink = styled(Link)`
+  color: var(--text-muted);
+  font-weight: 500;
+
+  &:hover {
+    color: var(--accent-strong);
+  }
+`
+
+const MainFooter = () => (
+  <Footer>
+    <FooterInner>
+      <FooterNav>
+        <FooterLink to='/threads'>Threads</FooterLink>
+        <FooterLink to='/channels'>Channels</FooterLink>
+        <FooterLink to='/user/profile'>Profile</FooterLink>
+      </FooterNav>
+      <span>Live Forum community discussions, refreshed with a cleaner interface.</span>
+    </FooterInner>
+  </Footer>
 )
-
-MainFooter.propTypes = {
-  /**
-   * Whether the content is contained, or not.
-   */
-  contained: PropTypes.bool,
-  /**
-   * The menu items array.
-   */
-  menuItems: PropTypes.array,
-  /**
-   * The copyright info.
-   */
-  copyright: PropTypes.string
-}
-
-MainFooter.defaultProps = {
-  contained: false,
-  copyright: 'Copyright © 2018 DesignRevision',
-  menuItems: [
-    {
-      title: 'Home',
-      to: '#'
-    },
-    {
-      title: 'Services',
-      to: '#'
-    },
-    {
-      title: 'About',
-      to: '#'
-    },
-    {
-      title: 'Products',
-      to: '#'
-    },
-    {
-      title: 'Blog',
-      to: '#'
-    }
-  ]
-}
 
 export default MainFooter

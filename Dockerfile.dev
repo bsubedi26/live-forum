@@ -1,0 +1,24 @@
+FROM node:18-bullseye
+
+WORKDIR /app
+
+# Install client dependencies (using yarn like production)
+COPY client/package.json client/yarn.lock ./client/
+WORKDIR /app/client
+RUN yarn install --legacy-peer-deps
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# Install server dependencies
+WORKDIR /app
+COPY server/package*.json ./server/
+WORKDIR /app/server
+RUN npm ci
+RUN npm install -g nodemon
+
+WORKDIR /app
+
+# Expose both ports
+EXPOSE 3000 3030
+
+# Run both services with hot reload
+CMD ["sh", "-c", "cd /app/server && nodemon src/index.js & cd /app/client && npm start"]
