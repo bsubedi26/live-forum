@@ -9,6 +9,11 @@ services:
     volumes:
       - forum-data:/app/data
     restart: unless-stopped
+    networks:
+      - shared-tunnel-net
 
 volumes:
   forum-data:
+networks:
+  shared-tunnel-net:
+    external: true
