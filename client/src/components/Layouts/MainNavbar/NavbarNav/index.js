@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Nav } from 'shards-react'
 
-import Notifications from './Notifications'
+// import Notifications from './Notifications'
 import UserActions from './UserActions'
 
 const AuthActions = styled.div`
@@ -21,7 +21,7 @@ const AuthActions = styled.div`
 
 const LoggedInLinks = ({ user, onLogout }) => (
   <Nav navbar className='align-items-center border-left-0 flex-row'>
-    <Notifications />
+    {/* <Notifications /> */}
     <UserActions {...{ user, onLogout }} />
   </Nav>
 )
